@@ -26,7 +26,7 @@ public class DataFetcher: ObservableObject {
         let workMenuItems = [ MenuItem(name: "Завод", image: "🏭"),
                               MenuItem(name: "Стройка", image: "👷🏻‍♀️"),
                               MenuItem(name: "Мотель", image: "🏩"),
-                              MenuItem(name: "Щиктан (Общепит)", image: "🍽"),
+                              MenuItem(name: "Общепит", image: "🍽"),
                               MenuItem(name: "Сельхоз работы", image: "🧑🏽‍🌾"),
                               MenuItem(name: "Почта", image: "📦"),
                               MenuItem(name: "Работа в офисе", image: "💼"),
@@ -54,7 +54,7 @@ public class DataFetcher: ObservableObject {
                               MenuItem(name: "Аксессуары", image: "🎧"),
                               MenuItem(name: "Планшеты и электронные книги", image: "📱"),
                               MenuItem(name: "Умные часы и фитнес-браслеты", image: "⌚️"),
-                              MenuItem(name: "Другое", image: "📟")
+                              MenuItem(name: "Другое", image: "☎️")
         ]
 
         let homeMenuItems = [ MenuItem(name: "Мебель", image: "🛋"),
@@ -75,7 +75,7 @@ public class DataFetcher: ObservableObject {
                               MenuItem(name: "Компьютеры и ноутбуки", image: "💻"),
                               MenuItem(name: "Игровые приставки и консоли", image: "🎮"),
                               MenuItem(name: "Фото и видеокмеры", image: "📷"),
-                              MenuItem(name: "Другое", image: "🖨")
+                              MenuItem(name: "Другое", image: "⌨️")
         ]
 
         let childrenMenuItems = [ MenuItem(name: "Детская одежда и обувь", image: "👗"),

@@ -29,18 +29,20 @@ import SwiftUI
 struct MenuView: View {
     @ObservedObject var fetcher = DataFetcher()
     var body: some View {
-        List(fetcher.menuItem, children: \.children){
-            item in
-                HStack{
-                    Text(item.image)
-                        .font(.title)
-//                    Image(item.image)
-//                        .resizable()
-//                        .frame(width: 30, height: 30)
-                        
-                    Text(item.name)
-                }
+        VStack {
+            Text("KORYOSARAM")
+                .font(.callout)
+                .padding(.trailing, 200)
+            List(fetcher.menuItem, children: \.children){
+                item in
+                    HStack{
+                        Text(item.image)
+                            .font(.title)
+                        Text(item.name)
+                    }
+            }
         }
+
     }
 }
 
