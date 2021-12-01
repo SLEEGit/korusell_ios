@@ -15,7 +15,7 @@ struct ContentView: View {
                 .tabItem {
                     Image(systemName: "house")
                 }
-            Text("View for adding adv")
+            TestView()
                 .tabItem {
                     Image(systemName: "plus.square")
                 }

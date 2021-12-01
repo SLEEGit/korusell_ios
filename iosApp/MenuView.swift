@@ -7,42 +7,24 @@
 
 import SwiftUI
 
-//struct MenuView: View {
-//    var body: some View {
-//        List(sampleMenuItems, children: \.subMenuItems) { item in
-//
-//            HStack {
-//                    Image(item.image)
-//                        .resizable()
-//                        .scaledToFit()
-//                        .frame(width: 50, height: 50)
-//
-//                    Text(item.name)
-//                        .font(.system(.title3, design: .rounded))
-//                        .bold()
-//
-//                }
-//        }
-//    }
-//}
-
 struct MenuView: View {
     @ObservedObject var fetcher = DataFetcher()
     var body: some View {
-        VStack {
-            Text("KORYOSARAM")
-                .font(.callout)
-                .padding(.trailing, 200)
-            List(fetcher.menuItem, children: \.children){
-                item in
+        NavigationView {
+            List(fetcher.menuItem, children: \.children){ item in
+                ZStack {
+                    NavigationLink(destination: Text(item.name)) {}
+                    .opacity(0.0)
+                    .buttonStyle(PlainButtonStyle())
                     HStack{
                         Text(item.image)
                             .font(.title)
                         Text(item.name)
+                        Spacer()
                     }
-            }
+                }
+            }.navigationTitle("KORYOSARAM")
         }
-
     }
 }
 
