@@ -10,30 +10,16 @@ import SwiftUI
 struct HomeView: View {
     
     @State var list: [Work] = []
+    var category: String
+    var barTitle: String = ""
+    var menu: String
     
     var body: some View {
         
-        VStack {
+        List(list) { item in
             HStack {
-                HStack {
-                    DemoView()
-//                    Text("Работа")
-//                    Image(systemName: "arrow.down")
-                }
-                .padding()
-                Spacer()
-                HStack {
-                    Image(systemName: "filemenu.and.selection")
-                    Text("Фильтр")
-                }
-                .padding()
-            }
-            List(list) { item in
-                HStack {
-                    Image(item.category)
-                        .resizable()
-                        .scaledToFit()
-                        .frame(width: 60, height: 60)
+                NavigationLink(destination: AdvView(work: item)) {
+                    Text(putEmoji(category: item.category))
                     VStack {
                         Text(item.createdAt)
                             .font(.caption)
@@ -47,7 +33,8 @@ struct HomeView: View {
                             Text(item.town)
                                 .font(.caption)
                                 .foregroundColor(.gray)
-                            Spacer()
+                        }
+                        HStack {
                             Text("Зарплата:")
                                 .font(.caption)
                                 .foregroundColor(.gray)
@@ -55,29 +42,44 @@ struct HomeView: View {
                                 .font(.caption)
                                 .foregroundColor(.gray)
                         }
-                        
-                        Spacer()
-                        Text(item.description)
-                            .font(.caption)
-                        Spacer()
-                        Text(item.phone)
-                            .font(.caption)
                     }
-                    
                 }
                 
+                
             }
-            .onAppear {
-                JSONParser().getWorkList(fileName: "workdata") { (list) in
-                    self.list = list
-                }
+            
+        }
+        .onAppear {
+            JSONParser().getWorkList(fileName: menu) { (list) in
+                self.list = list.filter { $0.category == category }
             }
         }
+        .navigationTitle(barTitle)
+        .navigationBarTitleDisplayMode(.inline)
+
+        .toolbar{
+                NavigationLink(destination: InformationView()) {
+                Text("filter")
+            }
+        }
+    }
+    
+    func putEmoji(category: String) -> String {
+        if category == "Zavod" {
+            return "🏭"
+        } else if category == "motel" {
+            return "🏩"
+        }
+        return ""
     }
 }
 
 struct HomeView_Previews: PreviewProvider {
     static var previews: some View {
-        HomeView()
+        HomeView(category: "Zavod", menu: "work")
     }
 }
+
+#if DEBUG
+let example = Work(_id: "HNyHZZjtq298izgub", createdAt: "2021-11-28T03:58:20.665Z", updatedAt: "2021-11-28T03:58:20.665Z", category: "motel", salary: "3000000", town: "Чхонджу", description: "г.Чхонджу 청주시 (Оксан-мён 옥산면) ЖК дисплеи (протирка, тейпинг, комса) Чуган 09:00~18:00 (чаноб 3 часа с утра) Зарплата 20-го числа, авансы Дорожные не выплачиваются Развоз имеется Жильё не предоставляют 3 девушки виза F4 생휴, Ёнча, 13~ая, нед.бонус есть Страховка 50% Обязательное знание языка Услуга бесплатная (аутсорсинг) 010-2369-6613", phone: "010 1233 1111")
+#endif

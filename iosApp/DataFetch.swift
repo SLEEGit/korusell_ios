@@ -11,11 +11,13 @@ struct MenuItem: Identifiable{
     var id = UUID()
     var name: String
     var image: String
+    var category: String = ""
     var children : [MenuItem]?
 }
 
 public class DataFetcher: ObservableObject {
     @Published var menuItem = [MenuItem]()
+    @Published var serviceItem = [MenuItem]()
 
     init() {
 //        var nestedMenu : [MenuItem] = []
@@ -23,16 +25,16 @@ public class DataFetcher: ObservableObject {
 //            nestedMenu.append(DataModel(name: "Sub Item \(i)", icon: "labor"))
 //        }
         
-        let workMenuItems = [ MenuItem(name: "Завод", image: "🏭"),
-                              MenuItem(name: "Стройка", image: "👷🏻‍♀️"),
-                              MenuItem(name: "Мотель", image: "🏩"),
-                              MenuItem(name: "Общепит", image: "🍽"),
-                              MenuItem(name: "Сельхоз работы", image: "🧑🏽‍🌾"),
-                              MenuItem(name: "Почта", image: "📦"),
-                              MenuItem(name: "Работа в офисе", image: "💼"),
-                              MenuItem(name: "Другая работа", image: "👨‍🚀")
-        ]
-
+        let workMenuItems = [ MenuItem(name: "Завод", image: "🏭", category: "Zavod"),
+                              MenuItem(name: "Стройка", image: "👷🏻‍♀️", category: "stroyka"),
+                              MenuItem(name: "Мотель", image: "🏩", category: "motel"),
+                              MenuItem(name: "Общепит", image: "🍽", category: "shchiktan"),
+                              MenuItem(name: "Сельхоз работы", image: "🧑🏽‍🌾", category: "selkhoz"),
+                              MenuItem(name: "Почта", image: "📦", category: "pochta"),
+                              MenuItem(name: "Работа в офисе", image: "💼", category: "ofis"),
+                              MenuItem(name: "Другая работа", image: "👨‍🚀", category: "rabota_drugoye")
+]
+        
         let carsMenuItems = [ MenuItem(name: "Hyundai", image: "🚗"),
                               MenuItem(name: "KIA", image: "🚙"),
                               MenuItem(name: "GM Chevrolet", image: "🚘"),
@@ -105,7 +107,7 @@ public class DataFetcher: ObservableObject {
         ]
         
         self.menuItem = [
-            MenuItem(name: "Работа", image: "🛠", children: workMenuItems),
+            MenuItem(name: "Работа", image: "🛠", category: "work", children: workMenuItems),
             MenuItem(name: "Автомобили", image: "🚗", children: carsMenuItems),
             MenuItem(name: "Недвижимость", image: "🏢", children: realMenuItems),
             MenuItem(name: "Телефоны и Аксессуары", image: "📱", children: phonesMenuItems),
@@ -117,6 +119,20 @@ public class DataFetcher: ObservableObject {
             MenuItem(name: "Спорт, туризм и отдых", image: "🏓", children: sportMenuItems),
             MenuItem(name: "Домашние животные", image: "🐶", children: petsMenuItems),
             MenuItem(name: "Обмен, отдам бесплатно", image: "🔄")
+            ]
+        
+        self.serviceItem = [
+            MenuItem(name: "Документы/Переводы", image: "📑", category: "docs"),
+            MenuItem(name: "Транспорт/Переезд", image: "🚛", category: "transport"),
+            MenuItem(name: "Связь", image: "📱", category: "connect"),
+            MenuItem(name: "Рестораны/Кафе", image: "🍲", category: "food"),
+            MenuItem(name: "Юридические услуги", image: "👩🏻‍⚖️", category: "law"),
+            MenuItem(name: "Финансовые услуги", image: "💰", category: "money"),
+            MenuItem(name: "Красота/Здоровье", image: "💅🏼", category: "health"),
+            MenuItem(name: "СТО/Тюнинг", image: "🧑🏻‍🔧", category: "car"),
+            MenuItem(name: "Няни/Детсад", image: "👵🏼", category: "nanny"),
+            MenuItem(name: "Образование", image: "📚", category: "study"),
+            MenuItem(name: "Туризм", image: "🗿", category: "tourism")
             ]
     }
 }

@@ -7,13 +7,13 @@
 
 import SwiftUI
 
-struct MenuView: View {
+struct AdsView: View {
     @ObservedObject var fetcher = DataFetcher()
     var body: some View {
         NavigationView {
             List(fetcher.menuItem, children: \.children){ item in
                 ZStack {
-                    NavigationLink(destination: Text(item.name)) {}
+                    NavigationLink(destination: HomeView(category: item.category, barTitle: item.image + " " + item.name, menu: "work" )) {}
                     .opacity(0.0)
                     .buttonStyle(PlainButtonStyle())
                     HStack{
@@ -23,14 +23,20 @@ struct MenuView: View {
                         Spacer()
                     }
                 }
-            }.navigationTitle("KORYOSARAM")
+            }.navigationTitle("ОБЪЯВЛЕНИЯ")
+                .toolbar{
+                        NavigationLink(destination: InformationView()) {
+                        Text("info")
+                    }
+                }
+                
         }
     }
 }
 
 
-struct MenuView_Previews: PreviewProvider {
+struct AdsView_Previews: PreviewProvider {
     static var previews: some View {
-        MenuView()
+        AdsView()
     }
 }
