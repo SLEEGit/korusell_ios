@@ -25,7 +25,7 @@ public class DataFetcher: ObservableObject {
 //            nestedMenu.append(DataModel(name: "Sub Item \(i)", icon: "labor"))
 //        }
         
-        let workMenuItems = [ MenuItem(name: "Завод", image: "🏭", category: "Zavod"),
+        let workMenuItems = [ MenuItem(name: "Завод", image: "🏭", category: "zavod"),
                               MenuItem(name: "Стройка", image: "👷🏻‍♀️", category: "stroyka"),
                               MenuItem(name: "Мотель", image: "🏩", category: "motel"),
                               MenuItem(name: "Общепит", image: "🍽", category: "shchiktan"),
@@ -36,7 +36,7 @@ public class DataFetcher: ObservableObject {
 ]
         
         let carsMenuItems = [ MenuItem(name: "Hyundai", image: "🚗"),
-                              MenuItem(name: "KIA", image: "🚙"),
+                              MenuItem(name: "KIA", image: "🚙", category: "kia"),
                               MenuItem(name: "GM Chevrolet", image: "🚘"),
                               MenuItem(name: "Renault Samsung", image: "🛻"),
                               MenuItem(name: "BMW", image: "🏎"),

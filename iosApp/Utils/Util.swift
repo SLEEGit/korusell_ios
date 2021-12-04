@@ -8,9 +8,9 @@
 import Foundation
 
 class Util {
-        func putEmoji(category: String) -> [String] {
+        func parseCategory(category: String) -> [String] {
             var list: [String] = []
-            if category == "Zavod" {
+            if category == "zavod" {
                 list.append("🏭")
                 list.append("Завод")
             } else if category == "motel" {
@@ -34,6 +34,9 @@ class Util {
             } else if category == "rabota_drugoye" {
                 list.append("👨‍🚀")
                 list.append("Другая работа")
+            } else if category == "kia" {
+                list.append("🚙")
+                list.append("KIA")
             } else {
                 
             }
@@ -43,14 +46,10 @@ class Util {
     func formatDate(date: String) -> String {
         let dateFormatterGet = DateFormatter()
         dateFormatterGet.dateFormat = "yyyy-MM-dd'T'HH:mm:ss.SSSZ"
-        print(date)
-
         let dateFormatterPrint = DateFormatter()
         dateFormatterPrint.dateFormat = "dd MMMM yyyy г."
-
         dateFormatterPrint.locale = Locale(identifier: "ru_RU")
         let date: Date? = dateFormatterGet.date(from: date)
-        print(dateFormatterPrint.string(from: date! as Date))
         
         return dateFormatterPrint.string(from: date! as Date)
         

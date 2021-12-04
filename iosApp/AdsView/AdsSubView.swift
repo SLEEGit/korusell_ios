@@ -13,15 +13,20 @@ struct AdsSubView: View {
     var category: String
     var barTitle: String = ""
     var menu: String
+    @State private var showingSheet = false
+    @State private var city = "Город"
     
     var body: some View {
         
         List(list) { item in
-            let icon = Util().putEmoji(category: item.category)[0]
-            let name = Util().putEmoji(category: item.category)[1]
+            let icon = Util().parseCategory(category: item.category)[0]
+            let name = Util().parseCategory(category: item.category)[1]
             let date = Util().formatDate(date: item.createdAt)
-            HStack {
-                NavigationLink(destination: AdvView(work: item)) {
+//                NavigationLink(destination: AdvView(work: item)) {
+                Button(action: {
+                    showingSheet.toggle()
+                }) {
+                    HStack {
                     Text(icon)
                     VStack(alignment: .leading) {
                         Text(name)
@@ -47,7 +52,11 @@ struct AdsSubView: View {
                                 .foregroundColor(.gray)
                         }
                     }
-                }
+                    .sheet(isPresented: $showingSheet, content: {
+                        AdvView(work: item)
+                    })
+                
+            }
             }
         }
         .onAppear {
@@ -58,9 +67,26 @@ struct AdsSubView: View {
         .navigationTitle(barTitle)
         .navigationBarTitleDisplayMode(.inline)
         .toolbar{
-                NavigationLink(destination: InformationView()) {
-                Text("Выбрать город")
+//                NavigationLink(destination: InformationView()) {
+            Menu {
+                Button {
+                    city = "Ансан"
+//                    style = 0
+                } label: {
+                    Text("Ансан")
+//                    Image(systemName: "arrow.down.right.circle")
+                }
+                Button {
+//                  city = "Хвасонг"
+                } label: {
+                    Text("Хвасонг")
+//                    Image(systemName: "arrow.up.and.down.circle")
+                }
+            } label: {
+                 Text("Город")
+//                 Image(systemName: "tag.circle")
             }
+//            }
         }
     }
     

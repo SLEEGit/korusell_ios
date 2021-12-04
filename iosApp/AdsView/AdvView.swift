@@ -13,14 +13,14 @@ struct AdvView: View {
     
     var body: some View {
         let date = Util().formatDate(date: work.updatedAt)
-        let icon = Util().putEmoji(category: work.category)[0]
-        let name = Util().putEmoji(category: work.category)[1]
+        let icon = Util().parseCategory(category: work.category)[0]
+        let name = Util().parseCategory(category: work.category)[1]
         ScrollView {
             VStack {
 //                Later change to individual image
                 Text(icon)
-                    .font(.title)
-                    .frame(width: 60, height: 60)
+                    .font(.system(size: 100))
+//                    .frame(width: 100, height: 100)
                 HStack {
                     Text(date)
                         .font(.caption)
@@ -28,9 +28,6 @@ struct AdvView: View {
                         .padding(10)
                     Spacer()
                 }
-                
-                
-                
                 HStack {
                     Text(name)
                         .font(.title2)
