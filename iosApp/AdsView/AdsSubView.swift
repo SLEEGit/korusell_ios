@@ -10,14 +10,14 @@ import SwiftUI
 struct AdsSubView: View {
     
     @State var list: [Work] = []
+    @State var unsortedList: [Work] = []
     var category: String
     var barTitle: String = ""
     var menu: String
     @State private var showingSheet = false
-    @State private var city = "Город"
+    @State private var city = "Все города"
     
     var body: some View {
-        
         List(list) { item in
             let icon = Util().parseCategory(category: item.category)[0]
             let name = Util().parseCategory(category: item.category)[1]
@@ -62,6 +62,7 @@ struct AdsSubView: View {
         .onAppear {
             JSONParser().getWorkList(fileName: menu) { (list) in
                 self.list = list.filter { $0.category == category }
+                self.unsortedList = self.list
             }
         }
         .navigationTitle(barTitle)
@@ -70,21 +71,28 @@ struct AdsSubView: View {
 //                NavigationLink(destination: InformationView()) {
             Menu {
                 Button {
-                    city = "Ансан"
-//                    style = 0
+                    self.list = self.unsortedList
+                    city = "Все города"
                 } label: {
-                    Text("Ансан")
-//                    Image(systemName: "arrow.down.right.circle")
+                    Text("Все города")
                 }
                 Button {
-//                  city = "Хвасонг"
+                    self.list = self.unsortedList
+                    city = "Чхонджу"
+                    self.list = list.filter { $0.town == city }
+                } label: {
+                    Text("Чхонджу")
+                }
+                Button {
+                    self.list = self.unsortedList
+                    city = "Хвасонг"
+                    self.list = list.filter { $0.town == city }
                 } label: {
                     Text("Хвасонг")
-//                    Image(systemName: "arrow.up.and.down.circle")
                 }
             } label: {
-                 Text("Город")
-//                 Image(systemName: "tag.circle")
+//                Image(systemName: "eye.circle")
+                 Text(city)
             }
 //            }
         }
