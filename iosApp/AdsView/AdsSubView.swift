@@ -7,7 +7,7 @@
 
 import SwiftUI
 
-struct HomeView: View {
+struct AdsSubView: View {
     
     @State var list: [Work] = []
     var category: String
@@ -18,7 +18,8 @@ struct HomeView: View {
         
         List(list) { item in
             HStack {
-                NavigationLink(destination: AdvView(work: item)) {
+                NavigationLink(destination: AdvView(work: item, icon: putEmoji(category: item.category))) {
+//                    Image(item.updatedAt)
                     Text(putEmoji(category: item.category))
                     VStack {
                         Text(item.createdAt)
@@ -76,7 +77,7 @@ struct HomeView: View {
 
 struct HomeView_Previews: PreviewProvider {
     static var previews: some View {
-        HomeView(category: "Zavod", menu: "work")
+        AdsSubView(category: "Zavod", menu: "work")
     }
 }
 

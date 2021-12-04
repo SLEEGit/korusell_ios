@@ -10,14 +10,17 @@ import SwiftUI
 struct AdvView: View {
     
     var work: Work!
+    var icon: String
     
     var body: some View {
         ScrollView {
-            Image(work.category)
-                .resizable()
-                .scaledToFit()
-                .frame(width: 60, height: 60)
+
             VStack {
+//                Image(work.updatedAt)
+                Text(icon)
+//                    .resizable()
+//                    .scaledToFill()
+                    .frame(width: 60, height: 60)
                 Text(work.createdAt)
                     .font(.caption)
                     .foregroundColor(.gray)
@@ -46,6 +49,7 @@ struct AdvView: View {
                 Text(work.phone)
                     .font(.caption)
             }
+            
         }
         
     }
@@ -53,7 +57,7 @@ struct AdvView: View {
 
 struct AdvView_Previews: PreviewProvider {
     static var previews: some View {
-        AdvView(work: example)
+        AdvView(work: example, icon: "")
     }
 }
 

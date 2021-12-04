@@ -7,7 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		253305BE27549F6C0061DD28 /* HomeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 253305BD27549F6C0061DD28 /* HomeView.swift */; };
+		253305BE27549F6C0061DD28 /* AdsSubView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 253305BD27549F6C0061DD28 /* AdsSubView.swift */; };
 		253305C12754A6940061DD28 /* work.json in Resources */ = {isa = PBXBuildFile; fileRef = 253305C02754A6940061DD28 /* work.json */; };
 		253305C32754A7050061DD28 /* JSONParser.swift in Sources */ = {isa = PBXBuildFile; fileRef = 253305C22754A7050061DD28 /* JSONParser.swift */; };
 		253305C92754C3C50061DD28 /* DropDown.swift in Sources */ = {isa = PBXBuildFile; fileRef = 253305C82754C3C50061DD28 /* DropDown.swift */; };
@@ -19,6 +19,7 @@
 		2593A6DD27539FAF00081698 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 2593A6DC27539FAF00081698 /* Assets.xcassets */; };
 		2593A6E027539FAF00081698 /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 2593A6DF27539FAF00081698 /* Preview Assets.xcassets */; };
 		25973DFF2759E34E00DC016B /* service.json in Resources */ = {isa = PBXBuildFile; fileRef = 25973DFE2759E34E00DC016B /* service.json */; };
+		25973E02275B27CF00DC016B /* ServiceSubView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 25973E01275B27CF00DC016B /* ServiceSubView.swift */; };
 		25AD649027589E6A00C8C05A /* FilterView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 25AD648F27589E6A00C8C05A /* FilterView.swift */; };
 		25AD64922758A64400C8C05A /* InformationView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 25AD64912758A64400C8C05A /* InformationView.swift */; };
 		25AD64942758B07300C8C05A /* AdvView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 25AD64932758B07300C8C05A /* AdvView.swift */; };
@@ -26,7 +27,7 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
-		253305BD27549F6C0061DD28 /* HomeView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeView.swift; sourceTree = "<group>"; };
+		253305BD27549F6C0061DD28 /* AdsSubView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AdsSubView.swift; sourceTree = "<group>"; };
 		253305C02754A6940061DD28 /* work.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = work.json; sourceTree = "<group>"; };
 		253305C22754A7050061DD28 /* JSONParser.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = JSONParser.swift; sourceTree = "<group>"; };
 		253305C82754C3C50061DD28 /* DropDown.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DropDown.swift; sourceTree = "<group>"; };
@@ -39,6 +40,7 @@
 		2593A6DC27539FAF00081698 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		2593A6DF27539FAF00081698 /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
 		25973DFE2759E34E00DC016B /* service.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = service.json; sourceTree = "<group>"; };
+		25973E01275B27CF00DC016B /* ServiceSubView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ServiceSubView.swift; sourceTree = "<group>"; };
 		25AD648F27589E6A00C8C05A /* FilterView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FilterView.swift; sourceTree = "<group>"; };
 		25AD64912758A64400C8C05A /* InformationView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InformationView.swift; sourceTree = "<group>"; };
 		25AD64932758B07300C8C05A /* AdvView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AdvView.swift; sourceTree = "<group>"; };
@@ -91,19 +93,15 @@
 			isa = PBXGroup;
 			children = (
 				2593A6D827539FAC00081698 /* iosAppApp.swift */,
-				25973DE42759969300DC016B /* Home */,
 				2593A6DA27539FAC00081698 /* ContentView.swift */,
-				253305CA275603A60061DD28 /* AdsView.swift */,
-				253305BD27549F6C0061DD28 /* HomeView.swift */,
-				25AD64932758B07300C8C05A /* AdvView.swift */,
-				253305C22754A7050061DD28 /* JSONParser.swift */,
+				253305CC27560E440061DD28 /* DataFetch.swift */,
+				25973DE42759969300DC016B /* AdsView */,
+				25973E00275A4D0100DC016B /* ServiceView */,
 				2593A6DC27539FAF00081698 /* Assets.xcassets */,
 				2593A6DE27539FAF00081698 /* Preview Content */,
-				253305C82754C3C50061DD28 /* DropDown.swift */,
-				253305CC27560E440061DD28 /* DataFetch.swift */,
-				253305CE27571F690061DD28 /* ServiceView.swift */,
 				25AD648F27589E6A00C8C05A /* FilterView.swift */,
 				25AD64912758A64400C8C05A /* InformationView.swift */,
+				253305C82754C3C50061DD28 /* DropDown.swift */,
 			);
 			path = iosApp;
 			sourceTree = "<group>";
@@ -116,11 +114,24 @@
 			path = "Preview Content";
 			sourceTree = "<group>";
 		};
-		25973DE42759969300DC016B /* Home */ = {
+		25973DE42759969300DC016B /* AdsView */ = {
 			isa = PBXGroup;
 			children = (
+				253305CA275603A60061DD28 /* AdsView.swift */,
+				253305BD27549F6C0061DD28 /* AdsSubView.swift */,
+				25AD64932758B07300C8C05A /* AdvView.swift */,
+				253305C22754A7050061DD28 /* JSONParser.swift */,
 			);
-			path = Home;
+			path = AdsView;
+			sourceTree = "<group>";
+		};
+		25973E00275A4D0100DC016B /* ServiceView */ = {
+			isa = PBXGroup;
+			children = (
+				253305CE27571F690061DD28 /* ServiceView.swift */,
+				25973E01275B27CF00DC016B /* ServiceSubView.swift */,
+			);
+			path = ServiceView;
 			sourceTree = "<group>";
 		};
 		45A62DF6782E9C65FD75BB4F /* Frameworks */ = {
@@ -239,12 +250,13 @@
 			buildActionMask = 2147483647;
 			files = (
 				253305CB275603A60061DD28 /* AdsView.swift in Sources */,
+				25973E02275B27CF00DC016B /* ServiceSubView.swift in Sources */,
 				253305C32754A7050061DD28 /* JSONParser.swift in Sources */,
 				253305C92754C3C50061DD28 /* DropDown.swift in Sources */,
 				2593A6DB27539FAC00081698 /* ContentView.swift in Sources */,
 				25AD649027589E6A00C8C05A /* FilterView.swift in Sources */,
 				25AD64922758A64400C8C05A /* InformationView.swift in Sources */,
-				253305BE27549F6C0061DD28 /* HomeView.swift in Sources */,
+				253305BE27549F6C0061DD28 /* AdsSubView.swift in Sources */,
 				253305CF27571F690061DD28 /* ServiceView.swift in Sources */,
 				253305CD27560E450061DD28 /* DataFetch.swift in Sources */,
 				25AD64942758B07300C8C05A /* AdvView.swift in Sources */,

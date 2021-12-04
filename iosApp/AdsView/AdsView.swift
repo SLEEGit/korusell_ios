@@ -13,7 +13,7 @@ struct AdsView: View {
         NavigationView {
             List(fetcher.menuItem, children: \.children){ item in
                 ZStack {
-                    NavigationLink(destination: HomeView(category: item.category, barTitle: item.image + " " + item.name, menu: "work" )) {}
+                    NavigationLink(destination: AdsSubView(category: item.category, barTitle: item.image + " " + item.name, menu: "work" )) {}
                     .opacity(0.0)
                     .buttonStyle(PlainButtonStyle())
                     HStack{

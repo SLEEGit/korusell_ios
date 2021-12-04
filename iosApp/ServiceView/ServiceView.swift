@@ -13,7 +13,7 @@ struct ServiceView: View {
         NavigationView {
             List(fetcher.serviceItem) { item in
                 ZStack {
-                    NavigationLink(destination: HomeView(category: item.category, barTitle: item.image + " " + item.name, menu: "service" )) {}
+                    NavigationLink(destination: AdsSubView(category: item.category, barTitle: item.image + " " + item.name, menu: "service" )) {}
                     .opacity(0.0)
                     .buttonStyle(PlainButtonStyle())
                     HStack{

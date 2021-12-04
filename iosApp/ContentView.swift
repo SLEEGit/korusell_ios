@@ -9,15 +9,14 @@ import SwiftUI
 
 struct ContentView: View {
     var body: some View {
-        
         TabView {
             AdsView()
                 .tabItem {
-                    Image(systemName: "bag")
+                    Image(systemName: "line.3.horizontal.circle")
                 }
             ServiceView()
                 .tabItem {
-                    Image(systemName: "wrench.fill")
+                    Image(systemName: "house")
                 }
             Text("😇Здесь будет персональная страничка")
                 .tabItem {
@@ -30,5 +29,6 @@ struct ContentView: View {
 struct ContentView_Previews: PreviewProvider {
     static var previews: some View {
         ContentView()
+            .preferredColorScheme(.dark)
     }
 }
