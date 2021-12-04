@@ -18,7 +18,7 @@ struct ServiceSubView: View {
         
         List(list) { item in
             HStack {
-                NavigationLink(destination: AdvView(work: item, icon: putEmoji(category: item.category))) {
+                NavigationLink(destination: AdvView(work: item)) {
 //                    Image(item.updatedAt)
                     Text(putEmoji(category: item.category))
                     VStack {

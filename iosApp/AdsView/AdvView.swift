@@ -10,22 +10,40 @@ import SwiftUI
 struct AdvView: View {
     
     var work: Work!
-    var icon: String
     
     var body: some View {
+        let date = Util().formatDate(date: work.updatedAt)
+        let icon = Util().putEmoji(category: work.category)[0]
+        let name = Util().putEmoji(category: work.category)[1]
         ScrollView {
-
             VStack {
-//                Image(work.updatedAt)
+//                Later change to individual image
                 Text(icon)
-//                    .resizable()
-//                    .scaledToFill()
+                    .font(.title)
                     .frame(width: 60, height: 60)
-                Text(work.createdAt)
-                    .font(.caption)
-                    .foregroundColor(.gray)
-                Text(work.category)
-                    .font(.caption)
+                HStack {
+                    Text(date)
+                        .font(.caption)
+                        .foregroundColor(.gray)
+                        .padding(10)
+                    Spacer()
+                }
+                
+                
+                
+                HStack {
+                    Text(name)
+                        .font(.title2)
+                        .padding(10)
+                    Divider()
+                    Text(work.salary + " W")
+//                    Поменять на символ вона
+                        .font(.title3)
+                        .foregroundColor(.gray)
+                        .padding(10)
+                    Spacer()
+                }
+                
                 HStack {
                     Text("Город:")
                         .font(.caption)
@@ -34,30 +52,46 @@ struct AdvView: View {
                         .font(.caption)
                         .foregroundColor(.gray)
                     Spacer()
-                    Text("Зарплата:")
+                }.padding(10)
+                HStack {
+                    Text("Виза:")
                         .font(.caption)
                         .foregroundColor(.gray)
-                    Text(work.salary)
+                    Text(work._id)
                         .font(.caption)
                         .foregroundColor(.gray)
-                }
+                    Spacer()
+                }.padding(10)
                 
-                Spacer()
                 Text(work.description)
                     .font(.caption)
-                Spacer()
-                Text(work.phone)
-                    .font(.caption)
+                    .padding(20)
+                    .padding(.bottom, 50)
+                
+                Button(action: doSomething) {
+                    HStack {
+                        Image(systemName: "phone.fill")
+                        Text(work.phone)
+                    }
+                    .font(.title3)
+                    .frame(width: 280, height: 50, alignment: .center)
+                    .background(.green)
+                    .foregroundColor(Color.white)
+                    .cornerRadius(15)
+                }
+            
             }
             
         }
         
     }
+    
+    func doSomething() {}
 }
 
 struct AdvView_Previews: PreviewProvider {
     static var previews: some View {
-        AdvView(work: example, icon: "")
+        AdvView(work: example)
     }
 }
 
