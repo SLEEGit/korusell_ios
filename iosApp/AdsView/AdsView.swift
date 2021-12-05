@@ -9,6 +9,7 @@ import SwiftUI
 
 struct AdsView: View {
     @ObservedObject var fetcher = DataFetcher()
+//    @State var workCount: String = ""
     var body: some View {
         NavigationView {
             List(fetcher.menuItem, children: \.children){ item in
@@ -21,15 +22,22 @@ struct AdsView: View {
                             .font(.title)
                         Text(item.name)
                         Spacer()
+//                        Text(String(workCount))
+                        
                     }
                 }
-            }.navigationTitle("ОБЪЯВЛЕНИЯ")
+            }
+//            .onAppear {
+//                JSONParser().getWorkList(fileName: item) { (list) in
+//                    workCount = String(list.count) }
+//            }
+            .navigationTitle("ОБЪЯВЛЕНИЯ")
                 .toolbar{
                         NavigationLink(destination: InformationView()) {
                         Text("info")
                     }
                 }
-                
+  
         }
     }
 }

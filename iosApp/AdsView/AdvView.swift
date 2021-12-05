@@ -21,6 +21,9 @@ struct AdvView: View {
                 Image(work.image)
                     .resizable()
                     .scaledToFit()
+                    .cornerRadius(15)
+                    .padding(10)
+                    
             } else {
                 Text(icon)
                     .font(.system(size: 50))

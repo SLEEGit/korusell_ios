@@ -133,7 +133,7 @@ struct AdsSubView: View {
     
 }
 
-struct HomeView_Previews: PreviewProvider {
+struct AdsSubView_Previews: PreviewProvider {
     static var previews: some View {
         AdsSubView(category: "Zavod", menu: "work")
     }
