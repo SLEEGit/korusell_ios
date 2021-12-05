@@ -6,6 +6,7 @@
 //
 
 import Foundation
+import SwiftUI
 
 class Util {
         func parseCategory(category: String) -> [String] {
@@ -38,7 +39,8 @@ class Util {
                 list.append("🚙")
                 list.append("KIA")
             } else {
-                
+                list.append("")
+                list.append("")
             }
             return list
         }
@@ -56,3 +58,4 @@ class Util {
     }
     
 }
+

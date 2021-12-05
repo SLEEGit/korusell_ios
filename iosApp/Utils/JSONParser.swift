@@ -14,10 +14,21 @@ struct Work: Codable, Identifiable {
     let updatedAt: String
     let category: String
     let salary : String
+    let visa: [String]
     let town : String
     let description: String
     let phone: String
-    
+    let image: String
+}
+
+struct Person: Codable, Identifiable {
+    let id = UUID()
+    let _id: String
+    let avatar: String
+    let name : String
+    let username : String
+    let email: String
+    let phone: String
 }
 
 
@@ -27,6 +38,18 @@ class JSONParser {
             guard let url = Bundle.main.url(forResource: fileName, withExtension: "json") else { return }
             URLSession.shared.dataTask(with: url) { (data, _, _) in
                 let users = try! JSONDecoder().decode([Work].self, from: data!)
+                print(users)
+                DispatchQueue.main.async {
+                    completion(users)
+                }
+            }
+            .resume()
+        }
+    
+    func getProfiles(fileName: String, completion:@escaping ([Person]) -> ()) {
+            guard let url = Bundle.main.url(forResource: fileName, withExtension: "json") else { return }
+            URLSession.shared.dataTask(with: url) { (data, _, _) in
+                let users = try! JSONDecoder().decode([Person].self, from: data!)
                 print(users)
                 DispatchQueue.main.async {
                     completion(users)

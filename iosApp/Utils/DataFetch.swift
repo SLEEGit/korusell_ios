@@ -108,7 +108,7 @@ public class DataFetcher: ObservableObject {
         
         self.menuItem = [
             MenuItem(name: "Работа", image: "🛠", category: "work", children: workMenuItems),
-            MenuItem(name: "Автомобили", image: "🚗", children: carsMenuItems),
+            MenuItem(name: "Транспорт", image: "🚗", children: carsMenuItems),
             MenuItem(name: "Недвижимость", image: "🏢", children: realMenuItems),
             MenuItem(name: "Телефоны и Аксессуары", image: "📱", children: phonesMenuItems),
             MenuItem(name: "Для дома, хобби", image: "🏠", children: homeMenuItems),
