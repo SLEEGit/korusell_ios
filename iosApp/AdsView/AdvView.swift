@@ -18,11 +18,15 @@ struct AdvView: View {
         VStack {
             //                Later change to individual image
             if work.image != "" {
-                Image(work.image)
-                    .resizable()
-                    .scaledToFit()
-                    .cornerRadius(15)
-                    .padding(10)
+                TabView {
+                    Image(work.image)
+                        .resizable()
+                        .scaledToFit()
+                        .cornerRadius(15)
+                        .padding(10)
+                }.tabViewStyle(.page(indexDisplayMode: .always))
+                    .indexViewStyle(.page(backgroundDisplayMode: .always))
+                
                     
             } else {
                 Text(icon)
