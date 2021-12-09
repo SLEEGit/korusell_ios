@@ -122,10 +122,11 @@ public class DataFetcher: ObservableObject {
             ]
         
         self.serviceItem = [
+            MenuItem(name: "Рестораны/Кафе", image: "🍲", category: "food"),
+            MenuItem(name: "Магазины", image: "🍞", category: "shop"),
+            MenuItem(name: "Связь", image: "📱", category: "connect"),
             MenuItem(name: "Документы/Переводы", image: "📑", category: "docs"),
             MenuItem(name: "Транспорт/Переезд", image: "🚛", category: "transport"),
-            MenuItem(name: "Связь", image: "📱", category: "connect"),
-            MenuItem(name: "Рестораны/Кафе", image: "🍲", category: "food"),
             MenuItem(name: "Юридические услуги", image: "👩🏻‍⚖️", category: "law"),
             MenuItem(name: "Финансовые услуги", image: "💰", category: "money"),
             MenuItem(name: "Красота/Здоровье", image: "💅🏼", category: "health"),

@@ -10,13 +10,13 @@ import SwiftUI
 struct ContentView: View {
     var body: some View {
         TabView {
-            AdsView()
-                .tabItem {
-                    Image(systemName: "line.3.horizontal.circle")
-                }
             ServiceView()
                 .tabItem {
                     Image(systemName: "house")
+                }
+            Text("Map")
+                .tabItem {
+                    Image(systemName: "map")
                 }
             Profile(person: person)
                 .tabItem {
