@@ -18,7 +18,7 @@ struct Work: Codable, Identifiable {
     let town : String
     let description: String
     let phone: String
-    let image: String
+    let image: [String]
 }
 
 struct Person: Codable, Identifiable {
@@ -34,13 +34,23 @@ struct Person: Codable, Identifiable {
 
 class JSONParser {
 
-    func getWorkList(fileName: String, completion:@escaping ([Work]) -> ()) {
-            guard let url = Bundle.main.url(forResource: fileName, withExtension: "json") else { return }
+    func getWorkList(fileName: String, completion: @escaping ([Work]) -> ()) {
+        var menu = ""
+        if fileName == "zavod" || fileName == "stroyka" || fileName == "motel" || fileName == "shchiktan" || fileName == "selkhoz" || fileName == "pochta" || fileName == "ofis" || fileName == "rabota_drugoye" {
+            menu = "work"
+        } else {
+            menu = fileName
+        }
+            guard let url = Bundle.main.url(forResource: menu, withExtension: "json") else { return }
             URLSession.shared.dataTask(with: url) { (data, _, _) in
-                let users = try! JSONDecoder().decode([Work].self, from: data!)
-                print(users)
+                var list = try! JSONDecoder().decode([Work].self, from: data!)
+                print(list)
+                
+                if fileName != "work" {
+                    list = list.filter { $0.category == fileName }
+                }
                 DispatchQueue.main.async {
-                    completion(users)
+                    completion(list)
                 }
             }
             .resume()

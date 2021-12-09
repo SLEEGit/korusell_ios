@@ -13,14 +13,18 @@ struct ContentView: View {
             AdsView()
                 .tabItem {
                     Image(systemName: "line.3.horizontal.circle")
+                    Text("Объявления")
+                        
                 }
             ServiceView()
                 .tabItem {
                     Image(systemName: "house")
+                    Text("Услуги")
                 }
             Profile(person: person)
                 .tabItem {
                     Image(systemName: "person.crop.circle")
+                    Text("Профиль")
                 }
         }
     }
