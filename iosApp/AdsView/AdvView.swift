@@ -17,15 +17,18 @@ struct AdvView: View {
         let name = Util().parseCategory(category: work.category)[1]
         VStack {
             //                Later change to individual image
-            if work.image != "" {
+            if work.image != [] {
                 TabView {
-                    Image(work.image)
-                        .resizable()
-                        .scaledToFit()
-                        .cornerRadius(15)
-                        .padding(10)
-                }.tabViewStyle(.page(indexDisplayMode: .always))
-                    .indexViewStyle(.page(backgroundDisplayMode: .always))
+                    ForEach(work.image, id: \.self) { image in
+                        Image(image)
+                            .resizable()
+                            .scaledToFit()
+                            .cornerRadius(15)
+                            .padding(10)
+                    }
+                }.indexViewStyle(.page(backgroundDisplayMode: .always))
+                .tabViewStyle(.page)
+                    
                 
                     
             } else {
@@ -102,5 +105,5 @@ struct AdvView_Previews: PreviewProvider {
 }
 
 #if DEBUG
-let example2 = Work(_id: "HNyHZZjtq298izgub", createdAt: "2021-11-28T03:58:20.665Z", updatedAt: "2021-11-28T03:58:20.665Z", category: "motel", salary: "3000000", visa: ["F4", "H2"], town: "Чхонджу", description: "г.Чхонджу 청주시 (Оксан-мён 옥산면) ЖК дисплеи (протирка, тейпинг, комса) Чуган 09:00~18:00 (чаноб 3 часа с утра) Зарплата 20-го числа, авансы Дорожные не выплачиваются Развоз имеется Жильё не предоставляют 3 девушки виза F4 생휴, Ёнча, 13~ая, нед.бонус есть Страховка 50% Обязательное знание языка Услуга бесплатная (аутсорсинг) 010-2369-6613", phone: "010 1233 1111", image: "factory")
+let example2 = Work(_id: "HNyHZZjtq298izgub", createdAt: "2021-11-28T03:58:20.665Z", updatedAt: "2021-11-28T03:58:20.665Z", category: "motel", salary: "3000000", visa: ["F4", "H2"], town: "Чхонджу", description: "г.Чхонджу 청주시 (Оксан-мён 옥산면) ЖК дисплеи (протирка, тейпинг, комса) Чуган 09:00~18:00 (чаноб 3 часа с утра) Зарплата 20-го числа, авансы Дорожные не выплачиваются Развоз имеется Жильё не предоставляют 3 девушки виза F4 생휴, Ёнча, 13~ая, нед.бонус есть Страховка 50% Обязательное знание языка Услуга бесплатная (аутсорсинг) 010-2369-6613", phone: "010 1233 1111", image: ["factory"])
 #endif

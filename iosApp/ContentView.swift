@@ -10,9 +10,19 @@ import SwiftUI
 struct ContentView: View {
     var body: some View {
         TabView {
+<<<<<<< HEAD
+=======
+            AdsView()
+                .tabItem {
+                    Image(systemName: "line.3.horizontal.circle")
+                    Text("Объявления")
+                        
+                }
+>>>>>>> 49679bc382012bc8a46535c15c3876c16ef7f428
             ServiceView()
                 .tabItem {
                     Image(systemName: "house")
+                    Text("Услуги")
                 }
             Text("Map")
                 .tabItem {
@@ -21,6 +31,7 @@ struct ContentView: View {
             Profile(person: person)
                 .tabItem {
                     Image(systemName: "person.crop.circle")
+                    Text("Профиль")
                 }
         }
     }
