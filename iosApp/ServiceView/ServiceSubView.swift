@@ -8,7 +8,7 @@
 import SwiftUI
 
 struct ServiceSubView: View {
-    
+    @StateObject private var session = Session()
     @State var list: [Service] = []
     @State var unsortedList: [Service] = []
     @State private var showingSheet = false
@@ -60,6 +60,10 @@ struct ServiceSubView: View {
             }
         }
         .onAppear {
+            session.fetchData()
+            if let result = session.services {
+                print(result)
+            }
             JSONParser().getServiceList(fileName: menu) { (list) in
                 self.list = list
                 self.unsortedList = list

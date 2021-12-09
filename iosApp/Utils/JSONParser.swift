@@ -69,12 +69,13 @@ class JSONParser {
             .resume()
         }
     
+    
     func getServiceList(fileName: String, completion: @escaping ([Service]) -> ()) {
             guard let url = Bundle.main.url(forResource: "service", withExtension: "json") else { return }
             URLSession.shared.dataTask(with: url) { (data, _, _) in
                 var list = try! JSONDecoder().decode([Service].self, from: data!)
                 print(list)
-                
+
                 if fileName != "service" {
                     list = list.filter { $0.category == fileName }
                 }

@@ -16,6 +16,9 @@
 		254B21C9275C63340099E287 /* Profile.swift in Sources */ = {isa = PBXBuildFile; fileRef = 254B21C8275C63340099E287 /* Profile.swift */; };
 		256D58FF2761DA30002EDC6A /* ServiceMenuView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 256D58FE2761DA30002EDC6A /* ServiceMenuView.swift */; };
 		256D59032761DA86002EDC6A /* service.json in Resources */ = {isa = PBXBuildFile; fileRef = 256D59012761DA86002EDC6A /* service.json */; };
+		256D59052761DDB8002EDC6A /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 256D59042761DDB8002EDC6A /* GoogleService-Info.plist */; };
+		256D59072761E185002EDC6A /* ServiceViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 256D59062761E185002EDC6A /* ServiceViewModel.swift */; };
+		256D59092761E555002EDC6A /* Session.swift in Sources */ = {isa = PBXBuildFile; fileRef = 256D59082761E555002EDC6A /* Session.swift */; };
 		2593A6D927539FAC00081698 /* iosAppApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2593A6D827539FAC00081698 /* iosAppApp.swift */; };
 		2593A6DB27539FAC00081698 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2593A6DA27539FAC00081698 /* ContentView.swift */; };
 		2593A6DD27539FAF00081698 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 2593A6DC27539FAF00081698 /* Assets.xcassets */; };
@@ -37,6 +40,9 @@
 		254B21C8275C63340099E287 /* Profile.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Profile.swift; sourceTree = "<group>"; };
 		256D58FE2761DA30002EDC6A /* ServiceMenuView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ServiceMenuView.swift; sourceTree = "<group>"; };
 		256D59012761DA86002EDC6A /* service.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = service.json; sourceTree = "<group>"; };
+		256D59042761DDB8002EDC6A /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
+		256D59062761E185002EDC6A /* ServiceViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ServiceViewModel.swift; sourceTree = "<group>"; };
+		256D59082761E555002EDC6A /* Session.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Session.swift; sourceTree = "<group>"; };
 		25717C5D275F520A00C2CD01 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = Info.plist; sourceTree = "<group>"; };
 		2593A6D527539FAC00081698 /* iosApp.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = iosApp.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		2593A6D827539FAC00081698 /* iosAppApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = iosAppApp.swift; sourceTree = "<group>"; };
@@ -95,6 +101,7 @@
 		2593A6D727539FAC00081698 /* iosApp */ = {
 			isa = PBXGroup;
 			children = (
+				256D59042761DDB8002EDC6A /* GoogleService-Info.plist */,
 				25717C5D275F520A00C2CD01 /* Info.plist */,
 				2593A6D827539FAC00081698 /* iosAppApp.swift */,
 				2593A6DA27539FAC00081698 /* ContentView.swift */,
@@ -143,6 +150,8 @@
 				253305CC27560E440061DD28 /* DataFetch.swift */,
 				253305C22754A7050061DD28 /* JSONParser.swift */,
 				25973E04275B492400DC016B /* Util.swift */,
+				256D59062761E185002EDC6A /* ServiceViewModel.swift */,
+				256D59082761E555002EDC6A /* Session.swift */,
 			);
 			path = Utils;
 			sourceTree = "<group>";
@@ -175,6 +184,7 @@
 				2593A6D127539FAC00081698 /* Sources */,
 				2593A6D227539FAC00081698 /* Frameworks */,
 				2593A6D327539FAC00081698 /* Resources */,
+				759E7DC9988CDCE72C8BD742 /* [CP] Embed Pods Frameworks */,
 			);
 			buildRules = (
 			);
@@ -225,6 +235,7 @@
 			files = (
 				253305C12754A6940061DD28 /* work.json in Resources */,
 				2593A6E027539FAF00081698 /* Preview Assets.xcassets in Resources */,
+				256D59052761DDB8002EDC6A /* GoogleService-Info.plist in Resources */,
 				2593A6DD27539FAF00081698 /* Assets.xcassets in Resources */,
 				256D59032761DA86002EDC6A /* service.json in Resources */,
 			);
@@ -233,6 +244,23 @@
 /* End PBXResourcesBuildPhase section */
 
 /* Begin PBXShellScriptBuildPhase section */
+		759E7DC9988CDCE72C8BD742 /* [CP] Embed Pods Frameworks */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-iosApp/Pods-iosApp-frameworks-${CONFIGURATION}-input-files.xcfilelist",
+			);
+			name = "[CP] Embed Pods Frameworks";
+			outputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-iosApp/Pods-iosApp-frameworks-${CONFIGURATION}-output-files.xcfilelist",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-iosApp/Pods-iosApp-frameworks.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
 		F9F59BEAF7BA322F910B868F /* [CP] Check Pods Manifest.lock */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
@@ -266,11 +294,13 @@
 				256D58FF2761DA30002EDC6A /* ServiceMenuView.swift in Sources */,
 				25973E02275B27CF00DC016B /* ServiceSubView.swift in Sources */,
 				253305C32754A7050061DD28 /* JSONParser.swift in Sources */,
+				256D59072761E185002EDC6A /* ServiceViewModel.swift in Sources */,
 				254B21C9275C63340099E287 /* Profile.swift in Sources */,
 				2593A6DB27539FAC00081698 /* ContentView.swift in Sources */,
 				25AD64922758A64400C8C05A /* InformationView.swift in Sources */,
 				25973E05275B492400DC016B /* Util.swift in Sources */,
 				253305BE27549F6C0061DD28 /* AdsSubView.swift in Sources */,
+				256D59092761E555002EDC6A /* Session.swift in Sources */,
 				253305CF27571F690061DD28 /* ServiceView.swift in Sources */,
 				253305CD27560E450061DD28 /* DataFetch.swift in Sources */,
 				25AD64942758B07300C8C05A /* AdvView.swift in Sources */,

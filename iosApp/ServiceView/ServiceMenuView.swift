@@ -27,6 +27,7 @@ struct ServiceMenuView: View {
                 .toolbar{
                         NavigationLink(destination: InformationView()) {
                         Text("info")
+                            
                     }
                 }
                 
