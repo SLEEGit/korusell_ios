@@ -59,3 +59,70 @@ class Util {
     
 }
 
+struct FilterView: View {
+    @State private var city = "Все города"
+    @State var list: [Service] = []
+    @State var unsortedList: [Service] = []
+    var body: some View {
+        Menu {
+            Button {
+                self.list = self.unsortedList
+                city = "Все города"
+            } label: {
+                Text("Все города")
+            }
+            Button {
+                self.list = self.unsortedList
+                city = "Ансан"
+                self.list = list.filter { $0.city == city }
+            } label: {
+                Text("Ансан")
+            }
+            Button {
+                self.list = self.unsortedList
+                city = "Хвасонг"
+                self.list = list.filter { $0.city == city }
+            } label: {
+                Text("Хвасонг")
+            }
+            Button {
+                self.list = self.unsortedList
+                city = "Инчхон"
+                self.list = list.filter { $0.city == city }
+            } label: {
+                Text("Инчхон")
+            }
+            Button {
+                self.list = self.unsortedList
+                city = "Сеул"
+                self.list = list.filter { $0.city == city }
+            } label: {
+                Text("Сеул")
+            }
+            Button {
+                self.list = self.unsortedList
+                city = "Асан-Синчанг"
+                self.list = list.filter { $0.city == city }
+            } label: {
+                Text("Асан-Синчанг")
+            }
+            Button {
+                self.list = self.unsortedList
+                city = "Чхонан"
+                self.list = list.filter { $0.city == city }
+            } label: {
+                Text("Чхонан")
+            }
+            Button {
+                self.list = self.unsortedList
+                city = "Другой город"
+                self.list = list.filter { $0.city != "Чхонан" && $0.city != "Хвасонг" && $0.city != "Ансан" && $0.city != "Асан-Синчанг" && $0.city != "Сеул" && $0.city != "Инчхон" && $0.city != "Хвасонг"}
+            } label: {
+                Text("Другой город")
+            }
+        } label: {
+            //                Image(systemName: "eye.circle")
+            Text(city)
+        }
+    }
+}

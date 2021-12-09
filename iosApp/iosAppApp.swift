@@ -12,7 +12,6 @@ struct iosAppApp: App {
     var body: some Scene {
         WindowGroup {
             ContentView()
-//            WebView(request: URLRequest(url: URL(string: "https://koryosaram.ru/")!))
         }
     }
 }

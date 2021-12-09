@@ -21,6 +21,19 @@ struct Work: Codable, Identifiable {
     let image: [String]
 }
 
+struct Service: Codable, Identifiable {
+    let id = UUID()
+    let _id: String
+    let owner: String
+    let name: String
+    let category: String
+    let city : String
+    let address : String
+    let phone: String
+    let image: [String]
+    let description: String
+}
+
 struct Person: Codable, Identifiable {
     let id = UUID()
     let _id: String
@@ -55,6 +68,23 @@ class JSONParser {
             }
             .resume()
         }
+    
+    func getServiceList(fileName: String, completion: @escaping ([Service]) -> ()) {
+            guard let url = Bundle.main.url(forResource: "service", withExtension: "json") else { return }
+            URLSession.shared.dataTask(with: url) { (data, _, _) in
+                var list = try! JSONDecoder().decode([Service].self, from: data!)
+                print(list)
+                
+                if fileName != "service" {
+                    list = list.filter { $0.category == fileName }
+                }
+                DispatchQueue.main.async {
+                    completion(list)
+                }
+            }
+            .resume()
+        }
+    
     
     func getProfiles(fileName: String, completion:@escaping ([Person]) -> ()) {
             guard let url = Bundle.main.url(forResource: fileName, withExtension: "json") else { return }
