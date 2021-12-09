@@ -13,6 +13,7 @@ struct ServiceView: View {
     var body: some View {
         
         Form {
+            Section {
             TabView {
                 ForEach(service.image, id: \.self) { image in
                     Image(image)
@@ -23,6 +24,7 @@ struct ServiceView: View {
             .indexViewStyle(.page(backgroundDisplayMode: .always))
             .tabViewStyle(.page)
             .frame(width: 300, height: 200)
+            }
             Section {
                 Text(service.name)
                     .font(.title2)
@@ -38,6 +40,7 @@ struct ServiceView: View {
                 Text(service.address)
                     .font(.caption)
                     .foregroundColor(.gray)
+            
                 Text(service.description)
                     .font(.caption)
             }
