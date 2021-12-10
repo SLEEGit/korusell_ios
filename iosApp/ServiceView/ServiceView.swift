@@ -13,18 +13,40 @@ struct ServiceView: View {
     var body: some View {
         
         Form {
-            Section {
-            TabView {
-                ForEach(service.image, id: \.self) { image in
-                    Image(image)
+            AsyncImage(url: URL(string: service.image[0])) { image in
+                    image
                         .resizable()
-                        .scaledToFit()
+                        .scaledToFill()
+                } placeholder: {
+                    Image(systemName: "person")
                 }
-            }
-            .indexViewStyle(.page(backgroundDisplayMode: .always))
-            .tabViewStyle(.page)
-            .frame(width: 300, height: 200)
-            }
+                .frame(width: 300, height: 300)
+//            Section{
+
+//            AsyncImage(
+//                url: URL(string: service.image[0]),
+//                content: { image in
+//                    image.resizable()
+//                        .scaledToFit()
+//                        .cornerRadius(10)
+//                },
+//                placeholder: {
+//                    Image(systemName: "person")
+//                }
+//                )
+//            }
+//            Section {
+//            TabView {
+//                ForEach(service.image, id: \.self) { image in
+//                    Image(image)
+//                        .resizable()
+//                        .scaledToFit()
+//                }
+//            }
+//            .indexViewStyle(.page(backgroundDisplayMode: .always))
+//            .tabViewStyle(.page)
+//            .frame(width: 300, height: 200)
+//            }
             Section {
                 Text(service.name)
                     .font(.title2)

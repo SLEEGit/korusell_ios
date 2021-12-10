@@ -1,6 +1,39 @@
 {
 "services" :
-[ 
+[
+{
+    "_id" : "HNyHZZjtq298izgub",
+    "owner" : "hPQwM9F7L9CxTZdRm",
+    "name" : "Кафе RELAX",
+    "category" : "food",
+    "city" : "Ансан",
+    "address" : "경기 안산시 단원구 원곡동 962, 지하 1층",
+    "phone" : "010-2428-4522",
+    "image" : ["https://firebasestorage.googleapis.com/v0/b/korusale.appspot.com/o/images%2Fans1-1.jpeg?alt=media&token=2202f900-dc1c-42c7-b752-131b59d6548f"],
+    "description" : "Европейская и азиатская кухня. Шашлыки, самса, тандырные лепешки Европейская и азиатская кухня. Шашлыки, самса, тандырные лепешк Европейская и азиатская кухня. Шашлыки, самса, тандырные лепешки Европейская и азиатская кухня. Шашлыки, самса, тандырные лепешкии"
+},
+{
+    "_id" : "HNyHZZjtq298izgub",
+    "owner" : "hPQwM9F7L9CxTZdRm",
+    "name" : "Кафе RELAX",
+    "category" : "food",
+    "city" : "Ансан",
+    "address" : "경기 안산시 단원구 원곡동 962, 지하 1층",
+    "phone" : "010-2428-4522",
+    "image" : ["https://firebasestorage.googleapis.com/v0/b/korusale.appspot.com/o/images%2Fpizzaroliya.jpeg?alt=media&token=b92d68cf-f73b-4381-9673-06aea1307376"],
+    "description" : "Европейская и азиатская кухня. Шашлыки, самса, тандырные лепешки Европейская и азиатская кухня. Шашлыки, самса, тандырные лепешк Европейская и азиатская кухня. Шашлыки, самса, тандырные лепешки Европейская и азиатская кухня. Шашлыки, самса, тандырные лепешкии"
+},
+{
+    "_id" : "HNyHZZjtq298izgub",
+    "owner" : "hPQwM9F7L9CxTZdRm",
+    "name" : "Кафе RELAX",
+    "category" : "food",
+    "city" : "Ансан",
+    "address" : "경기 안산시 단원구 원곡동 962, 지하 1층",
+    "phone" : "010-2428-4522",
+    "image" : ["https://firebasestorage.googleapis.com/v0/b/korusale.appspot.com/o/images%2Fvkusnyashka.png?alt=media&token=615dda58-1fc1-4fe1-ba27-0e639dddbd5a"],
+    "description" : "Европейская и азиатская кухня. Шашлыки, самса, тандырные лепешки Европейская и азиатская кухня. Шашлыки, самса, тандырные лепешк Европейская и азиатская кухня. Шашлыки, самса, тандырные лепешки Европейская и азиатская кухня. Шашлыки, самса, тандырные лепешкии"
+},
 {
     "_id" : "HNyHZZjtq298izgub",
     "owner" : "hPQwM9F7L9CxTZdRm",
@@ -14,13 +47,46 @@
 },
 {
     "_id" : "HNyHZZjtq298izgub",
+    "owner" : "hPQwM9F7L9CxTZdRm",
+    "name" : "Кафе RELAX",
+    "category" : "food",
+    "city" : "Ансан",
+    "address" : "경기 안산시 단원구 원곡동 962, 지하 1층",
+    "phone" : "010-2428-4522",
+    "image" : ["relax"],
+    "description" : "Европейская и азиатская кухня. Шашлыки, самса, тандырные лепешки Европейская и азиатская кухня. Шашлыки, самса, тандырные лепешк Европейская и азиатская кухня. Шашлыки, самса, тандырные лепешки Европейская и азиатская кухня. Шашлыки, самса, тандырные лепешкии"
+},
+{
+    "_id" : "HNyHZZjtq298izgub",
+    "owner" : "hPQwM9F7L9CxTZdRm",
+    "name" : "Кафе RELAX",
+    "category" : "food",
+    "city" : "Ансан",
+    "address" : "경기 안산시 단원구 원곡동 962, 지하 1층",
+    "phone" : "010-2428-4522",
+    "image" : ["https://firebasestorage.googleapis.com:443/v0/b/korusale.appspot.com/o/images%2Frelax.jpeg?alt=media&token=0244f401-68b5-41a5-a195-420f05163d7d"],
+    "description" : "Европейская и азиатская кухня. Шашлыки, самса, тандырные лепешки Европейская и азиатская кухня. Шашлыки, самса, тандырные лепешк Европейская и азиатская кухня. Шашлыки, самса, тандырные лепешки Европейская и азиатская кухня. Шашлыки, самса, тандырные лепешкии"
+},
+{
+    "_id" : "HNyHZZjtq298izgub",
+    "owner" : "hPQwM9F7L9CxTZdRm",
+    "name" : "Кафе RELAX",
+    "category" : "food",
+    "city" : "Ансан",
+    "address" : "경기 안산시 단원구 원곡동 962, 지하 1층",
+    "phone" : "010-2428-4522",
+    "image" : ["https://firebasestorage.googleapis.com:443/v0/b/korusale.appspot.com/o/images%2Frelax.jpeg?alt=media&token=0244f401-68b5-41a5-a195-420f05163d7d"],
+    "description" : "Европейская и азиатская кухня. Шашлыки, самса, тандырные лепешки Европейская и азиатская кухня. Шашлыки, самса, тандырные лепешк Европейская и азиатская кухня. Шашлыки, самса, тандырные лепешки Европейская и азиатская кухня. Шашлыки, самса, тандырные лепешкии"
+},
+{
+    "_id" : "HNyHZZjtq298izgub",
     "owner" : "Людмила Ким",
     "name" : "Dream Telecom",
     "category" : "connect",
     "city" : "Ансан",
     "address" : "경기도 안산시 당원구 747-9,101호",
     "phone" : "'010-5557-5752",
-    "image" : ["phone"],
+    "image" : ["https://firebasestorage.googleapis.com/v0/b/korusale.appspot.com/o/images%2Fphone.jpeg?alt=media&token=9fe81c63-417a-470b-8ef8-8cde93979e40"],
     "description" : "Магазин сотовой связи "
 }
 

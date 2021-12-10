@@ -18,26 +18,24 @@ struct ServiceSubView: View {
     var barTitle: String = ""
     var menu: String
     
-    
     var body: some View {
         List(list) { item in
-            let icon = Util().parseCategory(category: item.category)[0]
-            let name = Util().parseCategory(category: item.category)[1]
             
             ZStack {
                 NavigationLink(destination: ServiceView(service: item)) {}
                 .opacity(0.0)
                 .buttonStyle(PlainButtonStyle())
                 HStack {
-                    if item.image != [] {
-                        Image(item.image[0])
-                            .resizable()
-                            .scaledToFit()
-                            .cornerRadius(10)
-                        
-                    } else {
-                        Text(icon)
-                    }
+                    AsyncImage(url: URL(string: item.image[0])) { image in
+                            image
+                                .resizable()
+                                .scaledToFit()
+                        } placeholder: {
+
+                            Image("")
+                        }
+                        .frame(width: 100, height: 100)
+                    
                     VStack(alignment: .leading) {
                         Text(item.name)
                             .font(.title2)
@@ -56,6 +54,7 @@ struct ServiceSubView: View {
                             .padding(.top, 5)
                             .lineLimit(3)
                     }
+                    Spacer()
                 }
             }
         }
@@ -136,11 +135,11 @@ struct ServiceSubView: View {
     
 }
 
-struct ServiceSubView_Previews: PreviewProvider {
-    static var previews: some View {
-        ServiceSubView(category: "food", menu: "service")
-    }
-}
+//struct ServiceSubView_Previews: PreviewProvider {
+//    static var previews: some View {
+//        ServiceSubView(category: "food", menu: "service")
+//    }
+//}
 
 
 
