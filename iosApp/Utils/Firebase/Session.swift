@@ -5,53 +5,9 @@
 //  Created by Sergey Lee on 2021/12/09.
 //
 
-import Foundation
 import FirebaseDatabase
-import FirebaseStorage
-import UIKit
-import SwiftUI
 
 class Session: ObservableObject {
-
-//    func down() {
-//        let storage = Storage.storage()
-//        let pathReference = storage.reference(withPath: "images/\(service.image[0]).jpeg").getData(maxSize: 1 * 1024 * 1024) { (imageData, err) in
-//            if let err = err {
-//                print("Error: \(err.localizedDescription)")
-//            } else {
-//                if let imageData = imageData {
-//                    self.download_image = UIImage(data: imageData)
-//                } else {
-//                    print("no image data")
-//                }
-//            }
-//            
-//        }
-//    }
-    
-    func download(services: [Service], completion: @escaping ([Image]) -> ()) {
-        var imageArray: [Image] = []
-        let storage = Storage.storage()
-        
-        for i in services {
-            let pathReference = storage.reference(withPath: "images/\(i.image[0]).jpeg")
-            pathReference.getData(maxSize: 1 * 1024 * 1024) { data, error in
-              if let error = error {
-                // Uh-oh, an error occurred!
-                  print("// Uh-oh, an error occurred! \(error)")
-              } else {
-                  let image: Image = Image(uiImage: UIImage(data: data!)!)
-                    print(image)
-                  imageArray.append(image)
-              }
-                
-            }
-        }
-        DispatchQueue.main.async {
-            completion(imageArray)
-        }
-    }
-
     
     func fetchData(category: String, completion: @escaping ([Service]) -> ()) {
 

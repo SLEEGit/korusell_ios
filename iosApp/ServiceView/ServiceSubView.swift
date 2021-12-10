@@ -26,16 +26,19 @@ struct ServiceSubView: View {
                 .opacity(0.0)
                 .buttonStyle(PlainButtonStyle())
                 HStack {
-                    AsyncImage(url: URL(string: item.image[0])) { image in
-                            image
-                                .resizable()
-                                .scaledToFit()
-                        } placeholder: {
-
-                            Image("")
-                        }
-                        .frame(width: 100, height: 100)
-                    
+                    RemoteImage(url: item.image[0])
+                        .aspectRatio(contentMode: .fit)
+                                    .frame(width: 100)
+//                    AsyncImage(url: URL(string: item.image[0])) { image in
+//                            image
+//                                .resizable()
+//                                .scaledToFit()
+//                        } placeholder: {
+//
+//                            Image("")
+//                        }
+//                        .frame(width: 100, height: 100)
+//
                     VStack(alignment: .leading) {
                         Text(item.name)
                             .font(.title2)

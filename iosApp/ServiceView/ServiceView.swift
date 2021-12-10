@@ -11,43 +11,19 @@ struct ServiceView: View {
     var service: Service!
     
     var body: some View {
-        
+//        AsyncImage(url: URL(string: service.image[0])) { image in
+//                image
+//                    .resizable()
+//                    .scaledToFill()
+//            } placeholder: {
+//                Image(systemName: "person")
+//            }
+//            .frame(width: 200, height: 200)
         Form {
-            AsyncImage(url: URL(string: service.image[0])) { image in
-                    image
-                        .resizable()
-                        .scaledToFill()
-                } placeholder: {
-                    Image(systemName: "person")
-                }
-                .frame(width: 300, height: 300)
-//            Section{
-
-//            AsyncImage(
-//                url: URL(string: service.image[0]),
-//                content: { image in
-//                    image.resizable()
-//                        .scaledToFit()
-//                        .cornerRadius(10)
-//                },
-//                placeholder: {
-//                    Image(systemName: "person")
-//                }
-//                )
-//            }
-//            Section {
-//            TabView {
-//                ForEach(service.image, id: \.self) { image in
-//                    Image(image)
-//                        .resizable()
-//                        .scaledToFit()
-//                }
-//            }
-//            .indexViewStyle(.page(backgroundDisplayMode: .always))
-//            .tabViewStyle(.page)
-//            .frame(width: 300, height: 200)
-//            }
             Section {
+                RemoteImage(url: service.image[0])
+                    .aspectRatio(contentMode: .fit)
+                                .frame(width: 300)
                 Text(service.name)
                     .font(.title2)
                 
@@ -62,6 +38,7 @@ struct ServiceView: View {
                 Text(service.address)
                     .font(.caption)
                     .foregroundColor(.gray)
+                    
             
                 Text(service.description)
                     .font(.caption)

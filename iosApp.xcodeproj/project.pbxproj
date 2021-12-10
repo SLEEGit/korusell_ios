@@ -18,8 +18,7 @@
 		256D59032761DA86002EDC6A /* service.json in Resources */ = {isa = PBXBuildFile; fileRef = 256D59012761DA86002EDC6A /* service.json */; };
 		256D59052761DDB8002EDC6A /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 256D59042761DDB8002EDC6A /* GoogleService-Info.plist */; };
 		256D59092761E555002EDC6A /* Session.swift in Sources */ = {isa = PBXBuildFile; fileRef = 256D59082761E555002EDC6A /* Session.swift */; };
-		256D590B2762E285002EDC6A /* Storage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 256D590A2762E285002EDC6A /* Storage.swift */; };
-		256D590E2762F561002EDC6A /* FirebaseImage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 256D590D2762F561002EDC6A /* FirebaseImage.swift */; };
+		256D5915276349D4002EDC6A /* RemoteImage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 256D5914276349D4002EDC6A /* RemoteImage.swift */; };
 		2593A6D927539FAC00081698 /* iosAppApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2593A6D827539FAC00081698 /* iosAppApp.swift */; };
 		2593A6DB27539FAC00081698 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2593A6DA27539FAC00081698 /* ContentView.swift */; };
 		2593A6DD27539FAF00081698 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 2593A6DC27539FAF00081698 /* Assets.xcassets */; };
@@ -43,8 +42,7 @@
 		256D59012761DA86002EDC6A /* service.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = service.json; sourceTree = "<group>"; };
 		256D59042761DDB8002EDC6A /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		256D59082761E555002EDC6A /* Session.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Session.swift; sourceTree = "<group>"; };
-		256D590A2762E285002EDC6A /* Storage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Storage.swift; sourceTree = "<group>"; };
-		256D590D2762F561002EDC6A /* FirebaseImage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FirebaseImage.swift; sourceTree = "<group>"; };
+		256D5914276349D4002EDC6A /* RemoteImage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RemoteImage.swift; sourceTree = "<group>"; };
 		25717C5D275F520A00C2CD01 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = Info.plist; sourceTree = "<group>"; };
 		2593A6D527539FAC00081698 /* iosApp.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = iosApp.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		2593A6D827539FAC00081698 /* iosAppApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = iosAppApp.swift; sourceTree = "<group>"; };
@@ -85,8 +83,6 @@
 			isa = PBXGroup;
 			children = (
 				256D59082761E555002EDC6A /* Session.swift */,
-				256D590A2762E285002EDC6A /* Storage.swift */,
-				256D590D2762F561002EDC6A /* FirebaseImage.swift */,
 			);
 			path = Firebase;
 			sourceTree = "<group>";
@@ -163,6 +159,7 @@
 				253305CC27560E440061DD28 /* DataFetch.swift */,
 				253305C22754A7050061DD28 /* JSONParser.swift */,
 				25973E04275B492400DC016B /* Util.swift */,
+				256D5914276349D4002EDC6A /* RemoteImage.swift */,
 			);
 			path = Utils;
 			sourceTree = "<group>";
@@ -308,8 +305,8 @@
 			files = (
 				253305CB275603A60061DD28 /* AdsView.swift in Sources */,
 				256D58FF2761DA30002EDC6A /* ServiceMenuView.swift in Sources */,
-				256D590E2762F561002EDC6A /* FirebaseImage.swift in Sources */,
 				25973E02275B27CF00DC016B /* ServiceSubView.swift in Sources */,
+				256D5915276349D4002EDC6A /* RemoteImage.swift in Sources */,
 				253305C32754A7050061DD28 /* JSONParser.swift in Sources */,
 				254B21C9275C63340099E287 /* Profile.swift in Sources */,
 				2593A6DB27539FAC00081698 /* ContentView.swift in Sources */,
@@ -321,7 +318,6 @@
 				253305CD27560E450061DD28 /* DataFetch.swift in Sources */,
 				25AD64942758B07300C8C05A /* AdvView.swift in Sources */,
 				2593A6D927539FAC00081698 /* iosAppApp.swift in Sources */,
-				256D590B2762E285002EDC6A /* Storage.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
