@@ -60,14 +60,13 @@ struct ServiceSubView: View {
             }
         }
         .onAppear {
-            session.fetchData()
-            if let result = session.services {
-                print(result)
-            }
-            JSONParser().getServiceList(fileName: menu) { (list) in
+            session.fetchData() { (list) in
                 self.list = list
                 self.unsortedList = list
             }
+//            JSONParser().getServiceList(fileName: menu) { (list) in
+//
+//            }
         }
         .navigationTitle(barTitle)
         .navigationBarTitleDisplayMode(.inline)

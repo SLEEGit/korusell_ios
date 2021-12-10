@@ -9,41 +9,28 @@ import Foundation
 import FirebaseDatabase
 
 class Session: ObservableObject {
-    
-    @Published var services: String?
-    func fetchData() {
 
-        
+    func fetchData(completion: @escaping ([Service]) -> ()) {
         let ref = Database.database(url: "https://korusale-default-rtdb.asia-southeast1.firebasedatabase.app").reference(withPath: "services")
-        ref.observeSingleEvent(of: .value, with: { snapShot in
-            let a = snapShot.value as? Dictionary<String, AnyObject>
-            print(a)
-        
-        
-//
-//        .observe(.value, with: { snapshot in
-//            for item in snapshot.children {
-//                    print(item)
-//
-//            }
+        ref.observeSingleEvent(of: .value, with: { snapshot in
+            let values = snapshot.value as! [[String:Any]]
+            var innerServices: [Service] = []
+            for i in values {
+                let service = Service(dictionary: i)
+                innerServices.append(service)
+            }
+            DispatchQueue.main.async {
+                completion(innerServices)
+            }
             
-//            self.services = snapshot.value as! [Service]
-
+//            services = Service(dictionary: values ?? [[]])
+//            let service = Service(dictionary: values ?? [:])
+//            print(values)
+//            let enumerator = snapshot.children
+//            while let rest = enumerator.nextObject() as? DataSnapshot {
+//                let values = (rest as! DataSnapshot).value as? [String:Any]
+//                let service = Service(dictionary: values ?? [:])
+//                self.services.append(service)
         })
     }
 }
-//
-//struct ContentView : View {
-//  @StateObject private var firebaseManager = FirebaseManager()
-//
-//  var body : some View {
-//    VStack {
-//      Text("Hello, world")
-//      if let result = firebaseManager.result {
-//        Text(result)
-//      }
-//    }.onAppear {
-//      firebaseManager.makeFirebaseCall()
-//    }
-//  }
-//}
