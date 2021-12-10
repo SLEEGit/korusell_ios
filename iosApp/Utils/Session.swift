@@ -10,7 +10,7 @@ import FirebaseDatabase
 
 class Session: ObservableObject {
 
-    func fetchData(completion: @escaping ([Service]) -> ()) {
+    func fetchData(category: String, completion: @escaping ([Service]) -> ()) {
         let ref = Database.database(url: "https://korusale-default-rtdb.asia-southeast1.firebasedatabase.app").reference(withPath: "services")
         ref.observeSingleEvent(of: .value, with: { snapshot in
             let values = snapshot.value as! [[String:Any]]
@@ -20,6 +20,7 @@ class Session: ObservableObject {
                 innerServices.append(service)
             }
             DispatchQueue.main.async {
+                innerServices = innerServices.filter { $0.category == category }
                 completion(innerServices)
             }
             

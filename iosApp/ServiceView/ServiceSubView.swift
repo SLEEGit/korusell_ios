@@ -60,7 +60,7 @@ struct ServiceSubView: View {
             }
         }
         .onAppear {
-            session.fetchData() { (list) in
+            session.fetchData(category: menu) { (list) in
                 self.list = list
                 self.unsortedList = list
             }
