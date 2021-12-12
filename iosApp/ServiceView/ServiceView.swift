@@ -21,9 +21,18 @@ struct ServiceView: View {
 //            .frame(width: 200, height: 200)
         Form {
             Section {
-                RemoteImage(url: service.image[0])
-                    .aspectRatio(contentMode: .fit)
-                                .frame(width: 300)
+            TabView {
+                ForEach(service.image, id: \.self) { item in
+                            RemoteImage(url: item)
+                                .aspectRatio(contentMode: .fill)
+                                            
+                        }
+                    }
+                    .tabViewStyle(PageTabViewStyle())
+                    .frame(width: 300, height: 300)
+            }
+            Section {
+                
                 Text(service.name)
                     .font(.title2)
                 

@@ -28,7 +28,7 @@ struct ServiceSubView: View {
                 HStack {
                     RemoteImage(url: item.image[0])
                         .aspectRatio(contentMode: .fit)
-                                    .frame(width: 100)
+                                    .frame(maxWidth: 100)
 //                    AsyncImage(url: URL(string: item.image[0])) { image in
 //                            image
 //                                .resizable()
