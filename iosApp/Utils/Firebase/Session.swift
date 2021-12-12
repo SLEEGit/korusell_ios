@@ -18,7 +18,7 @@ class Session: ObservableObject {
             for i in values {
                 let service = Service(dictionary: i)
                 innerServices.append(service)
-                print(service)
+//                print(service)
             }
             DispatchQueue.main.async {
                 innerServices = innerServices.filter { $0.category == category }

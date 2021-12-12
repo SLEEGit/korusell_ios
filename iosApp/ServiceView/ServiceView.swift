@@ -24,7 +24,7 @@ struct ServiceView: View {
             TabView {
                 ForEach(service.image, id: \.self) { item in
                             RemoteImage(url: item)
-                                .aspectRatio(contentMode: .fill)
+                                .aspectRatio(contentMode: .fit)
                                             
                         }
                     }
@@ -34,7 +34,7 @@ struct ServiceView: View {
             Section {
                 
                 Text(service.name)
-                    .font(.title2)
+                    .font(.title3)
                 
                 HStack {
                     Text("Город")
@@ -51,6 +51,10 @@ struct ServiceView: View {
             
                 Text(service.description)
                     .font(.caption)
+                    .multilineTextAlignment(.leading)
+                    .lineLimit(nil)
+                // эта штука снизу убрала троеточие в тексте
+                    .minimumScaleFactor(0.1)
             }
             
             Section {

@@ -8,12 +8,15 @@
 import SwiftUI
 
 struct ServiceMenuView: View {
+    
     @ObservedObject var fetcher = DataFetcher()
+    @State private var city = "Все города"
+    
     var body: some View {
         NavigationView {
             List(fetcher.serviceItem) { item in
                 ZStack {
-                    NavigationLink(destination: ServiceSubView(category: item.category, barTitle: item.image + " " + item.name, menu: item.category )) {}
+                    NavigationLink(destination: ServiceSubView(city: city, category: item.category, barTitle: item.image + " " + item.name, menu: item.category)) {}
                     .opacity(0.0)
                     .buttonStyle(PlainButtonStyle())
                     HStack{
@@ -23,11 +26,67 @@ struct ServiceMenuView: View {
                         Spacer()
                     }
                 }
-            }.navigationTitle("УСЛУГИ")
+            }.navigationTitle("Услуги")
                 .toolbar{
-                        NavigationLink(destination: InformationView()) {
-                        Text("info")
+                    Menu {
+                        Button {
                             
+                            city = "Все города"
+                        } label: {
+                            Text("Все города")
+                        }
+                        Button {
+                            
+                            city = "Ансан"
+                            
+                        } label: {
+                            Text("Ансан")
+                        }
+                        Button {
+                            
+                            city = "Хвасонг"
+                            
+                        } label: {
+                            Text("Хвасонг")
+                        }
+                        Button {
+                            
+                            city = "Инчxон"
+                            
+                        } label: {
+                            Text("Инчxон")
+                        }
+                        Button {
+                            
+                            city = "Сеул"
+                            
+                        } label: {
+                            Text("Сеул")
+                        }
+                        Button {
+                            
+                            city = "Асан"
+                            
+                        } label: {
+                            Text("Асан")
+                        }
+                        Button {
+                            
+                            city = "Чхонан"
+                            
+                        } label: {
+                            Text("Чхонан")
+                        }
+                        Button {
+                            
+                            city = "Другой город"
+                       
+                        } label: {
+                            Text("Другой город")
+                        }
+                    } label: {
+                        //                Image(systemName: "eye.circle")
+                        Text(city)
                     }
                 }
                 

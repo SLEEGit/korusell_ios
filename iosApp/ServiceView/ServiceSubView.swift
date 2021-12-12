@@ -12,11 +12,12 @@ struct ServiceSubView: View {
     @State var list: [Service] = []
     @State var unsortedList: [Service] = []
     @State private var showingSheet = false
-    @State private var city = "Все города"
+    @State var city = "Все города"
     
     var category: String
     var barTitle: String = ""
     var menu: String
+//    var city: String
     
     var body: some View {
         List(list) { item in
@@ -41,13 +42,15 @@ struct ServiceSubView: View {
 //
                     VStack(alignment: .leading) {
                         Text(item.name)
-                            .font(.title2)
+                            .font(.system(size: 15))
+                            .bold()
+                            .minimumScaleFactor(0.1)
                         HStack {
                             Text("Город:")
                                 .font(.system(size: 15))
                                 .foregroundColor(.gray)
                             Text(item.city)
-                                .font(.system(size: 15))
+                                .font(.system(size: 13))
                                 .foregroundColor(.gray)
                         }
                         
@@ -63,7 +66,14 @@ struct ServiceSubView: View {
         }
         .onAppear {
             session.fetchData(category: menu) { (list) in
-                self.list = list
+                if city == "Все города" {
+                    self.list = list
+                } else if city == "Другой город" {
+                    self.list = list.filter { $0.city != "Чхонан" && $0.city != "Хвасонг" && $0.city != "Ансан" && $0.city != "Асан" && $0.city != "Сеул" && $0.city != "Инчxон" && $0.city != "Хвасонг"}
+                } else {
+                    self.list = list.filter { $0.city == city }
+                }
+                
                 self.unsortedList = list
             }
 //            JSONParser().getServiceList(fileName: menu) { (list) in
@@ -96,10 +106,10 @@ struct ServiceSubView: View {
                 }
                 Button {
                     self.list = self.unsortedList
-                    city = "Инчхон"
+                    city = "Инчxон"
                     self.list = list.filter { $0.city == city }
                 } label: {
-                    Text("Инчхон")
+                    Text("Инчxон")
                 }
                 Button {
                     self.list = self.unsortedList
@@ -110,10 +120,10 @@ struct ServiceSubView: View {
                 }
                 Button {
                     self.list = self.unsortedList
-                    city = "Асан-Синчанг"
+                    city = "Асан"
                     self.list = list.filter { $0.city == city }
                 } label: {
-                    Text("Асан-Синчанг")
+                    Text("Асан")
                 }
                 Button {
                     self.list = self.unsortedList
@@ -125,7 +135,7 @@ struct ServiceSubView: View {
                 Button {
                     self.list = self.unsortedList
                     city = "Другой город"
-                    self.list = list.filter { $0.city != "Чхонан" && $0.city != "Хвасонг" && $0.city != "Ансан" && $0.city != "Асан-Синчанг" && $0.city != "Сеул" && $0.city != "Инчхон" && $0.city != "Хвасонг"}
+                    self.list = list.filter { $0.city != "Чхонан" && $0.city != "Хвасонг" && $0.city != "Ансан" && $0.city != "Асан" && $0.city != "Сеул" && $0.city != "Инчxон" && $0.city != "Хвасонг"}
                 } label: {
                     Text("Другой город")
                 }
