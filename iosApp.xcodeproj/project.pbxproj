@@ -15,6 +15,7 @@
 		253305CF27571F690061DD28 /* ServiceView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 253305CE27571F690061DD28 /* ServiceView.swift */; };
 		25441F6C2767179600B6E240 /* MapView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 25441F6B2767179600B6E240 /* MapView.swift */; };
 		25441F6E2767196400B6E240 /* MapViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 25441F6D2767196300B6E240 /* MapViewController.swift */; };
+		25441F8C2767260D00B6E240 /* MapView2.swift in Sources */ = {isa = PBXBuildFile; fileRef = 25441F8B2767260D00B6E240 /* MapView2.swift */; };
 		254B21C9275C63340099E287 /* Profile.swift in Sources */ = {isa = PBXBuildFile; fileRef = 254B21C8275C63340099E287 /* Profile.swift */; };
 		256D58FF2761DA30002EDC6A /* ServiceMenuView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 256D58FE2761DA30002EDC6A /* ServiceMenuView.swift */; };
 		256D59032761DA86002EDC6A /* service.json in Resources */ = {isa = PBXBuildFile; fileRef = 256D59012761DA86002EDC6A /* service.json */; };
@@ -41,6 +42,7 @@
 		253305CE27571F690061DD28 /* ServiceView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ServiceView.swift; sourceTree = "<group>"; };
 		25441F6B2767179600B6E240 /* MapView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MapView.swift; sourceTree = "<group>"; };
 		25441F6D2767196300B6E240 /* MapViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MapViewController.swift; sourceTree = "<group>"; };
+		25441F8B2767260D00B6E240 /* MapView2.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MapView2.swift; sourceTree = "<group>"; };
 		254B21C8275C63340099E287 /* Profile.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Profile.swift; sourceTree = "<group>"; };
 		256D58FE2761DA30002EDC6A /* ServiceMenuView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ServiceMenuView.swift; sourceTree = "<group>"; };
 		256D59012761DA86002EDC6A /* service.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = service.json; sourceTree = "<group>"; };
@@ -88,6 +90,7 @@
 			children = (
 				25441F6B2767179600B6E240 /* MapView.swift */,
 				25441F6D2767196300B6E240 /* MapViewController.swift */,
+				25441F8B2767260D00B6E240 /* MapView2.swift */,
 			);
 			path = Map;
 			sourceTree = "<group>";
@@ -317,6 +320,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				25441F8C2767260D00B6E240 /* MapView2.swift in Sources */,
 				253305CB275603A60061DD28 /* AdsView.swift in Sources */,
 				25441F6C2767179600B6E240 /* MapView.swift in Sources */,
 				256D58FF2761DA30002EDC6A /* ServiceMenuView.swift in Sources */,

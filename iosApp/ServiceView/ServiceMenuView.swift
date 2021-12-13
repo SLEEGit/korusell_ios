@@ -18,7 +18,7 @@ struct ServiceMenuView: View {
         NavigationView {
             List(fetcher.serviceItem) { item in
                 ZStack {
-                    NavigationLink(destination: ServiceSubView(category: item.category, barTitle: item.image + " " + item.name, menu: item.category)) {}
+                    NavigationLink(destination: ServiceSubView(category: item.category, barTitle: item.image + " " + item.name)) {}
                     .opacity(0.0)
                     .buttonStyle(PlainButtonStyle())
                     HStack{
@@ -36,13 +36,13 @@ struct ServiceMenuView: View {
                 .toolbar{
                     Menu {
                         Button {
-                            globalCity = "Хвасонг"
+                            globalCity = "Все города"
                             city = globalCity
                         } label: {
                             Text("Все города")
                         }
                         Button {
-                            globalCity = "Хвасонг"
+                            globalCity = "Ансан"
                             city = globalCity
                         } label: {
                             Text("Ансан")

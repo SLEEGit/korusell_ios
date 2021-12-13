@@ -21,7 +21,9 @@ class Session: ObservableObject {
 //                print(service)
             }
             DispatchQueue.main.async {
-                innerServices = innerServices.filter { $0.category == category }
+                if category != "all" {
+                    innerServices = innerServices.filter { $0.category == category }
+                }
                 completion(innerServices)
             }
             

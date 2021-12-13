@@ -53,8 +53,10 @@ struct ServiceView: View {
                     .font(.caption)
                     .multilineTextAlignment(.leading)
                     .lineLimit(nil)
+                    .padding(.bottom, 10)
                 // эта штука снизу убрала троеточие в тексте
                     .minimumScaleFactor(0.1)
+                    
             }
             
             Section {

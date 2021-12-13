@@ -16,7 +16,7 @@ struct ServiceSubView: View {
     
     var category: String
     var barTitle: String = ""
-    var menu: String
+    
 //    var city: String
     
     var body: some View {
@@ -65,7 +65,7 @@ struct ServiceSubView: View {
             }
         }
         .onAppear {
-            session.fetchData(category: menu) { (list) in
+            session.fetchData(category: category) { (list) in
                 if globalCity == "Все города" {
                     self.list = list
                 } else if globalCity == "Другой город" {

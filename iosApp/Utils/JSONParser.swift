@@ -22,6 +22,7 @@ struct Work: Codable, Identifiable {
 }
 
 struct Service: Codable, Identifiable {
+    
     let id = UUID()
     let _id: String
     let owner: String
