@@ -12,7 +12,7 @@ struct ServiceSubView: View {
     @State var list: [Service] = []
     @State var unsortedList: [Service] = []
     @State private var showingSheet = false
-    @State var city = "Все города"
+//    @State var city = "Все города"
     
     var category: String
     var barTitle: String = ""
@@ -66,12 +66,12 @@ struct ServiceSubView: View {
         }
         .onAppear {
             session.fetchData(category: menu) { (list) in
-                if city == "Все города" {
+                if globalCity == "Все города" {
                     self.list = list
-                } else if city == "Другой город" {
-                    self.list = list.filter { $0.city != "Чхонан" && $0.city != "Хвасонг" && $0.city != "Ансан" && $0.city != "Асан" && $0.city != "Сеул" && $0.city != "Инчxон" && $0.city != "Хвасонг"}
+                } else if globalCity == "Другой город" {
+                    self.list = list.filter { $0.city != "Чхонан" && $0.city != "Хвасонг" && $0.city != "Ансан" && $0.city != "Асан" && $0.city != "Сеул" && $0.city != "Инчхон" && $0.city != "Хвасонг"}
                 } else {
-                    self.list = list.filter { $0.city == city }
+                    self.list = list.filter { $0.city == globalCity }
                 }
                 
                 self.unsortedList = list
@@ -86,62 +86,62 @@ struct ServiceSubView: View {
             Menu {
                 Button {
                     self.list = self.unsortedList
-                    city = "Все города"
+                    globalCity = "Все города"
                 } label: {
                     Text("Все города")
                 }
                 Button {
                     self.list = self.unsortedList
-                    city = "Ансан"
-                    self.list = list.filter { $0.city == city }
+                    globalCity = "Ансан"
+                    self.list = list.filter { $0.city == globalCity }
                 } label: {
                     Text("Ансан")
                 }
                 Button {
                     self.list = self.unsortedList
-                    city = "Хвасонг"
-                    self.list = list.filter { $0.city == city }
+                    globalCity = "Хвасонг"
+                    self.list = list.filter { $0.city == globalCity }
                 } label: {
                     Text("Хвасонг")
                 }
                 Button {
                     self.list = self.unsortedList
-                    city = "Инчxон"
-                    self.list = list.filter { $0.city == city }
+                    globalCity = "Инчхон"
+                    self.list = list.filter { $0.city == globalCity }
                 } label: {
-                    Text("Инчxон")
+                    Text("Инчхон")
                 }
                 Button {
                     self.list = self.unsortedList
-                    city = "Сеул"
-                    self.list = list.filter { $0.city == city }
+                    globalCity = "Сеул"
+                    self.list = list.filter { $0.city == globalCity }
                 } label: {
                     Text("Сеул")
                 }
                 Button {
                     self.list = self.unsortedList
-                    city = "Асан"
-                    self.list = list.filter { $0.city == city }
+                    globalCity = "Асан"
+                    self.list = list.filter { $0.city == globalCity }
                 } label: {
                     Text("Асан")
                 }
                 Button {
                     self.list = self.unsortedList
-                    city = "Чхонан"
-                    self.list = list.filter { $0.city == city }
+                    globalCity = "Чхонан"
+                    self.list = list.filter { $0.city == globalCity }
                 } label: {
                     Text("Чхонан")
                 }
                 Button {
                     self.list = self.unsortedList
-                    city = "Другой город"
-                    self.list = list.filter { $0.city != "Чхонан" && $0.city != "Хвасонг" && $0.city != "Ансан" && $0.city != "Асан" && $0.city != "Сеул" && $0.city != "Инчxон" && $0.city != "Хвасонг"}
+                    globalCity = "Другой город"
+                    self.list = list.filter { $0.city != "Чхонан" && $0.city != "Хвасонг" && $0.city != "Ансан" && $0.city != "Асан" && $0.city != "Сеул" && $0.city != "Инчхон" && $0.city != "Хвасонг"}
                 } label: {
                     Text("Другой город")
                 }
             } label: {
                 //                Image(systemName: "eye.circle")
-                Text(city)
+                Text(globalCity)
             }
         }
     }

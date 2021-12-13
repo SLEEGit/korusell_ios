@@ -7,6 +7,8 @@
 
 import SwiftUI
 
+var globalCity: String = "Все города"
+
 struct ServiceMenuView: View {
     
     @ObservedObject var fetcher = DataFetcher()
@@ -16,7 +18,7 @@ struct ServiceMenuView: View {
         NavigationView {
             List(fetcher.serviceItem) { item in
                 ZStack {
-                    NavigationLink(destination: ServiceSubView(city: city, category: item.category, barTitle: item.image + " " + item.name, menu: item.category)) {}
+                    NavigationLink(destination: ServiceSubView(category: item.category, barTitle: item.image + " " + item.name, menu: item.category)) {}
                     .opacity(0.0)
                     .buttonStyle(PlainButtonStyle())
                     HStack{
@@ -26,61 +28,58 @@ struct ServiceMenuView: View {
                         Spacer()
                     }
                 }
-            }.navigationTitle("Услуги")
+            }
+            .onAppear{
+                city = globalCity
+            }
+            .navigationTitle("Услуги")
                 .toolbar{
                     Menu {
                         Button {
-                            
-                            city = "Все города"
+                            globalCity = "Хвасонг"
+                            city = globalCity
                         } label: {
                             Text("Все города")
                         }
                         Button {
-                            
-                            city = "Ансан"
-                            
+                            globalCity = "Хвасонг"
+                            city = globalCity
                         } label: {
                             Text("Ансан")
                         }
                         Button {
-                            
-                            city = "Хвасонг"
-                            
+                            globalCity = "Хвасонг"
+                            city = globalCity
                         } label: {
                             Text("Хвасонг")
                         }
                         Button {
-                            
-                            city = "Инчxон"
-                            
+                            globalCity = "Инчхон"
+                            city = globalCity
                         } label: {
-                            Text("Инчxон")
+                            Text("Инчхон")
                         }
                         Button {
-                            
-                            city = "Сеул"
-                            
+                            globalCity = "Сеул"
+                            city = globalCity
                         } label: {
                             Text("Сеул")
                         }
                         Button {
-                            
-                            city = "Асан"
-                            
+                            globalCity = "Асан"
+                            city = globalCity
                         } label: {
                             Text("Асан")
                         }
                         Button {
-                            
-                            city = "Чхонан"
-                            
+                            globalCity = "Чхонан"
+                            city = globalCity
                         } label: {
                             Text("Чхонан")
                         }
                         Button {
-                            
-                            city = "Другой город"
-                       
+                            globalCity = "Другой город"
+                            city = globalCity
                         } label: {
                             Text("Другой город")
                         }
