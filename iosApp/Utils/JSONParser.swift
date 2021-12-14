@@ -33,6 +33,9 @@ struct Service: Codable, Identifiable {
     let phone: String
     let image: [String]
     let description: String
+    let latitude: String
+    let longitude: String
+    
     
     init(dictionary: [String: Any]) {
         self._id = dictionary["_id"] as? String ?? ""
@@ -44,7 +47,23 @@ struct Service: Codable, Identifiable {
         self.phone = dictionary["phone"] as? String ?? ""
         self.image = dictionary["image"] as? [String] ?? []
         self.description = dictionary["description"] as? String ?? ""
+        self.latitude = dictionary["latitude"] as? String ?? ""
+        self.longitude = dictionary["longitude"] as? String ?? ""
         }
+    
+//    init(_id: String, owner: String, name: String, category: String, city: String, address: String, phone: String, image: [String], description: String, latitude: String, longitude: String) {
+//        self._id = _id
+//        self.owner = owner
+//        self.name = name
+//        self.category = category
+//        self.city = city
+//        self.address = address
+//        self.phone = phone
+//        self.image = image
+//        self.description = description
+//        self.latitude = latitude
+//        self.longitude = longitude
+//    }
 }
 
 struct Person: Codable, Identifiable {
