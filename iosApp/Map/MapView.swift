@@ -7,8 +7,14 @@
 
 import SwiftUI
 import MapKit
-import CoreLocation
-import CoreLocationUI
+//import CoreLocation
+//import CoreLocationUI
+
+//struct catModel: Hashable {
+//    var id = UUID()
+//    let category: String
+//    let name: String
+//}
 
 struct MapView: View {
     
@@ -17,15 +23,27 @@ struct MapView: View {
     @State var unsortedList: [Service] = []
     @State var category: String = "all"
     @State var categoryName: String = "Категории"
-    @ObservedObject var locationManager = LocationManager()
+    
     @StateObject var locationManager2 = LocationManager2()
     
-    
-    var userLatitude: Double { return locationManager.lastLocation?.coordinate.latitude ?? 0 }
-    
-    var userLongitude: Double { return locationManager.lastLocation?.coordinate.longitude ?? 0 }
-    
     @State private var mapRegion = MKCoordinateRegion(center: CLLocationCoordinate2D(latitude: 36.62257816899407, longitude: 127.91520089316795), span: MKCoordinateSpan(latitudeDelta: 3.5, longitudeDelta: 3.5))
+    
+//    let categories: [catModel] = [
+//        catModel(category: "Все категории", name: "all"),
+//        catModel(category: "Рестораны/Кафе", name: "food"),
+//        catModel(category: "Связь", name: "connect"),
+//        catModel(category: "Магазины", name: "shop"),
+//        catModel(category: "Документы/Переводы", name: "docs"),
+//        catModel(category: "Юридические услуги", name: "law"),
+//        catModel(category: "Финансовые услуги", name: "money"),
+//        catModel(category: "Красота/Здоровье", name: "health"),
+//        catModel(category: "СТО/Тюнинг", name: "car")
+//        catModel(category: "Транспорт/Переезд", name: "transport"),
+//        catModel(category: "Няни/Детсад", name: "nanny"),
+//        catModel(category: "Образование", name: "study"),
+//        catModel(category: "Туризм", name: "tourism")
+        
+//    ]
     
     var body: some View {
         NavigationView {
@@ -34,7 +52,6 @@ struct MapView: View {
                     MapAnnotation(coordinate: CLLocationCoordinate2D(latitude: Double(service.latitude) ?? 0.0, longitude: Double(service.longitude) ?? 0.0)) {
                         NavigationLink {
                             DetailsView(service: service)
-                            Text(service.name)
                         } label: {
                             VStack {
                                 Text(service.name)
@@ -45,7 +62,6 @@ struct MapView: View {
                                     .renderingMode(.original)
                                     .resizable()
                                     .frame(width: 30, height: 30)
-                                
                                     .shadow(color: .gray, radius: 1, x: 1, y: 1)
                             }
                         }
@@ -56,152 +72,167 @@ struct MapView: View {
                     .onAppear {
                         list.removeAll()
                         session.fetchData(category: self.category) { (list) in
-                            if globalCity == "Все города" {
-                                self.list = list
-                            } else if globalCity == "Другой город" {
-                                self.list = list.filter { $0.city != "Чхонан" && $0.city != "Хвасонг" && $0.city != "Ансан" && $0.city != "Асан" && $0.city != "Сеул" && $0.city != "Инчхон" && $0.city != "Хвасонг"}
-                            } else {
-                                self.list = list.filter { $0.city == globalCity }
-                            }
                             self.unsortedList = list
+                            self.list = Util().getCity(city: globalCity, category: self.category, unsortedList: self.unsortedList)
                         }
                     }
                 
                     .toolbar {
                         ToolbarItem(placement: .navigationBarLeading) {
                             Menu(self.categoryName) {
-                                Button {
-                                    self.category = "all"
+//                                ForEach(categories.identified(by: \.id)) { cat in
+//                                    Button {
+//                                        self.categoryName = cat.name
+//                                        self.category = cat.category
+//                                        self.list = Util().getCity(city: globalCity, category: self.category, unsortedList: self.unsortedList)
+//                                    } label: {
+//                                        Text(cat.name)
+//                                    }
+//                                }
+                                Button("Все категории") {
                                     self.categoryName = "Все категории"
-                                    self.list = unsortedList.filter { $0.city == globalCity }
-                                } label: {
-                                    Text("Все категории")
+                                    self.category = "all"
+                                    self.list = Util().getCity(city: globalCity, category: self.category, unsortedList: self.unsortedList)
                                 }
-                                Button {
-                                    self.category = "food"
+                                Button("Рестораны/Кафе") {
                                     self.categoryName = "Рестораны/Кафе"
-                                    self.list = unsortedList.filter { $0.city == globalCity && $0.category == self.category }
-                                } label: {
-                                    Text("Рестораны/Кафе")
+                                    self.category = "food"
+                                    self.list = Util().getCity(city: globalCity, category: self.category, unsortedList: self.unsortedList)
                                 }
-                                Button {
-                                    self.category = "connect"
+                                Button("Связь") {
                                     self.categoryName = "Связь"
-                                    self.list = unsortedList.filter { $0.city == globalCity && $0.category == self.category }
-                                } label: {
-                                    Text("Связь")
+                                    self.category = "connect"
+                                    self.list = Util().getCity(city: globalCity, category: self.category, unsortedList: self.unsortedList)
                                 }
-                                Button {
-                                    self.category = "shop"
+                                Button("Магазины") {
                                     self.categoryName = "Магазины"
-                                    self.list = unsortedList.filter { $0.city == globalCity && $0.category == self.category }
-                                } label: {
-                                    Text("Магазины")
+                                    self.category = "shop"
+                                    self.list = Util().getCity(city: globalCity, category: self.category, unsortedList: self.unsortedList)
                                 }
+                                Button("Документы/Переводы") {
+                                    self.categoryName = "Документы/Переводы"
+                                    self.category = "docs"
+                                    self.list = Util().getCity(city: globalCity, category: self.category, unsortedList: self.unsortedList)
+                                }
+                                Button("Юридические услуги") {
+                                    self.categoryName = "Юридические услуги"
+                                    self.category = "law"
+                                    self.list = Util().getCity(city: globalCity, category: self.category, unsortedList: self.unsortedList)
+                                }
+                                Button("Финансовые услуги") {
+                                    self.categoryName = "Финансовые услуги"
+                                    self.category = "money"
+                                    self.list = Util().getCity(city: globalCity, category: self.category, unsortedList: self.unsortedList)
+                                }
+                                Button("Красота/Здоровье") {
+                                    self.categoryName = "Красота/Здоровье"
+                                    self.category = "health"
+                                    self.list = Util().getCity(city: globalCity, category: self.category, unsortedList: self.unsortedList)
+                                }
+                                Button("СТО/Тюнинг") {
+                                    self.categoryName = "СТО/Тюнинг"
+                                    self.category = "car"
+                                    self.list = Util().getCity(city: globalCity, category: self.category, unsortedList: self.unsortedList)
+                                }
+//                                Button("Транспорт/Переезд") {
+//                                    self.categoryName = "Транспорт/Переезд"
+//                                    self.category = "transport"
+//                                    self.list = Util().getCity(city: globalCity, category: self.category, unsortedList: self.unsortedList)
+//                                }
+//                                Button("Няни/Детсад") {
+//                                    self.categoryName = "Няни/Детсад"
+//                                    self.category = "nanny"
+//                                    self.list = Util().getCity(city: globalCity, category: self.category, unsortedList: self.unsortedList)
+//                                }
+//                                Button("Образование") {
+//                                    self.categoryName = "Образование"
+//                                    self.category = "study"
+//                                    self.list = Util().getCity(city: globalCity, category: self.category, unsortedList: self.unsortedList)
+//                                }
+//                                Button("Туризм") {
+//                                    self.categoryName = "Туризм"
+//                                    self.category = "tourism"
+//                                    self.list = Util().getCity(city: globalCity, category: self.category, unsortedList: self.unsortedList)
+//                                }
                             }
                         }
                         ToolbarItem(placement: .navigationBarTrailing) {
                             Menu {
-                                Button {
+                                Button("Все города") {
                                     mapRegion = MKCoordinateRegion(center: CLLocationCoordinate2D(latitude: 36.62257816899407, longitude: 127.91520089316795), span: MKCoordinateSpan(latitudeDelta: 3.5, longitudeDelta: 3.5))
-                                    self.list = self.unsortedList
                                     globalCity = "Все города"
-                                    
-                                } label: {
-                                    Text("Все города")
+                                    self.list = Util().getCity(city: globalCity, category: self.category, unsortedList: self.unsortedList)
                                 }
-                                Button {
+                                Button("Ансан") {
                                     mapRegion = MKCoordinateRegion(center: CLLocationCoordinate2D(latitude: 37.31639679242606, longitude: 126.8256217710536), span: MKCoordinateSpan(latitudeDelta: 0.1, longitudeDelta: 0.1))
-                                    self.list = self.unsortedList
                                     globalCity = "Ансан"
-                                    self.list = list.filter { $0.city == globalCity }
-                                } label: {
-                                    Text("Ансан")
+                                    self.list = Util().getCity(city: globalCity, category: self.category, unsortedList: self.unsortedList)
                                 }
-                                Button {
+                                Button("Хвасонг") {
                                     mapRegion = MKCoordinateRegion(center: CLLocationCoordinate2D(latitude: 37.16834087290789, longitude: 126.801294705907), span: MKCoordinateSpan(latitudeDelta: 0.2, longitudeDelta: 0.2))
-                                    self.list = self.unsortedList
                                     globalCity = "Хвасонг"
-                                    self.list = list.filter { $0.city == globalCity }
-                                } label: {
-                                    Text("Хвасонг")
+                                    self.list = Util().getCity(city: globalCity, category: self.category, unsortedList: self.unsortedList)
                                 }
-                                Button {
+                                Button("Инчхон") {
                                     mapRegion = MKCoordinateRegion(center: CLLocationCoordinate2D(latitude: 37.45771638152154, longitude: 126.7028438251576), span: MKCoordinateSpan(latitudeDelta: 0.2, longitudeDelta: 0.2))
-                                    self.list = self.unsortedList
                                     globalCity = "Инчхон"
-                                    self.list = list.filter { $0.city == globalCity }
-                                } label: {
-                                    Text("Инчхон")
+                                    self.list = Util().getCity(city: globalCity, category: self.category, unsortedList: self.unsortedList)
                                 }
-                                Button {
+                                Button("Сеул") {
                                     mapRegion = MKCoordinateRegion(center: CLLocationCoordinate2D(latitude: 37.52146229568448, longitude: 126.98610893732737), span: MKCoordinateSpan(latitudeDelta: 0.3, longitudeDelta: 0.3))
-                                    self.list = self.unsortedList
                                     globalCity = "Сеул"
-                                    self.list = list.filter { $0.city == globalCity }
-                                } label: {
-                                    Text("Сеул")
+                                    self.list = Util().getCity(city: globalCity, category: self.category, unsortedList: self.unsortedList)
                                 }
-                                Button {
+                                Button("Асан") {
                                     mapRegion = MKCoordinateRegion(center: CLLocationCoordinate2D(latitude: 36.7818299238274, longitude: 127.00476323050401), span: MKCoordinateSpan(latitudeDelta: 0.1, longitudeDelta: 0.1))
-                                    self.list = self.unsortedList
                                     globalCity = "Асан"
-                                    self.list = list.filter { $0.city == globalCity }
-                                } label: {
-                                    Text("Асан")
+                                    self.list = Util().getCity(city: globalCity, category: self.category, unsortedList: self.unsortedList)
                                 }
-                                Button {
+                                Button("Чхонан") {
                                     mapRegion = MKCoordinateRegion(center: CLLocationCoordinate2D(latitude: 36.80244428186357, longitude: 127.18186756201197), span: MKCoordinateSpan(latitudeDelta: 0.2, longitudeDelta: 0.2))
-                                    self.list = self.unsortedList
                                     globalCity = "Чхонан"
-                                    self.list = list.filter { $0.city == globalCity }
-                                } label: {
-                                    Text("Чхонан")
+                                    self.list = Util().getCity(city: globalCity, category: self.category, unsortedList: self.unsortedList)
                                 }
-                                Button {
+                                Button("Другой город") {
                                     mapRegion = MKCoordinateRegion(center: CLLocationCoordinate2D(latitude: 36.62257816899407, longitude: 127.91520089316795), span: MKCoordinateSpan(latitudeDelta: 3.5, longitudeDelta: 3.5))
-                                    self.list = self.unsortedList
                                     globalCity = "Другой город"
-                                    self.list = list.filter { $0.city != "Чхонан" && $0.city != "Хвасонг" && $0.city != "Ансан" && $0.city != "Асан" && $0.city != "Сеул" && $0.city != "Инчхон" && $0.city != "Хвасонг"}
-                                } label: {
-                                    Text("Другой город")
+                                    self.list = Util().getCity(city: globalCity, category: self.category, unsortedList: self.unsortedList)
                                 }
                             } label: {
-                                //                Image(systemName: "eye.circle")
                                 Text(globalCity)
                             }
                         }
                     }
-                HStack {
-                    Spacer()
-                    LocationButton {
-                        locationManager2.requestLocation()
-                    }
-                    .frame(width: 60, height: 60)
-                    .labelStyle(.iconOnly)
-                    .symbolVariant(.fill)
-                    .foregroundColor(.white)
-                    .cornerRadius(30)
-                }
+//                HStack {
+//                    Spacer()
+//                    LocationButton {
+//                        locationManager2.requestLocation()
+//                    }
+//                    .labelStyle(.iconOnly)
+//                    .symbolVariant(.fill)
+//                    .foregroundColor(.white)
+//                    .frame(width: 60, height: 60)
+//                    .cornerRadius(30)
+//                }
             }
         }
     }
     
-    func getCoordinates(address: String, completion: @escaping (CLLocationCoordinate2D?) -> Void) {
-        let geocoder = CLGeocoder()
-        geocoder.geocodeAddressString(address) {
-            (placemarks, error) in
-            guard error == nil else {
-                print("Geocoding error: \(error!)")
-                completion(nil)
-                return
-            }
-            completion(placemarks?.first?.location?.coordinate)
-        }
-    }
+//    func getCoordinates(address: String, completion: @escaping (CLLocationCoordinate2D?) -> Void) {
+//        let geocoder = CLGeocoder()
+//        geocoder.geocodeAddressString(address) {
+//            (placemarks, error) in
+//            guard error == nil else {
+//                print("Geocoding error: \(error!)")
+//                completion(nil)
+//                return
+//            }
+//            completion(placemarks?.first?.location?.coordinate)
+//        }
+//    }
 }
 
-struct MapView2_Previews: PreviewProvider {
+struct MapView_Previews: PreviewProvider {
     static var previews: some View {
         MapView()
     }

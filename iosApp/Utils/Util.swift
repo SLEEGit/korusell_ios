@@ -57,7 +57,73 @@ class Util {
         
     }
     
+    func getCity(city: String, category: String, unsortedList: [Service]) -> [Service] {
+        
+        var afterCategory: [Service] = unsortedList
+        
+        switch category {
+        case "all":
+            print("all")
+        case "food":
+            afterCategory = afterCategory.filter { $0.category == "food" }
+        case "shop":
+            afterCategory = afterCategory.filter { $0.category == "shop" }
+        case "connect":
+            afterCategory = afterCategory.filter { $0.category == "connect" }
+        case "docs":
+            afterCategory = afterCategory.filter { $0.category == "docs" }
+        case "transport":
+            afterCategory = afterCategory.filter { $0.category == "transport" }
+        case "law":
+            afterCategory = afterCategory.filter { $0.category == "law" }
+        case "money":
+            afterCategory = afterCategory.filter { $0.category == "money" }
+        case "health":
+            afterCategory = afterCategory.filter { $0.category == "health" }
+        case "car":
+            afterCategory = afterCategory.filter { $0.category == "car" }
+        case "nanny":
+            afterCategory = afterCategory.filter { $0.category == "nanny" }
+        case "study":
+            afterCategory = afterCategory.filter { $0.category == "study" }
+        case "tourism":
+            afterCategory = afterCategory.filter { $0.category == "tourism" }
+        default:
+            print("no category")
+        }
+        
+        switch city {
+        case "Все города":
+            return afterCategory
+        case "Ансан":
+            return afterCategory.filter { $0.city == "Ансан"}
+        case "Хвасонг":
+            return afterCategory.filter { $0.city == "Хвасонг"}
+        case "Сеул":
+            return afterCategory.filter { $0.city == "Сеул"}
+        case "Инчхон":
+            return afterCategory.filter { $0.city == "Инчхон"}
+        case "Асан":
+            return afterCategory.filter { $0.city == "Асан"}
+        case "Чхонан":
+            return afterCategory.filter { $0.city == "Чхонан"}
+        case "Другой город":
+            return afterCategory.filter { $0.city != "Чхонан" && $0.city != "Хвасонг" && $0.city != "Ансан" && $0.city != "Асан" && $0.city != "Сеул" && $0.city != "Инчхон" && $0.city != "Хвасонг"}
+        default:
+            return []
+        }
+    }
+    
 }
+
+enum cityStatus {
+    case all, ansan, hwaseong, seoul, incheon, asan, cheonan, other
+}
+
+enum categoryStatus {
+    case all, food, shop, connect, docs, transport, law, money, health, car, nanny, study, tourism
+}
+
 
 struct FilterView: View {
     @State private var city = "Все города"
