@@ -63,31 +63,31 @@ class Util {
         
         switch category {
         case "all":
-            print("all")
+            afterCategory = unsortedList
         case "food":
-            afterCategory = afterCategory.filter { $0.category == "food" }
+            afterCategory = unsortedList.filter { $0.category == "food" }
         case "shop":
-            afterCategory = afterCategory.filter { $0.category == "shop" }
+            afterCategory = unsortedList.filter { $0.category == "shop" }
         case "connect":
-            afterCategory = afterCategory.filter { $0.category == "connect" }
+            afterCategory = unsortedList.filter { $0.category == "connect" }
         case "docs":
-            afterCategory = afterCategory.filter { $0.category == "docs" }
+            afterCategory = unsortedList.filter { $0.category == "docs" }
         case "transport":
-            afterCategory = afterCategory.filter { $0.category == "transport" }
+            afterCategory = unsortedList.filter { $0.category == "transport" }
         case "law":
-            afterCategory = afterCategory.filter { $0.category == "law" }
+            afterCategory = unsortedList.filter { $0.category == "law" }
         case "money":
-            afterCategory = afterCategory.filter { $0.category == "money" }
+            afterCategory = unsortedList.filter { $0.category == "money" }
         case "health":
-            afterCategory = afterCategory.filter { $0.category == "health" }
+            afterCategory = unsortedList.filter { $0.category == "health" }
         case "car":
-            afterCategory = afterCategory.filter { $0.category == "car" }
+            afterCategory = unsortedList.filter { $0.category == "car" }
         case "nanny":
-            afterCategory = afterCategory.filter { $0.category == "nanny" }
+            afterCategory = unsortedList.filter { $0.category == "nanny" }
         case "study":
-            afterCategory = afterCategory.filter { $0.category == "study" }
+            afterCategory = unsortedList.filter { $0.category == "study" }
         case "tourism":
-            afterCategory = afterCategory.filter { $0.category == "tourism" }
+            afterCategory = unsortedList.filter { $0.category == "tourism" }
         default:
             print("no category")
         }

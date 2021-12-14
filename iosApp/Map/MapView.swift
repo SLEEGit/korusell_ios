@@ -49,19 +49,21 @@ struct MapView: View {
         NavigationView {
             ZStack(alignment: .bottom) {
                 Map(coordinateRegion: $mapRegion, annotationItems: list) { service in
-                    MapAnnotation(coordinate: CLLocationCoordinate2D(latitude: Double(service.latitude) ?? 0.0, longitude: Double(service.longitude) ?? 0.0)) {
+                    MapAnnotation(coordinate: CLLocationCoordinate2D(latitude: Double(service.latitude) ?? 0.0, longitude: Double(service.longitude) ?? 0.0))
+                    
+                    {
                         NavigationLink {
                             DetailsView(service: service)
                         } label: {
                             VStack {
-                                Text(service.name)
-                                    .font(.system(size: 10))
-                                    .foregroundColor(.black)
-                                    .shadow(color: .white, radius: 1, x: 1, y: 1)
-                                Image(systemName: "mappin.circle.fill")
+//                                Text(service.name)
+//                                    .font(.system(size: 10))
+//                                    .foregroundColor(.black)
+//                                    .shadow(color: .white, radius: 1, x: 1, y: 1)
+                                Image(systemName: "mappin")
                                     .renderingMode(.original)
                                     .resizable()
-                                    .frame(width: 30, height: 30)
+                                    .frame(width: 8, height: 20)
                                     .shadow(color: .gray, radius: 1, x: 1, y: 1)
                             }
                         }
