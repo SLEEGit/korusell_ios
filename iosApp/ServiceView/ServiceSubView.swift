@@ -11,14 +11,10 @@ import CachedAsyncImage
 struct ServiceSubView: View {
     @StateObject private var session = Session()
     @State var list: [Service] = []
-    @State var unsortedList: [Service] = []
-    @State private var showingSheet = false
-    
+    @State var afterCatlList: [Service] = []
     var category: String
     var barTitle: String = ""
-    
-    
-    
+
     var body: some View {
         List(list) { item in
             ZStack {
@@ -34,11 +30,13 @@ struct ServiceSubView: View {
                             image
                                 .resizable()
                                 .scaledToFit()
+                                .frame(width: 100, height: 100)
                         } placeholder: {
-
-                            Image("")
+                            Image(systemName: "photo")
+                                .frame(width: 10, height: 10)
+                                .padding()
                         }
-                        .frame(width: 100, height: 100)
+                        
 
                     VStack(alignment: .leading) {
                         Text(item.name)
@@ -65,75 +63,69 @@ struct ServiceSubView: View {
             }
         }
         .onAppear {
-            session.fetchData(category: category) { (list) in
+            self.afterCatlList = globalServices.filter { $0.category == category }
                 if globalCity == "Все города" {
-                    self.list = list
+                    self.list = afterCatlList
                 } else if globalCity == "Другой город" {
-                    self.list = list.filter { $0.city != "Чхонан" && $0.city != "Хвасонг" && $0.city != "Ансан" && $0.city != "Асан" && $0.city != "Сеул" && $0.city != "Инчхон" && $0.city != "Хвасонг"}
+                    self.list = afterCatlList.filter { $0.city != "Чхонан" && $0.city != "Хвасонг" && $0.city != "Ансан" && $0.city != "Асан" && $0.city != "Сеул" && $0.city != "Инчхон" && $0.city != "Хвасонг"}
                 } else {
-                    self.list = list.filter { $0.city == globalCity }
-                }
-                
-                self.unsortedList = list
+                    self.list = afterCatlList.filter { $0.city == globalCity }
             }
-//            JSONParser().getServiceList(fileName: menu) { (list) in
-//
-//            }
         }
         .navigationTitle(barTitle)
         .navigationBarTitleDisplayMode(.inline)
         .toolbar{
             Menu {
                 Button {
-                    self.list = self.unsortedList
+                    self.list = self.afterCatlList
                     globalCity = "Все города"
                 } label: {
                     Text("Все города")
                 }
                 Button {
-                    self.list = self.unsortedList
+                    self.list = self.afterCatlList
                     globalCity = "Ансан"
                     self.list = list.filter { $0.city == globalCity }
                 } label: {
                     Text("Ансан")
                 }
                 Button {
-                    self.list = self.unsortedList
+                    self.list = self.afterCatlList
                     globalCity = "Хвасонг"
                     self.list = list.filter { $0.city == globalCity }
                 } label: {
                     Text("Хвасонг")
                 }
                 Button {
-                    self.list = self.unsortedList
+                    self.list = self.afterCatlList
                     globalCity = "Инчхон"
                     self.list = list.filter { $0.city == globalCity }
                 } label: {
                     Text("Инчхон")
                 }
                 Button {
-                    self.list = self.unsortedList
+                    self.list = self.afterCatlList
                     globalCity = "Сеул"
                     self.list = list.filter { $0.city == globalCity }
                 } label: {
                     Text("Сеул")
                 }
                 Button {
-                    self.list = self.unsortedList
+                    self.list = self.afterCatlList
                     globalCity = "Асан"
                     self.list = list.filter { $0.city == globalCity }
                 } label: {
                     Text("Асан")
                 }
                 Button {
-                    self.list = self.unsortedList
+                    self.list = self.afterCatlList
                     globalCity = "Чхонан"
                     self.list = list.filter { $0.city == globalCity }
                 } label: {
                     Text("Чхонан")
                 }
                 Button {
-                    self.list = self.unsortedList
+                    self.list = self.afterCatlList
                     globalCity = "Другой город"
                     self.list = list.filter { $0.city != "Чхонан" && $0.city != "Хвасонг" && $0.city != "Ансан" && $0.city != "Асан" && $0.city != "Сеул" && $0.city != "Инчхон" && $0.city != "Хвасонг"}
                 } label: {

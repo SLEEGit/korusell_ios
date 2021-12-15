@@ -21,10 +21,12 @@ struct ServiceView: View {
                             image
                                 .resizable()
                                 .scaledToFit()
+                                .frame(width: 300, height: 300)
                         } placeholder: {
-                            Image(systemName: "image")
+                            Image(systemName: "photo")
+                                .frame(width: 50, height: 50)
                         }
-                    .frame(width: 300, height: 300)
+                    
                 Spacer()
             }
 //            TabView {
