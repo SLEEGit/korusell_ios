@@ -7,7 +7,7 @@
 
 import SwiftUI
 
-var globalCity: String = "Все города"
+
 
 struct ServiceMenuView: View {
     

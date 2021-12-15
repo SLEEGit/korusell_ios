@@ -6,6 +6,7 @@
 //
 
 import SwiftUI
+import CachedAsyncImage
 
 struct DetailsView: View {
     
@@ -14,17 +15,29 @@ struct DetailsView: View {
     var body: some View {
         
         Form {
-            Section {
-            TabView {
-                ForEach(service.image, id: \.self) { item in
-                            RemoteImage(url: item)
-                                .aspectRatio(contentMode: .fit)
-                                            
+            HStack {
+                Spacer()
+                CachedAsyncImage(url: URL(string: service.image[0])) { image in
+                            image
+                                .resizable()
+                                .scaledToFit()
+                        } placeholder: {
+                            Image(systemName: "image")
                         }
-                    }
-                    .tabViewStyle(PageTabViewStyle())
                     .frame(width: 300, height: 300)
+                Spacer()
             }
+//            Section {
+//            TabView {
+//                ForEach(service.image, id: \.self) { item in
+//                            RemoteImage(url: item)
+//                                .aspectRatio(contentMode: .fit)
+//
+//                        }
+//                    }
+//                    .tabViewStyle(PageTabViewStyle())
+//                    .frame(width: 300, height: 300)
+//            }
             Section {
                 
                 Text(service.name)

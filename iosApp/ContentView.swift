@@ -7,7 +7,15 @@
 
 import SwiftUI
 
+var globalServices: [Service] = []
+var imageList: [RemoteImage] = []
+var globalCity: String = "Все города"
+
+
 struct ContentView: View {
+    
+    @StateObject private var session = Session()
+    
     var body: some View {
         TabView {
             ServiceMenuView()
@@ -22,6 +30,12 @@ struct ContentView: View {
                 .tabItem {
                     Image(systemName: "person.crop.circle")
                 }
+        }
+        .onAppear {
+            session.fetchData(category: "all") { (list) in
+                globalServices = list
+            }
+            
         }
     }
 }

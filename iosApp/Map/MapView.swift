@@ -22,7 +22,7 @@ struct MapView: View {
     @State var list: [Service] = []
     @State var unsortedList: [Service] = []
     @State var category: String = "all"
-    @State var categoryName: String = "Категории"
+    @State var categoryName: String = "Все категории"
     
     @StateObject var locationManager2 = LocationManager2()
     
@@ -49,9 +49,7 @@ struct MapView: View {
         NavigationView {
             ZStack(alignment: .bottom) {
                 Map(coordinateRegion: $mapRegion, annotationItems: list) { service in
-                    MapAnnotation(coordinate: CLLocationCoordinate2D(latitude: Double(service.latitude) ?? 0.0, longitude: Double(service.longitude) ?? 0.0))
-                    
-                    {
+                    MapAnnotation(coordinate: CLLocationCoordinate2D(latitude: Double(service.latitude) ?? 0.0, longitude: Double(service.longitude) ?? 0.0)) {
                         NavigationLink {
                             DetailsView(service: service)
                         } label: {
@@ -75,7 +73,8 @@ struct MapView: View {
                         list.removeAll()
                         session.fetchData(category: self.category) { (list) in
                             self.unsortedList = list
-                            self.list = Util().getCity(city: globalCity, category: self.category, unsortedList: self.unsortedList)
+//                            self.list = Util().getCity(city: globalCity, category: self.category, unsortedList: self.unsortedList)
+                            self.list = list
                         }
                     }
                 

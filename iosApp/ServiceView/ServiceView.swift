@@ -6,31 +6,37 @@
 //
 
 import SwiftUI
+import CachedAsyncImage
 
 struct ServiceView: View {
     var service: Service!
     
     var body: some View {
-//        AsyncImage(url: URL(string: service.image[0])) { image in
-//                image
-//                    .resizable()
-//                    .scaledToFill()
-//            } placeholder: {
-//                Image(systemName: "person")
-//            }
-//            .frame(width: 200, height: 200)
+
         Form {
-            Section {
-            TabView {
-                ForEach(service.image, id: \.self) { item in
-                            RemoteImage(url: item)
-                                .aspectRatio(contentMode: .fit)
-                                            
+//            Section {
+            HStack {
+                Spacer()
+                CachedAsyncImage(url: URL(string: service.image[0])) { image in
+                            image
+                                .resizable()
+                                .scaledToFit()
+                        } placeholder: {
+                            Image(systemName: "image")
                         }
-                    }
-                    .tabViewStyle(PageTabViewStyle())
                     .frame(width: 300, height: 300)
+                Spacer()
             }
+//            TabView {
+//                ForEach(service.image, id: \.self) { item in
+//                            RemoteImage(url: item)
+//                                .aspectRatio(contentMode: .fit)
+//
+//                        }
+//                    }
+//                    .tabViewStyle(PageTabViewStyle())
+//                    .frame(width: 300, height: 300)
+//            }
             Section {
                 
                 Text(service.name)

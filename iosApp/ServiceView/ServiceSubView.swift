@@ -6,40 +6,40 @@
 //
 
 import SwiftUI
+import CachedAsyncImage
 
 struct ServiceSubView: View {
     @StateObject private var session = Session()
     @State var list: [Service] = []
     @State var unsortedList: [Service] = []
     @State private var showingSheet = false
-//    @State var city = "Все города"
     
     var category: String
     var barTitle: String = ""
     
-//    var city: String
+    
     
     var body: some View {
         List(list) { item in
-            
             ZStack {
                 NavigationLink(destination: ServiceView(service: item)) {}
                 .opacity(0.0)
                 .buttonStyle(PlainButtonStyle())
                 HStack {
-                    RemoteImage(url: item.image[0])
-                        .aspectRatio(contentMode: .fit)
-                                    .frame(maxWidth: 100)
-//                    AsyncImage(url: URL(string: item.image[0])) { image in
-//                            image
-//                                .resizable()
-//                                .scaledToFit()
-//                        } placeholder: {
-//
-//                            Image("")
-//                        }
-//                        .frame(width: 100, height: 100)
-//
+//                    RemoteImage(url: item.image[0])
+//                        .aspectRatio(contentMode: .fit)
+//                    .frame(maxWidth: 100)
+
+                    CachedAsyncImage(url: URL(string: item.image[0])) { image in
+                            image
+                                .resizable()
+                                .scaledToFit()
+                        } placeholder: {
+
+                            Image("")
+                        }
+                        .frame(width: 100, height: 100)
+
                     VStack(alignment: .leading) {
                         Text(item.name)
                             .font(.system(size: 15))

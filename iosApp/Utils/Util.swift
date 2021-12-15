@@ -59,7 +59,7 @@ class Util {
     
     func getCity(city: String, category: String, unsortedList: [Service]) -> [Service] {
         
-        var afterCategory: [Service] = unsortedList
+        var afterCategory: [Service] = []
         
         switch category {
         case "all":
@@ -89,7 +89,7 @@ class Util {
         case "tourism":
             afterCategory = unsortedList.filter { $0.category == "tourism" }
         default:
-            print("no category")
+            afterCategory = unsortedList
         }
         
         switch city {
@@ -110,7 +110,7 @@ class Util {
         case "Другой город":
             return afterCategory.filter { $0.city != "Чхонан" && $0.city != "Хвасонг" && $0.city != "Ансан" && $0.city != "Асан" && $0.city != "Сеул" && $0.city != "Инчхон" && $0.city != "Хвасонг"}
         default:
-            return []
+            return afterCategory
         }
     }
     
