@@ -22,7 +22,6 @@
 		256D59032761DA86002EDC6A /* service.json in Resources */ = {isa = PBXBuildFile; fileRef = 256D59012761DA86002EDC6A /* service.json */; };
 		256D59052761DDB8002EDC6A /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 256D59042761DDB8002EDC6A /* GoogleService-Info.plist */; };
 		256D59092761E555002EDC6A /* Session.swift in Sources */ = {isa = PBXBuildFile; fileRef = 256D59082761E555002EDC6A /* Session.swift */; };
-		256D5915276349D4002EDC6A /* RemoteImage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 256D5914276349D4002EDC6A /* RemoteImage.swift */; };
 		2593A6D927539FAC00081698 /* iosAppApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2593A6D827539FAC00081698 /* iosAppApp.swift */; };
 		2593A6DB27539FAC00081698 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2593A6DA27539FAC00081698 /* ContentView.swift */; };
 		2593A6DD27539FAF00081698 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 2593A6DC27539FAF00081698 /* Assets.xcassets */; };
@@ -30,7 +29,6 @@
 		25973E02275B27CF00DC016B /* ServiceSubView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 25973E01275B27CF00DC016B /* ServiceSubView.swift */; };
 		25973E05275B492400DC016B /* Util.swift in Sources */ = {isa = PBXBuildFile; fileRef = 25973E04275B492400DC016B /* Util.swift */; };
 		259936042769789A00F468B6 /* CachedAsyncImage in Frameworks */ = {isa = PBXBuildFile; productRef = 259936032769789A00F468B6 /* CachedAsyncImage */; };
-		25AD64922758A64400C8C05A /* InformationView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 25AD64912758A64400C8C05A /* InformationView.swift */; };
 		25AD64942758B07300C8C05A /* AdvView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 25AD64932758B07300C8C05A /* AdvView.swift */; };
 		7E4128007F7572B3F603FEEB /* Pods_iosApp.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = BCC3DBD7F6436A1D9D2C1C77 /* Pods_iosApp.framework */; };
 /* End PBXBuildFile section */
@@ -51,7 +49,6 @@
 		256D59012761DA86002EDC6A /* service.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = service.json; sourceTree = "<group>"; };
 		256D59042761DDB8002EDC6A /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		256D59082761E555002EDC6A /* Session.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Session.swift; sourceTree = "<group>"; };
-		256D5914276349D4002EDC6A /* RemoteImage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RemoteImage.swift; sourceTree = "<group>"; };
 		25717C5D275F520A00C2CD01 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = Info.plist; sourceTree = "<group>"; };
 		2593A6D527539FAC00081698 /* iosApp.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = iosApp.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		2593A6D827539FAC00081698 /* iosAppApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = iosAppApp.swift; sourceTree = "<group>"; };
@@ -60,7 +57,6 @@
 		2593A6DF27539FAF00081698 /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
 		25973E01275B27CF00DC016B /* ServiceSubView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ServiceSubView.swift; sourceTree = "<group>"; };
 		25973E04275B492400DC016B /* Util.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Util.swift; sourceTree = "<group>"; };
-		25AD64912758A64400C8C05A /* InformationView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InformationView.swift; sourceTree = "<group>"; };
 		25AD64932758B07300C8C05A /* AdvView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AdvView.swift; sourceTree = "<group>"; };
 		6BBB108F7637D033E3BED1F4 /* Pods-iosApp.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-iosApp.debug.xcconfig"; path = "Target Support Files/Pods-iosApp/Pods-iosApp.debug.xcconfig"; sourceTree = "<group>"; };
 		BCC3DBD7F6436A1D9D2C1C77 /* Pods_iosApp.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_iosApp.framework; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -130,18 +126,17 @@
 		2593A6D727539FAC00081698 /* iosApp */ = {
 			isa = PBXGroup;
 			children = (
-				256D59042761DDB8002EDC6A /* GoogleService-Info.plist */,
-				25717C5D275F520A00C2CD01 /* Info.plist */,
 				2593A6D827539FAC00081698 /* iosAppApp.swift */,
 				2593A6DA27539FAC00081698 /* ContentView.swift */,
 				25441F6A2767178600B6E240 /* Map */,
-				25973E03275B48ED00DC016B /* Utils */,
-				25973DE42759969300DC016B /* AdsView */,
 				25973E00275A4D0100DC016B /* ServiceView */,
+				259936052769812B00F468B6 /* Profile */,
+				25973E03275B48ED00DC016B /* Utils */,
 				2593A6DC27539FAF00081698 /* Assets.xcassets */,
+				25717C5D275F520A00C2CD01 /* Info.plist */,
+				256D59042761DDB8002EDC6A /* GoogleService-Info.plist */,
+				25973DE42759969300DC016B /* AdsView */,
 				2593A6DE27539FAF00081698 /* Preview Content */,
-				254B21C8275C63340099E287 /* Profile.swift */,
-				25AD64912758A64400C8C05A /* InformationView.swift */,
 			);
 			path = iosApp;
 			sourceTree = "<group>";
@@ -181,9 +176,16 @@
 				253305CC27560E440061DD28 /* DataFetch.swift */,
 				253305C22754A7050061DD28 /* JSONParser.swift */,
 				25973E04275B492400DC016B /* Util.swift */,
-				256D5914276349D4002EDC6A /* RemoteImage.swift */,
 			);
 			path = Utils;
+			sourceTree = "<group>";
+		};
+		259936052769812B00F468B6 /* Profile */ = {
+			isa = PBXGroup;
+			children = (
+				254B21C8275C63340099E287 /* Profile.swift */,
+			);
+			path = Profile;
 			sourceTree = "<group>";
 		};
 		45A62DF6782E9C65FD75BB4F /* Frameworks */ = {
@@ -331,12 +333,10 @@
 				25441F922768476A00B6E240 /* LocationManager2.swift in Sources */,
 				256D58FF2761DA30002EDC6A /* ServiceMenuView.swift in Sources */,
 				25973E02275B27CF00DC016B /* ServiceSubView.swift in Sources */,
-				256D5915276349D4002EDC6A /* RemoteImage.swift in Sources */,
 				253305C32754A7050061DD28 /* JSONParser.swift in Sources */,
 				254B21C9275C63340099E287 /* Profile.swift in Sources */,
 				2593A6DB27539FAC00081698 /* ContentView.swift in Sources */,
 				25441F90276844C700B6E240 /* LocationManager.swift in Sources */,
-				25AD64922758A64400C8C05A /* InformationView.swift in Sources */,
 				25973E05275B492400DC016B /* Util.swift in Sources */,
 				253305BE27549F6C0061DD28 /* AdsSubView.swift in Sources */,
 				256D59092761E555002EDC6A /* Session.swift in Sources */,

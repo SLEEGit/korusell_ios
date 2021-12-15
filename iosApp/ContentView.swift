@@ -8,8 +8,8 @@
 import SwiftUI
 
 var globalServices: [Service] = []
-var imageList: [RemoteImage] = []
 var globalCity: String = "Все города"
+var globalCategory: String = "all"
 
 
 struct ContentView: View {

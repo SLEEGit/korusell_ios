@@ -13,12 +13,15 @@ struct ServiceMenuView: View {
     
     @ObservedObject var fetcher = DataFetcher()
     @State private var city = "Все города"
+    @State var selectCategory: Bool = false
     
     var body: some View {
         NavigationView {
             List(fetcher.serviceItem) { item in
                 ZStack {
                     NavigationLink(destination: ServiceSubView(category: item.category, barTitle: item.image + " " + item.name)) {}
+
+                    
                     .opacity(0.0)
                     .buttonStyle(PlainButtonStyle())
                     HStack{
@@ -28,6 +31,7 @@ struct ServiceMenuView: View {
                         Spacer()
                     }
                 }
+
             }
             .onAppear{
                 city = globalCity

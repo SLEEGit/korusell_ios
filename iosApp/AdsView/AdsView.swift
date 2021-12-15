@@ -32,11 +32,11 @@ struct AdsView: View {
 //                    workCount = String(list.count) }
 //            }
             .navigationTitle("ОБЪЯВЛЕНИЯ")
-                .toolbar{
-                        NavigationLink(destination: InformationView()) {
-                        Text("info")
-                    }
-                }
+//                .toolbar{
+//                        NavigationLink(destination: InformationView()) {
+//                        Text("info")
+//                    }
+//                }
   
         }
     }
