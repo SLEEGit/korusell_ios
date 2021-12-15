@@ -9,7 +9,7 @@ import SwiftUI
 import CachedAsyncImage
 
 struct ServiceSubView: View {
-    @StateObject private var session = Session()
+    @StateObject private var session = DB()
     @State var list: [Service] = []
     @State var afterCatlList: [Service] = []
     var category: String

@@ -7,7 +7,7 @@
 
 import FirebaseDatabase
 
-class Session: ObservableObject {
+class DB: ObservableObject {
     
     func fetchData(category: String, completion: @escaping ([Service]) -> ()) {
 

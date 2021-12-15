@@ -7,20 +7,21 @@
 
 import SwiftUI
 
-struct Profile: View {
+struct ProfileView: View {
     
-    var person: Person!
+    var email: String
+    var uid: String
+    var displayName: String
     
     var body: some View {
         VStack {
-            //                Later change to individual image
             VStack {
-                Image(person.avatar)
+                Image("avatar")
                     .resizable()
                     .scaledToFill()
                     .frame(width: 150, height: 150)
                     .cornerRadius(75)
-                Text(person.name)
+                Text(uid)
                     .font(.title)
             }
             
@@ -31,7 +32,7 @@ struct Profile: View {
                             .font(.caption)
                             .foregroundColor(.gray)
                         Spacer()
-                        Text(person.email)
+                        Text(email)
                             .font(.caption)
                     }
                     HStack {
@@ -39,7 +40,7 @@ struct Profile: View {
                             .font(.caption)
                             .foregroundColor(.gray)
                         Spacer()
-                        Text(person.phone)
+                        Text(displayName)
                             .font(.caption)
                     }
                     Section {
@@ -60,13 +61,14 @@ struct Profile: View {
         }
     }
 }
-struct Profile_Previews: PreviewProvider {
-    static var previews: some View {
-        Profile()
-    }
-}
+//struct Profile_Previews: PreviewProvider {
+//    static var previews: some View {
+//        Profile(person: example3, viewModel: viewModel)
+//    }
+//}
 
 #if DEBUG
-let example3 = Person(_id: "HNyHZZjtq298izgub", avatar: "", name: "sd", username: "username", email:"asdasda", phone: "010 1233 1111")
+//let example3 = Person(_id: "HNyHZZjtq298izgub", avatar: "", name: "sd", username: "username", email:"asdasda", phone: "010 1233 1111")
+let example3 = User(uid: "123", displayName: "dis name", email: "test@test.thisistest", avatar: "avatar", phone: "010-0000-0000")
 #endif
 

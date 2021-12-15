@@ -11,10 +11,9 @@ var globalServices: [Service] = []
 var globalCity: String = "Все города"
 var globalCategory: String = "all"
 
-
 struct ContentView: View {
     
-    @StateObject private var session = Session()
+    @StateObject private var session = DB()
     
     var body: some View {
         TabView {
@@ -26,7 +25,7 @@ struct ContentView: View {
                 .tabItem {
                     Image(systemName: "map")
                 }
-            Profile(person: person)
+            CheckStatusView()
                 .tabItem {
                     Image(systemName: "person.crop.circle")
                 }

@@ -18,7 +18,7 @@ import MapKit
 
 struct MapView: View {
     
-    @StateObject private var session = Session()
+    @StateObject private var session = DB()
     @State var list: [Service] = []
     @State var category: String = "all"
     @State var categoryName: String = "Все категории"

@@ -10,7 +10,7 @@ import Firebase
 
 @main
 struct iosAppApp: App {
-    
+
     init() {
         FirebaseApp.configure()
     }
