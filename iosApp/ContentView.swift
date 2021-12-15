@@ -36,9 +36,9 @@ struct ContentView: View {
                 globalServices = list
 //                var number = 0
 //                for i in list {
-//                    
+//
 //                    Util().getLocation(from: i.address) { boo in
-//                        
+//
 //                        print("=============================  \(number)")
 //                        print(i.address)
 //                        print(boo)
