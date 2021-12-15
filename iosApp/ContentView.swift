@@ -34,6 +34,18 @@ struct ContentView: View {
         .onAppear {
             session.fetchData(category: "all") { (list) in
                 globalServices = list
+//                var number = 0
+//                for i in list {
+//                    
+//                    Util().getLocation(from: i.address) { boo in
+//                        
+//                        print("=============================  \(number)")
+//                        print(i.address)
+//                        print(boo)
+//                        number += 1
+//                    }
+//                }
+                
             }
             
         }

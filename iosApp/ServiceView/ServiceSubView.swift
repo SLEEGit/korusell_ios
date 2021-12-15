@@ -59,7 +59,7 @@ struct ServiceSubView: View {
             }
         }
         .onAppear {
-            self.list = Util().getCity(city: globalCity, category: category, unsortedList: globalServices)
+            self.list = Util().filter(city: globalCity, category: category, unsortedList: globalServices)
         }
         .navigationTitle(barTitle)
         .navigationBarTitleDisplayMode(.inline)
@@ -67,35 +67,35 @@ struct ServiceSubView: View {
             Menu(globalCity) {
                 Button("Все города") {
                     globalCity = "Все города"
-                    self.list = Util().getCity(city: globalCity, category: category, unsortedList: globalServices)
+                    self.list = Util().filter(city: globalCity, category: category, unsortedList: globalServices)
                 }
                 Button("Ансан") {
                     globalCity = "Ансан"
-                    self.list = Util().getCity(city: globalCity, category: category, unsortedList: globalServices)
+                    self.list = Util().filter(city: globalCity, category: category, unsortedList: globalServices)
                 }
                 Button("Хвасонг") {
                     globalCity = "Хвасонг"
-                    self.list = Util().getCity(city: globalCity, category: category, unsortedList: globalServices)
+                    self.list = Util().filter(city: globalCity, category: category, unsortedList: globalServices)
                 }
                 Button("Инчхон") {
                     globalCity = "Инчхон"
-                    self.list = Util().getCity(city: globalCity, category: category, unsortedList: globalServices)
+                    self.list = Util().filter(city: globalCity, category: category, unsortedList: globalServices)
                 }
                 Button("Сеул") {
                     globalCity = "Сеул"
-                    self.list = Util().getCity(city: globalCity, category: category, unsortedList: globalServices)
+                    self.list = Util().filter(city: globalCity, category: category, unsortedList: globalServices)
                 }
                 Button("Асан") {
                     globalCity = "Асан"
-                    self.list = Util().getCity(city: globalCity, category: category, unsortedList: globalServices)
+                    self.list = Util().filter(city: globalCity, category: category, unsortedList: globalServices)
                 }
                 Button("Чхонан") {
                     globalCity = "Чхонан"
-                    self.list = Util().getCity(city: globalCity, category: category, unsortedList: globalServices)
+                    self.list = Util().filter(city: globalCity, category: category, unsortedList: globalServices)
                 }
                 Button("Другой город") {
                     globalCity = "Другой город"
-                    self.list = Util().getCity(city: globalCity, category: category, unsortedList: globalServices)
+                    self.list = Util().filter(city: globalCity, category: category, unsortedList: globalServices)
                 }
             }
         }
