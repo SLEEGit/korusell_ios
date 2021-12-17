@@ -20,12 +20,7 @@ struct ServiceMenuView: View {
         NavigationView {
             
             List(fetcher.serviceItem) { item in
-                
-                ZStack {
-                    
-                    NavigationLink(destination: ServiceSubView(category: item.category, barTitle: item.image + " " + item.name)) {}
-                    .opacity(0.0)
-                    .buttonStyle(PlainButtonStyle())
+                NavigationLink(destination: ServiceSubView(category: item.category, barTitle: item.image + " " + item.name)) {
                     HStack{
                         Text(item.image)
                             .font(.title)
@@ -33,7 +28,6 @@ struct ServiceMenuView: View {
                         Spacer()
                     }
                 }
-                
             }
             .onAppear{
                 city = globalCity

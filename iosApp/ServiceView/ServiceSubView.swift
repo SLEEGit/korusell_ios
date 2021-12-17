@@ -14,26 +14,22 @@ struct ServiceSubView: View {
     @State var afterCatlList: [Service] = []
     var category: String
     var barTitle: String = ""
-
+    
     var body: some View {
         List(list) { item in
-            ZStack {
-                NavigationLink(destination: ServiceView(service: item)) {}
-                .opacity(0.0)
-                .buttonStyle(PlainButtonStyle())
+            NavigationLink(destination: ServiceView(service: item)) {
                 HStack {
                     CachedAsyncImage(url: URL(string: item.image[0])) { image in
-                            image
-                                .resizable()
-                                .scaledToFit()
-                                .frame(width: 100, height: 100)
-                        } placeholder: {
-                            Image(systemName: "photo")
-                                .frame(width: 10, height: 10)
-                                .padding()
-                        }
-                        
-
+                        image
+                            .resizable()
+                            .scaledToFit()
+                            .frame(width: 100, height: 100)
+                    } placeholder: {
+                        Image("logo")
+                            .resizable()
+                            .scaledToFit()
+                            .frame(width: 100, height: 100)
+                    }
                     VStack(alignment: .leading) {
                         Text(item.name)
                             .font(.system(size: 15))

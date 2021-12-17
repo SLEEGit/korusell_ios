@@ -12,33 +12,31 @@ struct ServiceView: View {
     var service: Service!
     
     var body: some View {
-
+        
         Form {
-//            Section {
+            //            Section {
             HStack {
                 Spacer()
                 CachedAsyncImage(url: URL(string: service.image[0])) { image in
-                            image
-                                .resizable()
-                                .scaledToFit()
-                                .frame(width: 300, height: 300)
-                        } placeholder: {
-                            Image(systemName: "photo")
-                                .frame(width: 50, height: 50)
-                        }
-                    
+                    image
+                        .resizable()
+                        .aspectRatio(contentMode: .fit)
+                } placeholder: {
+                    Image("logo")
+                        .aspectRatio(contentMode: .fit)
+                }
                 Spacer()
             }
-//            TabView {
-//                ForEach(service.image, id: \.self) { item in
-//                            RemoteImage(url: item)
-//                                .aspectRatio(contentMode: .fit)
-//
-//                        }
-//                    }
-//                    .tabViewStyle(PageTabViewStyle())
-//                    .frame(width: 300, height: 300)
-//            }
+            //            TabView {
+            //                ForEach(service.image, id: \.self) { item in
+            //                            RemoteImage(url: item)
+            //                                .aspectRatio(contentMode: .fit)
+            //
+            //                        }
+            //                    }
+            //                    .tabViewStyle(PageTabViewStyle())
+            //                    .frame(width: 300, height: 300)
+            //            }
             Section {
                 
                 Text(service.name)
@@ -55,8 +53,8 @@ struct ServiceView: View {
                 Text(service.address)
                     .font(.caption)
                     .foregroundColor(.gray)
-                    
-            
+                
+                
                 Text(service.description)
                     .font(.caption)
                     .multilineTextAlignment(.leading)
@@ -64,7 +62,7 @@ struct ServiceView: View {
                     .padding(.bottom, 10)
                 // эта штука снизу убрала троеточие в тексте
                     .minimumScaleFactor(0.1)
-                    
+                
             }
             
             Section {
