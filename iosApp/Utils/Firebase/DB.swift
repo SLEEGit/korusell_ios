@@ -10,6 +10,7 @@ import FirebaseAuth
 
 class DB: ObservableObject {
     
+//    GET
     func fetchData(category: String, completion: @escaping ([Service]) -> ()) {
 
         let ref = Database.database(url: "https://korusale-default-rtdb.asia-southeast1.firebasedatabase.app").reference(withPath: "services")
@@ -19,7 +20,6 @@ class DB: ObservableObject {
             for i in values {
                 let service = Service(dictionary: i)
                 innerServices.append(service)
-//                print(service)
             }
             DispatchQueue.main.async {
                 if category != "all" {
@@ -30,6 +30,24 @@ class DB: ObservableObject {
         })
     }
     
+    func getUser(uid: String, completion: @escaping (User) -> ()) {
+
+        let ref = Database.database(url: "https://korusale-default-rtdb.asia-southeast1.firebasedatabase.app").reference(withPath: "users")
+        ref.child(uid).getData(completion:  { error, snapshot in
+          guard error == nil else {
+            print(error!.localizedDescription)
+            return;
+          }
+            print(snapshot)
+            print(snapshot.value)
+            let values = snapshot.value as! [String:Any]
+            let user = User(dictionary: values)
+            completion(user)
+        });
+        
+    }
+    
+//    POST
     func createUserInDB(user: FirebaseAuth.User, completion: @escaping () -> Void) {
 
         let ref = Database.database(url: "https://korusale-default-rtdb.asia-southeast1.firebasedatabase.app").reference(withPath: "users")
@@ -48,20 +66,5 @@ class DB: ObservableObject {
             }
     }
     
-    func getUser(uid: String, completion: @escaping (User) -> ()) {
 
-        let ref = Database.database(url: "https://korusale-default-rtdb.asia-southeast1.firebasedatabase.app").reference(withPath: "users")
-        ref.child(uid).getData(completion:  { error, snapshot in
-          guard error == nil else {
-            print(error!.localizedDescription)
-            return;
-          }
-            print(snapshot)
-            print(snapshot.value)
-//            let values = snapshot.value as! [String:Any]
-//            let user = User(dictionary: values)
-//            completion(user)
-        });
-        
-    }
 }
