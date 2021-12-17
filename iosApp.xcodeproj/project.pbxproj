@@ -208,8 +208,8 @@
 			children = (
 				259936072769A0BB00F468B6 /* CheckStatusView.swift */,
 				259936092769A0FA00F468B6 /* LoginView.swift */,
-				2599360D2769B42C00F468B6 /* User.swift */,
 				259936132769E33900F468B6 /* RegistrationView.swift */,
+				2599360D2769B42C00F468B6 /* User.swift */,
 			);
 			path = "Login&Registration";
 			sourceTree = "<group>";

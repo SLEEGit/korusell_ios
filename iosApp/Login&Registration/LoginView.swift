@@ -8,62 +8,47 @@
 import SwiftUI
 
 struct LoginView : View {
-
+    
     @ObservedObject var logging: Logging
     @State var email: String = ""
     @State var password: String = ""
-
+    
     var body: some View {
         NavigationView {
-            VStack {
-                Image("logo")
-                    .resizable()
-                    .scaledToFit()
-                    .frame(width: 150, height: 150)
-                
-                VStack {
+            Form {
+                Section(header: Text("Введите Ваш e-mail и пароль")) {
                     TextField("Электронная почта", text: $email)
-                        .padding()
-                        .background(Color.gray)
-                    
+                        .disableAutocorrection(true)
+                        .keyboardType(.emailAddress)
+                        .autocapitalization(.none)
                     SecureField("Пароль", text: $password)
-                        .padding()
-                        .background(Color.gray)
-                    
+                }
+                Section {
                     Button(action: {
-                        
                         Authentication().signIn(email: email, password: password) {
+                            
                             logging.isSignedIn = true
+                            print(logging.isSignedIn)
                         }
-                        
                     }, label: {
                         Text("Войти")
-                            .foregroundColor(.white)
-                            .frame(width: 200, height: 50)
-                            .cornerRadius(8)
-                            .background(Color.blue)
                     })
-                    NavigationLink(destination: RegistrationView()) {}
+                        .disabled(true)
+                }
+                Section(header: Text("Создать новый аккаунт")) {
+                NavigationLink(destination: RegistrationView()) {
                     Text("Зарегистрироваться")
-                        .padding()
-                        
-
-                    
+                        .foregroundColor(.accentColor)
                 }
-                .padding()
-                
-                Spacer()
-            }.onAppear {
-                if Pref.userDefault.bool(forKey: "usersignedin") {
-                    logging.isSignedIn = true
                 }
-            }
+            }.navigationBarTitle("Войти")
         }
     }
 }
 
+
 //struct LoginView_Preview: PreviewProvider {
 //    static var previews: some View {
-//        LoginView(isLoggedIn: true)
+//        LoginView(logging: lo)
 //    }
 //}

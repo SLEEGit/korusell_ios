@@ -15,9 +15,10 @@ class Authentication {
                 print("НЕ УДАЛОСЬ АУТЕНТИФИЦИРОВАТЬСЯ")
                 return
             }
-            Pref.userDefault.set(true, forKey: "usersignedin")
-            Pref.userDefault.synchronize()
+            
             DispatchQueue.main.async {
+                Pref.userDefault.set(true, forKey: "usersignedin")
+                Pref.userDefault.synchronize()
                 completion()
             }
             
@@ -31,7 +32,6 @@ class Authentication {
             Pref.userDefault.set(false, forKey: "usersignedin")
             Pref.userDefault.synchronize()
             completion()
-            print(Auth.auth().currentUser?.email)
         } catch {
                 print("ERROR SIGN OUT")
         }

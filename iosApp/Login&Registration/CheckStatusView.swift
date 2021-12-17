@@ -12,12 +12,14 @@ struct CheckStatusView : View {
     
     @StateObject var logging = Logging()
     @State var isLoggedIn: Bool = false
-    let user = Auth.auth().currentUser
+    @State var user = Auth.auth().currentUser
     
     @ViewBuilder
     var body: some View {
-        
-        if !logging.isSignedIn || user == nil {
+        //                if Pref.userDefault.bool(forKey: "usersignedin") {
+        //                    logging.isSignedIn = true
+        //                }
+        if !logging.isSignedIn && !Pref.userDefault.bool(forKey: "usersignedin") {
             LoginView(logging: logging)
         } else {
             ProfileView(logging: logging, email: user!.email!, uid: user!.uid, displayName: user?.displayName ?? "no display name")
