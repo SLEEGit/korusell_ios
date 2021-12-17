@@ -7,6 +7,7 @@
 
 import SwiftUI
 import CachedAsyncImage
+import MobileCoreServices
 
 struct ServiceView: View {
     var service: Service!
@@ -51,9 +52,16 @@ struct ServiceView: View {
                         .font(.caption)
                 }
                 Text(service.address)
+                    .contextMenu {
+                            Button(action: {
+                                UIPasteboard.general.string = service.address
+                            }) {
+                                Text("Скопировать")
+                                Image(systemName: "doc.on.doc")
+                            }
+                         }
                     .font(.caption)
                     .foregroundColor(.gray)
-                
                 
                 Text(service.description)
                     .font(.caption)

@@ -20,6 +20,7 @@ class Authentication {
                 Pref.userDefault.set(true, forKey: "usersignedin")
                 Pref.userDefault.synchronize()
                 completion()
+                print("SIGNED IN   \(Auth.auth().currentUser?.email)")
             }
             
             
@@ -28,9 +29,11 @@ class Authentication {
 
     func signOut(completion: @escaping () -> Void) {
         do {
+            print("SIGNED OUT   \(Auth.auth().currentUser?.email)")
             try Auth.auth().signOut()
             Pref.userDefault.set(false, forKey: "usersignedin")
             Pref.userDefault.synchronize()
+            print("SIGNED OUT   \(Auth.auth().currentUser?.email)")
             completion()
         } catch {
                 print("ERROR SIGN OUT")
@@ -46,11 +49,12 @@ class Authentication {
                 print("НЕ УДАЛОСЬ ЗАРЕГИСТРИРОВАТЬСЯ")
                 return
             }
-            completion()
-            
+            if let user = result?.user {
+                DB().createUserInDB(user: user) {
+                    completion()
+                }
+            }
         }
-        
-        //Success
     }
 }
         

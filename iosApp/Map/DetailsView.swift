@@ -54,6 +54,14 @@ struct DetailsView: View {
                         .font(.caption)
                 }
                 Text(service.address)
+                    .contextMenu {
+                            Button(action: {
+                                UIPasteboard.general.string = service.address
+                            }) {
+                                Text("Скопировать")
+                                Image(systemName: "doc.on.doc")
+                            }
+                         }
                     .font(.caption)
                     .foregroundColor(.gray)
                     
