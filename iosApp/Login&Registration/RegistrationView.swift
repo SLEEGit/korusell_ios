@@ -32,11 +32,8 @@ struct RegistrationView: View {
             }
             Section {
                 Button(action: {
-                    if password == "" || email == "" {
-                        warningText = "Введите e-mail и пароль!"
-                    } else if password != rePassword {
+                    if password != rePassword {
                         warningText = "Пароли не совпадают!"
-//                        showingAlert = true
                     } else {
                         warningText = ""
                         Authentication().signUp(email: email, password: password) {
@@ -54,6 +51,7 @@ struct RegistrationView: View {
                         presentationMode.wrappedValue.dismiss()
                     }
                 }
+                .disabled(email.isEmpty || password.isEmpty || rePassword.isEmpty)
                 
             }
         }.navigationBarTitle("Регистрация")

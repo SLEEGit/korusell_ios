@@ -12,6 +12,8 @@ struct LoginView : View {
     @ObservedObject var logging: Logging
     @State var email: String = ""
     @State var password: String = ""
+    @State var buttonDisabled: Bool = true
+    
     
     var body: some View {
         NavigationView {
@@ -25,6 +27,7 @@ struct LoginView : View {
                 }
                 Section {
                     Button(action: {
+                        
                         Authentication().signIn(email: email, password: password) {
                             
                             logging.isSignedIn = true
@@ -33,7 +36,7 @@ struct LoginView : View {
                     }, label: {
                         Text("Войти")
                     })
-                        .disabled(true)
+                        .disabled(email.isEmpty || password.isEmpty)
                 }
                 Section(header: Text("Создать новый аккаунт")) {
                 NavigationLink(destination: RegistrationView()) {
