@@ -15,17 +15,39 @@ class Authentication {
                 print("НЕ УДАЛОСЬ АУТЕНТИФИЦИРОВАТЬСЯ")
                 return
             }
-            completion()
             Pref.userDefault.set(true, forKey: "usersignedin")
             Pref.userDefault.synchronize()
+            DispatchQueue.main.async {
+                completion()
+            }
+            
+            
         }
     }
 
-    func signUp(email: String, password: String) {
+    func signOut(completion: @escaping () -> Void) {
+        do {
+            try Auth.auth().signOut()
+            Pref.userDefault.set(false, forKey: "usersignedin")
+            Pref.userDefault.synchronize()
+            completion()
+            print(Auth.auth().currentUser?.email)
+        } catch {
+                print("ERROR SIGN OUT")
+        }
+        
+
+        
+    }
+    
+    func signUp(email: String, password: String, completion: @escaping () -> Void) {
         Auth.auth().createUser(withEmail: email, password: password) { result, error in
             guard result != nil, error == nil else {
+                print("НЕ УДАЛОСЬ ЗАРЕГИСТРИРОВАТЬСЯ")
                 return
             }
+            completion()
+            
         }
         
         //Success

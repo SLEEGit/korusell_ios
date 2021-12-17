@@ -9,7 +9,7 @@ import SwiftUI
 
 struct LoginView : View {
 
-    @Binding var isLoggedIn: Bool
+    @ObservedObject var logging: Logging
     @State var email: String = ""
     @State var password: String = ""
 
@@ -33,7 +33,7 @@ struct LoginView : View {
                     Button(action: {
                         
                         Authentication().signIn(email: email, password: password) {
-                            isLoggedIn = true
+                            logging.isSignedIn = true
                         }
                         
                     }, label: {
@@ -43,13 +43,19 @@ struct LoginView : View {
                             .cornerRadius(8)
                             .background(Color.blue)
                     })
+                    NavigationLink(destination: RegistrationView()) {}
+                    Text("Зарегистрироваться")
+                        .padding()
+                        
+
+                    
                 }
                 .padding()
                 
                 Spacer()
             }.onAppear {
                 if Pref.userDefault.bool(forKey: "usersignedin") {
-                    isLoggedIn = true
+                    logging.isSignedIn = true
                 }
             }
         }

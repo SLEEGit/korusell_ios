@@ -9,9 +9,12 @@ import SwiftUI
 
 struct ProfileView: View {
     
+    @ObservedObject var logging: Logging
     var email: String
     var uid: String
     var displayName: String
+    @State private var showingAlert = false
+    
     
     var body: some View {
         VStack {
@@ -24,7 +27,6 @@ struct ProfileView: View {
                 Text(uid)
                     .font(.title)
             }
-            
             Form {
                 Section {
                     HStack {
@@ -43,21 +45,29 @@ struct ProfileView: View {
                         Text(displayName)
                             .font(.caption)
                     }
-                    Section {
-                        Button(action: {
-                            
-                        }) {
-                            HStack(alignment: .center) {
-                                Spacer()
-                                Image(systemName: "pencil")
-                                Text("Редактировать")
-                                Spacer()
+                }
+                Section {
+                    Button(action: {
+                        showingAlert = true
+                    })
+                    {
+                        HStack {
+                            Spacer()
+                            Text("Выйти")
+                                .foregroundColor(Color.red)
+                            Spacer()
+                        }
+                    }
+                    .alert("Вы действительно хотите выйти?", isPresented: $showingAlert) {
+                        Button("Отмена", role: .cancel) {}
+                        Button("Выйти") {
+                            Authentication().signOut() {
+                                logging.isSignedIn = false
                             }
                         }
                     }
                 }
             }
-            
         }
     }
 }
