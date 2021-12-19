@@ -22,8 +22,6 @@ class Authentication {
                 completion()
                 print("SIGNED IN   \(Auth.auth().currentUser?.email)")
             }
-            
-            
         }
     }
 

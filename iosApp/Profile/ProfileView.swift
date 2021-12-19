@@ -7,6 +7,7 @@
 
 import SwiftUI
 import FirebaseAuth
+import FirebaseStorage
 
 struct ProfileView: View {
     
@@ -16,31 +17,46 @@ struct ProfileView: View {
     @State var name: String = ""
     @State var phone: String = ""
     @State var avatar: String = ""
+    @State var business: Service!
+    @State private var isShowPhotoLibrary = false
+    @State private var image = UIImage(named: "avatar")!
+    @State private var uid = Auth.auth().currentUser?.uid ?? ""
+    
+//    @Binding var selectedImage: UIImage
+//    @Environment(\.presentationMode) private var presentationMode
     
     var body: some View {
         NavigationView {
             Form {
                 Section {
-                    Image("avatar")
+                    Image(uiImage: self.image)
                         .resizable()
                         .scaledToFill()
                         .frame(width: 100, height: 100)
                         .cornerRadius(75)
                         .listRowSeparator(.hidden)
+                        .onTapGesture {
+                            print("Boo")
+
+                            isShowPhotoLibrary = true
+     
+                        }                           .sheet(isPresented: $isShowPhotoLibrary) {
+                            ImagePicker(selectedImage: self.$image, currentUid: self.$uid, sourceType: .photoLibrary)
+                        }
                     Text(user.email ?? "")
                         .font(.title3)
                 }
                 .frame(maxWidth: .infinity, maxHeight: .infinity, alignment: .center)
                 .listRowInsets(EdgeInsets())
                 .background(Color(UIColor.systemGroupedBackground))
-                NavigationLink(destination: Text("Редактировать имя")) {
+                NavigationLink(destination: EditNameView(name: $name, phone: $phone)) {
                     HStack {
                         Text("Имя")
                         Spacer()
                         Text(name)
                     }
                 }
-                NavigationLink(destination: Text("Редактировать имя")) {
+                NavigationLink(destination: EditNameView(name: $name, phone: $phone)) {
                     HStack {
                         Text("Номер телефона")
                         Spacer()
@@ -48,7 +64,7 @@ struct ProfileView: View {
                     }
                 }
                 Section {
-                    NavigationLink(destination: Text("Мой Бизнес")) {
+                    NavigationLink(destination: MyBusinessView(service: business)) {
                         Text("Мой Бизнес")
                     }
                     NavigationLink(destination: Text("Скоро мы добавим сюда объявления! 😇")) {
@@ -58,6 +74,9 @@ struct ProfileView: View {
                 Section {
                     Button(action: {
                         showingAlert = true
+//                        DB().getMyBusiness(uid: user.uid) { _ in
+                            
+//                        }
                     })
                     {
                         HStack {
@@ -82,6 +101,13 @@ struct ProfileView: View {
             DB().getUser(uid: user.uid) { user in
                 name = user.name ?? ""
                 phone = user.phone ?? ""
+            }
+            DB().getMyBusiness(uid: user.uid) { business in
+                print(business)
+                self.business = business
+            }
+            DB().getAvatar(uid: uid) { image in
+                self.image = image
             }
 
         }
