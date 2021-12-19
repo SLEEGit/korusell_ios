@@ -49,14 +49,15 @@ struct ProfileView: View {
                 .frame(maxWidth: .infinity, maxHeight: .infinity, alignment: .center)
                 .listRowInsets(EdgeInsets())
                 .background(Color(UIColor.systemGroupedBackground))
-                NavigationLink(destination: EditNameView(name: $name, phone: $phone)) {
+//                NavigationLink(destination: EditNameView(name: $name, phone: $phone)) {
+                    NavigationLink(destination: getDestination(name: name, phone: phone)) {
                     HStack {
                         Text("Имя")
                         Spacer()
                         Text(name)
                     }
                 }
-                NavigationLink(destination: EditNameView(name: $name, phone: $phone)) {
+                NavigationLink(destination: getDestination(name: name, phone: phone)) {
                     HStack {
                         Text("Номер телефона")
                         Spacer()
@@ -112,6 +113,16 @@ struct ProfileView: View {
 
         }
     }
+    
+    
+    func getDestination(name: String, phone: String) -> AnyView {
+            if Pref.userDefault.bool(forKey: "usersignedin") {
+                return AnyView(EditNameView(name: $name, phone: $phone))
+            } else {
+                return AnyView(Text("Logged out"))
+            }
+        }
+    
 }
     //struct Profile_Previews: PreviewProvider {
     //    static var previews: some View {

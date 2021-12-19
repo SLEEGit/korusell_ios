@@ -14,11 +14,29 @@ class DB: ObservableObject {
     
     //    GET
     
+    func getImage(uid: String, completion: @escaping (UIImage) -> ()) {
+
+        let storage = Storage.storage().reference().child("images/\(uid).jpeg")
+        var image = UIImage()
+        storage.getData(maxSize: 1 * 2048 * 2048) { (metadata, error) in
+            if let error = error {
+                image = UIImage(named: "avatar")!
+                print("Error while uploading file: ", error)
+            } else {
+                let image1 = UIImage(data: metadata!)
+                image = image1!
+                print("Metadata: ", metadata)
+            }
+            completion(image)
+        }
+        
+    }
+    
     func getAvatar(uid: String, completion: @escaping (UIImage) -> ()) {
 
         let storage = Storage.storage().reference().child("avatars/\(uid).jpg")
         var image = UIImage()
-        storage.getData(maxSize: 1 * 4048 * 4048) { (metadata, error) in
+        storage.getData(maxSize: 1 * 2048 * 2048) { (metadata, error) in
             if let error = error {
                 image = UIImage(named: "avatar")!
                 print("Error while uploading file: ", error)
@@ -101,7 +119,7 @@ class DB: ObservableObject {
         let resizedImage = image
         
         // Convert the image into JPEG and compress the quality to reduce its size
-        let data = resizedImage.jpegData(compressionQuality: 0.2)
+        let data = resizedImage.jpegData(compressionQuality: 0.1)
         
         let metadata = StorageMetadata()
         metadata.contentType = "image/jpg"

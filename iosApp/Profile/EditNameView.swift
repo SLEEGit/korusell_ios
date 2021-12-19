@@ -40,11 +40,12 @@ struct EditNameView: View {
             }
         }.onAppear {
             DB().getUser(uid: user.uid) { user in
-                name = user.name ?? ""
-                phone = user.phone ?? ""
+                self.name = user.name ?? ""
+                self.phone = user.phone ?? ""
             }
         }
     }
+
 }
 
 //struct EditNameView_Previews: PreviewProvider {
