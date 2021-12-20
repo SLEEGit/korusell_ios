@@ -18,7 +18,6 @@ struct ProfileView: View {
     @State var phone: String = ""
     @State var avatar: String = ""
     @State var business: Service!
-    @State var businessName: String = ""
     @State private var isShowPhotoLibrary = false
     @State private var image = UIImage(named: "avatar")!
     @State private var uid = Auth.auth().currentUser?.uid ?? ""
@@ -28,6 +27,8 @@ struct ProfileView: View {
     @State var city: String = ""
     @State var address: String = ""
     @State var description: String = ""
+    @State var latitude: String = ""
+    @State var longitude: String = ""
     
 //    @Binding var selectedImage: UIImage
 //    @Environment(\.presentationMode) private var presentationMode
@@ -72,11 +73,11 @@ struct ProfileView: View {
                     }
                 }
                 Section {
-                    NavigationLink(destination: MyBusinessView(service: business, businessName: $businessName, name: $bname, city: $city, address: $address, phone: $bphone, description: $description)) {
+                    NavigationLink(destination: MyBusinessView(uid: $uid, name: $bname, city: $city, address: $address, phone: $bphone, description: $description, latitude: $latitude, longitude: $longitude)) {
                         HStack {
                             Text("Мой Бизнес")
                             Spacer()
-                            Text(businessName)
+                            Text(bname)
                         }
                         
                     }
@@ -119,12 +120,13 @@ struct ProfileView: View {
                 print("getting business in profile")
                 print(business)
                 self.business = business
-                self.businessName = business.name
                 self.bname = business.name
                 self.bphone = business.phone
                 self.city = business.city
                 self.address = business.address
                 self.description = business.description
+                self.latitude = business.latitude
+                self.longitude = business.longitude
             }
             DB().getAvatar(uid: uid) { image in
                 self.image = image

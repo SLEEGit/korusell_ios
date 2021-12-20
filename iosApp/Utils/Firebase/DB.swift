@@ -51,11 +51,11 @@ class DB: ObservableObject {
     }
     
     func fetchData(category: String, completion: @escaping ([Service]) -> ()) {
-        ref.reference(withPath: "services").observeSingleEvent(of: .value, with: { snapshot in
-            let values = snapshot.value as! [[String:Any]]
+        ref.reference(withPath: "services2").observeSingleEvent(of: .value, with: { snapshot in
+            let values = snapshot.value as! [String : [String:Any]]
             var innerServices: [Service] = []
             for i in values {
-                let service = Service(dictionary: i)
+                let service = Service(dictionary: i.value)
                 innerServices.append(service)
             }
             DispatchQueue.main.async {
@@ -82,7 +82,7 @@ class DB: ObservableObject {
     }
     
     func fetchData2(category: String, completion: @escaping ([Service]) -> ()) {
-        ref.reference(withPath: "services").observeSingleEvent(of: .value, with: { snapshot in
+        ref.reference(withPath: "services2").observeSingleEvent(of: .value, with: { snapshot in
             let values = snapshot.value as! [[String:Any]]
             var innerServices: [Service] = []
             for i in values {
@@ -99,7 +99,7 @@ class DB: ObservableObject {
     }
     
     func getMyBusiness(uid: String, completion: @escaping (Service) -> ()) {
-        let defaultService = Service(_id: "", owner: uid, name: "avatar", category: "", city: "", address: "", phone: "", image: [""], description: "", latitude: "", longitude: "")
+        let defaultService = Service(name: "", category: "", city: "", address: "", phone: "", description: "", latitude: "", longitude: "")
         ref.reference(withPath: "services2").child(uid).getData(completion:  { error, snapshot in
             guard error == nil else {
                 print(error!.localizedDescription)
@@ -116,7 +116,7 @@ class DB: ObservableObject {
                 }
             } else {
                 completion(defaultService)
-                self.updateBusiness(uid: uid, _id: "", name: "", city: "", address: "", phone: "", descrition: "", owner: uid, image: ["avatar"], latitude: "", longitude: "") { }
+                self.updateBusiness(uid: uid, name: "", city: "", address: "", phone: "", descrition: "", latitude: "", longitude: "") { }
             }
             
             
@@ -141,9 +141,9 @@ class DB: ObservableObject {
         }
     }
     
-    func updateBusiness(uid: String, _id: String, name: String, city: String, address: String, phone: String, descrition: String, owner: String, image: [String], latitude: String, longitude: String, completion: @escaping () -> Void) {
+    func updateBusiness(uid: String, name: String, city: String, address: String, phone: String, descrition: String, latitude: String, longitude: String, completion: @escaping () -> Void) {
 
-        ref.reference(withPath: "services2").child(uid).updateChildValues(["_id:" : _id, "name" : name, "city" : city, "address" : address, "phone" : phone, "description" : descrition, "owner" : owner, "image" : image, "latitude": latitude, "longitude": longitude])
+        ref.reference(withPath: "services2").child(uid).updateChildValues(["name" : name, "city" : city, "address" : address, "phone" : phone, "description" : descrition, "latitude": latitude, "longitude": longitude])
         DispatchQueue.main.async {
             completion()
         }

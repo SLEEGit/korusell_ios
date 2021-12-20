@@ -19,7 +19,7 @@ struct ServiceSubView: View {
         List(list) { item in
             NavigationLink(destination: ServiceView(service: item)) {
                 HStack {
-                    CachedAsyncImage(url: URL(string: item.image[0])) { image in
+                    CachedAsyncImage(url: URL(string: item.name)) { image in
                         image
                             .resizable()
                             .scaledToFit()

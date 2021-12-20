@@ -17,7 +17,7 @@ struct DetailsView: View {
         Form {
             HStack {
                 Spacer()
-                CachedAsyncImage(url: URL(string: service.image[0])) { image in
+                CachedAsyncImage(url: URL(string: service.name)) { image in
                             image
                                 .resizable()
                                 .scaledToFit()

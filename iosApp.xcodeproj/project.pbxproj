@@ -39,6 +39,7 @@
 		25ED2B55276CE75000575FEB /* MyBusinessView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 25ED2B54276CE75000575FEB /* MyBusinessView.swift */; };
 		25ED2B57276CE9A600575FEB /* EditNameView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 25ED2B56276CE9A600575FEB /* EditNameView.swift */; };
 		25ED2B59276F012A00575FEB /* ImagePicker.swift in Sources */ = {isa = PBXBuildFile; fileRef = 25ED2B58276F012A00575FEB /* ImagePicker.swift */; };
+		25ED2B5B2770373800575FEB /* Service.swift in Sources */ = {isa = PBXBuildFile; fileRef = 25ED2B5A2770373800575FEB /* Service.swift */; };
 		7E4128007F7572B3F603FEEB /* Pods_iosApp.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = BCC3DBD7F6436A1D9D2C1C77 /* Pods_iosApp.framework */; };
 /* End PBXBuildFile section */
 
@@ -76,6 +77,7 @@
 		25ED2B54276CE75000575FEB /* MyBusinessView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyBusinessView.swift; sourceTree = "<group>"; };
 		25ED2B56276CE9A600575FEB /* EditNameView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditNameView.swift; sourceTree = "<group>"; };
 		25ED2B58276F012A00575FEB /* ImagePicker.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImagePicker.swift; sourceTree = "<group>"; };
+		25ED2B5A2770373800575FEB /* Service.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Service.swift; sourceTree = "<group>"; };
 		6BBB108F7637D033E3BED1F4 /* Pods-iosApp.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-iosApp.debug.xcconfig"; path = "Target Support Files/Pods-iosApp/Pods-iosApp.debug.xcconfig"; sourceTree = "<group>"; };
 		BCC3DBD7F6436A1D9D2C1C77 /* Pods_iosApp.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_iosApp.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		D9B96B5C301D3AD6549B202A /* Pods-iosApp.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-iosApp.release.xcconfig"; path = "Target Support Files/Pods-iosApp/Pods-iosApp.release.xcconfig"; sourceTree = "<group>"; };
@@ -197,6 +199,7 @@
 				253305C22754A7050061DD28 /* JSONParser.swift */,
 				25973E04275B492400DC016B /* Util.swift */,
 				259936112769DD6900F468B6 /* Pref.swift */,
+				25ED2B5A2770373800575FEB /* Service.swift */,
 			);
 			path = Utils;
 			sourceTree = "<group>";
@@ -368,6 +371,7 @@
 				259936142769E33900F468B6 /* RegistrationView.swift in Sources */,
 				25441F922768476A00B6E240 /* LocationManager2.swift in Sources */,
 				25ED2B55276CE75000575FEB /* MyBusinessView.swift in Sources */,
+				25ED2B5B2770373800575FEB /* Service.swift in Sources */,
 				256D58FF2761DA30002EDC6A /* ServiceMenuView.swift in Sources */,
 				25973E02275B27CF00DC016B /* ServiceSubView.swift in Sources */,
 				253305C32754A7050061DD28 /* JSONParser.swift in Sources */,

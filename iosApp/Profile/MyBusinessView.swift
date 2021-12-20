@@ -9,13 +9,17 @@ import SwiftUI
 import CachedAsyncImage
 
 struct MyBusinessView: View {
-    @State var service: Service!
-    @Binding var businessName: String
+//    @State var service: Service!
+    @Binding var uid: String
     @Binding var name: String
     @Binding var city: String
     @Binding var address: String
     @Binding var phone: String
     @Binding var description: String
+    @Binding var latitude: String
+    @Binding var longitude: String
+    
+    
     @State private var showingAlert = false
     @Environment(\.presentationMode) var presentationMode: Binding<PresentationMode>
     
@@ -23,7 +27,7 @@ struct MyBusinessView: View {
         List {
             HStack {
                 Spacer()
-                CachedAsyncImage(url: URL(string: service.image[0])) { image in
+                CachedAsyncImage(url: URL(string: "")) { image in
                     image
                         .resizable()
                         .aspectRatio(contentMode: .fit)
@@ -33,19 +37,38 @@ struct MyBusinessView: View {
                 }
                 Spacer()
             }
-            TextField("Название", text: $name)
-            TextField("Город", text: $city)
-            TextField("Адрес", text: $address)
-            TextField("Номер телефона", text: $phone)
-            TextField("Описание", text: $description)
-         
+            HStack {
+                Text("Название")
+                    .foregroundColor(.gray)
+                TextField("Название", text: $name)
+            }
+            HStack {
+                Text("Город")
+                    .foregroundColor(.gray)
+                TextField("Город", text: $city)
+            }
+            HStack {
+                Text("Адрес")
+                    .foregroundColor(.gray)
+                TextField("Адрес", text: $address)
+            }
+            HStack {
+                Text("Номер телефона")
+                    .foregroundColor(.gray)
+                TextField("Номер телефона", text: $phone)
+            }
+            HStack {
+                Text("Описание")
+                    .foregroundColor(.gray)
+                TextField("Описание", text: $description)
+            }
+
             Section {
                 HStack {
                     Spacer()
                     Button("Обновить данные") {
-                        DB().updateBusiness(uid: service.owner, _id: service._id, name: name, city: city, address: address, phone: phone, descrition: description, owner: service.owner, image: service.image, latitude: service.latitude, longitude: service.longitude) {
+                        DB().updateBusiness(uid: uid, name: name, city: city, address: address, phone: phone, descrition: description, latitude: latitude, longitude: longitude) {
                             showingAlert = true
-                            businessName = name
                         }
                     }.alert("Данные успешно обновлены", isPresented: $showingAlert) {
                         Button("Ок") {
