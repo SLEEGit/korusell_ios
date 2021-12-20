@@ -51,19 +51,19 @@ struct Service: Codable, Identifiable {
         self.longitude = dictionary["longitude"] as? String ?? ""
         }
     
-//    init(_id: String, owner: String, name: String, category: String, city: String, address: String, phone: String, image: [String], description: String, latitude: String, longitude: String) {
-//        self._id = _id
-//        self.owner = owner
-//        self.name = name
-//        self.category = category
-//        self.city = city
-//        self.address = address
-//        self.phone = phone
-//        self.image = image
-//        self.description = description
-//        self.latitude = latitude
-//        self.longitude = longitude
-//    }
+    init(_id: String, owner: String, name: String, category: String, city: String, address: String, phone: String, image: [String], description: String, latitude: String, longitude: String) {
+        self._id = _id
+        self.owner = owner
+        self.name = name
+        self.category = category
+        self.city = city
+        self.address = address
+        self.phone = phone
+        self.image = image
+        self.description = description
+        self.latitude = latitude
+        self.longitude = longitude
+    }
 }
 
 struct Person: Codable, Identifiable {

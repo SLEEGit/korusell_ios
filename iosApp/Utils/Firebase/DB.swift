@@ -81,21 +81,50 @@ class DB: ObservableObject {
         });
     }
     
+    func fetchData2(category: String, completion: @escaping ([Service]) -> ()) {
+        ref.reference(withPath: "services").observeSingleEvent(of: .value, with: { snapshot in
+            let values = snapshot.value as! [[String:Any]]
+            var innerServices: [Service] = []
+            for i in values {
+                let service = Service(dictionary: i)
+                innerServices.append(service)
+            }
+            DispatchQueue.main.async {
+                if category != "all" {
+                    innerServices = innerServices.filter { $0.category == category }
+                }
+                completion(innerServices)
+            }
+        })
+    }
+    
     func getMyBusiness(uid: String, completion: @escaping (Service) -> ()) {
+        let defaultService = Service(_id: "", owner: uid, name: "avatar", category: "", city: "", address: "", phone: "", image: [""], description: "", latitude: "", longitude: "")
         ref.reference(withPath: "services2").child(uid).getData(completion:  { error, snapshot in
             guard error == nil else {
                 print(error!.localizedDescription)
                 return;
             }
-            let values = snapshot.value as! [String:Any]
-            print(values)
-            let service = Service(dictionary: values)
-            DispatchQueue.main.async {
-                print(service)
-                completion(service)
+            print(snapshot.value)
+            if snapshot.exists() {
+                let values = snapshot.value as! [String:Any]
+                let service = Service(dictionary: values)
+                DispatchQueue.main.async {
+                    print(service)
+                    print("Step1")
+                    completion(service)
+                }
+            } else {
+                completion(defaultService)
+                self.updateBusiness(uid: uid, _id: "", name: "", city: "", address: "", phone: "", descrition: "", owner: uid, image: ["avatar"], latitude: "", longitude: "") { }
             }
+            
+            
+            
         })
     }
+    
+    
     
     //    POST
     func createUserInDB(user: FirebaseAuth.User, completion: @escaping () -> Void) {
@@ -111,6 +140,15 @@ class DB: ObservableObject {
             completion()
         }
     }
+    
+    func updateBusiness(uid: String, _id: String, name: String, city: String, address: String, phone: String, descrition: String, owner: String, image: [String], latitude: String, longitude: String, completion: @escaping () -> Void) {
+
+        ref.reference(withPath: "services2").child(uid).updateChildValues(["_id:" : _id, "name" : name, "city" : city, "address" : address, "phone" : phone, "description" : descrition, "owner" : owner, "image" : image, "latitude": latitude, "longitude": longitude])
+        DispatchQueue.main.async {
+            completion()
+        }
+    }
+    
     
     func postAvatar(image: UIImage, uid: String) {
         let storage = Storage.storage().reference().child("avatars/\(uid).jpg")

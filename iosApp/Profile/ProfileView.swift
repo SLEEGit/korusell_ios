@@ -18,9 +18,16 @@ struct ProfileView: View {
     @State var phone: String = ""
     @State var avatar: String = ""
     @State var business: Service!
+    @State var businessName: String = ""
     @State private var isShowPhotoLibrary = false
     @State private var image = UIImage(named: "avatar")!
     @State private var uid = Auth.auth().currentUser?.uid ?? ""
+    
+    @State var bname: String = ""
+    @State var bphone: String = ""
+    @State var city: String = ""
+    @State var address: String = ""
+    @State var description: String = ""
     
 //    @Binding var selectedImage: UIImage
 //    @Environment(\.presentationMode) private var presentationMode
@@ -65,8 +72,13 @@ struct ProfileView: View {
                     }
                 }
                 Section {
-                    NavigationLink(destination: MyBusinessView(service: business)) {
-                        Text("Мой Бизнес")
+                    NavigationLink(destination: MyBusinessView(service: business, businessName: $businessName, name: $bname, city: $city, address: $address, phone: $bphone, description: $description)) {
+                        HStack {
+                            Text("Мой Бизнес")
+                            Spacer()
+                            Text(businessName)
+                        }
+                        
                     }
                     NavigationLink(destination: Text("Скоро мы добавим сюда объявления! 😇")) {
                         Text("Мои Объявления")
@@ -104,13 +116,22 @@ struct ProfileView: View {
                 phone = user.phone ?? ""
             }
             DB().getMyBusiness(uid: user.uid) { business in
+                print("getting business in profile")
                 print(business)
                 self.business = business
+                self.businessName = business.name
+                self.bname = business.name
+                self.bphone = business.phone
+                self.city = business.city
+                self.address = business.address
+                self.description = business.description
             }
             DB().getAvatar(uid: uid) { image in
                 self.image = image
             }
-
+//            DB().fetchData2(category: "") { service in
+////                self.business = service
+//            }
         }
     }
     
