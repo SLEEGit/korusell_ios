@@ -9,7 +9,7 @@ import SwiftUI
 import CachedAsyncImage
 
 struct MyBusinessView: View {
-//    @State var service: Service!
+    //    @State var service: Service!
     @Binding var uid: String
     @Binding var name: String
     @Binding var city: String
@@ -21,27 +21,27 @@ struct MyBusinessView: View {
     @Binding var category: String
     
     @State var directory: String = "images"
-    @State private var image = UIImage(named: "logo")!
+    @State private var image = UIImage(named: "blank")!
     @State private var isShowPhotoLibrary = false
     @State private var showingAlert = false
     @Environment(\.presentationMode) var presentationMode: Binding<PresentationMode>
-
+    
     
     var body: some View {
         List {
-            Image(uiImage: self.image)
-                .resizable()
-                .scaledToFill()
-                .listRowSeparator(.hidden)
-                .onTapGesture {
-                    print("Boo")
-
+            VStack {
+                Image(uiImage: self.image)
+                    .resizable()
+                    .scaledToFill()
+                    .listRowSeparator(.hidden)
+                Button("Изменить фото") {
                     isShowPhotoLibrary = true
-
-                }                           .sheet(isPresented: $isShowPhotoLibrary) {
+                }
+                .sheet(isPresented: $isShowPhotoLibrary) {
                     ImagePicker(selectedImage: self.$image, currentUid: self.$uid, directory: $directory, sourceType: .photoLibrary)
                 }
-            Spacer()
+                
+            }.padding()
             HStack {
                 
                 Text("Название")
@@ -68,17 +68,17 @@ struct MyBusinessView: View {
                     Text("Туризм").tag("tourism")
                 }.foregroundColor(Color.black)
             }.foregroundColor(.gray)
-                Picker("Город", selection: $city) {
-                    Group {
-                        Text("Ансан").tag("Ансан")
-                        Text("Хвасонг").tag("Хвасонг")
-                        Text("Сеул").tag("Сеул")
-                        Text("Инчхон").tag("Инчхон")
-                        Text("Асан").tag("Асан")
-                        Text("Чхонан").tag("Чхонан")
-                    }
-                    .foregroundColor(Color.black)
-                }.foregroundColor(.gray)
+            Picker("Город", selection: $city) {
+                Group {
+                    Text("Ансан").tag("Ансан")
+                    Text("Хвасонг").tag("Хвасонг")
+                    Text("Сеул").tag("Сеул")
+                    Text("Инчхон").tag("Инчхон")
+                    Text("Асан").tag("Асан")
+                    Text("Чхонан").tag("Чхонан")
+                }
+                .foregroundColor(Color.black)
+            }.foregroundColor(.gray)
             HStack {
                 Text("Другой город")
                     .foregroundColor(.gray)
@@ -88,7 +88,7 @@ struct MyBusinessView: View {
             HStack {
                 Text("Адрес")
                     .foregroundColor(.gray)
-                TextField("Адрес", text: $address)
+                TextField("경기도 안산시 단원구 선이로 6", text: $address)
                     .disableAutocorrection(true)
             }
             HStack {
@@ -103,7 +103,7 @@ struct MyBusinessView: View {
                 TextEditor(text: $description)
                     .disableAutocorrection(true)
             }
-
+            
             Section {
                 HStack {
                     Spacer()

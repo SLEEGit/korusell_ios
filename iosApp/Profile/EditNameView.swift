@@ -18,10 +18,10 @@ struct EditNameView: View {
     var body: some View {
         Form {
             Section(header: Text("Укажите Ваше имя и фамилию")) {
-                TextField("Фамилия и имя", text: $name)
+                TextField("Пример Примеров", text: $name)
             }
-            Section(header: Text("Укажите Ваш номер телефона"), footer: Text("Пример: 010-0000-0000")) {
-                TextField("Номер телефона", text: $phone)
+            Section(header: Text("Укажите Ваш номер телефона")) {
+                TextField("010-0000-0000", text: $phone)
             }
             Section {
                 HStack {

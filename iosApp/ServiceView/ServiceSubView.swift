@@ -12,7 +12,7 @@ struct ServiceSubView: View {
     @StateObject private var session = DB()
     @State var list: [Service] = []
     @State var afterCatlList: [Service] = []
-    @State private var image = UIImage(named: "logo")!
+    @State private var image = UIImage(named: "blank")!
     var category: String
     var barTitle: String = ""
     
@@ -20,53 +20,7 @@ struct ServiceSubView: View {
     var body: some View {
         List(list) { item in
             NavigationLink(destination: ServiceView(service: item)) {
-                HStack {
-                    FirebaseImage(id: "vishenka")
-                    
-//                    Image(uiImage: self.image)
-//                        .resizable()
-//                        .scaledToFill()
-//                        .onAppear {
-//                            DB().getImage(uid: item.uid, directory: "images") { image in
-//                                self.image = image
-//                            }
-//                        }
-
-//                    CachedAsyncImage(url: URL(string: item.name)) { image in
-//                        image
-//                            .resizable()
-//                            .scaledToFit()
-//                            .frame(width: 100, height: 100)
-//                    } placeholder: {
-//                        Image("logo")
-//                            .resizable()
-//                            .scaledToFit()
-//                            .frame(width: 100, height: 100)
-//                    }
-                    VStack(alignment: .leading) {
-                        Text(item.name)
-                            .font(.system(size: 15))
-                            .bold()
-                            .minimumScaleFactor(0.1)
-                        HStack {
-                            Text("Город:")
-                                .font(.system(size: 15))
-                                .foregroundColor(.gray)
-                            Text(item.city)
-                                .font(.system(size: 13))
-                                .foregroundColor(.gray)
-                        }
-                        
-                        Text(item.description)
-                            .font(.caption)
-                            .foregroundColor(.gray)
-                            .padding(.top, 5)
-                            .lineLimit(3)
-                    }
-                    Spacer()
-                }.onAppear {
-                    
-                }
+                ExpandedService(service: item, image: image)
             }
         }
         .onAppear {

@@ -34,8 +34,9 @@ class DB: ObservableObject {
         var image = UIImage()
         storage.getData(maxSize: 1 * 2048 * 2048) { (metadata, error) in
             if let error = error {
-                image = UIImage(named: "avatar")!
+//                image = UIImage(systemName: "photo")!
                 print("Error while uploading file: ", error)
+                return
             } else {
                 let image1 = UIImage(data: metadata!)
                 image = image1!
@@ -43,11 +44,10 @@ class DB: ObservableObject {
             }
             completion(image)
         }
-        
     }
     
     func fetchData(category: String, completion: @escaping ([Service]) -> ()) {
-        ref.reference(withPath: "services2").observeSingleEvent(of: .value, with: { snapshot in
+        ref.reference(withPath: "services").observeSingleEvent(of: .value, with: { snapshot in
             let values = snapshot.value as! [String : [String:Any]]
             var innerServices: [Service] = []
             for i in values {
@@ -78,7 +78,7 @@ class DB: ObservableObject {
     }
     
     func fetchData2(category: String, completion: @escaping ([Service]) -> ()) {
-        ref.reference(withPath: "services2").observeSingleEvent(of: .value, with: { snapshot in
+        ref.reference(withPath: "services").observeSingleEvent(of: .value, with: { snapshot in
             let values = snapshot.value as! [[String:Any]]
             var innerServices: [Service] = []
             for i in values {
@@ -96,7 +96,7 @@ class DB: ObservableObject {
     
     func getMyBusiness(uid: String, completion: @escaping (Service) -> ()) {
         let defaultService = Service(uid: "", name: "", category: "", city: "", address: "", phone: "", description: "", latitude: "", longitude: "")
-        ref.reference(withPath: "services2").child(uid).getData(completion:  { error, snapshot in
+        ref.reference(withPath: "services").child(uid).getData(completion:  { error, snapshot in
             guard error == nil else {
                 print(error!.localizedDescription)
                 return;
@@ -134,9 +134,16 @@ class DB: ObservableObject {
         }
     }
     
+    func sendMessage(user: FirebaseAuth.User, message: String, completion: @escaping () -> Void) {
+        ref.reference(withPath: "messages").child(user.uid).updateChildValues(["message" : message, "user" : user.email!])
+        DispatchQueue.main.async {
+            completion()
+        }
+    }
+    
     func updateBusiness(uid: String, name: String, category: String, city: String, address: String, phone: String, descrition: String, latitude: String, longitude: String, completion: @escaping () -> Void) {
 
-        ref.reference(withPath: "services2").child(uid).updateChildValues(["uid" : uid, "name" : name, "city" : city, "category" : category, "address" : address, "phone" : phone, "description" : descrition, "latitude": latitude, "longitude": longitude])
+        ref.reference(withPath: "services").child(uid).updateChildValues(["uid" : uid, "name" : name, "city" : city, "category" : category, "address" : address, "phone" : phone, "description" : descrition, "latitude": latitude, "longitude": longitude])
         DispatchQueue.main.async {
             completion()
         }

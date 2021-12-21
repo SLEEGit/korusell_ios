@@ -55,24 +55,12 @@ struct ExpandedService: View {
             
             Image(uiImage: self.image)
                 .resizable()
-                .scaledToFill()
+                .scaledToFit()
                 .onAppear {
                     DB().getImage(uid: service.uid, directory: "images") { image in
                         self.image = image
                     }
                 }
-            
-            //                    CachedAsyncImage(url: URL(string: item.name)) { image in
-            //                        image
-            //                            .resizable()
-            //                            .scaledToFit()
-            //                            .frame(width: 100, height: 100)
-            //                    } placeholder: {
-            //                        Image("logo")
-            //                            .resizable()
-            //                            .scaledToFit()
-            //                            .frame(width: 100, height: 100)
-            //                    }
             VStack(alignment: .leading) {
                 Text(service.name)
                     .font(.system(size: 15))
@@ -95,6 +83,78 @@ struct ExpandedService: View {
             }
             Spacer()
         }
-        
+    }
+}
+
+
+struct ExpandedServiceDetails: View {
+    @State var service: Service
+    @State var image: UIImage
+    var body: some View {
+        Form {
+            Image(uiImage: image)
+                .resizable()
+                .scaledToFit()
+                .onAppear {
+                    DB().getImage(uid: service.uid, directory: "images") { image in
+                        self.image = image
+                    }
+                }
+            Section {
+                
+                Text(service.name)
+                    .font(.title3)
+                
+                HStack {
+                    Text("Город")
+                        .font(.caption)
+                        .foregroundColor(.gray)
+                    Divider()
+                    Text(service.city)
+                        .font(.caption)
+                }
+                Text(service.address)
+                    .contextMenu {
+                            Button(action: {
+                                UIPasteboard.general.string = service.address
+                            }) {
+                                Text("Скопировать")
+                                Image(systemName: "doc.on.doc")
+                            }
+                         }
+                    .font(.caption)
+                    .foregroundColor(.gray)
+                
+                Text(service.description)
+                    .font(.caption)
+                    .multilineTextAlignment(.leading)
+                    .lineLimit(nil)
+                    .padding(.bottom, 10)
+                // эта штука снизу убрала троеточие в тексте
+                    .minimumScaleFactor(0.1)
+                
+            }
+            
+            Section {
+                Button(action: {
+                    call(numberString: service.phone)
+                }) {
+                    HStack(alignment: .center) {
+                        Spacer()
+                        Image(systemName: "phone.fill")
+                        Text(service.phone)
+                        Spacer()
+                    }
+                }
+            }
+        }
+
+    }
+    
+    func call(numberString: String) {
+        let telephone = "tel://"
+        let formattedString = telephone + numberString
+        guard let url = URL(string: formattedString) else { return }
+        UIApplication.shared.open(url)
     }
 }

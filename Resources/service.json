@@ -1,25 +1,691 @@
-[
 {
-    "_id" : "HNyHZZjtq298izgub",
-    "owner" : "hPQwM9F7L9CxTZdRm",
-    "name" : "Кафе RELAX",
+"services" :  {
+  "noOwner1" :
+  {
+    "uid" : "1",
+    "address" : "경기 안산시 단원구 원곡동 962, 지하 1층",
     "category" : "food",
     "city" : "Ансан",
-    "address" : "경기 안산시 단원구 원곡동 962, 지하 1층",
-    "phone" : "010-2428-4522",
-    "image" : ["relax"],
-    "description" : "Европейская и азиатская кухня. Шашлыки, самса, тандырные лепешки Европейская и азиатская кухня. Шашлыки, самса, тандырные лепешк Европейская и азиатская кухня. Шашлыки, самса, тандырные лепешки Европейская и азиатская кухня. Шашлыки, самса, тандырные лепешкии"
-},
-{
-    "_id" : "HNyHZZjtq298izgub",
-    "owner" : "Людмила Ким",
-    "name" : "Dream Telecom",
+    "description" : "Европейская и азиатская кухни. Шашлыки, самса, тандырные лепешки",
+    "image" : [ "https://firebasestorage.googleapis.com/v0/b/korusale.appspot.com/o/images%2Frelax.jpeg?alt=media&token=0244f401-68b5-41a5-a195-420f05163d7d", "https://firebasestorage.googleapis.com/v0/b/korusale.appspot.com/o/images%2Frelax.jpeg?alt=media&token=0244f401-68b5-41a5-a195-420f05163d7d" ],
+    "latitude" : "37.336059693318056",
+    "longitude" : "126.79259297615148",
+    "name" : "Кафе RELAX",
+    "owner" : "unnamed",
+    "phone" : "010-2428-4522"
+  },
+"noOwner2" :
+  {
+    "uid" : "2",
+    "address" : "경기 안산시 단원구 선부동 1028",
+    "category" : "food",
+    "city" : "Ансан",
+    "description" : "Бесплатная доставка пиццы и роллов по Ансану",
+    "image" : [ "https://firebasestorage.googleapis.com/v0/b/korusale.appspot.com/o/images%2Fpizzaroliya.jpeg?alt=media&token=b92d68cf-f73b-4381-9673-06aea1307376", "https://firebasestorage.googleapis.com/v0/b/korusale.appspot.com/o/images%2Fpizzaroliya.jpeg?alt=media&token=b92d68cf-f73b-4381-9673-06aea1307376" ],
+    "latitude" : "37.34233446894402",
+    "longitude" : "126.80352240926254",
+    "name" : "Pizza Roliya",
+    "owner" : "unnamed",
+    "phone" : "010-8363-9793"
+  },
+"noOwner3" :
+  {
+    "uid" : "3",
+    "address" : "경기 안산시 상록구 중보로 47, 108호",
+    "category" : "food",
+    "city" : "Ансан",
+    "description" : "ЗАКАЗЫ ПРИНИМАЮТСЯ МИНИМУМ ЗА 3 ДНЯ!!! Приготовление блюд для мероприятий.  Чартоги, чимпени, сарпегодя, крахмальные пегодя, кадюри, чак-чак",
+    "image" : [ "https://firebasestorage.googleapis.com/v0/b/korusale.appspot.com/o/images%2Fjemchuzhina.jpeg?alt=media&token=b2b467ab-d8b0-4a93-94d9-a2f2e8699c3d" ],
+    "latitude" : "37.3075490827203",
+    "longitude" : "126.8517946534412",
+    "name" : "Кафе Жемчужина",
+    "owner" : "unnamed",
+    "phone" : "010-7757-1959"
+  },
+"noOwner4" :
+  {
+    "uid" : "4",
+    "address" : "경기도 안산시 상록구 사동 1254-5",
+    "category" : "food",
+    "city" : "Ансан",
+    "description" : "Европейская, корейская. узбекская кухни. Оформление мини-банкетов.",
+    "image" : [ "https://firebasestorage.googleapis.com/v0/b/korusale.appspot.com/o/images%2Fvkusnyashka.png?alt=media&token=615dda58-1fc1-4fe1-ba27-0e639dddbd5a" ],
+    "latitude" : "37.30076974826297",
+    "longitude" : "126.85600547405328",
+    "name" : "Кафе Вкусняшка",
+    "owner" : "unnamed",
+    "phone" : "010-4102-3008"
+  },
+"noOwner5" :
+  {
+    "uid" : "5",
+    "address" : "경기 안산시 상록구 사동 1169-17",
+    "category" : "food",
+    "city" : "Ансан",
+    "description" : "Кафе 'Ханъян' в Ансане (Ханъянг). Корейская, узбекская, европейская кухни.",
+    "image" : [ "https://firebasestorage.googleapis.com/v0/b/korusale.appspot.com/o/images%2Fhanyan.jpeg?alt=media&token=7f85ce4f-c31d-41fb-aa50-776dfaf25870" ],
+    "latitude" : "37.300567388827595",
+    "longitude" : "126.84079213378115",
+    "name" : "Кафе Ханъян",
+    "owner" : "unnamed",
+    "phone" : "010-5350-2122"
+  },
+"noOwner6" :
+  {
+    "uid" : "6",
+    "address" : "경기도 안산시 상록구 학사2길 19",
+    "category" : "food",
+    "city" : "Ансан",
+    "description" : "Фастфуд (шаурма, кебаб, донар)",
+    "image" : [ "https://firebasestorage.googleapis.com/v0/b/korusale.appspot.com/o/images%2Flike-eat.jpeg?alt=media&token=44fb18ec-29d4-4349-b9b2-e91639c09e7f" ],
+    "latitude" : "37.30039151114187",
+    "longitude" : "126.8396465433998",
+    "name" : "Фастфуд LIKE EAT",
+    "owner" : "unnamed",
+    "phone" : "010-5745-9777"
+  },
+"noOwner7" :
+  {
+    "uid" : "7",
+    "address" : "경기 안산시 단원구 선이로 6, 101호",
+    "category" : "food",
+    "city" : "Ансан",
+    "description" : "Пиццерия ТАКИ. Доставка на дом по Ансану.",
+    "image" : [ "https://firebasestorage.googleapis.com/v0/b/korusale.appspot.com/o/images%2Fpizza-taki.jpeg?alt=media&token=3115f402-fba0-48f2-a025-653ddfdc061e" ],
+    "latitude" : "37.34179065122719",
+    "longitude" : "126.80420101900076",
+    "name" : "Пицца Таки",
+    "owner" : "unnamed",
+    "phone" : "010-2206-9933"
+  },
+"noOwner8" :
+  {
+    "uid" : "8",
+    "address" : "경기 안산시 단원구 원곡동 787-16, 4 충",
+    "category" : "food",
+    "city" : "Ансан",
+    "description" : "Вкусная доставка по городу Ансан",
+    "image" : [ "https://firebasestorage.googleapis.com/v0/b/korusale.appspot.com/o/images%2Fcrystal.jpeg?alt=media&token=e9397f39-f7fc-4a98-886b-c32b768c0677" ],
+    "latitude" : "37.329105744951725",
+    "longitude" : "126.78854567037845",
+    "name" : "Кафе Кристал",
+    "owner" : "unnamed",
+    "phone" : "'010-4346-9898"
+  },
+"noOwner9" :
+  {
+    "uid" : "9",
+    "address" : "경기도 안산시 상록구 사동 1169, 2층",
+    "category" : "food",
+    "city" : "Ансан",
+    "description" : "Узбекская кухня, тандырная самса, лепешки, мясо. Приготовление праздничных блюд на заказ.",
+    "image" : [ "https://firebasestorage.googleapis.com/v0/b/korusale.appspot.com/o/images%2Fraihon.png?alt=media&token=759ad87b-02ab-4231-b4ae-a7a314c0e773" ],
+    "latitude" : "37.30058981446625",
+    "longitude" : "126.84045136224364",
+    "name" : "Кафе Rayhon",
+    "owner" : "unnamed",
+    "phone" : "010-6592-2118"
+  },
+"noOwner10" :
+  {
+    "uid" : "10",
+    "address" : "경기 안산시 단원구 원곡동 754-3",
+    "category" : "food",
+    "city" : "Ансан",
+    "description" : "Магазин суши sushi&fit. Доставка по Ансану. Огромный выбор роллов на любой вкус. Режим работы ежедневно с 11:00 до 23:00. Суши и роллы также могут быть приготовлены на заказ.",
+    "image" : [ "https://firebasestorage.googleapis.com/v0/b/korusale.appspot.com/o/images%2Fsushifit.jpeg?alt=media&token=f5e49fa4-bbe4-4a5c-bef7-922f22de5e40" ],
+    "latitude" : "37.33204777020775",
+    "longitude" : "126.79482819413901",
+    "name" : "Магазин Sushi&fit",
+    "owner" : "unnamed",
+    "phone" : "010-2017-2049"
+  },
+"noOwner11" :
+  {
+    "uid" : "11",
+    "address" : "경기도 안산시 상록구 이동 716 2, 2층",
+    "category" : "food",
+    "city" : "Ансан",
+    "description" : "Арт – ресторан BBQ HOUSE, начал свою работу 02.02.2020г. Наше заведение направлено на культурное время препровождение гостей,каждый раз удивляя различными шоу-программами, караоке и прочими интересными развлечениями.",
+    "image" : [ "https://firebasestorage.googleapis.com/v0/b/korusale.appspot.com/o/images%2Flogo-bbq-png-01.png?alt=media&token=30ab7ee0-0f1b-41cb-89b4-f7c8864b8557" ],
+    "latitude" : "37.30780006345583",
+    "longitude" : "126.85239695552522",
+    "name" : "BBQ HOUSE",
+    "owner" : "unnamed",
+    
+    "phone" : "010 8496 0510"
+  },
+"noOwner12" :
+  {
+    "uid" : "12",
+    "address" : "인천 연수구 새말로56번길 2 1",
+    "category" : "food",
+    "city" : "Инчхон",
+    "description" : "AN's lounge bar - экспресс доставка суши и роллов по Инчону",
+    "image" : [ "https://firebasestorage.googleapis.com/v0/b/korusale.appspot.com/o/images%2Fans1-1.jpeg?alt=media&token=2202f900-dc1c-42c7-b752-131b59d6548f" ],
+    "latitude" : "37.420709277407795",
+    "longitude" : "126.67630176521085",
+    "name" : "AN's lounge bar",
+    "owner" : "unnamed",
+    "phone" : "010-7734-7811"
+  },
+"noOwner13" :
+  {
+    "uid" : "13",
+    "address" : "인천 연수구 함박로 76",
+    "category" : "food",
+    "city" : "Инчхон",
+    "description" : "Узбекская и европейская кухни",
+    "image" : [ "https://firebasestorage.googleapis.com/v0/b/korusale.appspot.com/o/images%2Fchaihana_logo.jpeg?alt=media&token=20c74b23-ab4e-4fba-bcc0-e2fcc0711259" ],
+    "latitude" : "37.42522778653348",
+    "longitude" : "126.68562201008713",
+    "name" : "Кафе Чайхана",
+    "owner" : "unnamed",
+    "phone" : "032-817-7681"
+  },
+"noOwner14" :
+  {
+    "uid" : "14",
+    "address" : "인천광역시 연수구 함박로 42",
+    "category" : "food",
+    "city" : "Инчхон",
+    "description" : "Кафе Мелоди - первое русскоязычное кафе, открытое в районе Саданджи (Ёнсудон)",
+    "image" : [ "https://firebasestorage.googleapis.com/v0/b/korusale.appspot.com/o/images%2Fmelody.jpeg?alt=media&token=15b22e8f-8c30-4950-bcf2-ce823139a7ca" ],
+    "latitude" : "37.42553285344583",
+    "longitude" : "126.6817041165055",
+    "name" : "Кафе Мелоди",
+    "owner" : "unnamed",
+    "phone" : "032-817-7980"
+  },
+"noOwner15" :
+  {
+    "uid" : "15",
+    "address" : "인천 연수구 연수동 함박로 57",
+    "category" : "food",
+    "city" : "Инчхон",
+    "description" : "Давленная лапша (живая) для приготовления куксу, барбекю, приготовленное по особому рецпту в смокинг гриле",
+    "image" : [ "https://firebasestorage.googleapis.com/v0/b/korusale.appspot.com/o/images%2Fbon_appetit.jpeg?alt=media&token=5c48731d-bf9e-4187-b1f8-f9f3fe53c483" ],
+    "latitude" : "37.425666237105055",
+    "longitude" : "126.68365467135771",
+    "name" : "Ресторан Бон Аппетит",
+    "owner" : "unnamed",
+    "phone" : "010-3339-9117"
+  },
+"noOwner16" :
+  {
+    "uid" : "16",
+    "address" : "인천광역시 연수구 연수동 512-6",
+    "category" : "food",
+    "city" : "Инчхон",
+    "description" : "Гавайская, Пепперони, Овощная, Мясная, Комбинированная, Сырная пиццы, а также спагетти и жаренный рис",
+    "image" : [ "https://firebasestorage.googleapis.com/v0/b/korusale.appspot.com/o/images%2Fsmile_pizza.jpeg?alt=media&token=78c96a70-53af-4b1f-9ccc-a39be9fb210f" ],
+    "latitude" : "37.42532860252923",
+    "longitude" : "126.68462835470987",
+    "name" : "Пиццерия Smile pizza",
+    "owner" : "unnamed",
+    "phone" : "010-2197-2300"
+  },
+"noOwner17" :
+  {
+    "uid" : "17",
+    "address" : "인천광역시 연수구 연수동 513-12",
+    "category" : "food",
+    "city" : "Инчхон",
+    "description" : "Донары, Шаурма, напитки",
+    "image" : [ "https://firebasestorage.googleapis.com/v0/b/korusale.appspot.com/o/images%2Fkebab_house.jpeg?alt=media&token=31b03a5d-eac0-4a2d-8ec8-d5b4f305455f" ],
+    "latitude" : "37.425595588008484",
+    "longitude" : "126.68437363949512",
+    "name" : "Кафе Kebab House",
+    "owner" : "unnamed",
+    "phone" : "010-9618-1718"
+  },
+"noOwner18" :
+  {
+    "uid" : "18",
+    "address" : "인천광역시 연수구 비류대로433번길 1",
+    "category" : "food",
+    "city" : "Инчхон",
+    "description" : "Шашлыки, стэйки, роллы, паста, тандырное меню, европейские и корейские салаты. Прием заказов - с 13.00 до 22.00, сб - с 15.00, выходной ПН",
+    "image" : [ "https://firebasestorage.googleapis.com/v0/b/korusale.appspot.com/o/images%2Fassorti.logo.jpg?alt=media&token=ddd1cc58-b75a-45a0-b348-353536ba3834" ],
+    "latitude" : "37.424967540853814",
+    "longitude" : "126.68285050552642",
+    "name" : "Ресторан Assorti",
+    "owner" : "unnamed",
+    "phone" : "010-8971-2104"
+  },
+"noOwner19" :
+  {
+    "uid" : "19",
+    "address" : "인천광역시 연수구 연수동 512-3",
+    "category" : "food",
+    "city" : "Инчхон",
+    "description" : "Корейская, узбекская, европейская кухни. Доставка в районе Саданджи, Сонак, Ёнсу",
+    "image" : [ "https://firebasestorage.googleapis.com/v0/b/korusale.appspot.com/o/images%2Fogonek.jpeg?alt=media&token=81744d6c-0fdc-4356-afa6-1fd36a11d485" ],
+    "latitude" : "37.42537982944893",
+    "longitude" : "126.68411468880161",
+    "name" : "Кафе Огонёк",
+    "owner" : "unnamed",
+    "phone" : "010-8034-7017"
+  },
+"noOwner20" :
+  {
+    "uid" : "20",
+    "address" : "충남 아산시 신창면 읍내리 286-3",
+    "category" : "food",
+    "city" : "Асан",
+    "description" : "Европейская, корейская кухни, шашлыки, салаты. Экспресс доставка по Синчангу (Асан)",
+    "image" : [ "https://firebasestorage.googleapis.com/v0/b/korusale.appspot.com/o/images%2Fkafe_aliance.jpeg?alt=media&token=938539b2-63a4-47a0-b8b8-7ec2aadde80b" ],
+    "latitude" : "36.77829153858278",
+    "longitude" : "126.9344807661532",
+    "name" : "Кафе Альянс",
+    "owner" : "unnamed",
+    "phone" : "010-4591-9091"
+  },
+"noOwner21" :
+  {
+    "uid" : "21",
+    "address" : "충청남도 아산시 둔포면 둔포면로 17번길 20-5",
+    "category" : "food",
+    "city" : "Асан",
+    "description" : "Шашлыки, кядя, каурма лагман и многое другое. Доставка по району Дунпо (Дунпори)",
+    "image" : [ "https://firebasestorage.googleapis.com/v0/b/korusale.appspot.com/o/images%2Fvstrecha.jpeg?alt=media&token=f0c97b7b-77f5-48d8-adb3-a86bd893f956" ],
+    "latitude" : "36.92960990041078",
+    "longitude" : "127.03567659583464",
+    "name" : "Кафе Встреча",
+    "owner" : "unnamed",
+    "phone" : "010-7354-2005"
+  },
+"noOwner22" :
+  {
+    "uid" : "22",
+    "address" : "",
+    "category" : "food",
+    "city" : "Кванджу",
+    "description" : "Бургеры, чикен, донары, сендвичи, пицца, хачапури, сырные палочки.  Возможен предварительный заказ после оплаты на счет Nong Hyup 356-0368-5729-43",
+    "image" : [ "https://firebasestorage.googleapis.com/v0/b/korusale.appspot.com/o/images%2Ffamily-fast-food.png?alt=media&token=b9eb20de-5c04-4676-93da-82f5eb46a251" ],
+    "name" : "Family fast food",
+    "owner" : "unnamed",
+    "phone" : "010-4532-7494"
+  },
+"noOwner23" :
+  {
+    "uid" : "23",
+    "address" : "광주광역시 광산구 산정공원로60번길 4",
+    "category" : "food",
+    "city" : "Кванджу",
+    "description" : "Европейская, корейская, узбекская кухни. ",
+    "image" : [ "https://firebasestorage.googleapis.com/v0/b/korusale.appspot.com/o/images%2Ffamily_cafe.png?alt=media&token=0be3175d-04e2-418a-9593-1095f97f72ec" ],
+    "latitude" : "35.17309981084111",
+    "longitude" : "126.80730083222156",
+    "name" : "Кафе на пьянке 'My family'",
+    "owner" : "unnamed",
+    "phone" : "010-5818-6511"
+  },
+"noOwner24" :
+  {
+    "uid" : "24",
+    "address" : "서울특별시 중구 마른내로 159-4",
+    "category" : "food",
+    "city" : "Сеул",
+    "description" : "Мы готовим только из свежих продуктов в любое время или день недели. Узбекская, европейская, корейская кухни. ",
+    "image" : [ "https://firebasestorage.googleapis.com/v0/b/korusale.appspot.com/o/images%2Fsamarkand.jpeg?alt=media&token=2135d538-5f7e-4879-bb4f-37d4ee32c916" ],
+    "latitude" : "37.564834124435066",
+    "longitude" : "127.00590053434993",
+    "name" : "Кафе Samarkand City",
+    "owner" : "unnamed",
+    "phone" : "02-2285-2220"
+  },
+"noOwner25" :
+  {
+    "uid" : "25",
+    "address" : "서울특별시 용산구 이태원로 164-1 5층",
+    "category" : "food",
+    "city" : "Сеул",
+    "description" : "Ресторан в самом популярном американском районе Итэвон. Все блюда готовятся профессиональными поварами и только из свежих продуктов. ",
+    "image" : [ "https://firebasestorage.googleapis.com/v0/b/korusale.appspot.com/o/images%2Ftroika.png?alt=media&token=065352a3-aee1-4f4d-b0ba-24b1f1e11566" ],
+    "latitude" : "37.53399287588325",
+    "longitude" : "126.99229119894996",
+    "name" : "Ресторан Тройка",
+    "owner" : "unnamed",
+    "phone" : "02-797-7724"
+  },
+"noOwner26" :
+  {
+    "uid" : "26",
+    "address" : "서울 중구 쌍림동 146-4 서림 빌딩 В-1hameleo",
+    "category" : "food",
+    "city" : "Сеул",
+    "description" : "Европейская, корейская кухни, шашлыки, салаты, элитные напитки. \n Ресторан-бар 'Хамелеон' открылся 21 ноября 2017 года. Это воплощение разных стилей незабываемой кухни, смешанный креативный интерьер, не имеющий себе подобных. С помощью светодиодного освещения он имеет необычную цветовую гамму, способную превращать заведение в элитный ресторан, луанж бар, ночной клуб, караоке бар и просто уютное тихое кафе, где можно спокойно пообедать с семьей, провести деловую встречу. Каждый гость для нас дорог! Мы ждем Вас каждый день с понедельника по воскресенье, с 11:00 до 23:00, кухня с 11:00 до 23:00. Каждую субботу у нас живая музыка!",
+    "image" : [ "https://firebasestorage.googleapis.com/v0/b/korusale.appspot.com/o/images%2Fhameleon.jpeg?alt=media&token=7632d49f-b935-49f6-a0ac-673d117c16d0" ],
+    "latitude" : "37.56442557421833",
+    "longitude" : "127.00303667710746",
+    "name" : "Бар-ресторан Хамелеон",
+    "owner" : "unnamed",
+    "phone" : "010-7707-1301"
+  },
+"noOwner27" :
+  {
+    "uid" : "27",
+    "address" : "서울특별시 중구 마른내로 154",
+    "category" : "food",
+    "city" : "Сеул",
+    "description" : "Корейская, европейская, узбекская кухни. Шашлыки, салаты, закуски и многое другое.",
+    "image" : [ "https://firebasestorage.googleapis.com/v0/b/korusale.appspot.com/o/images%2Ffortune_food.jpeg?alt=media&token=7bc20df0-e904-4f22-baf1-54778cf60680" ],
+    "latitude" : "37.564552993822566",
+    "longitude" : "127.00496265302685",
+    "name" : "Ресторан Фортуна",
+    "owner" : "unnamed",
+    "phone" : "02-2267-0777"
+  },
+"noOwner28" :
+  {
+    "uid" : "28",
+    "address" : "",
+    "category" : "food",
+    "city" : "Хвасонг",
+    "description" : "Пицца, паста, горячие блюда, салаты и шашлыки",
+    "image" : [ "https://firebasestorage.googleapis.com/v0/b/korusale.appspot.com/o/images%2Fpizza_%26_pasta.jpeg?alt=media&token=08f2533d-1106-4247-a4e9-5adb453b4434" ],
+    "name" : "Pizza & pasta",
+    "owner" : "unnamed",
+    "phone" : "010-2831-1983"
+  },
+"noOwner29" :
+  {
+    "uid" : "29",
+    "address" : "경기도 화성시 향남읍 평4길 1",
+    "category" : "food",
+    "city" : "Хвасонг",
+    "description" : "Европейская и корейская кухни.  Большие порции. Вкусно как дома!!!",
+    "image" : [ "https://firebasestorage.googleapis.com/v0/b/korusale.appspot.com/o/images%2Fvishenka.jpg?alt=media&token=5fb7f252-0bac-4b97-a227-3a28a570c66d" ],
+    "latitude" : "37.13029564478973",
+    "longitude" : "126.90887136481136",
+    "name" : "Кафе Вишенка",
+    "owner" : "unnamed",
+    "phone" : "010-2418-2127"
+  },
+"noOwner30" :
+  {
+    "uid" : "30",
+    "address" : "",
+    "category" : "food",
+    "city" : "Хвасонг",
+    "description" : "Корейские и европейские блюда. Предзаказ. Самовывоз",
+    "image" : [ "https://firebasestorage.googleapis.com/v0/b/korusale.appspot.com/o/images%2Fnashe_kafe.jpeg?alt=media&token=1a78457d-2048-48b6-8730-8cfba7dd8179" ],
+    "name" : "Nashe Cafe",
+    "owner" : "unnamed",
+    "phone" : "010-7387-8808"
+  },
+"noOwner31" :
+  {
+    "uid" : "31",
+    "address" : "경주시 한빛 길 10 번길 43, 1 층",
+    "category" : "food",
+    "city" : "Кёнджу",
+    "description" : "Европейская, корейская, узбекская кухни. Доставка по г. Кенджу. Заказ шашлыков - от 5 шт.",
+    "image" : [ "https://firebasestorage.googleapis.com/v0/b/korusale.appspot.com/o/images%2Fuspeh.png?alt=media&token=29583c09-e0d8-4f7a-89f5-4aa51615d00b" ],
+    "latitude" : "35.85436603486205",
+    "longitude" : "129.20563537031634",
+    "name" : "Кафе Успех",
+    "owner" : "unnamed",
+    "phone" : "010-5586-7072"
+  },
+"noOwner32" :
+  {
+    "uid" : "32",
+    "address" : "경상남도 김해시 진영읍 장등로 6번길 49",
+    "category" : "food",
+    "city" : "Кимхе",
+    "description" : "Европейская, корейская, узбекская кухни. Доставка по району Чинъен, предварительный заказ, проведение банкетов. При первом заказе может потребоваться предоплата за оформленный заказ. NH 352-0385-4993-53",
+    "image" : [ "https://firebasestorage.googleapis.com/v0/b/korusale.appspot.com/o/images%2Fvkusnoff.png?alt=media&token=3d4c59fd-7ed1-49aa-8cb9-caeb06bfac55" ],
+    "latitude" : "35.310535052290504",
+    "longitude" : "128.73560750308266",
+    "name" : "Кафе Вкуснофф",
+    "owner" : "Tsoy Igor",
+    "phone" : "010-5568-8227"
+  },
+"noOwner33" :
+  {
+    "uid" : "33",
+    "address" : "",
+    "category" : "food",
+    "city" : "Пёнтек",
+    "description" : "Европейская и азиатская кухни. Шашлыки. Доставка по району Посын",
+    "image" : [ "https://firebasestorage.googleapis.com/v0/b/korusale.appspot.com/o/images%2Fuzbekistan_reataurant.jpeg?alt=media&token=99315e84-cecd-4cec-8e3d-e87e3ce43c8d" ],
+    "name" : "Ресторан Узбекистан",
+    "owner" : "unnamed",
+    "phone" : "010-5704-3182"
+  },
+"noOwner34" :
+  {
+    "uid" : "34",
+    "address" : "부산 동구 초량동 555-1",
+    "category" : "food",
+    "city" : "Пусан",
+    "description" : "Всемирно известные роллы в американском стиле и не менее популярная шаурма/лаваш/донер",
+    "image" : [ "https://firebasestorage.googleapis.com/v0/b/korusale.appspot.com/o/images%2Fcraft-sushi.jpeg?alt=media&token=673bfd0e-e025-432a-94b4-acc3a76e0a05" ],
+    "latitude" : "35.11519644399026",
+    "longitude" : "129.03871723162086",
+    "name" : "Кафе CRAFT SUSHI",
+    "owner" : "unnamed",
+    "phone" : "010-7553-4780"
+  },
+"noOwner35" :
+  {
+    "uid" : "35",
+    "address" : "충북 청주시 서원구 사창동 457 번지 2 층",
+    "category" : "food",
+    "city" : "Чхонджу",
+    "description" : "Ресторан-кафе UZBEGIM предлагает погрузиться в атмосферу Узбекистана и отведать национальную кухню.\n Плов (из риса лазер) ценители поймут. манты, лагман, самса. шашлыки (свиной, говяжи, куриный), казан-кабоб и многое другое",
+    "image" : [ "https://firebasestorage.googleapis.com/v0/b/korusale.appspot.com/o/images%2Fuzbegim.jpeg?alt=media&token=642b1fe1-d439-486d-bf23-66d4ecefb206" ],
+    "latitude" : "36.63262578047335",
+    "longitude" : "127.45734223767177",
+    "name" : "Cafe-Restaurant Uzbegim",
+    "owner" : "unnamed",
+    "phone" : "010-8074-5445"
+  },
+"noOwner36" :
+  {
+    "uid" : "36",
+    "address" : "경기 안산시 상록구 사동 1167-2",
+    "category" : "shop",
+    "city" : "Ансан",
+    "description" : "Большой ассортимент выпечки и кондитерских изделий, Русско-узбекская продукция, продукты питания и кисломолочные изделия. Мы работаем круглосуточно!",
+    "image" : [ "https://firebasestorage.googleapis.com/v0/b/korusale.appspot.com/o/images%2Fkolobok.jpeg?alt=media&token=2873699e-3ee9-43fb-a57f-2d250c2280e1" ],
+    "latitude" : "37.300377401274844",
+    "longitude" : "126.84090170478281",
+    "name" : "Пекарня Колобок",
+    "owner" : "unnamed",
+    "phone" : "010-5650-3355"
+  },
+"noOwner37" :
+  {
+    "uid" : "37",
+    "address" : "경기도 안산시 단원구 원곡동 763-6",
+    "category" : "shop",
+    "city" : "Ансан",
+    "description" : "Российские продукты питания, свежая выпечка, кондитерские изделия.",
+    "image" : [ "https://firebasestorage.googleapis.com/v0/b/korusale.appspot.com/o/images%2Fmasters.jpeg?alt=media&token=eeae5ba3-63c1-4eef-9780-41f2978babb0" ],
+    "latitude" : "37.331827891866915",
+    "longitude" : "126.79607690322503",
+    "name" : "Продуктовый магазин Master's",
+    "owner" : "unnamed",
+    "phone" : "010-9618-1718"
+  },
+"noOwner38" :
+  {
+    "uid" : "38",
+    "address" : "인천광역시 연수구 연수동 551",
+    "category" : "shop",
+    "city" : "Инчхон",
+    "description" : "Магазин-тандырная. Российские продукты питания, свежая выпечка.",
+    "image" : [ "https://firebasestorage.googleapis.com/v0/b/korusale.appspot.com/o/images%2Fdream_bakery.jpeg?alt=media&token=a9bb3cf3-da06-4e09-93c0-8cfe63f1f128" ],
+    "latitude" : "37.421491565042544",
+    "longitude" : "126.67613520375508",
+    "name" : "Магазин Dream bakery",
+    "owner" : "unnamed",
+    "phone" : "010-6365-8186"
+  },
+"noOwner39" :
+  {
+    "uid" : "39",
+    "address" : "인천광역시 연수구 연수동 528",
+    "category" : "shop",
+    "city" : "Инчхон",
+    "description" : "Магаизин-пекарня Bakery shop. Свежая выпечка, кондитерские изделия, консервы, молчные изделия и многое другое.",
+    "image" : [ "https://firebasestorage.googleapis.com/v0/b/korusale.appspot.com/o/images%2Fbakery_shop.jpeg?alt=media&token=2d74d093-407f-46bc-a8cc-42023458b165" ],
+    "latitude" : "37.42483620692676",
+    "longitude" : "126.68632170841936",
+    "name" : "Пекарня bakery shop",
+    "owner" : "unnamed",
+    "phone" : "010-4695-7778"
+  },
+"noOwner40" :
+  {
+    "uid" : "40",
+    "address" : "인천시 연수구 연수동 529-8 2층",
+    "category" : "shop",
+    "city" : "Инчхон",
+    "description" : "Магазин Кальянов и аксессуаров. Самый большой выбор кальянной продукции.  Кальяны, смеси, уголь, чашки, шланги, щипцы, аксессуары, колбы, комплектующие, сиропы и т.д.",
+    "image" : [ "https://firebasestorage.googleapis.com/v0/b/korusale.appspot.com/o/images%2Fmolecula.png?alt=media&token=6d758707-8572-42b3-b07d-4112648faf24" ],
+    "latitude" : "37.425159052789304",
+    "longitude" : "126.6863632864126",
+    "name" : "Магазин кальянов",
+    "owner" : "unnamed",
+    "phone" : "010-8993-3331"
+  },
+"noOwner41" :
+  {
+    "uid" : "41",
+    "address" : "서울특별시 중구 마른내로 159",
+    "category" : "shop",
+    "city" : "Сеул",
+    "description" : "Продукты питания: выпечка, колбасы, консервы, замороженные продукты, офощи, крупы, напитки. Экспресс доставка по Сеулу и отправка почтой по всей Корее \n\nДоставка продуктов питания почтой по всей Корее. При заказе до 16:00 часов и предоплаты на счет Woori bank 1002-938-262994, доставка 1-2 рабочих дня. Доставка оплачивается покупателем при получении заказа. Стоимость доставки - от 4.000 до 6.000 вон. \nДоставка в районе ст.м. Дондемун. (русский квартал) 30-60 минут\nДоставка по г. Сеул. Стоимость доставки может увеличиться до 15.000, в зависимости от района и времени доставки. 60-90 минут. \n\nМедовик – магазин-гастроном с самыми разнообразными товарами. Открыт в 2000 году, чтобы напомнить жителям стран СНГ в Южной Корее вкус домашних продуктов. Как говорит хозяйка ресторана: - Я просто соскучилась по хлебу. Вот мы и решили его испечь...Потом расширились и стали гастрономом. Так и пошло... В ассортименте черный и белый хлеб собственной выпечки (булочная расположена в следующем дому), а также импортированные молочные продукты, колбасные изделия, крупы(гречневая, овсяная и пр!), сухофрукты, чай и пряники. В ассортименте вкуснейшие торты и печенье. Находится магазин совсем рядом со станцией Тондэмун (исторический и культурный парк). Магазин Медовик – любимый вкус~",
+    "image" : [ "https://firebasestorage.googleapis.com/v0/b/korusale.appspot.com/o/images%2Fmedovik.png?alt=media&token=9e0a164f-c2af-4326-9d9e-359e54c040d4" ],
+    "latitude" : "37.56478651424134",
+    "longitude" : "127.00573717017804",
+    "name" : "Магазин Медовик",
+    "owner" : "unnamed",
+    "phone" : "02-2285-4700"
+  },
+"noOwner42" :
+  {
+    "uid" : "42",
+    "address" : "서울특별시 중구 광희동1가 89-1",
+    "category" : "shop",
+    "city" : "Сеул",
+    "description" : "Косметика, средства по уходу за кожей лица и тела, средства для волос ОПТОМ И В РОЗНИЦУ! \n\nКомпания «The best choice» является одним из крупнейших поставщиков высококачественной, оригинальной косметической продукции из Южной Кореи по конкурентоспособным ценам.\n\nАссортимент предлагаемой продукции включает косметику, средства по уходу за кожей лица и тела, средства для волос и т.д.\n\nМы тщательно подбираем продукцию, чтобы вы всегда были уверены в ее превосходном качестве!",
+    "image" : [ "https://firebasestorage.googleapis.com/v0/b/korusale.appspot.com/o/images%2Fthe_best_choice.jpeg?alt=media&token=fc05cfe6-bf0d-415d-aa93-ceb9921bd323" ],
+    "latitude" : "37.56510657681528",
+    "longitude" : "127.00524207905424",
+    "name" : "Магазин THE BEST CHOICE",
+    "owner" : "unnamed",
+    "phone" : "010-5959-0414"
+  },
+"noOwner43" :
+  {
+    "uid" : "43",
+    "address" : "서울특별시 중구 광희동1가 155-3",
+    "category" : "shop",
+    "city" : "Сеул",
+    "description" : "Samsung и Apple, новые, б/у, акссессуары, за наличные и в кредит. Дистанционная оплата кадафонов. \n\nГарантия на все телефоны от 1 месяца\n\nВсе заказы оформляются только после предоплаты на счет Woori bank 1002-840-525258",
+    "image" : [ "https://firebasestorage.googleapis.com/v0/b/korusale.appspot.com/o/images%2Fthe_raon.jpeg?alt=media&token=a172173e-7e8e-42a6-bdb4-5317cabea2a1" ],
+    "latitude" : "37.56510207196842",
+    "longitude" : "127.00633102676244",
+    "name" : "Магазин сотовых телефонов Раон",
+    "owner" : "unnamed",
+    "phone" : "010-6870-9119"
+  },
+"noOwner44" :
+  {
+    "uid" : "44",
+    "address" : "경기도 화성시 장안면 기아자동차로 792",
+    "category" : "shop",
+    "city" : "Хвасонг",
+    "description" : "Продукты питания: выпечка, консервы, крупы, специи",
+    "image" : [ "https://firebasestorage.googleapis.com/v0/b/korusale.appspot.com/o/images%2Fkits_foods.jpeg?alt=media&token=16569f59-3f36-44d7-9bb3-f7a449f457ae" ],
+    "latitude" : "37.07558652782632",
+    "longitude" : "126.81505484185942",
+    "name" : "Продуктовый магазин Kits foods",
+    "owner" : "unnamed",
+    "phone" : "010-8681-0399"
+  },
+"noOwner45" :
+  {
+    "uid" : "45",
+    "address" : "경기도 평택시 포승읍 여술 4길 28-2",
+    "category" : "shop",
+    "city" : "Пёнтек",
+    "description" : "Русские продукты питания в ассортименте , алкоголь и другие товары из России и Узбекистанаtata",
+    "image" : [ "https://firebasestorage.googleapis.com/v0/b/korusale.appspot.com/o/images%2Ftata.jpeg?alt=media&token=5c5bc0a9-7f8e-4e88-a681-83c92eb6aa59" ],
+    "latitude" : "36.99032157409601",
+    "longitude" : "126.84409839051408",
+    "name" : "Магазин Тата",
+    "owner" : "unnamed",
+    "phone" : "010-2934-4144"
+  },
+"noOwner46" :
+  {
+    "uid" : "46",
+    "address" : "경기도 평택시 포승읍 평택항로 483",
+    "category" : "shop",
+    "city" : "Пёнтек",
+    "description" : "Мясные деликатесыru",
+    "image" : [ "https://firebasestorage.googleapis.com/v0/b/korusale.appspot.com/o/images%2Fruss_meat.jpeg?alt=media&token=d0059144-8cad-4192-b377-8e0ba4b90425" ],
+    "latitude" : "36.993740708112504",
+    "longitude" : "126.84389883520421",
+    "name" : "Магазин Russmeat",
+    "owner" : "unnamed",
+    "phone" : "010- 7603-2805"
+  },
+"noOwner47" :
+  {
+    "uid" : "47",
+    "address" : "충청북도 청주시 흥덕구 복대동 847-7",
+    "category" : "shop",
+    "city" : "Чхонджу",
+    "description" : "Российские продукты питания. В ассортименте всегда горячий хлеб, хлебо-булочные кондитерские, колбасные изделия, молочная продукция, консервы, макароны. Все виды растительных масел, маринады, чаи, соки, крупы, широкий выбор алкогольных напитков. ",
+    "image" : [ "https://firebasestorage.googleapis.com/v0/b/korusale.appspot.com/o/images%2Fmagnat.png?alt=media&token=c20c5dec-8ec7-4029-a4ad-fb5896874b4d" ],
+    "latitude" : "36.635261945540385",
+    "longitude" : "127.45306187920607",
+    "name" : "Магазин-пекарня Магнат",
+    "owner" : "unnamed",
+    "phone" : "010-7577-7805"
+  },
+"noOwner48" :
+  {
+    "uid" : "48",
+    "address" : "경기도 안산시 당원구 747-9,101호 ",
     "category" : "connect",
     "city" : "Ансан",
-    "address" : "경기도 안산시 당원구 747-9,101호",
-    "phone" : "'010-5557-5752",
-    "image" : ["phone"],
-    "description" : "Магазин сотовой связи "
-}
+    "description" : "Магазин сотовой связи",
+    "image" : [ "x" ],
+    "latitude" : "37.33070105571041",
+    "longitude" : "126.79252781022936",
+    "name" : "Dream Telecom ",
+    "owner" : "Kim Lyudmila",
+    "phone" : "010-5557-5752"
+  }
 
-]
+
+},
+"users" : {
+    "EwsdrGYzddM2WAy7xNKbvSD8VXw1" : {
+      "email" : "test@test.com",
+      "name" : "",
+      "phone" : "",
+      "uid" : "EwsdrGYzddM2WAy7xNKbvSD8VXw1"
+    },
+    "upHEzALDrOcM784zrwHBnFRG8wu1" : {
+      "email" : "test@test.com",
+      "name" : "",
+      "phone" : "",
+      "uid" : "EwsdrGYzddM2WAy7xNKbvSD8VXw1"
+    },
+    "fJXaUfUN3JREdYvIBdbddxXA6Pg2" : {
+      "email" : "test@test.ru",
+      "name" : "",
+      "phone" : "",
+      "uid" : "fJXaUfUN3JREdYvIBdbddxXA6Pg2"
+    }
+  }
+}

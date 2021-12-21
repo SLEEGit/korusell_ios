@@ -17,12 +17,13 @@ struct ProfileView: View {
     @State var name: String = ""
     @State var phone: String = ""
     @State var avatar: String = ""
-
+    
     @State private var isShowPhotoLibrary = false
+    @State private var isShowInfo = false
     @State private var image = UIImage(named: "avatar")!
     @State private var uid = Auth.auth().currentUser?.uid ?? ""
     @State var directory: String = "avatars"
-
+    
     @State var business: Service!
     @State var bname: String = ""
     @State var bphone: String = ""
@@ -33,35 +34,42 @@ struct ProfileView: View {
     @State var longitude: String = ""
     @State var category: String = ""
     
-//    @Binding var selectedImage: UIImage
-//    @Environment(\.presentationMode) private var presentationMode
+//    @Environment(\.presentationMode) var presentationMode
+    //    @Binding var selectedImage: UIImage
+    //    @Environment(\.presentationMode) private var presentationMode
     
     var body: some View {
         NavigationView {
             Form {
                 Section {
-                    Image(uiImage: self.image)
-                        .resizable()
-                        .scaledToFill()
-                        .frame(width: 100, height: 100)
-                        .cornerRadius(75)
-                        .listRowSeparator(.hidden)
-                        .onTapGesture {
-                            print("Boo")
-
+                    VStack {
+                        Image(uiImage: self.image)
+                            .resizable()
+                            .scaledToFill()
+                            .frame(width: 100, height: 100)
+                            .cornerRadius(75)
+                        Button("Изменить фото профиля") {
                             isShowPhotoLibrary = true
-     
                         }                           .sheet(isPresented: $isShowPhotoLibrary) {
                             ImagePicker(selectedImage: self.$image, currentUid: self.$uid, directory: $directory, sourceType: .photoLibrary)
                         }
-                    Text(user.email ?? "")
-                        .font(.title3)
+                    }
+                    .listRowSeparator(.hidden)
+
+
                 }
                 .frame(maxWidth: .infinity, maxHeight: .infinity, alignment: .center)
                 .listRowInsets(EdgeInsets())
                 .background(Color(UIColor.systemGroupedBackground))
-//                NavigationLink(destination: EditNameView(name: $name, phone: $phone)) {
-                    NavigationLink(destination: getDestination(name: name, phone: phone)) {
+                //                NavigationLink(destination: EditNameView(name: $name, phone: $phone)) {
+                
+                HStack {
+                    Text("Эл. почта")
+                    Spacer()
+                    Text(user.email ?? "")
+                }
+                NavigationLink(destination: getDestination(name: name, phone: phone)) {
+                    
                     HStack {
                         Text("Имя")
                         Spacer()
@@ -91,9 +99,9 @@ struct ProfileView: View {
                 Section {
                     Button(action: {
                         showingAlert = true
-//                        DB().getMyBusiness(uid: user.uid) { _ in
-                            
-//                        }
+                        //                        DB().getMyBusiness(uid: user.uid) { _ in
+                        
+                        //                        }
                     })
                     {
                         HStack {
@@ -114,6 +122,13 @@ struct ProfileView: View {
                 }
             }
             .navigationBarTitle("Моя страница")
+            .toolbar {
+                Button("Инфо") {
+                    isShowInfo = true
+                }                           .sheet(isPresented: $isShowInfo) {
+                    Info()
+                }
+            }
         }.onAppear {
             DB().getUser(uid: user.uid) { user in
                 name = user.name ?? ""
@@ -136,89 +151,89 @@ struct ProfileView: View {
             DB().getImage(uid: uid, directory: "avatars") { image in
                 self.image = image
             }
-//            DB().fetchData2(category: "") { service in
-////                self.business = service
-//            }
+            //            DB().fetchData2(category: "") { service in
+            ////                self.business = service
+            //            }
         }
     }
     
     
     func getDestination(name: String, phone: String) -> AnyView {
-            if Pref.userDefault.bool(forKey: "usersignedin") {
-                return AnyView(EditNameView(name: $name, phone: $phone))
-            } else {
-                return AnyView(Text("Logged out"))
-            }
+        if Pref.userDefault.bool(forKey: "usersignedin") {
+            return AnyView(EditNameView(name: $name, phone: $phone))
+        } else {
+            return AnyView(Text("Logged out"))
         }
+    }
     
 }
-    //struct Profile_Previews: PreviewProvider {
-    //    static var previews: some View {
-    //        Profile(person: example3, viewModel: viewModel)
-    //    }
-    //}
-    
-    //#if DEBUG
-    ////let example3 = Person(_id: "HNyHZZjtq298izgub", avatar: "", name: "sd", username: "username", email:"asdasda", phone: "010 1233 1111")
-    //let example3 = User(uid: "123", displayName: "dis name", email: "test@test.thisistest", avatar: "avatar", phone: "010-0000-0000")
-    //#endif
-    
-    
-    //struct ExtractedView: View {
-    //    var body: some View {
-    //        Form {
-    //            Section {
-    //                HStack {
-    //                    Text("Имя")
-    //                        .font(.caption)
-    //                    Spacer()
-    //                    TextField(namePlaceholder, text: $name)
-    //                        .font(.caption)
-    //                }
-    //                HStack {
-    //                    Text("Номер телефона")
-    //                        .font(.caption)
-    //                    Spacer()
-    //                    TextField(phonePlaceholder, text: $phone)
-    //                        .font(.caption)
-    //                }
-    //            }
-    //            Section {
-    //                Button(action: {
-    //                    showingAlert = true
-    //                })
-    //                {
-    //                    HStack {
-    //                        Spacer()
-    //                        Text("Выйти")
-    //                            .foregroundColor(Color.red)
-    //                        Spacer()
-    //                    }
-    //                }
-    //                .alert("Вы действительно хотите выйти?", isPresented: $showingAlert) {
-    //                    Button("Отмена", role: .cancel) {}
-    //                    Button("Выйти") {
-    //                        Authentication().signOut() {
-    //                            logging.isSignedIn = false
-    //                        }
-    //                    }
-    //                }
-    //            }
-    //        }
-    //    }
-    //}
-    //        .toolbar {
-    //            Button("Обновить данные") {
-    //                DB().addNamePhone(user: user, name: name, phone: phone) {
-    //                    showingAlert2 = true
-    //                }
-    //            }.alert("Данные успешно обновлены", isPresented: $showingAlert2) {
-    //                Button("Ок", role: .cancel) {}
-    //            }
-    //        }
-    //}.onAppear {
-    //    DB().getUser(uid: user.uid) { user in
-    //        name = user.name ?? ""
-    //        phone = user.phone ?? ""
-    //    }
-    //}
+//struct Profile_Previews: PreviewProvider {
+//    static var previews: some View {
+//        Profile(person: example3, viewModel: viewModel)
+//    }
+//}
+
+//#if DEBUG
+////let example3 = Person(_id: "HNyHZZjtq298izgub", avatar: "", name: "sd", username: "username", email:"asdasda", phone: "010 1233 1111")
+//let example3 = User(uid: "123", displayName: "dis name", email: "test@test.thisistest", avatar: "avatar", phone: "010-0000-0000")
+//#endif
+
+
+//struct ExtractedView: View {
+//    var body: some View {
+//        Form {
+//            Section {
+//                HStack {
+//                    Text("Имя")
+//                        .font(.caption)
+//                    Spacer()
+//                    TextField(namePlaceholder, text: $name)
+//                        .font(.caption)
+//                }
+//                HStack {
+//                    Text("Номер телефона")
+//                        .font(.caption)
+//                    Spacer()
+//                    TextField(phonePlaceholder, text: $phone)
+//                        .font(.caption)
+//                }
+//            }
+//            Section {
+//                Button(action: {
+//                    showingAlert = true
+//                })
+//                {
+//                    HStack {
+//                        Spacer()
+//                        Text("Выйти")
+//                            .foregroundColor(Color.red)
+//                        Spacer()
+//                    }
+//                }
+//                .alert("Вы действительно хотите выйти?", isPresented: $showingAlert) {
+//                    Button("Отмена", role: .cancel) {}
+//                    Button("Выйти") {
+//                        Authentication().signOut() {
+//                            logging.isSignedIn = false
+//                        }
+//                    }
+//                }
+//            }
+//        }
+//    }
+//}
+//        .toolbar {
+//            Button("Обновить данные") {
+//                DB().addNamePhone(user: user, name: name, phone: phone) {
+//                    showingAlert2 = true
+//                }
+//            }.alert("Данные успешно обновлены", isPresented: $showingAlert2) {
+//                Button("Ок", role: .cancel) {}
+//            }
+//        }
+//}.onAppear {
+//    DB().getUser(uid: user.uid) { user in
+//        name = user.name ?? ""
+//        phone = user.phone ?? ""
+//    }
+//}
