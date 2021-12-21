@@ -7,13 +7,16 @@
 
 import SwiftUI
 
-
+var globalServices: [Service] = []
+var globalCity: String = "Все города"
+var globalCategory: String = "all"
 
 struct ServiceMenuView: View {
     
     @ObservedObject var fetcher = DataFetcher()
     @State private var city = "Все города"
     @State var selectCategory: Bool = false
+    @StateObject private var session = DB()
     
     var body: some View {
         
@@ -31,6 +34,21 @@ struct ServiceMenuView: View {
             }
             .onAppear{
                 city = globalCity
+                session.fetchData(category: "all") { (list) in
+                    globalServices = list
+    //                var number = 0
+    //                for i in list {
+    //
+    //                    Util().getLocation(from: i.address) { boo in
+    //
+    //                        print("=============================  \(number)")
+    //                        print(i.address)
+    //                        print(boo)
+    //                        number += 1
+    //                    }
+    //                }
+                }
+                
             }
             .navigationTitle("Услуги")
             .toolbar{

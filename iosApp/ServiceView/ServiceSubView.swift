@@ -15,6 +15,7 @@ struct ServiceSubView: View {
     var category: String
     var barTitle: String = ""
     
+    
     var body: some View {
         List(list) { item in
             NavigationLink(destination: ServiceView(service: item)) {

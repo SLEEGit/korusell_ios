@@ -18,10 +18,30 @@ struct MyBusinessView: View {
     @Binding var description: String
     @Binding var latitude: String
     @Binding var longitude: String
-    
+    @Binding var category: String
     
     @State private var showingAlert = false
     @Environment(\.presentationMode) var presentationMode: Binding<PresentationMode>
+    
+    
+
+    
+    enum Category: String, CaseIterable, Identifiable {
+        case food
+        case shop
+        case connect
+        case docs
+        case transport
+        case law
+        case money
+        case health
+        case car
+        case nanny
+        case study
+        case tourism
+        
+        var id: String { self.rawValue }
+    }
     
     var body: some View {
         List {
@@ -41,33 +61,63 @@ struct MyBusinessView: View {
                 Text("Название")
                     .foregroundColor(.gray)
                 TextField("Название", text: $name)
+                    .disableAutocorrection(true)
             }
-            HStack {
-                Text("Город")
-                    .foregroundColor(.gray)
-                TextField("Город", text: $city)
-            }
+            Picker("Категории", selection: $category) {
+                Group {
+                    Text("Рестораны/Кафе").tag("food")
+                    Text("Магазины").tag("shop")
+                    Text("Связь").tag("connect")
+                    Text("Документы/Переводы").tag("docs")
+                    Text("Транспорт/Переезд").tag("transport")
+                    Text("Юридические услуги").tag("law")
+                    Text("Финансовые услуги").tag("money")
+                    Text("Красота/Здоровье").tag("health")
+                    Text("СТО/Тюнинг").tag("car")
+                    Text("Няни/Детсад").tag("nanny")
+                }
+                .foregroundColor(Color.black)
+                Group {
+                    Text("Образование").tag("study")
+                    Text("Туризм").tag("tourism")
+                }.foregroundColor(Color.black)
+            }.foregroundColor(.gray)
+                Picker("Город", selection: $city) {
+                    Group {
+                        Text("Ансан").tag("Ансан")
+                        Text("Хвасонг").tag("Хвасонг")
+                        Text("Сеул").tag("Сеул")
+                        Text("Инчхон").tag("Инчхон")
+                        Text("Асан").tag("Асан")
+                        Text("Чхонан").tag("Чхонан")
+                    }
+                    .foregroundColor(Color.black)
+                }.foregroundColor(.gray)
+            
             HStack {
                 Text("Адрес")
                     .foregroundColor(.gray)
                 TextField("Адрес", text: $address)
+                    .disableAutocorrection(true)
             }
             HStack {
                 Text("Номер телефона")
                     .foregroundColor(.gray)
                 TextField("Номер телефона", text: $phone)
+                    .keyboardType(.phonePad)
             }
-            HStack {
+            VStack {
                 Text("Описание")
                     .foregroundColor(.gray)
-                TextField("Описание", text: $description)
+                TextEditor(text: $description)
+                    .disableAutocorrection(true)
             }
 
             Section {
                 HStack {
                     Spacer()
                     Button("Обновить данные") {
-                        DB().updateBusiness(uid: uid, name: name, city: city, address: address, phone: phone, descrition: description, latitude: latitude, longitude: longitude) {
+                        DB().updateBusiness(uid: uid, name: name, category: category, city: city, address: address, phone: phone, descrition: description, latitude: latitude, longitude: longitude) {
                             showingAlert = true
                         }
                     }.alert("Данные успешно обновлены", isPresented: $showingAlert) {

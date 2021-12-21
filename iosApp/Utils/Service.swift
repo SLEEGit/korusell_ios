@@ -10,6 +10,7 @@ import Foundation
 struct Service: Codable, Identifiable {
     
     let id = UUID()
+    let uid: String
     let name: String
     let category: String
     let city : String
@@ -21,6 +22,7 @@ struct Service: Codable, Identifiable {
     
     
     init(dictionary: [String: Any]) {
+        self.uid = dictionary["uid"] as? String ?? ""
         self.name = dictionary["name"] as? String ?? ""
         self.category = dictionary["category"] as? String ?? ""
         self.city = dictionary["city"] as? String ?? ""
@@ -31,7 +33,8 @@ struct Service: Codable, Identifiable {
         self.longitude = dictionary["longitude"] as? String ?? ""
         }
     
-    init(name: String, category: String, city: String, address: String, phone: String, description: String, latitude: String, longitude: String) {
+    init(uid: String, name: String, category: String, city: String, address: String, phone: String, description: String, latitude: String, longitude: String) {
+        self.uid = uid
         self.name = name
         self.category = category
         self.city = city

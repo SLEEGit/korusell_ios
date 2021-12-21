@@ -8,28 +8,24 @@
 import FirebaseDatabase
 import FirebaseAuth
 import FirebaseStorage
+import Foundation
 
 class DB: ObservableObject {
     let ref = Database.database(url: "https://korusale-default-rtdb.asia-southeast1.firebasedatabase.app")
     
     //    GET
     
-    func getImage(uid: String, completion: @escaping (UIImage) -> ()) {
-
-        let storage = Storage.storage().reference().child("images/\(uid).jpeg")
-        var image = UIImage()
-        storage.getData(maxSize: 1 * 2048 * 2048) { (metadata, error) in
-            if let error = error {
-                image = UIImage(named: "avatar")!
-                print("Error while uploading file: ", error)
+    func getImage(uid: String, completion: @escaping (URL) -> ()) {
+        let storage = Storage.storage().reference().child("images/\(uid).jpg")
+        storage.downloadURL() { url, error in
+            if let url = url {
+                print(url)
+                completion(url)
             } else {
-                let image1 = UIImage(data: metadata!)
-                image = image1!
-                print("Metadata: ", metadata)
+                return
             }
-            completion(image)
+            
         }
-        
     }
     
     func getAvatar(uid: String, completion: @escaping (UIImage) -> ()) {
@@ -99,7 +95,7 @@ class DB: ObservableObject {
     }
     
     func getMyBusiness(uid: String, completion: @escaping (Service) -> ()) {
-        let defaultService = Service(name: "", category: "", city: "", address: "", phone: "", description: "", latitude: "", longitude: "")
+        let defaultService = Service(uid: "", name: "", category: "", city: "", address: "", phone: "", description: "", latitude: "", longitude: "")
         ref.reference(withPath: "services2").child(uid).getData(completion:  { error, snapshot in
             guard error == nil else {
                 print(error!.localizedDescription)
@@ -116,7 +112,7 @@ class DB: ObservableObject {
                 }
             } else {
                 completion(defaultService)
-                self.updateBusiness(uid: uid, name: "", city: "", address: "", phone: "", descrition: "", latitude: "", longitude: "") { }
+                self.updateBusiness(uid: uid, name: "", category: "", city: "", address: "", phone: "", descrition: "", latitude: "", longitude: "") { }
             }
             
             
@@ -141,9 +137,9 @@ class DB: ObservableObject {
         }
     }
     
-    func updateBusiness(uid: String, name: String, city: String, address: String, phone: String, descrition: String, latitude: String, longitude: String, completion: @escaping () -> Void) {
+    func updateBusiness(uid: String, name: String, category: String, city: String, address: String, phone: String, descrition: String, latitude: String, longitude: String, completion: @escaping () -> Void) {
 
-        ref.reference(withPath: "services2").child(uid).updateChildValues(["name" : name, "city" : city, "address" : address, "phone" : phone, "description" : descrition, "latitude": latitude, "longitude": longitude])
+        ref.reference(withPath: "services2").child(uid).updateChildValues(["name" : name, "city" : city, "category" : category, "address" : address, "phone" : phone, "description" : descrition, "latitude": latitude, "longitude": longitude])
         DispatchQueue.main.async {
             completion()
         }
@@ -173,6 +169,4 @@ class DB: ObservableObject {
             }
         }
     }
-    
-    
 }
