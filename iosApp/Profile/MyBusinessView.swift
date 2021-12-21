@@ -108,9 +108,18 @@ struct MyBusinessView: View {
                 HStack {
                     Spacer()
                     Button("Обновить данные") {
-                        DB().updateBusiness(uid: uid, name: name, category: category, city: city, address: address, phone: phone, descrition: description, latitude: latitude, longitude: longitude) {
-                            showingAlert = true
+                        Util().getCoordinates(address: address) { coor in
+                            if let coor = coor {
+                                latitude = coor.latitude.description
+                                longitude = coor.longitude.description
+                            } else {
+                                return
+                            }
+                            DB().updateBusiness(uid: uid, name: name, category: category, city: city, address: address, phone: phone, descrition: description, latitude: latitude, longitude: longitude) {
+                                showingAlert = true
+                            }
                         }
+                        
                     }.alert("Данные успешно обновлены", isPresented: $showingAlert) {
                         Button("Ок") {
                             presentationMode.wrappedValue.dismiss()

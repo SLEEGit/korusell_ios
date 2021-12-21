@@ -9,96 +9,12 @@ import SwiftUI
 import CachedAsyncImage
 
 struct DetailsView: View {
-    
     var service: Service!
+    @State private var image = UIImage(named: "blank")!
     
     var body: some View {
-        
-        Form {
-            HStack {
-                Spacer()
-                CachedAsyncImage(url: URL(string: service.name)) { image in
-                            image
-                                .resizable()
-                                .scaledToFit()
-                                .frame(width: 300, height: 300)
-                        } placeholder: {
-                            Image(systemName: "photo")
-                                .frame(width: 50, height: 50)
-                        }
-                    
-                Spacer()
-            }
-//            Section {
-//            TabView {
-//                ForEach(service.image, id: \.self) { item in
-//                            RemoteImage(url: item)
-//                                .aspectRatio(contentMode: .fit)
-//
-//                        }
-//                    }
-//                    .tabViewStyle(PageTabViewStyle())
-//                    .frame(width: 300, height: 300)
-//            }
-            Section {
-                
-                Text(service.name)
-                    .font(.title3)
-                
-                HStack {
-                    Text("Город")
-                        .font(.caption)
-                        .foregroundColor(.gray)
-                    Divider()
-                    Text(service.city)
-                        .font(.caption)
-                }
-                Text(service.address)
-                    .contextMenu {
-                            Button(action: {
-                                UIPasteboard.general.string = service.address
-                            }) {
-                                Text("Скопировать")
-                                Image(systemName: "doc.on.doc")
-                            }
-                         }
-                    .font(.caption)
-                    .foregroundColor(.gray)
-                    
-            
-                Text(service.description)
-                    .font(.caption)
-                    .multilineTextAlignment(.leading)
-                    .lineLimit(nil)
-                    .padding(.bottom, 10)
-                // эта штука снизу убрала троеточие в тексте
-                    .minimumScaleFactor(0.1)
-                    
-            }
-            
-            Section {
-                Button(action: {
-                    call(numberString: service.phone)
-                }) {
-                    HStack(alignment: .center) {
-                        Spacer()
-                        Image(systemName: "phone.fill")
-                        Text(service.phone)
-                        Spacer()
-                    }
-                }
-            }
-        }
-        
+        ExpandedServiceDetails(service: service, image: image)
     }
-    
-    func call(numberString: String) {
-        let telephone = "tel://"
-        let formattedString = telephone + numberString
-        guard let url = URL(string: formattedString) else { return }
-        UIApplication.shared.open(url)
-    }
-    
 }
 
 struct DetailsView_Previews: PreviewProvider {

@@ -75,80 +75,84 @@ struct MapView: View {
                     .toolbar {
                         ToolbarItem(placement: .navigationBarLeading) {
                             Menu(self.categoryName) {
-//                                ForEach(categories.identified(by: \.id)) { cat in
-//                                    Button {
-//                                        self.categoryName = cat.name
-//                                        self.category = cat.category
-//                                        self.list = Util().getCity(city: globalCity, category: self.category, unsortedList: globalServices)
-//                                    } label: {
-//                                        Text(cat.name)
-//                                    }
-//                                }
-                                Button("Все категории") {
-                                    self.categoryName = "Все категории"
-                                    self.category = "all"
-                                    self.list = Util().filter(city: globalCity, category: self.category, unsortedList: globalServices)
+                                //                                ForEach(categories.identified(by: \.id)) { cat in
+                                //                                    Button {
+                                //                                        self.categoryName = cat.name
+                                //                                        self.category = cat.category
+                                //                                        self.list = Util().getCity(city: globalCity, category: self.category, unsortedList: globalServices)
+                                //                                    } label: {
+                                //                                        Text(cat.name)
+                                //                                    }
+                                //                                }
+                                Group {
+                                    Button("Все категории") {
+                                        self.categoryName = "Все категории"
+                                        self.category = "all"
+                                        self.list = Util().filter(city: globalCity, category: self.category, unsortedList: globalServices)
+                                    }
+                                    Button("Рестораны/Кафе") {
+                                        self.categoryName = "Рестораны/Кафе"
+                                        self.category = "food"
+                                        self.list = Util().filter(city: globalCity, category: self.category, unsortedList: globalServices)
+                                    }
+                                    Button("Связь") {
+                                        self.categoryName = "Связь"
+                                        self.category = "connect"
+                                        self.list = Util().filter(city: globalCity, category: self.category, unsortedList: globalServices)
+                                    }
+                                    Button("Магазины") {
+                                        self.categoryName = "Магазины"
+                                        self.category = "shop"
+                                        self.list = Util().filter(city: globalCity, category: self.category, unsortedList: globalServices)
+                                    }
+                                    Button("Документы/Переводы") {
+                                        self.categoryName = "Документы/Переводы"
+                                        self.category = "docs"
+                                        self.list = Util().filter(city: globalCity, category: self.category, unsortedList: globalServices)
+                                    }
+                                    Button("Юридические услуги") {
+                                        self.categoryName = "Юридические услуги"
+                                        self.category = "law"
+                                        self.list = Util().filter(city: globalCity, category: self.category, unsortedList: globalServices)
+                                    }
+                                    Button("Финансовые услуги") {
+                                        self.categoryName = "Финансовые услуги"
+                                        self.category = "money"
+                                        self.list = Util().filter(city: globalCity, category: self.category, unsortedList: globalServices)
+                                    }
+                                    Button("Красота/Здоровье") {
+                                        self.categoryName = "Красота/Здоровье"
+                                        self.category = "health"
+                                        self.list = Util().filter(city: globalCity, category: self.category, unsortedList: globalServices)
+                                    }
+                                    Button("СТО/Тюнинг") {
+                                        self.categoryName = "СТО/Тюнинг"
+                                        self.category = "car"
+                                        self.list = Util().filter(city: globalCity, category: self.category, unsortedList: globalServices)
+                                    }
                                 }
-                                Button("Рестораны/Кафе") {
-                                    self.categoryName = "Рестораны/Кафе"
-                                    self.category = "food"
-                                    self.list = Util().filter(city: globalCity, category: self.category, unsortedList: globalServices)
+                                Group {
+                                    Button("Транспорт/Переезд") {
+                                        self.categoryName = "Транспорт/Переезд"
+                                        self.category = "transport"
+                                        self.list = Util().filter(city: globalCity, category: self.category, unsortedList: globalServices)
+                                    }
+                                    Button("Няни/Детсад") {
+                                        self.categoryName = "Няни/Детсад"
+                                        self.category = "nanny"
+                                        self.list = Util().filter(city: globalCity, category: self.category, unsortedList: globalServices)
+                                    }
+                                    Button("Образование") {
+                                        self.categoryName = "Образование"
+                                        self.category = "study"
+                                        self.list = Util().filter(city: globalCity, category: self.category, unsortedList: globalServices)
+                                    }
+                                    Button("Туризм") {
+                                        self.categoryName = "Туризм"
+                                        self.category = "tourism"
+                                        self.list = Util().filter(city: globalCity, category: self.category, unsortedList: globalServices)
+                                    }
                                 }
-                                Button("Связь") {
-                                    self.categoryName = "Связь"
-                                    self.category = "connect"
-                                    self.list = Util().filter(city: globalCity, category: self.category, unsortedList: globalServices)
-                                }
-                                Button("Магазины") {
-                                    self.categoryName = "Магазины"
-                                    self.category = "shop"
-                                    self.list = Util().filter(city: globalCity, category: self.category, unsortedList: globalServices)
-                                }
-                                Button("Документы/Переводы") {
-                                    self.categoryName = "Документы/Переводы"
-                                    self.category = "docs"
-                                    self.list = Util().filter(city: globalCity, category: self.category, unsortedList: globalServices)
-                                }
-                                Button("Юридические услуги") {
-                                    self.categoryName = "Юридические услуги"
-                                    self.category = "law"
-                                    self.list = Util().filter(city: globalCity, category: self.category, unsortedList: globalServices)
-                                }
-                                Button("Финансовые услуги") {
-                                    self.categoryName = "Финансовые услуги"
-                                    self.category = "money"
-                                    self.list = Util().filter(city: globalCity, category: self.category, unsortedList: globalServices)
-                                }
-                                Button("Красота/Здоровье") {
-                                    self.categoryName = "Красота/Здоровье"
-                                    self.category = "health"
-                                    self.list = Util().filter(city: globalCity, category: self.category, unsortedList: globalServices)
-                                }
-                                Button("СТО/Тюнинг") {
-                                    self.categoryName = "СТО/Тюнинг"
-                                    self.category = "car"
-                                    self.list = Util().filter(city: globalCity, category: self.category, unsortedList: globalServices)
-                                }
-//                                Button("Транспорт/Переезд") {
-//                                    self.categoryName = "Транспорт/Переезд"
-//                                    self.category = "transport"
-//                                    self.list = Util().getCity(city: globalCity, category: self.category, unsortedList: globalServices)
-//                                }
-//                                Button("Няни/Детсад") {
-//                                    self.categoryName = "Няни/Детсад"
-//                                    self.category = "nanny"
-//                                    self.list = Util().getCity(city: globalCity, category: self.category, unsortedList: globalServices)
-//                                }
-//                                Button("Образование") {
-//                                    self.categoryName = "Образование"
-//                                    self.category = "study"
-//                                    self.list = Util().getCity(city: globalCity, category: self.category, unsortedList: globalServices)
-//                                }
-//                                Button("Туризм") {
-//                                    self.categoryName = "Туризм"
-//                                    self.category = "tourism"
-//                                    self.list = Util().getCity(city: globalCity, category: self.category, unsortedList: globalServices)
-//                                }
                             }
                         }
                         ToolbarItem(placement: .navigationBarTrailing) {
@@ -164,7 +168,7 @@ struct MapView: View {
                                     self.list = Util().filter(city: globalCity, category: self.category, unsortedList: globalServices)
                                 }
                                 Button("Хвасонг") {
-                                    mapRegion = MKCoordinateRegion(center: CLLocationCoordinate2D(latitude: 37.16834087290789, longitude: 126.801294705907), span: MKCoordinateSpan(latitudeDelta: 0.2, longitudeDelta: 0.2))
+                                    mapRegion = MKCoordinateRegion(center: CLLocationCoordinate2D(latitude: 37.16834087290789, longitude: 126.801294705907), span: MKCoordinateSpan(latitudeDelta: 0.3, longitudeDelta: 0.3))
                                     globalCity = "Хвасонг"
                                     self.list = Util().filter(city: globalCity, category: self.category, unsortedList: globalServices)
                                 }
