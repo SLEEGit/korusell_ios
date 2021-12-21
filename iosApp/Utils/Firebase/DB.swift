@@ -15,22 +15,22 @@ class DB: ObservableObject {
     
     //    GET
     
-    func getImage(uid: String, completion: @escaping (URL) -> ()) {
-        let storage = Storage.storage().reference().child("images/\(uid).jpg")
-        storage.downloadURL() { url, error in
-            if let url = url {
-                print(url)
-                completion(url)
-            } else {
-                return
-            }
-            
-        }
-    }
+//    func getImage(uid: String, completion: @escaping (URL) -> ()) {
+//        let storage = Storage.storage().reference().child("images/\(uid).jpg")
+//        storage.downloadURL() { url, error in
+//            if let url = url {
+//                print(url)
+//                completion(url)
+//            } else {
+//                return
+//            }
+//
+//        }
+//    }
     
-    func getAvatar(uid: String, completion: @escaping (UIImage) -> ()) {
+    func getImage(uid: String, directory: String, completion: @escaping (UIImage) -> ()) {
 
-        let storage = Storage.storage().reference().child("avatars/\(uid).jpg")
+        let storage = Storage.storage().reference().child("\(directory)/\(uid).jpg")
         var image = UIImage()
         storage.getData(maxSize: 1 * 2048 * 2048) { (metadata, error) in
             if let error = error {
@@ -114,9 +114,6 @@ class DB: ObservableObject {
                 completion(defaultService)
                 self.updateBusiness(uid: uid, name: "", category: "", city: "", address: "", phone: "", descrition: "", latitude: "", longitude: "") { }
             }
-            
-            
-            
         })
     }
     
@@ -139,15 +136,15 @@ class DB: ObservableObject {
     
     func updateBusiness(uid: String, name: String, category: String, city: String, address: String, phone: String, descrition: String, latitude: String, longitude: String, completion: @escaping () -> Void) {
 
-        ref.reference(withPath: "services2").child(uid).updateChildValues(["name" : name, "city" : city, "category" : category, "address" : address, "phone" : phone, "description" : descrition, "latitude": latitude, "longitude": longitude])
+        ref.reference(withPath: "services2").child(uid).updateChildValues(["uid" : uid, "name" : name, "city" : city, "category" : category, "address" : address, "phone" : phone, "description" : descrition, "latitude": latitude, "longitude": longitude])
         DispatchQueue.main.async {
             completion()
         }
     }
     
     
-    func postAvatar(image: UIImage, uid: String) {
-        let storage = Storage.storage().reference().child("avatars/\(uid).jpg")
+    func postImage(image: UIImage, directory: String, uid: String) {
+        let storage = Storage.storage().reference().child("\(directory)/\(uid).jpg")
         
         // Resize the image to 200px in height with a custom extension
         let resizedImage = image

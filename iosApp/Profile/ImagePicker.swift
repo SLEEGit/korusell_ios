@@ -12,6 +12,7 @@ struct ImagePicker: UIViewControllerRepresentable {
  
     @Binding var selectedImage: UIImage
     @Binding var currentUid: String
+    @Binding var directory: String
     @Environment(\.presentationMode) var presentationMode
     
     var sourceType: UIImagePickerController.SourceType = .photoLibrary
@@ -50,7 +51,7 @@ final class Coordinator: NSObject, UIImagePickerControllerDelegate, UINavigation
     func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [UIImagePickerController.InfoKey : Any]) {
  
         if let image = info[UIImagePickerController.InfoKey.originalImage] as? UIImage {
-            DB().postAvatar(image: image, uid: parent.currentUid)
+            DB().postImage(image: image, directory: parent.directory, uid: parent.currentUid)
             parent.selectedImage = image
         }
  

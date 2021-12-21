@@ -17,11 +17,13 @@ struct ProfileView: View {
     @State var name: String = ""
     @State var phone: String = ""
     @State var avatar: String = ""
-    @State var business: Service!
+
     @State private var isShowPhotoLibrary = false
     @State private var image = UIImage(named: "avatar")!
     @State private var uid = Auth.auth().currentUser?.uid ?? ""
-    
+    @State var directory: String = "avatars"
+
+    @State var business: Service!
     @State var bname: String = ""
     @State var bphone: String = ""
     @State var city: String = ""
@@ -50,7 +52,7 @@ struct ProfileView: View {
                             isShowPhotoLibrary = true
      
                         }                           .sheet(isPresented: $isShowPhotoLibrary) {
-                            ImagePicker(selectedImage: self.$image, currentUid: self.$uid, sourceType: .photoLibrary)
+                            ImagePicker(selectedImage: self.$image, currentUid: self.$uid, directory: $directory, sourceType: .photoLibrary)
                         }
                     Text(user.email ?? "")
                         .font(.title3)
@@ -130,7 +132,8 @@ struct ProfileView: View {
                 self.longitude = business.longitude
                 self.category = business.category
             }
-            DB().getAvatar(uid: uid) { image in
+            
+            DB().getImage(uid: uid, directory: "avatars") { image in
                 self.image = image
             }
 //            DB().fetchData2(category: "") { service in

@@ -20,44 +20,30 @@ struct MyBusinessView: View {
     @Binding var longitude: String
     @Binding var category: String
     
+    @State var directory: String = "images"
+    @State private var image = UIImage(named: "logo")!
+    @State private var isShowPhotoLibrary = false
     @State private var showingAlert = false
     @Environment(\.presentationMode) var presentationMode: Binding<PresentationMode>
-    
-    
 
-    
-    enum Category: String, CaseIterable, Identifiable {
-        case food
-        case shop
-        case connect
-        case docs
-        case transport
-        case law
-        case money
-        case health
-        case car
-        case nanny
-        case study
-        case tourism
-        
-        var id: String { self.rawValue }
-    }
     
     var body: some View {
         List {
-            HStack {
-                Spacer()
-                CachedAsyncImage(url: URL(string: "")) { image in
-                    image
-                        .resizable()
-                        .aspectRatio(contentMode: .fit)
-                } placeholder: {
-                    Image("logo")
-                        .aspectRatio(contentMode: .fit)
+            Image(uiImage: self.image)
+                .resizable()
+                .scaledToFill()
+                .listRowSeparator(.hidden)
+                .onTapGesture {
+                    print("Boo")
+
+                    isShowPhotoLibrary = true
+
+                }                           .sheet(isPresented: $isShowPhotoLibrary) {
+                    ImagePicker(selectedImage: self.$image, currentUid: self.$uid, directory: $directory, sourceType: .photoLibrary)
                 }
-                Spacer()
-            }
+            Spacer()
             HStack {
+                
                 Text("Название")
                     .foregroundColor(.gray)
                 TextField("Название", text: $name)
@@ -93,7 +79,12 @@ struct MyBusinessView: View {
                     }
                     .foregroundColor(Color.black)
                 }.foregroundColor(.gray)
-            
+            HStack {
+                Text("Другой город")
+                    .foregroundColor(.gray)
+                TextField("Город", text: $city)
+                    .disableAutocorrection(true)
+            }
             HStack {
                 Text("Адрес")
                     .foregroundColor(.gray)
@@ -103,7 +94,7 @@ struct MyBusinessView: View {
             HStack {
                 Text("Номер телефона")
                     .foregroundColor(.gray)
-                TextField("Номер телефона", text: $phone)
+                TextField("010-0000-0000", text: $phone)
                     .keyboardType(.phonePad)
             }
             VStack {
@@ -130,6 +121,10 @@ struct MyBusinessView: View {
             }
             
         }.onAppear {
+            
+            DB().getImage(uid: uid, directory: "images") { image in
+                self.image = image
+            }
         }
         
     }

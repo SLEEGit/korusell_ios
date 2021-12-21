@@ -6,6 +6,7 @@
 //
 
 import Foundation
+import SwiftUI
 
 struct Service: Codable, Identifiable {
     
@@ -20,7 +21,6 @@ struct Service: Codable, Identifiable {
     let latitude: String
     let longitude: String
     
-    
     init(dictionary: [String: Any]) {
         self.uid = dictionary["uid"] as? String ?? ""
         self.name = dictionary["name"] as? String ?? ""
@@ -31,7 +31,7 @@ struct Service: Codable, Identifiable {
         self.description = dictionary["description"] as? String ?? ""
         self.latitude = dictionary["latitude"] as? String ?? ""
         self.longitude = dictionary["longitude"] as? String ?? ""
-        }
+    }
     
     init(uid: String, name: String, category: String, city: String, address: String, phone: String, description: String, latitude: String, longitude: String) {
         self.uid = uid
@@ -43,5 +43,58 @@ struct Service: Codable, Identifiable {
         self.description = description
         self.latitude = latitude
         self.longitude = longitude
+    }
+}
+
+struct ExpandedService: View {
+    @State var service: Service
+    @State var image: UIImage
+    var body: some View {
+        HStack {
+            //            FirebaseImage(id: "vishenka")
+            
+            Image(uiImage: self.image)
+                .resizable()
+                .scaledToFill()
+                .onAppear {
+                    DB().getImage(uid: service.uid, directory: "images") { image in
+                        self.image = image
+                    }
+                }
+            
+            //                    CachedAsyncImage(url: URL(string: item.name)) { image in
+            //                        image
+            //                            .resizable()
+            //                            .scaledToFit()
+            //                            .frame(width: 100, height: 100)
+            //                    } placeholder: {
+            //                        Image("logo")
+            //                            .resizable()
+            //                            .scaledToFit()
+            //                            .frame(width: 100, height: 100)
+            //                    }
+            VStack(alignment: .leading) {
+                Text(service.name)
+                    .font(.system(size: 15))
+                    .bold()
+                    .minimumScaleFactor(0.1)
+                HStack {
+                    Text("Город:")
+                        .font(.system(size: 15))
+                        .foregroundColor(.gray)
+                    Text(service.city)
+                        .font(.system(size: 13))
+                        .foregroundColor(.gray)
+                }
+                
+                Text(service.description)
+                    .font(.caption)
+                    .foregroundColor(.gray)
+                    .padding(.top, 5)
+                    .lineLimit(3)
+            }
+            Spacer()
+        }
+        
     }
 }
