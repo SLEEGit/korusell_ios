@@ -41,7 +41,8 @@ struct MyBusinessView: View {
                     ImagePicker(selectedImage: self.$image, currentUid: self.$uid, directory: $directory, sourceType: .photoLibrary)
                 }
                 
-            }.padding()
+            }
+            .padding()
             HStack {
                 
                 Text("Название")
@@ -57,16 +58,16 @@ struct MyBusinessView: View {
                     Text("Документы/Переводы").tag("docs")
                     Text("Транспорт/Переезд").tag("transport")
                     Text("Юридические услуги").tag("law")
-                    Text("Финансовые услуги").tag("money")
+                    Text("Мероприятия").tag("party")
                     Text("Красота/Здоровье").tag("health")
                     Text("СТО/Тюнинг").tag("car")
                     Text("Няни/Детсад").tag("nanny")
                 }
-                .foregroundColor(Color.black)
+                .foregroundColor(Color("textColor"))
                 Group {
                     Text("Образование").tag("study")
                     Text("Туризм").tag("tourism")
-                }.foregroundColor(Color.black)
+                }.foregroundColor(Color("textColor"))
             }.foregroundColor(.gray)
             Picker("Город", selection: $city) {
                 Group {
@@ -77,7 +78,7 @@ struct MyBusinessView: View {
                     Text("Асан").tag("Асан")
                     Text("Чхонан").tag("Чхонан")
                 }
-                .foregroundColor(Color.black)
+                .foregroundColor(Color("textColor"))
             }.foregroundColor(.gray)
             HStack {
                 Text("Другой город")
@@ -88,7 +89,7 @@ struct MyBusinessView: View {
             HStack {
                 Text("Адрес")
                     .foregroundColor(.gray)
-                TextField("경기도 안산시 단원구 선이로 6", text: $address)
+                TextField("(на корейском языке)", text: $address)
                     .disableAutocorrection(true)
             }
             HStack {
@@ -108,13 +109,11 @@ struct MyBusinessView: View {
                 HStack {
                     Spacer()
                     Button("Обновить данные") {
-                        Util().getCoordinates(address: address) { coor in
-                            if let coor = coor {
-                                latitude = coor.latitude.description
-                                longitude = coor.longitude.description
-                            } else {
-                                return
-                            }
+                        Util().getCoordinates(address: address) { lat, long in
+                            self.latitude = lat
+                            self.longitude = long
+                        }
+                        DispatchQueue.main.asyncAfter(deadline: .now() + 1) {
                             DB().updateBusiness(uid: uid, name: name, category: category, city: city, address: address, phone: phone, descrition: description, latitude: latitude, longitude: longitude) {
                                 showingAlert = true
                             }

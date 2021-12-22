@@ -50,7 +50,7 @@ struct ServiceMenuView: View {
                 }
                 
             }
-            .navigationTitle("Услуги")
+            .navigationTitle("Korusell")
             .toolbar{
                 Menu {
                     Button {

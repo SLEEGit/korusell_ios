@@ -42,6 +42,7 @@
 		25ED2B5B2770373800575FEB /* Service.swift in Sources */ = {isa = PBXBuildFile; fileRef = 25ED2B5A2770373800575FEB /* Service.swift */; };
 		25ED2B5D2771565700575FEB /* TestView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 25ED2B5C2771565700575FEB /* TestView.swift */; };
 		25ED2B612771A08900575FEB /* Info.swift in Sources */ = {isa = PBXBuildFile; fileRef = 25ED2B602771A08900575FEB /* Info.swift */; };
+		25ED2B632771CE1600575FEB /* ImageCache.swift in Sources */ = {isa = PBXBuildFile; fileRef = 25ED2B622771CE1600575FEB /* ImageCache.swift */; };
 		7E4128007F7572B3F603FEEB /* Pods_iosApp.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = BCC3DBD7F6436A1D9D2C1C77 /* Pods_iosApp.framework */; };
 /* End PBXBuildFile section */
 
@@ -82,6 +83,7 @@
 		25ED2B5A2770373800575FEB /* Service.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Service.swift; sourceTree = "<group>"; };
 		25ED2B5C2771565700575FEB /* TestView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TestView.swift; sourceTree = "<group>"; };
 		25ED2B602771A08900575FEB /* Info.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Info.swift; sourceTree = "<group>"; };
+		25ED2B622771CE1600575FEB /* ImageCache.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageCache.swift; sourceTree = "<group>"; };
 		6BBB108F7637D033E3BED1F4 /* Pods-iosApp.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-iosApp.debug.xcconfig"; path = "Target Support Files/Pods-iosApp/Pods-iosApp.debug.xcconfig"; sourceTree = "<group>"; };
 		BCC3DBD7F6436A1D9D2C1C77 /* Pods_iosApp.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_iosApp.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		D9B96B5C301D3AD6549B202A /* Pods-iosApp.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-iosApp.release.xcconfig"; path = "Target Support Files/Pods-iosApp/Pods-iosApp.release.xcconfig"; sourceTree = "<group>"; };
@@ -200,11 +202,13 @@
 			isa = PBXGroup;
 			children = (
 				256D590C2762F531002EDC6A /* Firebase */,
+				25973E04275B492400DC016B /* Util.swift */,
+				25ED2B5A2770373800575FEB /* Service.swift */,
+				25ED2B622771CE1600575FEB /* ImageCache.swift */,
+				25ED2B58276F012A00575FEB /* ImagePicker.swift */,
+				259936112769DD6900F468B6 /* Pref.swift */,
 				253305CC27560E440061DD28 /* DataFetch.swift */,
 				253305C22754A7050061DD28 /* JSONParser.swift */,
-				25973E04275B492400DC016B /* Util.swift */,
-				259936112769DD6900F468B6 /* Pref.swift */,
-				25ED2B5A2770373800575FEB /* Service.swift */,
 			);
 			path = Utils;
 			sourceTree = "<group>";
@@ -215,7 +219,6 @@
 				254B21C8275C63340099E287 /* ProfileView.swift */,
 				25ED2B54276CE75000575FEB /* MyBusinessView.swift */,
 				25ED2B56276CE9A600575FEB /* EditNameView.swift */,
-				25ED2B58276F012A00575FEB /* ImagePicker.swift */,
 				25ED2B602771A08900575FEB /* Info.swift */,
 			);
 			path = Profile;
@@ -372,6 +375,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				25ED2B632771CE1600575FEB /* ImageCache.swift in Sources */,
 				25ED2B5D2771565700575FEB /* TestView.swift in Sources */,
 				25441F8C2767260D00B6E240 /* MapView.swift in Sources */,
 				253305CB275603A60061DD28 /* AdsView.swift in Sources */,
@@ -532,9 +536,11 @@
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_ASSET_PATHS = "\"iosApp/Preview Content\"";
+				DEVELOPMENT_TEAM = UXL6NT2432;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = iosApp/Info.plist;
+				INFOPLIST_KEY_CFBundleDisplayName = KoruSell;
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
@@ -561,9 +567,11 @@
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_ASSET_PATHS = "\"iosApp/Preview Content\"";
+				DEVELOPMENT_TEAM = UXL6NT2432;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = iosApp/Info.plist;
+				INFOPLIST_KEY_CFBundleDisplayName = KoruSell;
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";

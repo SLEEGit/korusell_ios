@@ -11,19 +11,31 @@ struct RegistrationView: View {
     @State var email: String = ""
     @State var password: String = ""
     @State var rePassword: String = ""
-    @State var showingAlert: Bool = false
     @State var showingAlertSuccess: Bool = false
     @Environment(\.presentationMode) var presentationMode: Binding<PresentationMode>
     
     @State var showWarning: Bool = false
     @State var warningText: String = ""
+    @State var isEmailValid: Bool = false
+    @State var isPassValid: Bool = false
     
     var body: some View {
         Form {
-            Section(header: Text("Введите Ваш e-mail и пароль"), footer: Text(warningText).foregroundColor(Color.red)) {
+            Section(header: Text("Введите Ваш e-mail и пароль"), footer: Text(warningText).foregroundColor(Color.red).lineLimit(0).minimumScaleFactor(0.1)) {
 //            Section(footer: Text("test text for footer")) {
 //            Section(header: Text("Введите Ваш e-mail и пароль")) {
-                TextField("Электронная почта", text: $email)
+                
+                TextField("Электронная почта", text: $email, onEditingChanged: { (isChanged) in
+                    if !isChanged {
+                        if Util().textFieldValidatorEmail(self.email) {
+                            self.isEmailValid = true
+                        } else {
+                            warningText = "Неверный формат эл. почты!"
+                            self.isEmailValid = false
+                            self.email = ""
+                        }
+                    }
+                })
                     .disableAutocorrection(true)
                     .keyboardType(.emailAddress)
                     .autocapitalization(.none)
@@ -34,6 +46,8 @@ struct RegistrationView: View {
                 Button(action: {
                     if password != rePassword {
                         warningText = "Пароли не совпадают!"
+                    } else if password.count < 8 {
+                        warningText = "Пароль должен содержать минимум 8 символов!"
                     } else {
                         warningText = ""
                         Authentication().signUp(email: email, password: password) {
@@ -43,9 +57,7 @@ struct RegistrationView: View {
                     
                 }, label: {
                     Text("Зарегистрироваться")
-                }).alert("Пароли не совпадают!", isPresented: $showingAlert) {
-                    Button("Ок", role: .cancel) {}
-                }
+                })
                 .alert("Регистрация выполнена успешно!", isPresented: $showingAlertSuccess) {
                     Button("Ок") {
                         presentationMode.wrappedValue.dismiss()

@@ -52,15 +52,15 @@ struct ExpandedService: View {
     var body: some View {
         HStack {
             //            FirebaseImage(id: "vishenka")
-            
-            Image(uiImage: self.image)
-                .resizable()
-                .scaledToFit()
-                .onAppear {
-                    DB().getImage(uid: service.uid, directory: "images") { image in
-                        self.image = image
-                    }
-                }
+            UrlImageView(urlString: service.uid)
+//            Image(uiImage: self.image)
+//                .resizable()
+//                .scaledToFit()
+//                .onAppear {
+//                    DB().getImage(uid: service.uid, directory: "images") { image in
+//                        self.image = image
+//                    }
+//                }
             VStack(alignment: .leading) {
                 Text(service.name)
                     .font(.system(size: 15))
@@ -92,14 +92,15 @@ struct ExpandedServiceDetails: View {
     @State var image: UIImage
     var body: some View {
         Form {
-            Image(uiImage: image)
-                .resizable()
+            UrlImageView(urlString: service.uid)
+//            Image(uiImage: image)
+//                .resizable()
                 .scaledToFit()
-                .onAppear {
-                    DB().getImage(uid: service.uid, directory: "images") { image in
-                        self.image = image
-                    }
-                }
+//                .onAppear {
+//                    DB().getImage(uid: service.uid, directory: "images") { image in
+//                        self.image = image
+//                    }
+//                }
             Section {
                 
                 Text(service.name)
