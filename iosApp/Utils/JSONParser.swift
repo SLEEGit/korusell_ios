@@ -8,7 +8,8 @@
 import Foundation
 
 struct Work: Codable, Identifiable {
-    let id = UUID()
+//    let id = UUID()
+    var id = UUID()
     let _id: String
     let createdAt: String
     let updatedAt: String
@@ -22,7 +23,8 @@ struct Work: Codable, Identifiable {
 }
 
 struct Person: Codable, Identifiable {
-    let id = UUID()
+//    let id = UUID()
+    var id = UUID()
     let _id: String
     let avatar: String
     let name : String

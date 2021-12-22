@@ -40,7 +40,7 @@ class DB: ObservableObject {
             } else {
                 let image1 = UIImage(data: metadata!)
                 image = image1!
-                print("Metadata: ", metadata)
+                print("Metadata: ", metadata!)
             }
             completion(image)
         }
@@ -101,7 +101,7 @@ class DB: ObservableObject {
                 print(error!.localizedDescription)
                 return;
             }
-            print(snapshot.value)
+            print(snapshot.value as Any)
             if snapshot.exists() {
                 let values = snapshot.value as! [String:Any]
                 let service = Service(dictionary: values)

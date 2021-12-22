@@ -10,7 +10,7 @@ import SwiftUI
 
 struct Service: Codable, Identifiable {
     
-    let id = UUID()
+    var id = UUID()
     let uid: String
     let name: String
     let category: String
@@ -81,6 +81,7 @@ struct ExpandedService: View {
                     .padding(.top, 5)
                     .lineLimit(3)
             }
+            .frame(width: 180)
             Spacer()
         }
     }

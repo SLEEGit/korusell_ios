@@ -20,18 +20,18 @@ class Authentication {
                 Pref.userDefault.set(true, forKey: "usersignedin")
                 Pref.userDefault.synchronize()
                 completion()
-                print("SIGNED IN   \(Auth.auth().currentUser?.email)")
+                print("SIGNED IN   \(String(describing: Auth.auth().currentUser?.email))")
             }
         }
     }
 
     func signOut(completion: @escaping () -> Void) {
         do {
-            print("SIGNED OUT   \(Auth.auth().currentUser?.email)")
+            print("SIGNED OUT   \(String(describing: Auth.auth().currentUser?.email))")
             try Auth.auth().signOut()
             Pref.userDefault.set(false, forKey: "usersignedin")
             Pref.userDefault.synchronize()
-            print("SIGNED OUT   \(Auth.auth().currentUser?.email)")
+            print("SIGNED OUT   \(String(describing: Auth.auth().currentUser?.email))")
             completion()
         } catch {
                 print("ERROR SIGN OUT")
