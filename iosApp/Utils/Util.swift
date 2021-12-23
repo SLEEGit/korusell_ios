@@ -34,6 +34,12 @@ class Util {
         return emailPredicate.evaluate(with: string)
     }
     
+    func call(numberString: String) {
+        let telephone = "tel://"
+        let formattedString = telephone + numberString
+        guard let url = URL(string: formattedString) else { return }
+        UIApplication.shared.open(url)
+    }
     
     func filter(city: String, category: String, unsortedList: [Service]) -> [Service] {
         

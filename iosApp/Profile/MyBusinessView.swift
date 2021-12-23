@@ -24,6 +24,8 @@ struct MyBusinessView: View {
     @State private var image = UIImage(named: "blank")!
     @State private var isShowPhotoLibrary = false
     @State private var showingAlert = false
+    @State private var showingHint = false
+    @State private var showingHint2 = false
     @Environment(\.presentationMode) var presentationMode: Binding<PresentationMode>
     
     
@@ -34,7 +36,7 @@ struct MyBusinessView: View {
                     .resizable()
                     .scaledToFill()
                     .listRowSeparator(.hidden)
-                Button("Изменить фото") {
+                Button("Выбрать картинку") {
                     isShowPhotoLibrary = true
                 }
                 .sheet(isPresented: $isShowPhotoLibrary) {
@@ -58,7 +60,7 @@ struct MyBusinessView: View {
                     Text("Документы/Переводы").tag("docs")
                     Text("Транспорт/Переезд").tag("transport")
                     Text("Юридические услуги").tag("law")
-                    Text("Мероприятия").tag("party")
+                    Text("Мероприятия/Фото/Видео").tag("party")
                     Text("Красота/Здоровье").tag("health")
                     Text("СТО/Тюнинг").tag("car")
                     Text("Няни/Детсад").tag("nanny")
@@ -81,16 +83,33 @@ struct MyBusinessView: View {
                 .foregroundColor(Color("textColor"))
             }.foregroundColor(.gray)
             HStack {
-                Text("Другой город")
+                Text("Ввести вручную")
                     .foregroundColor(.gray)
-                TextField("Город", text: $city)
+                TextField("Подсказка ->", text: $city)
                     .disableAutocorrection(true)
+                Image(systemName: "info.circle.fill")
+                    .renderingMode(.original)
+                    .shadow(radius: 2)
+                    .onTapGesture {
+                        showingHint2 = true
+                    }.alert("🤔 Если Вашего города нет в списке выше, введите его вручную", isPresented: $showingHint2) {
+                        Button("Ок", role: .cancel) {}
+                    }
             }
             HStack {
                 Text("Адрес")
                     .foregroundColor(.gray)
-                TextField("(на корейском языке)", text: $address)
+                TextField("Подсказка ->", text: $address)
                     .disableAutocorrection(true)
+                Spacer()
+                Image(systemName: "info.circle.fill")
+                    .renderingMode(.original)
+                    .shadow(radius: 2)
+                    .onTapGesture {
+                        showingHint = true
+                    }.alert("🤔 Чтобы Ваш бизнес отображался на карте, введите адрес на корейском языке без указания номера квартиры и этажа", isPresented: $showingHint) {
+                        Button("Ок", role: .cancel) {}
+                    }
             }
             HStack {
                 Text("Номер телефона")
@@ -102,7 +121,6 @@ struct MyBusinessView: View {
                 Text("Описание")
                     .foregroundColor(.gray)
                 TextEditor(text: $description)
-                    .disableAutocorrection(true)
             }
             
             Section {
@@ -128,12 +146,31 @@ struct MyBusinessView: View {
                 }
             }
             
-        }.onAppear {
+        }.navigationTitle("Мой Бизнес")
+        .onAppear {
             
             DB().getImage(uid: uid, directory: "images") { image in
                 self.image = image
             }
         }
+//        .toolbar {
+//            Button("Готово") {
+//                Util().getCoordinates(address: address) { lat, long in
+//                    self.latitude = lat
+//                    self.longitude = long
+//                }
+//                DispatchQueue.main.asyncAfter(deadline: .now() + 1) {
+//                    DB().updateBusiness(uid: uid, name: name, category: category, city: city, address: address, phone: phone, descrition: description, latitude: latitude, longitude: longitude) {
+//                        showingAlert = true
+//                    }
+//                }
+//
+//            }.alert("Данные успешно обновлены", isPresented: $showingAlert) {
+//                Button("Ок") {
+//                    presentationMode.wrappedValue.dismiss()
+//                }
+//            }
+//        }
         
     }
     

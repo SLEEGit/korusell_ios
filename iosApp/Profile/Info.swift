@@ -15,8 +15,7 @@ struct Info: View {
     
     var body: some View {
         VStack {
-            Text("Если Вы хотите связаться с рарабочтиками, можете писать на e-mail: ceo@koru.sale или в эту форму: ")
-                .padding()
+            Text("Связаться с рарабочтиками:\n\ne-mail: ceo@korusell.com\n\nили пишите сюда: ")
             TextEditor(text: $text)
                 .border(.black)
                 .padding()

@@ -34,7 +34,7 @@ struct MapView: View {
 //        catModel(category: "Магазины", name: "shop"),
 //        catModel(category: "Документы/Переводы", name: "docs"),
 //        catModel(category: "Юридические услуги", name: "law"),
-//        catModel(category: "Мероприятия", name: "party"),
+//        catModel(category: "Мероприятия/Фото/Видео", name: "party"),
 //        catModel(category: "Красота/Здоровье", name: "health"),
 //        catModel(category: "СТО/Тюнинг", name: "car")
 //        catModel(category: "Транспорт/Переезд", name: "transport"),
@@ -115,8 +115,8 @@ struct MapView: View {
                                         self.category = "law"
                                         self.list = Util().filter(city: globalCity, category: self.category, unsortedList: globalServices)
                                     }
-                                    Button("Мероприятия") {
-                                        self.categoryName = "Мероприятия"
+                                    Button("Мероприятия/Фото/Видео") {
+                                        self.categoryName = "Мероприятия/Фото/Видео"
                                         self.category = "party"
                                         self.list = Util().filter(city: globalCity, category: self.category, unsortedList: globalServices)
                                     }

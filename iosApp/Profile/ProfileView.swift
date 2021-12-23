@@ -92,7 +92,7 @@ struct ProfileView: View {
                         }
                         
                     }
-                    NavigationLink(destination: Text("Скоро мы добавим сюда объявления! 😇")) {
+                    NavigationLink(destination: MyAdvView()) {
                         Text("Мои Объявления")
                     }
                 }
@@ -123,11 +123,16 @@ struct ProfileView: View {
             }
             .navigationBarTitle("Моя страница")
             .toolbar {
-                Button("Инфо") {
+                Button(action: {
                     isShowInfo = true
-                }                           .sheet(isPresented: $isShowInfo) {
+                }) {
+                    Image(systemName: "ellipsis.bubble.fill")
+                        .renderingMode(.original)
+                        .shadow(radius: 2)
+                }.sheet(isPresented: $isShowInfo) {
                     Info()
                 }
+                
             }
         }.onAppear {
             DB().getUser(uid: user.uid) { user in

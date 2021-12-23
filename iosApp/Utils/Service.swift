@@ -53,14 +53,14 @@ struct ExpandedService: View {
         HStack {
             //            FirebaseImage(id: "vishenka")
             UrlImageView(urlString: service.uid)
-//            Image(uiImage: self.image)
-//                .resizable()
-//                .scaledToFit()
-//                .onAppear {
-//                    DB().getImage(uid: service.uid, directory: "images") { image in
-//                        self.image = image
-//                    }
-//                }
+            //            Image(uiImage: self.image)
+            //                .resizable()
+            //                .scaledToFit()
+            //                .onAppear {
+            //                    DB().getImage(uid: service.uid, directory: "images") { image in
+            //                        self.image = image
+            //                    }
+            //                }
             VStack(alignment: .leading) {
                 Text(service.name)
                     .font(.system(size: 15))
@@ -91,17 +91,18 @@ struct ExpandedService: View {
 struct ExpandedServiceDetails: View {
     @State var service: Service
     @State var image: UIImage
+    @State var isShowSheet: Bool = false
     var body: some View {
         Form {
             UrlImageView(urlString: service.uid)
-//            Image(uiImage: image)
-//                .resizable()
+            //            Image(uiImage: image)
+            //                .resizable()
                 .scaledToFit()
-//                .onAppear {
-//                    DB().getImage(uid: service.uid, directory: "images") { image in
-//                        self.image = image
-//                    }
-//                }
+            //                .onAppear {
+            //                    DB().getImage(uid: service.uid, directory: "images") { image in
+            //                        self.image = image
+            //                    }
+            //                }
             Section {
                 
                 Text(service.name)
@@ -115,18 +116,23 @@ struct ExpandedServiceDetails: View {
                     Text(service.city)
                         .font(.caption)
                 }
-                Text(service.address)
-                    .contextMenu {
+                HStack {
+                    Text("Адрес")
+                        .font(.caption)
+                        .foregroundColor(.gray)
+                    Divider()
+                    Text(service.address)
+                        .contextMenu {
                             Button(action: {
                                 UIPasteboard.general.string = service.address
                             }) {
                                 Text("Скопировать")
                                 Image(systemName: "doc.on.doc")
                             }
-                         }
-                    .font(.caption)
-                    .foregroundColor(.gray)
-                
+                        }
+                        .font(.caption)
+                }
+
                 Text(service.description)
                     .font(.caption)
                     .multilineTextAlignment(.leading)
@@ -139,7 +145,7 @@ struct ExpandedServiceDetails: View {
             
             Section {
                 Button(action: {
-                    call(numberString: service.phone)
+                    Util().call(numberString: service.phone)
                 }) {
                     HStack(alignment: .center) {
                         Spacer()
@@ -149,14 +155,22 @@ struct ExpandedServiceDetails: View {
                     }
                 }
             }
+            if service.uid.count > 10 {
+                Section {
+                    Button(action: {
+                        isShowSheet = true
+                    }) {
+                        HStack(alignment: .center) {
+                            Spacer()
+                            Image(systemName: "person.crop.circle")
+                            Text("Контактное лицо")
+                            Spacer()
+                        }
+                    }.sheet(isPresented: $isShowSheet) {
+                        OwnerView(ownerUid: service.uid)
+                    }
+                }
+            }
         }
-
-    }
-    
-    func call(numberString: String) {
-        let telephone = "tel://"
-        let formattedString = telephone + numberString
-        guard let url = URL(string: formattedString) else { return }
-        UIApplication.shared.open(url)
     }
 }

@@ -32,7 +32,7 @@ class DB: ObservableObject {
 
         let storage = Storage.storage().reference().child("\(directory)/\(uid).jpg")
         var image = UIImage()
-        storage.getData(maxSize: 1 * 2048 * 2048) { (metadata, error) in
+        storage.getData(maxSize: 1 * 1024 * 1024) { (metadata, error) in
             if let error = error {
 //                image = UIImage(systemName: "photo")!
                 print("Error while uploading file: ", error)
@@ -64,16 +64,18 @@ class DB: ObservableObject {
     }
     
     func getUser(uid: String, completion: @escaping (User) -> ()) {
-        
-        
         ref.reference(withPath: "users").child(uid).getData(completion:  { error, snapshot in
             guard error == nil else {
                 print(error!.localizedDescription)
-                return;
+                return
             }
-            let values = snapshot.value as! [String:Any]
-            let user = User(dictionary: values)
-            completion(user)
+            if let values = snapshot.value as? [String:Any] {
+                let user = User(dictionary: values)
+                completion(user)
+            } else {
+                return
+            }
+
         });
     }
     
@@ -101,13 +103,10 @@ class DB: ObservableObject {
                 print(error!.localizedDescription)
                 return;
             }
-            print(snapshot.value as Any)
             if snapshot.exists() {
                 let values = snapshot.value as! [String:Any]
                 let service = Service(dictionary: values)
                 DispatchQueue.main.async {
-                    print(service)
-                    print("Step1")
                     completion(service)
                 }
             } else {
@@ -134,8 +133,10 @@ class DB: ObservableObject {
         }
     }
     
+    
+    
     func sendMessage(user: FirebaseAuth.User, message: String, completion: @escaping () -> Void) {
-        ref.reference(withPath: "messages").child(user.uid).updateChildValues(["message" : message, "user" : user.email!])
+        ref.reference(withPath: "messages").child(user.uid).updateChildValues([Date.now.description : message, "user" : user.email!])
         DispatchQueue.main.async {
             completion()
         }
@@ -158,7 +159,6 @@ class DB: ObservableObject {
         
         // Convert the image into JPEG and compress the quality to reduce its size
         let data = resizedImage.jpegData(compressionQuality: 0.1)
-        
         let metadata = StorageMetadata()
         metadata.contentType = "image/jpg"
         
