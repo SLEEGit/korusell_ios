@@ -13,12 +13,18 @@ struct LoginView : View {
     @State var email: String = ""
     @State var password: String = ""
     @State var buttonDisabled: Bool = true
-    
-    
+    @State var warningText: String = ""
+    @State var showAlert: Bool = false
     var body: some View {
         NavigationView {
             Form {
-                Section(header: Text("Введите Ваш e-mail и пароль")) {
+                Section {
+                    FaceBookLoginView().onDisappear {
+                        logging.isSignedIn = Pref.isLoggedIn
+                    }
+                        .frame(width: 180, height: 50, alignment: .center).padding(10)
+                }
+                Section(header: Text("Введите Ваш e-mail и пароль"), footer: Text(warningText).foregroundColor(Color.red).lineLimit(0).minimumScaleFactor(0.1)) {
                     TextField("Электронная почта", text: $email)
                         .disableAutocorrection(true)
                         .keyboardType(.emailAddress)
@@ -29,8 +35,10 @@ struct LoginView : View {
                     Button(action: {
                         
                         Authentication().signIn(email: email, password: password) {
-                            
-                            logging.isSignedIn = true
+                            warningText = Pref.registerCompletion
+                            if warningText == "success" {
+                                logging.isSignedIn = true
+                            }
                             print(logging.isSignedIn)
                         }
                     }, label: {
@@ -44,7 +52,22 @@ struct LoginView : View {
                         .foregroundColor(.accentColor)
                 }
                 }
-            }.navigationBarTitle("Войти")
+            }.toolbar {
+                Button(action: {
+                    Authentication().passwordResetRequest(email: email, onSuccess: {
+                        showAlert = true
+                        print("---> onSuccess")
+                    }) { error in
+                        
+                        warningText = error
+                    }
+                }, label: {
+                    Text("Забыли пароль?")
+                }).alert("На Вашу почту отправлена ссылка для восстановления пароля", isPresented: $showAlert) {
+                    Button("Ок", role: .cancel) {}
+                }
+            }
+            .navigationBarTitle("Войти")
         }
     }
 }

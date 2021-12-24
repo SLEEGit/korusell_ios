@@ -16,6 +16,7 @@
 		2542E347277436B600883E0D /* OwnerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2542E346277436B500883E0D /* OwnerView.swift */; };
 		2542E3492774664800883E0D /* MyAdvView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2542E3482774664800883E0D /* MyAdvView.swift */; };
 		2542E34B27746FA800883E0D /* SignUpView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2542E34A27746FA800883E0D /* SignUpView.swift */; };
+		2542E34D27758B4900883E0D /* FacebookLoginView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2542E34C27758B4900883E0D /* FacebookLoginView.swift */; };
 		25441F8C2767260D00B6E240 /* MapView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 25441F8B2767260D00B6E240 /* MapView.swift */; };
 		25441F8E2768269C00B6E240 /* DetailsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 25441F8D2768269C00B6E240 /* DetailsView.swift */; };
 		25441F90276844C700B6E240 /* LocationManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 25441F8F276844C700B6E240 /* LocationManager.swift */; };
@@ -59,6 +60,7 @@
 		2542E346277436B500883E0D /* OwnerView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OwnerView.swift; sourceTree = "<group>"; };
 		2542E3482774664800883E0D /* MyAdvView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyAdvView.swift; sourceTree = "<group>"; };
 		2542E34A27746FA800883E0D /* SignUpView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignUpView.swift; sourceTree = "<group>"; };
+		2542E34C27758B4900883E0D /* FacebookLoginView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FacebookLoginView.swift; sourceTree = "<group>"; };
 		25441F8B2767260D00B6E240 /* MapView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MapView.swift; sourceTree = "<group>"; };
 		25441F8D2768269C00B6E240 /* DetailsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailsView.swift; sourceTree = "<group>"; };
 		25441F8F276844C700B6E240 /* LocationManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocationManager.swift; sourceTree = "<group>"; };
@@ -240,6 +242,7 @@
 				259936092769A0FA00F468B6 /* LoginView.swift */,
 				259936132769E33900F468B6 /* RegistrationView.swift */,
 				2599360D2769B42C00F468B6 /* User.swift */,
+				2542E34C27758B4900883E0D /* FacebookLoginView.swift */,
 			);
 			path = "Login&Registration";
 			sourceTree = "<group>";
@@ -384,6 +387,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				2542E34D27758B4900883E0D /* FacebookLoginView.swift in Sources */,
 				25ED2B632771CE1600575FEB /* ImageCache.swift in Sources */,
 				25ED2B5D2771565700575FEB /* TestView.swift in Sources */,
 				25441F8C2767260D00B6E240 /* MapView.swift in Sources */,

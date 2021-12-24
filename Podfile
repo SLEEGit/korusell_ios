@@ -8,5 +8,9 @@ target 'iosApp' do
   pod 'Firebase/Database'
   pod 'Firebase/Storage'
   pod 'Firebase/Auth'	
-  pod 'Firebase/Analytics' 
+  pod 'Firebase/Analytics'
+  pod 'FacebookCore'
+  pod 'FacebookLogin'
+  pod 'FacebookShare'
+  
 end

@@ -38,6 +38,7 @@ struct RegistrationView: View {
                 })
                     .disableAutocorrection(true)
                     .keyboardType(.emailAddress)
+                    .textContentType(.emailAddress)
                     .autocapitalization(.none)
                 SecureField("Пароль", text: $password)
                 SecureField("Повторите пароль", text: $rePassword)
@@ -51,7 +52,11 @@ struct RegistrationView: View {
                     } else {
                         warningText = ""
                         Authentication().signUp(email: email, password: password) {
-                            showingAlertSuccess = true
+                            warningText = Pref.registerCompletion
+                            if warningText == "success" {
+                                showingAlertSuccess = true
+                            }
+                            
                         }
                     }
                     

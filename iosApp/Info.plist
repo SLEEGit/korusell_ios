@@ -1,17 +1,45 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
 <plist version="1.0">
-<dict>
-	<key>UILaunchScreen</key>
-	<dict>
-		<key>UIColorName</key>
-		<string>LaunchScreenBG</string>
-		<key>UIImageName</key>
-		<string>logo</string>
-		<key>UIImageRespectsSafeAreaInsets</key>
-		<false/>
-		<key>UILaunchScreen</key>
-		<dict/>
-	</dict>
-</dict>
+    <dict>
+        <key>CFBundleURLTypes</key>
+        <array>
+            <dict>
+                <key>CFBundleURLSchemes</key>
+                <array>
+                    <string>fb899908460727420</string>
+                </array>
+            </dict>
+        </array>
+        <key>FacebookAppID</key>
+        <string>899908460727420</string>
+        <key>FacebookClientToken</key>
+        <string>184d6e04895f4d6f8c8c64a27f2b8169</string>
+        <key>FacebookDisplayName</key>
+        <string>korusell</string>
+        <key>LSApplicationQueriesSchemes</key>
+        <array>
+            <string>fbapi</string>
+            <string>fbapi20130214</string>
+            <string>fbapi20130410</string>
+            <string>fbapi20130702</string>
+            <string>fbapi20131010</string>
+            <string>fbapi20131219</string>
+            <string>fbapi20140410</string>
+            <string>fbapi20140116</string>
+            <string>fbapi20150313</string>
+            <string>fbapi20150629</string>
+            <string>fbapi20160328</string>
+            <string>fbauth</string>
+            <string>fb-messenger-share-api</string>
+            <string>fbauth2</string>
+            <string>fbshareextension</string>
+        </array>
+        <key>UILaunchScreen</key>
+        <array>
+            <key>UIColorName</key><string>LaunchScreenBG</string>
+            <key>UIImageName</key><string>logo</string>
+            <key>UIImageRespectsSafeAreaInsets</key><false/>
+        </array>
+    </dict>
 </plist>
