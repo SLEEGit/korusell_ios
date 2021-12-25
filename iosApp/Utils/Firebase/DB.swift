@@ -9,8 +9,10 @@ import FirebaseDatabase
 import FirebaseAuth
 import FirebaseStorage
 import Foundation
+import UIKit
 
 class DB: ObservableObject {
+    
     let ref = Database.database(url: "https://korusale-default-rtdb.asia-southeast1.firebasedatabase.app")
     
     //    GET
@@ -27,6 +29,23 @@ class DB: ObservableObject {
 //
 //        }
 //    }
+    
+    func getData(from url: URL, completion: @escaping (Data?, URLResponse?, Error?) -> ()) {
+        URLSession.shared.dataTask(with: url, completionHandler: completion).resume()
+    }
+    
+    func getImageByURL(from url: URL, completion: @escaping (UIImage) -> ()) {
+        print("Download Started")
+        getData(from: url) { data, response, error in
+            guard let data = data, error == nil else { return }
+            print(response?.suggestedFilename ?? url.lastPathComponent)
+            print("Download Finished")
+            // always update the UI from the main thread
+            DispatchQueue.main.async() {
+                completion(UIImage(data: data)!)
+            }
+        }
+    }
     
     func getImage(uid: String, directory: String, completion: @escaping (UIImage) -> ()) {
 
@@ -119,8 +138,8 @@ class DB: ObservableObject {
     
     
     //    POST
-    func createUserInDB(user: FirebaseAuth.User, completion: @escaping () -> Void) {
-        ref.reference(withPath: "users").child(user.uid).setValue(["uid" : user.uid, "email" : user.email, "name" : "", "phone" : ""])
+    func createUserInDB(user: FirebaseAuth.User, name: String = "", completion: @escaping () -> Void) {
+        ref.reference(withPath: "users").child(user.uid).updateChildValues(["uid" : user.uid, "email" : user.email, "name" : name])
         DispatchQueue.main.async {
             completion()
         }
@@ -151,14 +170,14 @@ class DB: ObservableObject {
     }
     
     
-    func postImage(image: UIImage, directory: String, uid: String) {
+    func postImage(image: UIImage, directory: String, uid: String, quality: Double) {
         let storage = Storage.storage().reference().child("\(directory)/\(uid).jpg")
         
         // Resize the image to 200px in height with a custom extension
         let resizedImage = image
         
         // Convert the image into JPEG and compress the quality to reduce its size
-        let data = resizedImage.jpegData(compressionQuality: 0.1)
+        let data = resizedImage.jpegData(compressionQuality: quality)
         let metadata = StorageMetadata()
         metadata.contentType = "image/jpg"
         

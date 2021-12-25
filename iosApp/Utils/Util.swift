@@ -9,6 +9,10 @@ import Foundation
 import SwiftUI
 import MapKit
 
+class Logging: ObservableObject {
+    @Published var isSignedIn: Bool = false
+}
+
 class Util {
     
     func getCoordinates(address: String, completion: @escaping (String, String) -> Void) {

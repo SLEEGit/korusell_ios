@@ -126,7 +126,7 @@ struct ProfileView: View {
                 Button(action: {
                     isShowInfo = true
                 }) {
-                    Image(systemName: "ellipsis.bubble.fill")
+                    Image(systemName: "questionmark.circle.fill")
                         .renderingMode(.original)
                         .shadow(radius: 2)
                 }.sheet(isPresented: $isShowInfo) {

@@ -24,6 +24,4 @@ struct CheckStatusView : View {
     }
 }
 
-class Logging: ObservableObject {
-    @Published var isSignedIn: Bool = false
-}
+

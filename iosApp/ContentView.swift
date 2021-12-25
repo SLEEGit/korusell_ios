@@ -16,7 +16,6 @@ struct ContentView: View {
     var body: some View {
         TabView {
             ServiceMenuView()
-//            SignUpView()
                 .tabItem {
                     Image(systemName: "house")
                 }

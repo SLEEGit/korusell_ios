@@ -7,19 +7,15 @@
 
 import Foundation
 import FirebaseAuth
+import FBSDKLoginKit
 
 class Authentication {
+
     
-//    func facebookLogin(credential: AuthCredential, completionBlock: @escaping (_ success: Bool) -> Void) {
-//        Auth.auth().signIn(with: credential, completion: { (firebaseUser, error) in
-//            print(firebaseUser)
-//            completionBlock(error == nil)
-//        })
-//    }
-    
-    func signIn(email: String, password: String, completion: @escaping () -> Void) {
+    func signInFacebook(completion: @escaping () -> Void) {
         Auth.auth().languageCode = "ru";
-        Auth.auth().signIn(withEmail: email, password: password) { result, error in
+        let credential = FacebookAuthProvider.credential(withAccessToken: AccessToken.current!.tokenString)
+        Auth.auth().signIn(with: credential) { (result, error) in
             guard result != nil, error == nil else {
                 let errorText: String  = error?.localizedDescription ?? "Не удалось авторизоваться!"
                 Pref.registerCompletion = errorText
@@ -35,6 +31,37 @@ class Authentication {
                 completion()
                 print("SIGNED IN   \(String(describing: Auth.auth().currentUser?.email))")
             }
+        }
+    }
+
+    
+    func signIn(email: String, password: String, completion: @escaping () -> Void) {
+        Auth.auth().languageCode = "ru";
+        Auth.auth().signIn(withEmail: email, password: password) { result, error in
+            guard result != nil, error == nil else {
+                let errorText: String  = error?.localizedDescription ?? "Не удалось авторизоваться!"
+                Pref.registerCompletion = errorText
+
+                print(errorText)
+                completion()
+                return
+            }
+//            DispatchQueue.main.async {
+//                if let user = result?.user {
+//                    DB().getUser(uid: user.uid) { gotUser in
+//                        if user.uid != gotUser.uid {
+//                            DB().createUserInDB(user: user) {
+//                            }
+//                        }
+//                    }
+//
+//                }
+                Pref.userDefault.set(true, forKey: "usersignedin")
+                Pref.userDefault.synchronize()
+                Pref.registerCompletion = "success"
+                completion()
+                print("SIGNED IN   \(String(describing: Auth.auth().currentUser?.email))")
+//            }
         }
     }
 
@@ -85,6 +112,7 @@ class Authentication {
             }
         }
     }
+    
 }
         
 extension AuthErrorCode {
