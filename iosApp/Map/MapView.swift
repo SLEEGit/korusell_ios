@@ -57,10 +57,10 @@ struct MapView: View {
 //                                    .font(.system(size: 10))
 //                                    .foregroundColor(.black)
 //                                    .shadow(color: .white, radius: 1, x: 1, y: 1)
-                                Image(systemName: "mappin")
+                                Image(systemName: "mappin.circle.fill")
                                     .renderingMode(.original)
                                     .resizable()
-                                    .frame(width: 8, height: 20)
+                                    .frame(width: 20, height: 20)
                                     .shadow(color: .gray, radius: 1, x: 1, y: 1)
                             }
                         }
