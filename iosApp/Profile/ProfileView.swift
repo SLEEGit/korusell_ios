@@ -139,6 +139,7 @@ struct ProfileView: View {
                 name = user.name ?? ""
                 phone = user.phone ?? ""
             }
+            DB().updateLastLogin(user: user, last_login: Date.now.description.localizedLowercase) {}
             DB().getMyBusiness(uid: user.uid) { business in
                 print("getting business in profile")
                 print(business)

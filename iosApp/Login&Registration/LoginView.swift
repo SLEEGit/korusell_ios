@@ -111,7 +111,7 @@ struct LoginView : View {
                     Pref.userDefault.setValue(data3["url"]!, forKey: "imageURL")
                     print(Pref.userDefault.string(forKey: "imageURL"))
                 } else {
-                    print(err)
+                    print("QWE \(err)")
                 }
             }
         }
@@ -121,7 +121,8 @@ struct LoginView : View {
         let credential = FacebookAuthProvider.credential(withAccessToken: AccessToken.current!.tokenString)
         Auth.auth().signIn(with: credential) { (user, error) in
             if (user != nil){
-                DB().createUserInDB(user: user!.user, name: Pref.userDefault.string(forKey: "name") ?? "") {   
+                let created_date = Date.now.description
+                DB().createUserInDB(user: user!.user, name: Pref.userDefault.string(forKey: "name") ?? "", created_date: created_date) {   
                 }
                 logging.isSignedIn = true
                 Pref.userDefault.set(true, forKey: "usersignedin")
@@ -133,6 +134,8 @@ struct LoginView : View {
             } else {
                 let errorText: String  = error?.localizedDescription ?? "Не удалось авторизоваться!"
                 Pref.registerCompletion = errorText
+                print(errorText)
+                warningText = "Войтите используя e-mail"
             }
         }
     }
@@ -143,90 +146,3 @@ struct LoginView : View {
 //        LoginView(logging: lo)
 //    }
 //}
-
-//struct FacebookModel: Codable, Identifiable {
-//
-//    let email: String
-//    let first_name: String
-//    let id: String
-//    let last_name: String
-//    let name: String
-//    let picture: [String : [String:Any]]
-//
-//
-//    init(dictionary: [String: Any]) {
-//        self.email = dictionary["email"] as? String ?? ""
-//        self.first_name = dictionary["first_name"] as? String ?? ""
-//        self.id = dictionary["id"] as? String ?? ""
-//        self.last_name = dictionary["last_name"] as? String ?? ""
-//        self.name = dictionary["name"] as? String ?? ""
-//        self.picture = dictionary["picture"] as? [String : [String:Any]]
-//    }
-//
-//}
-                    
-                    struct Person1: Model {
-                            let email: String
-                            let first_name: String
-                            let id: String
-                            let last_name: String
-                            let name: String
-                            let picture: Picture
-
-                        init?(json: JSON) {
-                            guard
-                                
-                                let first_name = json["first_name"] as? String,
-                                let id = json["id"] as? String,
-                                let last_name = json["last_name"] as? String,
-                                let name = json["name"] as? String,
-                                let email = json["email"] as? String,
-                                let pictureJson = json["picture.data"] as? JSON, // "picture.data" possible when using 'Unbox'
-                                let picture = Picture(json: pictureJson)
-                            else { return nil }
-                            self.name = name
-                            self.first_name = first_name
-                            self.id = id
-                            self.last_name = last_name
-                            self.email = email
-                            self.picture = picture
-                        }
-                    }
-                    
-                    typealias JSON = [String: Any]
-                    protocol Model {
-                      init?(json: JSON)
-                    }
-                    
-                    struct Picture: Model {
-                        let height: Int // Or maybe float...?
-                        let width: Int // Or maybe float...?
-                        let url: String
-                        
-                        init?(json: JSON) {
-                            guard
-                                let height = json["height"] as? Int,
-                                let width = json["width"] as? Int,
-                                let url = json["url"] as? String
-                            else { return nil }
-                            self.height = height
-                            self.width = width
-                            self.url = url
-                            
-                        
-                        }
-                    }
-                    
-struct FacebookModelPictureData: Codable {
-    let height: String
-    let is_silhouette: String
-    let url: String
-    let width: String
-    
-    init(dictionary: [String: Any]) {
-        self.height = dictionary["height"] as? String ?? ""
-        self.is_silhouette = dictionary["is_silhouette"] as? String ?? ""
-        self.url = dictionary["url"] as? String ?? ""
-        self.width = dictionary["width"] as? String ?? ""
-    }
-}

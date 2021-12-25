@@ -138,8 +138,15 @@ class DB: ObservableObject {
     
     
     //    POST
-    func createUserInDB(user: FirebaseAuth.User, name: String = "", completion: @escaping () -> Void) {
-        ref.reference(withPath: "users").child(user.uid).updateChildValues(["uid" : user.uid, "email" : user.email, "name" : name])
+    func createUserInDB(user: FirebaseAuth.User, name: String = "", created_date: String = "", completion: @escaping () -> Void) {
+        ref.reference(withPath: "users").child(user.uid).updateChildValues(["uid" : user.uid, "email" : user.email, "name" : name, "created_date" : created_date])
+        DispatchQueue.main.async {
+            completion()
+        }
+    }
+    
+    func updateLastLogin(user: FirebaseAuth.User, last_login: String, completion: @escaping () -> Void) {
+        ref.reference(withPath: "users").child(user.uid).updateChildValues(["last_login" : last_login])
         DispatchQueue.main.async {
             completion()
         }
