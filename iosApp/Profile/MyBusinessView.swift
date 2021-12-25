@@ -6,7 +6,6 @@
 //
 
 import SwiftUI
-import CachedAsyncImage
 
 struct MyBusinessView: View {
     //    @State var service: Service!

@@ -20,9 +20,10 @@
 		25441F90276844C700B6E240 /* LocationManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 25441F8F276844C700B6E240 /* LocationManager.swift */; };
 		25441F922768476A00B6E240 /* LocationManager2.swift in Sources */ = {isa = PBXBuildFile; fileRef = 25441F912768476A00B6E240 /* LocationManager2.swift */; };
 		254B21C9275C63340099E287 /* ProfileView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 254B21C8275C63340099E287 /* ProfileView.swift */; };
+		25558EE32777225D00E1481B /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 25558EE22777225D00E1481B /* GoogleService-Info.plist */; };
 		256D58FF2761DA30002EDC6A /* ServiceMenuView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 256D58FE2761DA30002EDC6A /* ServiceMenuView.swift */; };
 		256D59032761DA86002EDC6A /* service.json in Resources */ = {isa = PBXBuildFile; fileRef = 256D59012761DA86002EDC6A /* service.json */; };
-		256D59052761DDB8002EDC6A /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 256D59042761DDB8002EDC6A /* GoogleService-Info.plist */; };
+		256D59052761DDB8002EDC6A /* GoogleService-Info.plist_reserve in Resources */ = {isa = PBXBuildFile; fileRef = 256D59042761DDB8002EDC6A /* GoogleService-Info.plist_reserve */; };
 		256D59092761E555002EDC6A /* DB.swift in Sources */ = {isa = PBXBuildFile; fileRef = 256D59082761E555002EDC6A /* DB.swift */; };
 		2593A6D927539FAC00081698 /* iosAppApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2593A6D827539FAC00081698 /* iosAppApp.swift */; };
 		2593A6DB27539FAC00081698 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2593A6DA27539FAC00081698 /* ContentView.swift */; };
@@ -30,7 +31,6 @@
 		2593A6E027539FAF00081698 /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 2593A6DF27539FAF00081698 /* Preview Assets.xcassets */; };
 		25973E02275B27CF00DC016B /* ServiceSubView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 25973E01275B27CF00DC016B /* ServiceSubView.swift */; };
 		25973E05275B492400DC016B /* Util.swift in Sources */ = {isa = PBXBuildFile; fileRef = 25973E04275B492400DC016B /* Util.swift */; };
-		259936042769789A00F468B6 /* CachedAsyncImage in Frameworks */ = {isa = PBXBuildFile; productRef = 259936032769789A00F468B6 /* CachedAsyncImage */; };
 		259936082769A0BB00F468B6 /* CheckStatusView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 259936072769A0BB00F468B6 /* CheckStatusView.swift */; };
 		2599360A2769A0FA00F468B6 /* LoginView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 259936092769A0FA00F468B6 /* LoginView.swift */; };
 		2599360E2769B42C00F468B6 /* User.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2599360D2769B42C00F468B6 /* User.swift */; };
@@ -61,12 +61,13 @@
 		25441F8F276844C700B6E240 /* LocationManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocationManager.swift; sourceTree = "<group>"; };
 		25441F912768476A00B6E240 /* LocationManager2.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocationManager2.swift; sourceTree = "<group>"; };
 		254B21C8275C63340099E287 /* ProfileView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileView.swift; sourceTree = "<group>"; };
+		25558EE22777225D00E1481B /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		256D58FE2761DA30002EDC6A /* ServiceMenuView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ServiceMenuView.swift; sourceTree = "<group>"; };
 		256D59012761DA86002EDC6A /* service.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = service.json; sourceTree = "<group>"; };
-		256D59042761DDB8002EDC6A /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
+		256D59042761DDB8002EDC6A /* GoogleService-Info.plist_reserve */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xml; path = "GoogleService-Info.plist_reserve"; sourceTree = "<group>"; };
 		256D59082761E555002EDC6A /* DB.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DB.swift; sourceTree = "<group>"; };
 		25717C5D275F520A00C2CD01 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = Info.plist; sourceTree = "<group>"; };
-		2593A6D527539FAC00081698 /* iosApp.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = iosApp.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		2593A6D527539FAC00081698 /* korusell.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = korusell.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		2593A6D827539FAC00081698 /* iosAppApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = iosAppApp.swift; sourceTree = "<group>"; };
 		2593A6DA27539FAC00081698 /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
 		2593A6DC27539FAF00081698 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
@@ -97,7 +98,6 @@
 			buildActionMask = 2147483647;
 			files = (
 				7E4128007F7572B3F603FEEB /* Pods_iosApp.framework in Frameworks */,
-				259936042769789A00F468B6 /* CachedAsyncImage in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -147,7 +147,7 @@
 		2593A6D627539FAC00081698 /* Products */ = {
 			isa = PBXGroup;
 			children = (
-				2593A6D527539FAC00081698 /* iosApp.app */,
+				2593A6D527539FAC00081698 /* korusell.app */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -164,7 +164,8 @@
 				25973E03275B48ED00DC016B /* Utils */,
 				2593A6DC27539FAF00081698 /* Assets.xcassets */,
 				25717C5D275F520A00C2CD01 /* Info.plist */,
-				256D59042761DDB8002EDC6A /* GoogleService-Info.plist */,
+				25558EE22777225D00E1481B /* GoogleService-Info.plist */,
+				256D59042761DDB8002EDC6A /* GoogleService-Info.plist_reserve */,
 				25973DE42759969300DC016B /* AdsView */,
 				2593A6DE27539FAF00081698 /* Preview Content */,
 			);
@@ -274,10 +275,9 @@
 			);
 			name = iosApp;
 			packageProductDependencies = (
-				259936032769789A00F468B6 /* CachedAsyncImage */,
 			);
 			productName = iosApp;
-			productReference = 2593A6D527539FAC00081698 /* iosApp.app */;
+			productReference = 2593A6D527539FAC00081698 /* korusell.app */;
 			productType = "com.apple.product-type.application";
 		};
 /* End PBXNativeTarget section */
@@ -305,7 +305,6 @@
 			);
 			mainGroup = 2593A6CC27539FAC00081698;
 			packageReferences = (
-				259936022769789A00F468B6 /* XCRemoteSwiftPackageReference "SwiftUI-CachedAsyncImage" */,
 			);
 			productRefGroup = 2593A6D627539FAC00081698 /* Products */;
 			projectDirPath = "";
@@ -323,9 +322,10 @@
 			files = (
 				253305C12754A6940061DD28 /* work.json in Resources */,
 				2593A6E027539FAF00081698 /* Preview Assets.xcassets in Resources */,
-				256D59052761DDB8002EDC6A /* GoogleService-Info.plist in Resources */,
+				256D59052761DDB8002EDC6A /* GoogleService-Info.plist_reserve in Resources */,
 				2593A6DD27539FAF00081698 /* Assets.xcassets in Resources */,
 				256D59032761DA86002EDC6A /* service.json in Resources */,
+				25558EE32777225D00E1481B /* GoogleService-Info.plist in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -555,7 +555,7 @@
 				);
 				MARKETING_VERSION = 1.0;
 				PRODUCT_BUNDLE_IDENTIFIER = com.korusell.korusell;
-				PRODUCT_NAME = "$(TARGET_NAME)";
+				PRODUCT_NAME = korusell;
 				SWIFT_EMIT_LOC_STRINGS = YES;
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = 1;
@@ -586,7 +586,7 @@
 				);
 				MARKETING_VERSION = 1.0;
 				PRODUCT_BUNDLE_IDENTIFIER = com.korusell.korusell;
-				PRODUCT_NAME = "$(TARGET_NAME)";
+				PRODUCT_NAME = korusell;
 				SWIFT_EMIT_LOC_STRINGS = YES;
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = 1;
@@ -615,25 +615,6 @@
 			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
-
-/* Begin XCRemoteSwiftPackageReference section */
-		259936022769789A00F468B6 /* XCRemoteSwiftPackageReference "SwiftUI-CachedAsyncImage" */ = {
-			isa = XCRemoteSwiftPackageReference;
-			repositoryURL = "https://github.com/lorenzofiamingo/SwiftUI-CachedAsyncImage";
-			requirement = {
-				kind = upToNextMajorVersion;
-				minimumVersion = 1.0.0;
-			};
-		};
-/* End XCRemoteSwiftPackageReference section */
-
-/* Begin XCSwiftPackageProductDependency section */
-		259936032769789A00F468B6 /* CachedAsyncImage */ = {
-			isa = XCSwiftPackageProductDependency;
-			package = 259936022769789A00F468B6 /* XCRemoteSwiftPackageReference "SwiftUI-CachedAsyncImage" */;
-			productName = CachedAsyncImage;
-		};
-/* End XCSwiftPackageProductDependency section */
 	};
 	rootObject = 2593A6CD27539FAC00081698 /* Project object */;
 }

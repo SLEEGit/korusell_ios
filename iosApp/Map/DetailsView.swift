@@ -6,7 +6,6 @@
 //
 
 import SwiftUI
-import CachedAsyncImage
 
 struct DetailsView: View {
     var service: Service!

@@ -15,7 +15,7 @@ struct CheckStatusView : View {
     
     @ViewBuilder
     var body: some View {
-
+        
         if !logging.isSignedIn && !Pref.userDefault.bool(forKey: "usersignedin") {
             LoginView(logging: logging)
         } else {

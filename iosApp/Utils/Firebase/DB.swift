@@ -13,7 +13,7 @@ import UIKit
 
 class DB: ObservableObject {
     
-    let ref = Database.database(url: "https://korusale-default-rtdb.asia-southeast1.firebasedatabase.app")
+    let ref = Database.database(url: "https://korusell-default-rtdb.asia-southeast1.firebasedatabase.app/")
     
     //    GET
     
@@ -67,16 +67,22 @@ class DB: ObservableObject {
     
     func fetchData(category: String, completion: @escaping ([Service]) -> ()) {
         ref.reference(withPath: "services").observeSingleEvent(of: .value, with: { snapshot in
-            let values = snapshot.value as! [String : [String:Any]]
             var innerServices: [Service] = []
-            for i in values {
-                let service = Service(dictionary: i.value)
-                innerServices.append(service)
-            }
-            DispatchQueue.main.async {
-                if category != "all" {
-                    innerServices = innerServices.filter { $0.category == category }
+            if let values = snapshot.value as? [String : [String:Any]] {
+                
+                for i in values {
+                    let service = Service(dictionary: i.value)
+                    innerServices.append(service)
                 }
+                DispatchQueue.main.async {
+                    if category != "all" {
+                        innerServices = innerServices.filter { $0.category == category }
+                    }
+                    completion(innerServices)
+                }
+            } else {
+//                тут надо добавить ошибку для юзера!
+                print("FETCHING ERROR!")
                 completion(innerServices)
             }
         })

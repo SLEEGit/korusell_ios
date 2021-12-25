@@ -3,21 +3,21 @@
 <plist version="1.0">
 <dict>
 	<key>CLIENT_ID</key>
-	<string>558901653552-bqkmggrn7gn68npav0e9kfoadvadl63m.apps.googleusercontent.com</string>
+	<string>666841853860-prt3flusb1cf6hd0thf0fjcajdrhi7sf.apps.googleusercontent.com</string>
 	<key>REVERSED_CLIENT_ID</key>
-	<string>com.googleusercontent.apps.558901653552-bqkmggrn7gn68npav0e9kfoadvadl63m</string>
+	<string>com.googleusercontent.apps.666841853860-prt3flusb1cf6hd0thf0fjcajdrhi7sf</string>
 	<key>API_KEY</key>
-	<string>AIzaSyAJBEaaYrT2D79FTtg2HSJcL4Vgfv9S8VQ</string>
+	<string>AIzaSyCzubtZTeFHjKUGnBQx0FSORJZjSt8xiRQ</string>
 	<key>GCM_SENDER_ID</key>
-	<string>558901653552</string>
+	<string>666841853860</string>
 	<key>PLIST_VERSION</key>
 	<string>1</string>
 	<key>BUNDLE_ID</key>
-	<string>com.korusell.korusell</string>
+	<string>ru.koryosaram.iosApp</string>
 	<key>PROJECT_ID</key>
-	<string>korusell</string>
+	<string>korusale</string>
 	<key>STORAGE_BUCKET</key>
-	<string>korusell.appspot.com</string>
+	<string>korusale.appspot.com</string>
 	<key>IS_ADS_ENABLED</key>
 	<false></false>
 	<key>IS_ANALYTICS_ENABLED</key>
@@ -29,6 +29,6 @@
 	<key>IS_SIGNIN_ENABLED</key>
 	<true></true>
 	<key>GOOGLE_APP_ID</key>
-	<string>1:558901653552:ios:970e76cb43efdb38b47df5</string>
+	<string>1:666841853860:ios:e781bf49b9df931cb15b31</string>
 </dict>
 </plist>
