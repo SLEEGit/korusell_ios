@@ -7,8 +7,8 @@
 
 import SwiftUI
 import MapKit
-//import CoreLocation
-//import CoreLocationUI
+import CoreLocation
+import CoreLocationUI
 
 //struct catModel: Hashable {
 //    var id = UUID()
@@ -23,6 +23,7 @@ struct MapView: View {
     @State var category: String = "all"
     @State var categoryName: String = "Все категории"
     @State var isLoading: Bool = true
+    @State var trackingMode: MapUserTrackingMode = .follow
     
     @StateObject var locationManager2 = LocationManager2()
     
@@ -47,8 +48,9 @@ struct MapView: View {
     
     var body: some View {
         NavigationView {
-            ZStack {
-                Map(coordinateRegion: $mapRegion, annotationItems: list) { service in
+            ZStack(alignment: .bottom) {
+                Map(coordinateRegion: $mapRegion, interactionModes: .all, showsUserLocation: true, userTrackingMode: $trackingMode, annotationItems: list)
+            { service in
                     MapAnnotation(coordinate: CLLocationCoordinate2D(latitude: Double(service.latitude) ?? 0.0, longitude: Double(service.longitude) ?? 0.0)) {
                         NavigationLink {
                             DetailsView(service: service)
@@ -58,11 +60,14 @@ struct MapView: View {
 //                                    .font(.system(size: 10))
 //                                    .foregroundColor(.black)
 //                                    .shadow(color: .white, radius: 1, x: 1, y: 1)
-                                Image(systemName: "mappin.circle.fill")
-                                    .renderingMode(.original)
-                                    .resizable()
-                                    .frame(width: 20, height: 20)
-                                    .shadow(color: .gray, radius: 1, x: 1, y: 1)
+                                if service.latitude != "" {
+                                    Image(systemName: "mappin.circle.fill")
+                                        .renderingMode(.original)
+                                        .resizable()
+                                        .frame(width: 20, height: 20)
+                                        .shadow(color: .gray, radius: 1, x: 1, y: 1)
+                                }
+
                             }
                         }
                     }
@@ -71,6 +76,7 @@ struct MapView: View {
                     .navigationTitle("Карта")
                     .navigationBarTitleDisplayMode(.inline)
                     .onAppear {
+                        locationManager2.requestLocation()
                         session.fetchData(category: "all") { (list) in
                             globalServices = list
                             self.isLoading = false
@@ -213,17 +219,24 @@ struct MapView: View {
                             }
                         }
                     }
-//                HStack {
-//                    Spacer()
-//                    LocationButton {
-//                        locationManager2.requestLocation()
-//                    }
-//                    .labelStyle(.iconOnly)
-//                    .symbolVariant(.fill)
-//                    .foregroundColor(.white)
-//                    .frame(width: 60, height: 60)
-//                    .cornerRadius(30)
-//                }
+                HStack {
+                    Spacer()
+                    LocationButton {
+                        locationManager2.requestLocation()
+                        if let location = locationManager2.location {
+                            mapRegion = MKCoordinateRegion(center: CLLocationCoordinate2D(latitude: location.latitude, longitude: location.longitude), span: MKCoordinateSpan(latitudeDelta: 0.1, longitudeDelta: 0.1))
+                        } else {
+                            print("no data")
+                        }
+
+                    }
+                    .labelStyle(.iconOnly)
+                    .symbolVariant(.fill)
+                    .cornerRadius(30)
+                    .foregroundColor(.white)
+                    .frame(width: 60, height: 60)
+                    
+                }
             }
             if isLoading {
                 ProgressView().progressViewStyle(CircularProgressViewStyle(tint: Color("textColor")))
@@ -231,19 +244,6 @@ struct MapView: View {
             }
         }
     }
-    
-//    func getCoordinates(address: String, completion: @escaping (CLLocationCoordinate2D?) -> Void) {
-//        let geocoder = CLGeocoder()
-//        geocoder.geocodeAddressString(address) {
-//            (placemarks, error) in
-//            guard error == nil else {
-//                print("Geocoding error: \(error!)")
-//                completion(nil)
-//                return
-//            }
-//            completion(placemarks?.first?.location?.coordinate)
-//        }
-//    }
 }
 
 struct MapView_Previews: PreviewProvider {
