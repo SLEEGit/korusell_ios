@@ -17,7 +17,10 @@ struct LoginView : View {
     @State var buttonDisabled: Bool = true
     @State var warningText: String = ""
     @State var showAlert: Bool = false
+    @State var isLoading: Bool = false
+    
     var body: some View {
+        ZStack {
         NavigationView {
             Form {
                 Section {
@@ -78,6 +81,11 @@ struct LoginView : View {
                 }
             }
             .navigationBarTitle("Войти")
+        }.disabled(isLoading)
+        if isLoading {
+            ProgressView().progressViewStyle(CircularProgressViewStyle(tint: Color("textColor")))
+                .background(Color(UIColor.systemGroupedBackground).opacity(0.1))
+        }
         }
     }
     
@@ -93,6 +101,7 @@ struct LoginView : View {
             }else{
                 print("Logged in")
                 self.getFBUserData()
+                isLoading = true
             }
         }
         
@@ -121,13 +130,15 @@ struct LoginView : View {
         let credential = FacebookAuthProvider.credential(withAccessToken: AccessToken.current!.tokenString)
         Auth.auth().signIn(with: credential) { (user, error) in
             if (user != nil){
-                let created_date = Date.now.description
-                DB().createUserInDB(user: user!.user, name: Pref.userDefault.string(forKey: "name") ?? "", created_date: created_date) {   
-                }
+                isLoading = false
                 logging.isSignedIn = true
                 Pref.userDefault.set(true, forKey: "usersignedin")
                 Pref.userDefault.synchronize()
                 Pref.registerCompletion = "success"
+                let created_date = Date.now.description
+                DB().createUserInDB(user: user!.user, name: Pref.userDefault.string(forKey: "name") ?? "", created_date: created_date) {   
+                }
+
                 DB().getImageByURL(from: URL(string: Pref.userDefault.string(forKey: "imageURL")!)!) { image in
                     DB().postImage(image: image, directory: "avatars", uid: user?.user.uid ?? "", quality: 1.0)
                 }
