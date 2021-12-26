@@ -22,6 +22,7 @@ struct MapView: View {
     @State var list: [Service] = []
     @State var category: String = "all"
     @State var categoryName: String = "Все категории"
+    @State var isLoading: Bool = true
     
     @StateObject var locationManager2 = LocationManager2()
     
@@ -46,7 +47,7 @@ struct MapView: View {
     
     var body: some View {
         NavigationView {
-            ZStack(alignment: .bottom) {
+            ZStack {
                 Map(coordinateRegion: $mapRegion, annotationItems: list) { service in
                     MapAnnotation(coordinate: CLLocationCoordinate2D(latitude: Double(service.latitude) ?? 0.0, longitude: Double(service.longitude) ?? 0.0)) {
                         NavigationLink {
@@ -66,10 +67,20 @@ struct MapView: View {
                         }
                     }
                     
-                }.navigationTitle("Карта")
+                }.disabled(isLoading)
+                    .navigationTitle("Карта")
                     .navigationBarTitleDisplayMode(.inline)
                     .onAppear {
-                            self.list = Util().filter(city: globalCity, category: self.category, unsortedList: globalServices)
+                        session.fetchData(category: "all") { (list) in
+                            globalServices = list
+                            self.isLoading = false
+                        }
+                        
+                        //                        self.category = globalCategory
+                        //                        if globalCategory == "docs" {
+                        //                            self.categoryName = "Документы/Переводы"
+                        //                        }
+                        self.list = Util().filter(city: globalCity, category: self.category, unsortedList: globalServices)
                     }
                 
                     .toolbar {
@@ -213,6 +224,10 @@ struct MapView: View {
 //                    .frame(width: 60, height: 60)
 //                    .cornerRadius(30)
 //                }
+            }
+            if isLoading {
+                ProgressView().progressViewStyle(CircularProgressViewStyle(tint: Color("textColor")))
+                    .background(Color(UIColor.systemGroupedBackground).opacity(0.1))
             }
         }
     }

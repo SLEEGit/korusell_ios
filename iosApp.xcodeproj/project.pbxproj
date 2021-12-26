@@ -21,6 +21,7 @@
 		25441F922768476A00B6E240 /* LocationManager2.swift in Sources */ = {isa = PBXBuildFile; fileRef = 25441F912768476A00B6E240 /* LocationManager2.swift */; };
 		254B21C9275C63340099E287 /* ProfileView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 254B21C8275C63340099E287 /* ProfileView.swift */; };
 		25558EE32777225D00E1481B /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 25558EE22777225D00E1481B /* GoogleService-Info.plist */; };
+		25558EE527774B9300E1481B /* OtherCity.swift in Sources */ = {isa = PBXBuildFile; fileRef = 25558EE427774B9300E1481B /* OtherCity.swift */; };
 		256D58FF2761DA30002EDC6A /* ServiceMenuView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 256D58FE2761DA30002EDC6A /* ServiceMenuView.swift */; };
 		256D59032761DA86002EDC6A /* service.json in Resources */ = {isa = PBXBuildFile; fileRef = 256D59012761DA86002EDC6A /* service.json */; };
 		256D59052761DDB8002EDC6A /* GoogleService-Info.plist_reserve in Resources */ = {isa = PBXBuildFile; fileRef = 256D59042761DDB8002EDC6A /* GoogleService-Info.plist_reserve */; };
@@ -62,6 +63,7 @@
 		25441F912768476A00B6E240 /* LocationManager2.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocationManager2.swift; sourceTree = "<group>"; };
 		254B21C8275C63340099E287 /* ProfileView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileView.swift; sourceTree = "<group>"; };
 		25558EE22777225D00E1481B /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
+		25558EE427774B9300E1481B /* OtherCity.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OtherCity.swift; sourceTree = "<group>"; };
 		256D58FE2761DA30002EDC6A /* ServiceMenuView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ServiceMenuView.swift; sourceTree = "<group>"; };
 		256D59012761DA86002EDC6A /* service.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = service.json; sourceTree = "<group>"; };
 		256D59042761DDB8002EDC6A /* GoogleService-Info.plist_reserve */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xml; path = "GoogleService-Info.plist_reserve"; sourceTree = "<group>"; };
@@ -224,6 +226,7 @@
 				25ED2B54276CE75000575FEB /* MyBusinessView.swift */,
 				25ED2B602771A08900575FEB /* Info.swift */,
 				2542E3482774664800883E0D /* MyAdvView.swift */,
+				25558EE427774B9300E1481B /* OtherCity.swift */,
 			);
 			path = Profile;
 			sourceTree = "<group>";
@@ -383,6 +386,7 @@
 				253305CB275603A60061DD28 /* AdsView.swift in Sources */,
 				259936142769E33900F468B6 /* RegistrationView.swift in Sources */,
 				25441F922768476A00B6E240 /* LocationManager2.swift in Sources */,
+				25558EE527774B9300E1481B /* OtherCity.swift in Sources */,
 				2542E3492774664800883E0D /* MyAdvView.swift in Sources */,
 				25ED2B55276CE75000575FEB /* MyBusinessView.swift in Sources */,
 				25ED2B5B2770373800575FEB /* Service.swift in Sources */,

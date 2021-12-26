@@ -23,6 +23,7 @@ struct MyBusinessView: View {
     @State private var image = UIImage(named: "blank")!
     @State private var isShowPhotoLibrary = false
     @State private var showingAlert = false
+    @State private var showingAlertDelete = false
     @State private var showingHint = false
     @State private var showingHint2 = false
     @Environment(\.presentationMode) var presentationMode: Binding<PresentationMode>
@@ -70,6 +71,7 @@ struct MyBusinessView: View {
                     Text("Туризм").tag("tourism")
                 }.foregroundColor(Color("textColor"))
             }.foregroundColor(.gray)
+            HStack {
             Picker("Город", selection: $city) {
                 Group {
                     Text("Ансан").tag("Ансан")
@@ -81,19 +83,22 @@ struct MyBusinessView: View {
                 }
                 .foregroundColor(Color("textColor"))
             }.foregroundColor(.gray)
-            HStack {
-                Text("Ввести вручную")
-                    .foregroundColor(.gray)
-                TextField("Подсказка ->", text: $city)
-                    .disableAutocorrection(true)
                 Image(systemName: "info.circle.fill")
                     .renderingMode(.original)
                     .shadow(radius: 2)
                     .onTapGesture {
                         showingHint2 = true
-                    }.alert("🤔 Если Вашего города нет в списке выше, введите его вручную", isPresented: $showingHint2) {
+                    }.alert("🤔 Если Вашего города нет в списке, введите его вручную ниже", isPresented: $showingHint2) {
                         Button("Ок", role: .cancel) {}
                     }
+            }
+            
+            HStack {
+                Text("Другой город")
+                    .foregroundColor(.gray)
+                TextField("", text: $city)
+                    .disableAutocorrection(true)
+                
             }
             HStack {
                 Text("Адрес")
@@ -114,12 +119,16 @@ struct MyBusinessView: View {
                 Text("Номер телефона")
                     .foregroundColor(.gray)
                 TextField("010-0000-0000", text: $phone)
-                    .keyboardType(.phonePad)
+                    
+                    
             }
             VStack {
-                Text("Описание")
+                HStack {
+                    Text("Описание:")
+                }
                     .foregroundColor(.gray)
                 TextEditor(text: $description)
+                    .frame(height: 100)
             }
             
             Section {
@@ -130,7 +139,7 @@ struct MyBusinessView: View {
                             self.latitude = lat
                             self.longitude = long
                         }
-                        DispatchQueue.main.asyncAfter(deadline: .now() + 1) {
+                        DispatchQueue.main.asyncAfter(deadline: .now() + 0.5) {
                             DB().updateBusiness(uid: uid, name: name, category: category, city: city, address: address, phone: phone, descrition: description, latitude: latitude, longitude: longitude) {
                                 showingAlert = true
                             }
@@ -145,9 +154,45 @@ struct MyBusinessView: View {
                 }
             }
             
-        }.navigationTitle("Мой Бизнес")
-        .onAppear {
-            
+            Section {
+                HStack {
+                    Spacer()
+                    Button(action: {
+                        showingAlertDelete = true
+                    }) {
+                        Text("Удалить бизнес")
+                            .foregroundColor(Color.red)
+                    }.disabled(
+                        self.name == "" &&
+                        self.category == "" &&
+                        self.city == "" &&
+                        self.address == "" &&
+                        self.phone == "" &&
+                        self.description == ""
+                    )
+                    .alert("Вы уверены что хотите удалить Ваш бизнес?", isPresented: $showingAlertDelete) {
+                        Button("Удалить") {
+                            DB().deleteImage(uid: uid)
+                            DB().updateBusiness(uid: uid, name: "", category: "", city: "", address: "", phone: "", descrition: "", latitude: "", longitude: "") {
+                                self.name = ""
+                                self.category = ""
+                                self.city = ""
+                                self.address = ""
+                                self.phone = ""
+                                self.description = ""
+                                self.latitude = ""
+                                self.longitude = ""
+                                presentationMode.wrappedValue.dismiss()
+                            }
+                        }
+                        Button("Отмена", role: .cancel) {}
+                    }
+                    Spacer()
+                }
+            }
+            }.navigationTitle("Мой Бизнес")
+                .onAppear {
+                    
             DB().getImage(uid: uid, directory: "images") { image in
                 self.image = image
             }

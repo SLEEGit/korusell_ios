@@ -60,6 +60,7 @@ struct OwnerView: View {
                         Spacer()
                     }
                 }
+                
             }
             
         }

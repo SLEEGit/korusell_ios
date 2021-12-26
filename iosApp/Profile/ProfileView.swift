@@ -99,9 +99,6 @@ struct ProfileView: View {
                 Section {
                     Button(action: {
                         showingAlert = true
-                        //                        DB().getMyBusiness(uid: user.uid) { _ in
-                        
-                        //                        }
                     })
                     {
                         HStack {

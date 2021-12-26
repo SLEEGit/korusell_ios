@@ -104,7 +104,7 @@ struct ServiceMenuView: View {
             }.disabled(isLoading)
             if isLoading {
                 ProgressView().progressViewStyle(CircularProgressViewStyle(tint: Color("textColor")))
-                    .background(Color(UIColor.systemGroupedBackground))
+                    .background(Color(UIColor.systemGroupedBackground).opacity(0.1))
             }
         }
     }

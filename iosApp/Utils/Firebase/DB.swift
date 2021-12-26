@@ -205,4 +205,16 @@ class DB: ObservableObject {
             }
         }
     }
+    
+    func deleteImage(uid: String) {
+        let storage = Storage.storage().reference().child("images/\(uid).jpg")
+        storage.delete { error in
+            if let error = error {
+                print(error.localizedDescription)
+            } else {
+                print("Image deleted!")
+            }
+        }
+    }
+    
 }

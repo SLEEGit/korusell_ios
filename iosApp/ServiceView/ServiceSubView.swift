@@ -23,7 +23,7 @@ struct ServiceSubView: View {
             }
         }
         .onAppear {
-            
+            globalCategory = category
             self.list = Util().filter(city: globalCity, category: category, unsortedList: globalServices)
         }
         .navigationTitle(barTitle)
