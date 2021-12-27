@@ -23,6 +23,34 @@ struct LoginView : View {
         ZStack {
         NavigationView {
             Form {
+                
+                Section(header: Text("Введите Ваш e-mail и пароль"), footer: Text(warningText).foregroundColor(Color.red).lineLimit(0).minimumScaleFactor(0.1)) {
+                    TextField("Электронная почта", text: $email)
+                        .disableAutocorrection(true)
+                        .keyboardType(.emailAddress)
+                        .autocapitalization(.none)
+                    SecureField("Пароль", text: $password)
+                }
+                Section {
+                    HStack {
+                    Spacer()
+                    Button(action: {
+                        isLoading = true
+                        Authentication().signIn(email: email, password: password) {
+                            warningText = Pref.registerCompletion
+                            if warningText == "success" {
+                                logging.isSignedIn = true
+                                isLoading = false
+                            }
+                            print(logging.isSignedIn)
+                        }
+                    }, label: {
+                        Text("Войти")
+                    })
+                        .disabled(email.isEmpty || password.isEmpty)
+                    Spacer()
+                    }
+                }
                 Section {
                     Button(action: {
                         fbLogin()
@@ -36,28 +64,6 @@ struct LoginView : View {
                         }
                         
                     })
-                }
-                Section(header: Text("Введите Ваш e-mail и пароль"), footer: Text(warningText).foregroundColor(Color.red).lineLimit(0).minimumScaleFactor(0.1)) {
-                    TextField("Электронная почта", text: $email)
-                        .disableAutocorrection(true)
-                        .keyboardType(.emailAddress)
-                        .autocapitalization(.none)
-                    SecureField("Пароль", text: $password)
-                }
-                Section {
-                    Button(action: {
-                        
-                        Authentication().signIn(email: email, password: password) {
-                            warningText = Pref.registerCompletion
-                            if warningText == "success" {
-                                logging.isSignedIn = true
-                            }
-                            print(logging.isSignedIn)
-                        }
-                    }, label: {
-                        Text("Войти")
-                    })
-                        .disabled(email.isEmpty || password.isEmpty)
                 }
                 Section(header: Text("Создать новый аккаунт")) {
                 NavigationLink(destination: RegistrationView()) {

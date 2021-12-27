@@ -18,13 +18,13 @@ struct RegistrationView: View {
     @State var warningText: String = ""
     @State var isEmailValid: Bool = false
     @State var isPassValid: Bool = false
-    
+    @State var showingHint: Bool = false
     var body: some View {
         Form {
             Section(header: Text("Введите Ваш e-mail и пароль"), footer: Text(warningText).foregroundColor(Color.red).lineLimit(0).minimumScaleFactor(0.1)) {
 //            Section(footer: Text("test text for footer")) {
 //            Section(header: Text("Введите Ваш e-mail и пароль")) {
-                
+                HStack {
                 TextField("Электронная почта", text: $email, onEditingChanged: { (isChanged) in
                     if !isChanged {
                         if Util().textFieldValidatorEmail(self.email) {
@@ -40,6 +40,15 @@ struct RegistrationView: View {
                     .keyboardType(.emailAddress)
                     .textContentType(.emailAddress)
                     .autocapitalization(.none)
+                Image(systemName: "info.circle.fill")
+                    .renderingMode(.original)
+                    .shadow(radius: 2)
+                    .onTapGesture {
+                        showingHint = true
+                    }.alert("🤔 Используйте существующий e-mail", isPresented: $showingHint) {
+                        Button("Ок", role: .cancel) {}
+                    }
+                }
                 SecureField("Пароль", text: $password)
                 SecureField("Повторите пароль", text: $rePassword)
             }
