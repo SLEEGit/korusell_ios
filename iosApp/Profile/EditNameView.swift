@@ -22,7 +22,7 @@ struct EditNameView: View {
             }
             Section(header: Text("Укажите Ваш номер телефона")) {
                 TextField("010-0000-0000", text: $phone)
-                    .keyboardType(.namePhonePad)
+                    
             }
             Section {
                 HStack {

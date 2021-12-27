@@ -139,11 +139,11 @@ struct MyBusinessView: View {
                             self.latitude = lat
                             self.longitude = long
                         }
-                        DispatchQueue.main.asyncAfter(deadline: .now() + 0.5) {
+//                        DispatchQueue.main.asyncAfter(deadline: .now() + 0.5) {
                             DB().updateBusiness(uid: uid, name: name, category: category, city: city, address: address, phone: phone, descrition: description, latitude: latitude, longitude: longitude) {
                                 showingAlert = true
                             }
-                        }
+//                        }
                         
                     }.alert("Данные успешно обновлены", isPresented: $showingAlert) {
                         Button("Ок") {

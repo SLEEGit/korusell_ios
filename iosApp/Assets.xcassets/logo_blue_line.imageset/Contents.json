@@ -1,17 +1,15 @@
 {
   "images" : [
     {
-      "filename" : "logo_blue.jpeg",
+      "filename" : "photo_2021-12-27_13.41.23-removebg-preview.png",
       "idiom" : "universal",
       "scale" : "1x"
     },
     {
-      "filename" : "logo_blue-1.jpeg",
       "idiom" : "universal",
       "scale" : "2x"
     },
     {
-      "filename" : "logo_blue-2.jpeg",
       "idiom" : "universal",
       "scale" : "3x"
     }

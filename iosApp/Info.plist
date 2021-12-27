@@ -36,10 +36,11 @@
 		<string>fbshareextension</string>
 	</array>
 	<key>UILaunchScreen</key>
-	<array>
+	<dict>
+		<key>UIColorName</key>
 		<string>LaunchScreenBG</string>
-		<string>logo</string>
-		<false/>
-	</array>
+		<key>UIImageName</key>
+		<string>launch_image</string>
+	</dict>
 </dict>
 </plist>

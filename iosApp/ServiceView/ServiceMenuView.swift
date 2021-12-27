@@ -35,6 +35,13 @@ struct ServiceMenuView: View {
                         }
                     }
                 }
+                .navigationBarItems(leading:
+                                        Image("logo_blue_line")
+                                        .resizable()
+                                        .scaledToFill()
+                                        .frame(width: 100, height: 20)
+                                        .shadow(color: Color.gray, radius: 1, x: 1, y: 1)
+                )
                 .navigationTitle("Услуги")
                 .onAppear{
                     
@@ -45,7 +52,9 @@ struct ServiceMenuView: View {
                     }
                     
                 }
+
                 .toolbar{
+                    
                     Menu {
                         Button {
                             globalCity = "Все города"
@@ -106,7 +115,7 @@ struct ServiceMenuView: View {
                 ProgressView().progressViewStyle(CircularProgressViewStyle(tint: Color("textColor")))
                     .background(Color(UIColor.systemGroupedBackground).opacity(0.1))
             }
-        }
+        }.navigationViewStyle(StackNavigationViewStyle())
     }
 }
 
