@@ -45,8 +45,12 @@ struct RegistrationView: View {
                     .shadow(radius: 2)
                     .onTapGesture {
                         showingHint = true
-                    }.alert("🤔 Используйте существующий e-mail", isPresented: $showingHint) {
-                        Button("Ок", role: .cancel) {}
+                    }.alert(isPresented: $showingHint) {
+                        Alert(
+                            title: Text("🤔 Используйте существующий e-mail"),
+                            dismissButton: .default(Text("Ок"))
+                        )
+                        
                     }
                 }
                 SecureField("Пароль", text: $password)
@@ -72,11 +76,14 @@ struct RegistrationView: View {
                 }, label: {
                     Text("Зарегистрироваться")
                 })
-                .alert("Регистрация выполнена успешно!", isPresented: $showingAlertSuccess) {
-                    Button("Ок") {
-                        presentationMode.wrappedValue.dismiss()
-                    }
-                }
+                .alert(isPresented: $showingAlertSuccess) {
+                    Alert(
+                        title: Text("Регистрация выполнена успешно!"),
+                        dismissButton: .default(Text("Ок"))
+                    )
+            }
+                
+                
                 .disabled(email.isEmpty || password.isEmpty || rePassword.isEmpty)
                 
             }

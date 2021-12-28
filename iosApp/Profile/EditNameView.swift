@@ -27,19 +27,24 @@ struct EditNameView: View {
             Section {
                 HStack {
                     Spacer()
-                    Button("Обновить данные") {
+                    Button(action: {
                         DB().addNamePhone(user: user, name: name, phone: phone) {
                             showingAlert = true
+
                         }
-                    }.alert("Данные успешно обновлены", isPresented: $showingAlert) {
-                        Button("Ок") {
-                            presentationMode.wrappedValue.dismiss()
-                        }
+                    }, label: {
+                        Text("Обновить данные")
+                    }).alert(isPresented: $showingAlert) {
+                            Alert(
+                                title: Text("Данные успешно обновлены"),
+                                dismissButton: .default(Text("Ок"))
+                            )
                     }
                     Spacer()
                 }
             }
-        }.onAppear {
+        }
+        .onAppear {
             DB().getUser(uid: user.uid) { user in
                 self.name = user.name ?? ""
                 self.phone = user.phone ?? ""

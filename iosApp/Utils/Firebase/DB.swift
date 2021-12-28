@@ -168,7 +168,7 @@ class DB: ObservableObject {
     
     
     func sendMessage(user: FirebaseAuth.User, message: String, completion: @escaping () -> Void) {
-        ref.reference(withPath: "messages").child(user.uid).updateChildValues([Date.now.description : message, "user" : user.email!])
+        ref.reference(withPath: "messages").child(user.uid).updateChildValues([Date().description : message, "user" : user.email!])
         DispatchQueue.main.async {
             completion()
         }

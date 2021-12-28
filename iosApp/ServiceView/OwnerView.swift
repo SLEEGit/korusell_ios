@@ -23,14 +23,28 @@ struct OwnerView: View {
     var body: some View {
         Form {
             Section {
-                VStack {
-                    Image(uiImage: self.image)
-                        .resizable()
-                        .scaledToFill()
-                        .frame(width: 100, height: 100)
-                        .cornerRadius(75)
+                if #available(iOS 15.0, *) {
+                    VStack {
+                        Image(uiImage: self.image)
+                            .resizable()
+                            .scaledToFill()
+                            .frame(width: 100, height: 100)
+                            .cornerRadius(75)
+                    }
+                    .listRowSeparator(.hidden)
+                } else {
+                    VStack {
+                        Image(uiImage: self.image)
+                            .resizable()
+                            .scaledToFill()
+                            .frame(width: 100, height: 100)
+                            .cornerRadius(75)
+                    }
+                    .frame(maxWidth: .infinity, maxHeight: .infinity, alignment: .leading)
+                        .listRowInsets(EdgeInsets())
+                        .background(Color(UIColor.systemGroupedBackground).opacity(0.1))
+                        .background(Color(UIColor.systemGroupedBackground))
                 }
-                .listRowSeparator(.hidden)
                 
                 
             }

@@ -221,20 +221,24 @@ struct MapView: View {
                     }
                 HStack {
                     Spacer()
-                    LocationButton {
-                        locationManager2.requestLocation()
-                        if let location = locationManager2.location {
-                            mapRegion = MKCoordinateRegion(center: CLLocationCoordinate2D(latitude: location.latitude, longitude: location.longitude), span: MKCoordinateSpan(latitudeDelta: 0.1, longitudeDelta: 0.1))
-                        } else {
-                            print("no data")
+                    if #available(iOS 15.0, *) {
+                        LocationButton {
+                            locationManager2.requestLocation()
+                            if let location = locationManager2.location {
+                                mapRegion = MKCoordinateRegion(center: CLLocationCoordinate2D(latitude: location.latitude, longitude: location.longitude), span: MKCoordinateSpan(latitudeDelta: 0.1, longitudeDelta: 0.1))
+                            } else {
+                                print("no data")
+                            }
+                            
                         }
-
+                        .labelStyle(.iconOnly)
+                        .symbolVariant(.fill)
+                        .cornerRadius(30)
+                        .foregroundColor(.white)
+                        .frame(width: 60, height: 60)
+                    } else {
+                        // Fallback on earlier versions
                     }
-                    .labelStyle(.iconOnly)
-                    .symbolVariant(.fill)
-                    .cornerRadius(30)
-                    .foregroundColor(.white)
-                    .frame(width: 60, height: 60)
                     
                 }
             }

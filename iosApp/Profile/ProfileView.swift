@@ -42,19 +42,38 @@ struct ProfileView: View {
         NavigationView {
             Form {
                 Section {
-                    VStack {
-                        Image(uiImage: self.image)
-                            .resizable()
-                            .scaledToFill()
-                            .frame(width: 100, height: 100)
-                            .cornerRadius(75)
-                        Button("Изменить фото профиля") {
-                            isShowPhotoLibrary = true
-                        }                           .sheet(isPresented: $isShowPhotoLibrary) {
-                            ImagePicker(selectedImage: self.$image, currentUid: self.$uid, directory: $directory, sourceType: .photoLibrary)
+                    if #available(iOS 15.0, *) {
+                        VStack {
+                            Image(uiImage: self.image)
+                                .resizable()
+                                .scaledToFill()
+                                .frame(width: 100, height: 100)
+                                .cornerRadius(75)
+                            Button("Изменить фото профиля") {
+                                isShowPhotoLibrary = true
+                            }                           .sheet(isPresented: $isShowPhotoLibrary) {
+                                ImagePicker(selectedImage: self.$image, currentUid: self.$uid, directory: $directory, sourceType: .photoLibrary)
+                            }
                         }
+                        .listRowSeparator(.hidden)
+                    } else {
+                        VStack {
+                            Image(uiImage: self.image)
+                                .resizable()
+                                .scaledToFill()
+                                .frame(width: 100, height: 100)
+                                .cornerRadius(75)
+                            Button("Изменить фото профиля") {
+                                isShowPhotoLibrary = true
+                            }                           .sheet(isPresented: $isShowPhotoLibrary) {
+                                ImagePicker(selectedImage: self.$image, currentUid: self.$uid, directory: $directory, sourceType: .photoLibrary)
+                            }
+                        }
+                        .frame(maxWidth: .infinity, maxHeight: .infinity, alignment: .leading)
+                            .listRowInsets(EdgeInsets())
+                            .background(Color(UIColor.systemGroupedBackground).opacity(0.1))
+                            .background(Color(UIColor.systemGroupedBackground))
                     }
-                    .listRowSeparator(.hidden)
 
 
                 }
@@ -108,12 +127,16 @@ struct ProfileView: View {
                             Spacer()
                         }
                     }
-                    .alert("Вы действительно хотите выйти?", isPresented: $showingAlert) {
-                        Button("Отмена", role: .cancel) {}
-                        Button("Выйти") {
-                            Authentication().signOut() {
-                                logging.isSignedIn = false
-                            }
+                    .alert(isPresented: $showingAlert) {
+                        Alert(
+                            title: Text("Вы действительно хотите выйти?"),
+                            primaryButton: .destructive(Text("Выйти"), action: {
+                                Authentication().signOut() {
+                                    logging.isSignedIn = false
+                                }
+                            }),
+                            secondaryButton: .cancel(Text("Отмена"))
+                        )
                         }
                     }
                 }
@@ -130,13 +153,13 @@ struct ProfileView: View {
                     Info()
                 }
                 
-            }
+            
         }.onAppear {
             DB().getUser(uid: user.uid) { user in
                 name = user.name ?? ""
                 phone = user.phone ?? ""
             }
-            DB().updateLastLogin(user: user, last_login: Date.now.description.localizedLowercase) {}
+            DB().updateLastLogin(user: user, last_login: Date().description.localizedLowercase) {}
             DB().getMyBusiness(uid: user.uid) { business in
                 print("getting business in profile")
                 print(business)

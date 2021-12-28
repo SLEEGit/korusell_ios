@@ -21,77 +21,80 @@ struct LoginView : View {
     
     var body: some View {
         ZStack {
-        NavigationView {
-            Form {
-                
-                Section(header: Text("Введите Ваш e-mail и пароль"), footer: Text(warningText).foregroundColor(Color.red).lineLimit(0).minimumScaleFactor(0.1)) {
-                    TextField("Электронная почта", text: $email)
-                        .disableAutocorrection(true)
-                        .keyboardType(.emailAddress)
-                        .autocapitalization(.none)
-                    SecureField("Пароль", text: $password)
-                }
-                Section {
-                    HStack {
-                    Spacer()
-                    Button(action: {
-                        isLoading = true
-                        Authentication().signIn(email: email, password: password) {
-                            warningText = Pref.registerCompletion
-                            if warningText == "success" {
-                                logging.isSignedIn = true
-                                isLoading = false
-                            }
-                            print(logging.isSignedIn)
-                        }
-                    }, label: {
-                        Text("Войти")
-                    })
-                        .disabled(email.isEmpty || password.isEmpty)
-                    Spacer()
+            NavigationView {
+                Form {
+                    
+                    Section(header: Text("Введите Ваш e-mail и пароль"), footer: Text(warningText).foregroundColor(Color.red).lineLimit(0).minimumScaleFactor(0.1)) {
+                        TextField("Электронная почта", text: $email)
+                            .disableAutocorrection(true)
+                            .keyboardType(.emailAddress)
+                            .autocapitalization(.none)
+                        SecureField("Пароль", text: $password)
                     }
-                }
-                Section {
-                    Button(action: {
-                        fbLogin()
-                    }, label: {
+                    Section {
                         HStack {
-                            Image("facebook")
-                                .resizable()
-                                .scaledToFill()
-                                .frame(width: 30, height: 30)
-                            Text("Войти через Фейсбук")
+                            Spacer()
+                            Button(action: {
+                                isLoading = true
+                                Authentication().signIn(email: email, password: password) {
+                                    warningText = Pref.registerCompletion
+                                    if warningText == "success" {
+                                        logging.isSignedIn = true
+                                        isLoading = false
+                                    }
+                                    print(logging.isSignedIn)
+                                }
+                            }, label: {
+                                Text("Войти")
+                            })
+                                .disabled(email.isEmpty || password.isEmpty)
+                            Spacer()
                         }
-                        
-                    })
-                }
-                Section(header: Text("Создать новый аккаунт")) {
-                NavigationLink(destination: RegistrationView()) {
-                    Text("Зарегистрироваться")
-                        .foregroundColor(.accentColor)
-                }
-                }
-            }.toolbar {
-                Button(action: {
-                    Authentication().passwordResetRequest(email: email, onSuccess: {
-                        showAlert = true
-                        print("---> onSuccess")
-                    }) { error in
-                        
-                        warningText = error
                     }
-                }, label: {
-                    Text("Забыли пароль?")
-                }).alert("На Вашу почту отправлена ссылка для восстановления пароля", isPresented: $showAlert) {
-                    Button("Ок", role: .cancel) {}
+                    Section {
+                        Button(action: {
+                            fbLogin()
+                        }, label: {
+                            HStack {
+                                Image("facebook")
+                                    .resizable()
+                                    .scaledToFill()
+                                    .frame(width: 30, height: 30)
+                                Text("Войти через Фейсбук")
+                            }
+                            
+                        })
+                    }
+                    Section(header: Text("Создать новый аккаунт")) {
+                        NavigationLink(destination: RegistrationView()) {
+                            Text("Зарегистрироваться")
+                                .foregroundColor(.accentColor)
+                        }
+                    }
+                }.toolbar {
+                    Button(action: {
+                        Authentication().passwordResetRequest(email: email, onSuccess: {
+                            showAlert = true
+                            print("---> onSuccess")
+                        }) { error in
+                            
+                            warningText = error
+                        }
+                    }, label: {
+                        Text("Забыли пароль?")
+                    }).alert(isPresented: $showAlert) {
+                        Alert(
+                            title: Text("На Вашу почту отправлена ссылка для восстановления пароля"),
+                            dismissButton: .default(Text("Ок"))
+                        )
+                    }
+                    .navigationBarTitle("Войти")
+                }.disabled(isLoading)
+                if isLoading {
+                    ProgressView().progressViewStyle(CircularProgressViewStyle(tint: Color("textColor")))
+                        .background(Color(UIColor.systemGroupedBackground).opacity(0.1))
                 }
             }
-            .navigationBarTitle("Войти")
-        }.disabled(isLoading)
-        if isLoading {
-            ProgressView().progressViewStyle(CircularProgressViewStyle(tint: Color("textColor")))
-                .background(Color(UIColor.systemGroupedBackground).opacity(0.1))
-        }
         }
     }
     
@@ -141,10 +144,10 @@ struct LoginView : View {
                 Pref.userDefault.set(true, forKey: "usersignedin")
                 Pref.userDefault.synchronize()
                 Pref.registerCompletion = "success"
-                let created_date = Date.now.description
-                DB().createUserInDB(user: user!.user, name: Pref.userDefault.string(forKey: "name") ?? "", created_date: created_date) {   
+                let created_date = Date().description
+                DB().createUserInDB(user: user!.user, name: Pref.userDefault.string(forKey: "name") ?? "", created_date: created_date) {
                 }
-
+                
                 DB().getImageByURL(from: URL(string: Pref.userDefault.string(forKey: "imageURL")!)!) { image in
                     DB().postImage(image: image, directory: "avatars", uid: user?.user.uid ?? "", quality: 1.0)
                 }

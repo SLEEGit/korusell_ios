@@ -32,10 +32,18 @@ struct MyBusinessView: View {
     var body: some View {
         List {
             VStack {
-                Image(uiImage: self.image)
-                    .resizable()
-                    .scaledToFill()
-                    .listRowSeparator(.hidden)
+                if #available(iOS 15.0, *) {
+                    Image(uiImage: self.image)
+                        .resizable()
+                        .scaledToFill()
+                        .listRowSeparator(.hidden)
+                } else {
+                    Image(uiImage: self.image)
+                        .frame(maxWidth: .infinity, maxHeight: .infinity, alignment: .leading)
+                        .listRowInsets(EdgeInsets())
+                        .background(Color(UIColor.systemGroupedBackground).opacity(0.1))
+                        .background(Color(UIColor.systemGroupedBackground))
+                }
                 Button("Выбрать картинку") {
                     isShowPhotoLibrary = true
                 }
@@ -72,24 +80,27 @@ struct MyBusinessView: View {
                 }.foregroundColor(Color("textColor"))
             }.foregroundColor(.gray)
             HStack {
-            Picker("Город", selection: $city) {
-                Group {
-                    Text("Ансан").tag("Ансан")
-                    Text("Хвасонг").tag("Хвасонг")
-                    Text("Сеул").tag("Сеул")
-                    Text("Инчхон").tag("Инчхон")
-                    Text("Асан").tag("Асан")
-                    Text("Чхонан").tag("Чхонан")
-                }
-                .foregroundColor(Color("textColor"))
-            }.foregroundColor(.gray)
+                Picker("Город", selection: $city) {
+                    Group {
+                        Text("Ансан").tag("Ансан")
+                        Text("Хвасонг").tag("Хвасонг")
+                        Text("Сеул").tag("Сеул")
+                        Text("Инчхон").tag("Инчхон")
+                        Text("Асан").tag("Асан")
+                        Text("Чхонан").tag("Чхонан")
+                    }
+                    .foregroundColor(Color("textColor"))
+                }.foregroundColor(.gray)
                 Image(systemName: "info.circle.fill")
                     .renderingMode(.original)
                     .shadow(radius: 2)
                     .onTapGesture {
                         showingHint2 = true
-                    }.alert("🤔 Если Вашего города нет в списке, введите его вручную ниже", isPresented: $showingHint2) {
-                        Button("Ок", role: .cancel) {}
+                    }.alert(isPresented: $showingHint2) {
+                        Alert (
+                            title: Text("🤔 Если Вашего города нет в списке, введите его вручную ниже"),
+                            dismissButton: .default(Text("Ok"))
+                        )
                     }
             }
             
@@ -111,22 +122,26 @@ struct MyBusinessView: View {
                     .shadow(radius: 2)
                     .onTapGesture {
                         showingHint = true
-                    }.alert("🤔 Чтобы Ваш бизнес отображался на карте, введите адрес на корейском языке без указания номера квартиры и этажа", isPresented: $showingHint) {
-                        Button("Ок", role: .cancel) {}
+                    }.alert(isPresented: $showingHint) {
+                        Alert(
+                            title: Text("🤔 Чтобы Ваш бизнес отображался на карте, введите адрес на корейском языке без указания номера квартиры и этажа"),
+                            dismissButton: .default(Text("Ок"))
+                        )
                     }
+                
             }
             HStack {
                 Text("Номер телефона")
                     .foregroundColor(.gray)
                 TextField("010-0000-0000", text: $phone)
-                    
-                    
+                
+                
             }
             VStack {
                 HStack {
                     Text("Описание:")
                 }
-                    .foregroundColor(.gray)
+                .foregroundColor(.gray)
                 TextEditor(text: $description)
                     .frame(height: 100)
             }
@@ -139,16 +154,17 @@ struct MyBusinessView: View {
                             self.latitude = lat
                             self.longitude = long
                         }
-//                        DispatchQueue.main.asyncAfter(deadline: .now() + 0.5) {
-                            DB().updateBusiness(uid: uid, name: name, category: category, city: city, address: address, phone: phone, descrition: description, latitude: latitude, longitude: longitude) {
-                                showingAlert = true
-                            }
-//                        }
-                        
-                    }.alert("Данные успешно обновлены", isPresented: $showingAlert) {
-                        Button("Ок") {
-                            presentationMode.wrappedValue.dismiss()
+                        //                        DispatchQueue.main.asyncAfter(deadline: .now() + 0.5) {
+                        DB().updateBusiness(uid: uid, name: name, category: category, city: city, address: address, phone: phone, descrition: description, latitude: latitude, longitude: longitude) {
+                            showingAlert = true
                         }
+                        //                        }
+                        
+                    }.alert(isPresented: $showingAlert) {
+                        Alert(
+                            title: Text("Данные успешно обновлены"),
+                            dismissButton: .default(Text("Ок"))
+                        )
                     }
                     Spacer()
                 }
@@ -169,52 +185,54 @@ struct MyBusinessView: View {
                         self.address == "" &&
                         self.phone == "" &&
                         self.description == ""
-                    )
-                    .alert("Вы уверены что хотите удалить Ваш бизнес?", isPresented: $showingAlertDelete) {
-                        Button("Удалить") {
-                            DB().deleteImage(uid: uid)
-                            DB().updateBusiness(uid: uid, name: "", category: "", city: "", address: "", phone: "", descrition: "", latitude: "", longitude: "") {
-                                self.name = ""
-                                self.category = ""
-                                self.city = ""
-                                self.address = ""
-                                self.phone = ""
-                                self.description = ""
-                                self.latitude = ""
-                                self.longitude = ""
-                                presentationMode.wrappedValue.dismiss()
-                            }
-                        }
-                        Button("Отмена", role: .cancel) {}
+                    ).alert(isPresented: $showingAlert) {
+                        Alert(
+                            title: Text("Вы уверены что хотите удалить Ваш бизнес?"),
+                            primaryButton: .destructive(Text("Удалить"), action: {
+                                DB().deleteImage(uid: uid)
+                                DB().updateBusiness(uid: uid, name: "", category: "", city: "", address: "", phone: "", descrition: "", latitude: "", longitude: "") {
+                                    self.name = ""
+                                    self.category = ""
+                                    self.city = ""
+                                    self.address = ""
+                                    self.phone = ""
+                                    self.description = ""
+                                    self.latitude = ""
+                                    self.longitude = ""
+                                    presentationMode.wrappedValue.dismiss()
+                                }
+                            }),
+                            secondaryButton: .cancel(Text("Отмена"))
+                        )
                     }
                     Spacer()
                 }
             }
-            }.navigationTitle("Мой Бизнес")
-                .onAppear {
-                    
-            DB().getImage(uid: uid, directory: "images") { image in
-                self.image = image
+        }.navigationTitle("Мой Бизнес")
+            .onAppear {
+                
+                DB().getImage(uid: uid, directory: "images") { image in
+                    self.image = image
+                }
             }
-        }
-//        .toolbar {
-//            Button("Готово") {
-//                Util().getCoordinates(address: address) { lat, long in
-//                    self.latitude = lat
-//                    self.longitude = long
-//                }
-//                DispatchQueue.main.asyncAfter(deadline: .now() + 1) {
-//                    DB().updateBusiness(uid: uid, name: name, category: category, city: city, address: address, phone: phone, descrition: description, latitude: latitude, longitude: longitude) {
-//                        showingAlert = true
-//                    }
-//                }
-//
-//            }.alert("Данные успешно обновлены", isPresented: $showingAlert) {
-//                Button("Ок") {
-//                    presentationMode.wrappedValue.dismiss()
-//                }
-//            }
-//        }
+        //        .toolbar {
+        //            Button("Готово") {
+        //                Util().getCoordinates(address: address) { lat, long in
+        //                    self.latitude = lat
+        //                    self.longitude = long
+        //                }
+        //                DispatchQueue.main.asyncAfter(deadline: .now() + 1) {
+        //                    DB().updateBusiness(uid: uid, name: name, category: category, city: city, address: address, phone: phone, descrition: description, latitude: latitude, longitude: longitude) {
+        //                        showingAlert = true
+        //                    }
+        //                }
+        //
+        //            }.alert("Данные успешно обновлены", isPresented: $showingAlert) {
+        //                Button("Ок") {
+        //                    presentationMode.wrappedValue.dismiss()
+        //                }
+        //            }
+        //        }
         
     }
     
