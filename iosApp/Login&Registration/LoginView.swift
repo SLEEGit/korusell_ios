@@ -127,9 +127,9 @@ struct LoginView : View {
                     Pref.userDefault.setValue(data["first_name"]!, forKey: "first_name")
                     Pref.userDefault.setValue(data["name"]!, forKey: "name")
                     Pref.userDefault.setValue(data3["url"]!, forKey: "imageURL")
-                    print(Pref.userDefault.string(forKey: "imageURL"))
+                    print(Pref.userDefault.string(forKey: "imageURL") ?? "")
                 } else {
-                    print("QWE \(err)")
+                    print("QWE \(String(describing: err))")
                 }
             }
         }
