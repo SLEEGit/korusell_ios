@@ -25,7 +25,7 @@ struct MapView: View {
     @State var isLoading: Bool = true
     @State var trackingMode: MapUserTrackingMode = .follow
     
-    @StateObject var locationManager2 = LocationManager2()
+    @StateObject var locationManager = LocationManager()
     
     @State private var mapRegion = MKCoordinateRegion(center: CLLocationCoordinate2D(latitude: 36.62257816899407, longitude: 127.91520089316795), span: MKCoordinateSpan(latitudeDelta: 3.5, longitudeDelta: 3.5))
     
@@ -76,7 +76,7 @@ struct MapView: View {
                     .navigationTitle("Карта")
                     .navigationBarTitleDisplayMode(.inline)
                     .onAppear {
-                        locationManager2.requestLocation()
+//                        locationManager2.requestLocation()
                         session.fetchData(category: "all") { (list) in
                             globalServices = list
                             self.isLoading = false
@@ -223,13 +223,9 @@ struct MapView: View {
                     Spacer()
                     if #available(iOS 15.0, *) {
                         LocationButton {
-                            locationManager2.requestLocation()
-                            if let location = locationManager2.location {
-                                mapRegion = MKCoordinateRegion(center: CLLocationCoordinate2D(latitude: location.latitude, longitude: location.longitude), span: MKCoordinateSpan(latitudeDelta: 0.1, longitudeDelta: 0.1))
-                            } else {
-                                print("no data")
+                            if let location = locationManager.lastLocation?.coordinate {
+                                mapRegion = MKCoordinateRegion(center: CLLocationCoordinate2D(latitude: location.latitude, longitude: location.longitude), span: MKCoordinateSpan(latitudeDelta: 0.05, longitudeDelta: 0.05))
                             }
-                            
                         }
                         .labelStyle(.iconOnly)
                         .symbolVariant(.fill)
@@ -237,9 +233,20 @@ struct MapView: View {
                         .foregroundColor(.white)
                         .frame(width: 60, height: 60)
                     } else {
-                        // Fallback on earlier versions
+                        Button(action: {
+                            locationManager.requestLocation()
+                            if let location = locationManager.lastLocation?.coordinate {
+                                mapRegion = MKCoordinateRegion(center: CLLocationCoordinate2D(latitude: location.latitude, longitude: location.longitude), span: MKCoordinateSpan(latitudeDelta: 0.05, longitudeDelta: 0.05))
+                            }
+                        })
+                        {
+                            Image(systemName: "location.circle.fill")
+                                .renderingMode(.original)
+                                .font(.system(size: 40))
+                                .padding()
+                        }
                     }
-                    
+            
                 }
             }
             if isLoading {

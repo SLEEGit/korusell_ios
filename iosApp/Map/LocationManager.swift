@@ -24,6 +24,12 @@ class LocationManager: NSObject, ObservableObject, CLLocationManagerDelegate {
     }
 
    
+    func requestLocation() {
+        locationManager.desiredAccuracy = kCLLocationAccuracyBest
+        locationManager.requestWhenInUseAuthorization()
+        locationManager.startUpdatingLocation()
+        locationManager.requestLocation()
+    }
     
     var statusString: String {
         guard let status = locationStatus else {
@@ -40,14 +46,33 @@ class LocationManager: NSObject, ObservableObject, CLLocationManagerDelegate {
         }
     }
 
-    func locationManager(_ manager: CLLocationManager, didChangeAuthorization status: CLAuthorizationStatus) {
-        locationStatus = status
-        print(#function, statusString)
+    func locationManager(_ manager: CLLocationManager, didFailWithError error: Error) {
+             print("error:: \(error.localizedDescription)")
     }
+
+        func locationManager(_ manager: CLLocationManager, didChangeAuthorization status: CLAuthorizationStatus) {
+            if status == .authorizedWhenInUse {
+                locationManager.requestLocation()
+            }
+        }
+
+        func locationManager(_ manager: CLLocationManager, didUpdateLocations locations: [CLLocation]) {
+
+            if locations.first != nil {
+                self.lastLocation = locations.last
+                print("location:: (location)")
+            }
+
+        }
     
-    func locationManager(_ manager: CLLocationManager, didUpdateLocations locations: [CLLocation]) {
-        guard let location = locations.last else { return }
-        lastLocation = location
-        print(#function, location)
-    }
+//    func locationManager(_ manager: CLLocationManager, didChangeAuthorization status: CLAuthorizationStatus) {
+//        locationStatus = status
+////        print(#function, statusString)
+//    }
+//
+//    func locationManager(_ manager: CLLocationManager, didUpdateLocations locations: [CLLocation]) {
+//        guard let location = locations.last else { return }
+//        lastLocation = location
+////        print(#function, location)
+//    }
 }
