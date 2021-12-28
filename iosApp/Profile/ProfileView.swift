@@ -34,7 +34,7 @@ struct ProfileView: View {
     @State var longitude: String = ""
     @State var category: String = ""
     
-//    @Environment(\.presentationMode) var presentationMode
+    //    @Environment(\.presentationMode) var presentationMode
     //    @Binding var selectedImage: UIImage
     //    @Environment(\.presentationMode) private var presentationMode
     
@@ -70,12 +70,12 @@ struct ProfileView: View {
                             }
                         }
                         .frame(maxWidth: .infinity, maxHeight: .infinity, alignment: .leading)
-                            .listRowInsets(EdgeInsets())
-                            .background(Color(UIColor.systemGroupedBackground).opacity(0.1))
-                            .background(Color(UIColor.systemGroupedBackground))
+                        .listRowInsets(EdgeInsets())
+                        .background(Color(UIColor.systemGroupedBackground).opacity(0.1))
+                        .background(Color(UIColor.systemGroupedBackground))
                     }
-
-
+                    
+                    
                 }
                 .frame(maxWidth: .infinity, maxHeight: .infinity, alignment: .center)
                 .listRowInsets(EdgeInsets())
@@ -137,7 +137,6 @@ struct ProfileView: View {
                             }),
                             secondaryButton: .cancel(Text("Отмена"))
                         )
-                        }
                     }
                 }
             }
@@ -153,6 +152,7 @@ struct ProfileView: View {
                     Info()
                 }
                 
+            }
             
         }.onAppear {
             DB().getUser(uid: user.uid) { user in
