@@ -165,7 +165,9 @@ struct MyBusinessView: View {
                     }.alert(isPresented: $showingAlert) {
                         Alert(
                             title: Text("Данные успешно обновлены"),
-                            dismissButton: .default(Text("Ок"))
+                            dismissButton: .destructive((Text("Ок")), action: {
+                                presentationMode.wrappedValue.dismiss()
+                            })
                         )
                     }
                     Spacer()
@@ -187,22 +189,19 @@ struct MyBusinessView: View {
                         self.address == "" &&
                         self.phone == "" &&
                         self.description == ""
-                    ).alert(isPresented: $showingAlert) {
+                    ).alert(isPresented: $showingAlertDelete) {
                         Alert(
                             title: Text("Вы уверены что хотите удалить Ваш бизнес?"),
                             primaryButton: .destructive(Text("Удалить"), action: {
-                                DB().deleteImage(uid: uid)
-                                DB().updateBusiness(uid: uid, name: "", category: "", city: "", address: "", phone: "", descrition: "", latitude: "", longitude: "") {
-                                    self.name = ""
-                                    self.category = ""
-                                    self.city = ""
-                                    self.address = ""
-                                    self.phone = ""
-                                    self.description = ""
-                                    self.latitude = ""
-                                    self.longitude = ""
-                                    presentationMode.wrappedValue.dismiss()
-                                }
+                                DB().deleteBusiness(uid: uid)
+                                self.name = ""
+                                self.category = ""
+                                self.city = ""
+                                self.address = ""
+                                self.phone = ""
+                                self.description = ""
+                                presentationMode.wrappedValue.dismiss()
+                                
                             }),
                             secondaryButton: .cancel(Text("Отмена"))
                         )

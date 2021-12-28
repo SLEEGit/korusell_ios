@@ -207,8 +207,8 @@ class DB: ObservableObject {
     }
     
     // DELETE
-    func deleteImage(uid: String) {
-        let storage = Storage.storage().reference().child("images/\(uid).jpg")
+    func deleteImage(uid: String, directory: String) {
+        let storage = Storage.storage().reference().child("\(directory)/\(uid).jpg")
         storage.delete { error in
             if let error = error {
                 print(error.localizedDescription)
@@ -219,8 +219,13 @@ class DB: ObservableObject {
     }
     
     func deleteAccount(uid: String) {
-        deleteImage(uid: uid)
+        deleteImage(uid: uid, directory: "avatars")
         ref.reference(withPath: "users").child(uid).removeValue()
+    }
+    
+    func deleteBusiness(uid: String) {
+        deleteImage(uid: uid, directory: "images")
+        ref.reference(withPath: "services").child(uid).removeValue()
     }
     
 }
