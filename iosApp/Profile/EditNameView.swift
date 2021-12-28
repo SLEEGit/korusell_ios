@@ -13,6 +13,7 @@ struct EditNameView: View {
     @Binding var phone: String
     @State var user: FirebaseAuth.User = Auth.auth().currentUser!
     @State private var showingAlert = false
+    @ObservedObject var logging: Logging
     @Environment(\.presentationMode) var presentationMode: Binding<PresentationMode>
     
     var body: some View {
@@ -37,12 +38,39 @@ struct EditNameView: View {
                     }).alert(isPresented: $showingAlert) {
                             Alert(
                                 title: Text("Данные успешно обновлены"),
-                                dismissButton: .default(Text("Ок"))
+                                dismissButton: .destructive(Text("Ок"), action: {
+                                    presentationMode.wrappedValue.dismiss()
+                                })
                             )
                     }
                     Spacer()
                 }
             }
+            Section {
+                HStack {
+                    Spacer()
+                    Button(action: {
+                            showingAlert = true
+                    }, label: {
+                        Text("Удалить аккаунт")
+                            .foregroundColor(Color.red)
+                    }).alert(isPresented: $showingAlert) {
+                            Alert(
+                                title: Text("Ваш аккаунт будет удален! Вся информация будет утеряна!"),
+                                primaryButton: .destructive(Text("Удалить аккаунт"), action: {
+                                    Authentication().signOut() {
+                                        logging.isSignedIn = false
+                                    }
+                                    DB().deleteAccount(uid: user.uid)
+//                                    presentationMode.wrappedValue.dismiss()
+                                }),
+                                secondaryButton: .cancel(Text("Отмена"))
+                            )
+                    }
+                    Spacer()
+                }
+            }
+            
         }
         .onAppear {
             DB().getUser(uid: user.uid) { user in

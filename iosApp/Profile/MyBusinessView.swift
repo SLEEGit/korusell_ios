@@ -30,7 +30,7 @@ struct MyBusinessView: View {
     
     
     var body: some View {
-        List {
+        Form {
             VStack {
                 if #available(iOS 15.0, *) {
                     Image(uiImage: self.image)
@@ -39,10 +39,12 @@ struct MyBusinessView: View {
                         .listRowSeparator(.hidden)
                 } else {
                     Image(uiImage: self.image)
-                        .frame(maxWidth: .infinity, maxHeight: .infinity, alignment: .leading)
+                        .resizable()
+                        .scaledToFill()
+                        .frame(maxWidth: .infinity, maxHeight: .infinity, alignment: .center)
                         .listRowInsets(EdgeInsets())
                         .background(Color(UIColor.systemGroupedBackground).opacity(0.1))
-                        .background(Color(UIColor.systemGroupedBackground))
+//                        .background(Color(UIColor.systemGroupedBackground))
                 }
                 Button("Выбрать картинку") {
                     isShowPhotoLibrary = true

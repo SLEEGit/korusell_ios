@@ -69,7 +69,7 @@ struct ProfileView: View {
                                 ImagePicker(selectedImage: self.$image, currentUid: self.$uid, directory: $directory, sourceType: .photoLibrary)
                             }
                         }
-                        .frame(maxWidth: .infinity, maxHeight: .infinity, alignment: .leading)
+                        .frame(maxWidth: .infinity, maxHeight: .infinity, alignment: .center)
                         .listRowInsets(EdgeInsets())
                         .background(Color(UIColor.systemGroupedBackground).opacity(0.1))
                         .background(Color(UIColor.systemGroupedBackground))
@@ -87,20 +87,15 @@ struct ProfileView: View {
                     Spacer()
                     Text(user.email ?? "")
                 }
-                NavigationLink(destination: getDestination(name: name, phone: phone)) {
-                    
-                    HStack {
-                        Text("Имя")
-                        Spacer()
-                        Text(name)
-                    }
+                HStack {
+                    Text("Имя")
+                    Spacer()
+                    Text(name)
                 }
-                NavigationLink(destination: getDestination(name: name, phone: phone)) {
-                    HStack {
-                        Text("Номер телефона")
-                        Spacer()
-                        Text(phone)
-                    }
+                HStack {
+                    Text("Номер телефона")
+                    Spacer()
+                    Text(phone)
                 }
                 Section {
                     NavigationLink(destination: MyBusinessView(uid: $uid, name: $bname, city: $city, address: $address, phone: $bphone, description: $description, latitude: $latitude, longitude: $longitude, category: $category)) {
@@ -113,6 +108,11 @@ struct ProfileView: View {
                     }
                     NavigationLink(destination: MyAdvView()) {
                         Text("Мои Объявления")
+                    }
+                }
+                Section {
+                    NavigationLink(destination: getDestination(name: name, phone: phone)) {
+                        Text("Управление аккаунтом")
                     }
                 }
                 Section {
@@ -186,7 +186,7 @@ struct ProfileView: View {
     
     func getDestination(name: String, phone: String) -> AnyView {
         if Pref.userDefault.bool(forKey: "usersignedin") {
-            return AnyView(EditNameView(name: $name, phone: $phone))
+            return AnyView(EditNameView(name: $name, phone: $phone, logging: logging))
         } else {
             return AnyView(Text("Logged out"))
         }

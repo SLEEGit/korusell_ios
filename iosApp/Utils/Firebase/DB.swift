@@ -206,6 +206,7 @@ class DB: ObservableObject {
         }
     }
     
+    // DELETE
     func deleteImage(uid: String) {
         let storage = Storage.storage().reference().child("images/\(uid).jpg")
         storage.delete { error in
@@ -215,6 +216,11 @@ class DB: ObservableObject {
                 print("Image deleted!")
             }
         }
+    }
+    
+    func deleteAccount(uid: String) {
+        deleteImage(uid: uid)
+        ref.reference(withPath: "users").child(uid).removeValue()
     }
     
 }
