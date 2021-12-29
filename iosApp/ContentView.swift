@@ -29,8 +29,9 @@ struct ContentView: View {
                 }
         }
         .onAppear {
-
             
+//            Pref.userDefault.set(false, forKey: "usersignedin")
+//            Pref.userDefault.synchronize()
             
         }
     }

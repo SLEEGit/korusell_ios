@@ -226,6 +226,9 @@ class DB: ObservableObject {
     func deleteBusiness(uid: String) {
         deleteImage(uid: uid, directory: "images")
         ref.reference(withPath: "services").child(uid).removeValue()
+        
     }
+    
+
     
 }

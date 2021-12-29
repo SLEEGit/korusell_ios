@@ -11,6 +11,11 @@ struct RegistrationView: View {
     @State var email: String = ""
     @State var password: String = ""
     @State var rePassword: String = ""
+    
+    @State var phonenumber: String = ""
+    @State var code: String = ""
+    @State var ID: String = ""
+    
     @State var showingAlertSuccess: Bool = false
     @Environment(\.presentationMode) var presentationMode: Binding<PresentationMode>
     
@@ -19,11 +24,10 @@ struct RegistrationView: View {
     @State var isEmailValid: Bool = false
     @State var isPassValid: Bool = false
     @State var showingHint: Bool = false
+    @ObservedObject var logging = Logging()
     var body: some View {
         Form {
             Section(header: Text("Введите Ваш e-mail и пароль"), footer: Text(warningText).foregroundColor(Color.red).lineLimit(0).minimumScaleFactor(0.1)) {
-//            Section(footer: Text("test text for footer")) {
-//            Section(header: Text("Введите Ваш e-mail и пароль")) {
                 HStack {
                 TextField("Электронная почта", text: $email, onEditingChanged: { (isChanged) in
                     if !isChanged {
@@ -55,6 +59,30 @@ struct RegistrationView: View {
                 }
                 SecureField("Пароль", text: $password)
                 SecureField("Повторите пароль", text: $rePassword)
+                VStack{
+                    Text("Введите Ваш номер телефона чтобы проверить ваш Аккаунт")
+                    HStack {
+                        TextField("+82", text: $code)
+                        TextField("Номер телефона", text: $phonenumber)
+                    }
+                    
+                    Button(action: {
+                        
+                        Authentication().phoneValidation(code: code, number: phonenumber) { ID in
+                            self.ID = ID
+                        }
+                    }, label: {Text("Отправить код")})
+                    
+                    
+                }
+            }
+            Section {
+                
+                Button(action: {
+                    Authentication().phoneAuth(ID: self.ID, code: "123456") {
+                    logging.isSignedIn = true
+                    }
+                }, label: {Text("Отправить код")})
             }
             Section {
                 Button(action: {

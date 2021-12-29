@@ -64,7 +64,39 @@ class Authentication {
 //            }
         }
     }
-
+    
+    func phoneValidation(code: String, number: String, completion: @escaping (String) -> ()) {
+        PhoneAuthProvider.provider().verifyPhoneNumber("+"+code+number, uiDelegate: nil) { (ID, err) in
+            if err != nil {
+                print("FAIL")
+                print(err?.localizedDescription as Any)
+                return
+            } else {
+                print("SUCCESS")
+                print(ID as Any)
+                completion(ID!)
+            }
+        }
+    }
+    
+    func phoneAuth(ID: String, code: String, completion: @escaping () -> Void) {
+        let credential = PhoneAuthProvider.provider().credential(withVerificationID: ID, verificationCode: code)
+        
+        Auth.auth().signIn(with: credential) { (res, err) in
+            if err != nil {
+                print("FAIL")
+                print(err?.localizedDescription as Any)
+            } else {
+                Pref.userDefault.set(true, forKey: "usersignedin")
+                Pref.userDefault.synchronize()
+                Pref.registerCompletion = "success"
+                completion()
+                print("SUCCESS")
+            }
+        }
+        
+    }
+    
     func signOut(completion: @escaping () -> Void) {
         Auth.auth().languageCode = "ru";
         do {
