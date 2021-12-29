@@ -540,11 +540,13 @@
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_ASSET_PATHS = "\"iosApp/Preview Content\"";
-				DEVELOPMENT_TEAM = UXL6NT2432;
+				DEVELOPMENT_TEAM = 4GZ4AH8Z6M;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = iosApp/Info.plist;
 				INFOPLIST_KEY_CFBundleDisplayName = korusell;
+				INFOPLIST_KEY_NSLocationAlwaysUsageDescription = "Если Вы хотите видеть своё местоположение - разрешите использование геолокации";
+				INFOPLIST_KEY_NSLocationWhenInUseUsageDescription = "Если Вы хотите видеть своё местоположение - разрешите использование геолокации";
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen;
@@ -555,7 +557,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				MARKETING_VERSION = 1.0;
+				MARKETING_VERSION = 0.1.0;
 				PRODUCT_BUNDLE_IDENTIFIER = com.korusell.korusell;
 				PRODUCT_NAME = korusell;
 				SWIFT_EMIT_LOC_STRINGS = YES;
@@ -573,11 +575,13 @@
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_ASSET_PATHS = "\"iosApp/Preview Content\"";
-				DEVELOPMENT_TEAM = UXL6NT2432;
+				DEVELOPMENT_TEAM = 4GZ4AH8Z6M;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = iosApp/Info.plist;
 				INFOPLIST_KEY_CFBundleDisplayName = korusell;
+				INFOPLIST_KEY_NSLocationAlwaysUsageDescription = "Если Вы хотите видеть своё местоположение - разрешите использование геолокации";
+				INFOPLIST_KEY_NSLocationWhenInUseUsageDescription = "Если Вы хотите видеть своё местоположение - разрешите использование геолокации";
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen;
@@ -588,7 +592,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				MARKETING_VERSION = 1.0;
+				MARKETING_VERSION = 0.1.0;
 				PRODUCT_BUNDLE_IDENTIFIER = com.korusell.korusell;
 				PRODUCT_NAME = korusell;
 				SWIFT_EMIT_LOC_STRINGS = YES;

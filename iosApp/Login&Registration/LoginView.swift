@@ -89,11 +89,12 @@ struct LoginView : View {
                         )
                     }
                     .navigationBarTitle("Войти")
-                }.disabled(isLoading)
-                if isLoading {
-                    ProgressView().progressViewStyle(CircularProgressViewStyle(tint: Color("textColor")))
-                        .background(Color(UIColor.systemGroupedBackground).opacity(0.1))
                 }
+                
+            }.disabled(isLoading)
+            if isLoading {
+                ProgressView().progressViewStyle(CircularProgressViewStyle(tint: Color("textColor")))
+                    .background(Color(UIColor.systemGroupedBackground).opacity(0.1))
             }
         }
     }
@@ -159,6 +160,7 @@ struct LoginView : View {
             }
         }
     }
+    
 }
 
 //struct LoginView_Preview: PreviewProvider {

@@ -64,7 +64,7 @@ struct MapView: View {
                                     Image(systemName: "mappin.circle.fill")
                                         .renderingMode(.original)
                                         .resizable()
-                                        .frame(width: 20, height: 20)
+                                        .frame(width: 25, height: 25)
                                         .shadow(color: .gray, radius: 1, x: 1, y: 1)
                                 }
 

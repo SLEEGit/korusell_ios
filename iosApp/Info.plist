@@ -42,9 +42,5 @@
 		<key>UIImageName</key>
 		<string>launch_image</string>
 	</dict>
-    <key>NSLocationAlwaysUsageDescription</key>
-        <string>Если Вы хотите видеть своё местоположение - разрешите использование геолокации</string>
-        <key>NSLocationWhenInUseUsageDescription</key>
-        <string>Если Вы хотите видеть своё местоположение - разрешите использование геолокации</string>
 </dict>
 </plist>
