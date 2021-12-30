@@ -53,6 +53,7 @@ struct ExpandedService: View {
         HStack {
             //            FirebaseImage(id: "vishenka")
             UrlImageView(urlString: service.uid)
+                .frame(width: 100, height: 100)
             //            Image(uiImage: self.image)
             //                .resizable()
             //                .scaledToFit()

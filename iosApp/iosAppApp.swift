@@ -7,6 +7,7 @@
 
 import SwiftUI
 import Firebase
+import FBSDKCoreKit
 
 @main
 struct iosAppApp: App {
@@ -30,6 +31,10 @@ class AppDelegate: NSObject, UIApplicationDelegate {
   func application(_ application: UIApplication,
                    didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey : Any]? = nil) -> Bool {
     FirebaseApp.configure()
+      ApplicationDelegate.shared.application(
+                  application,
+                  didFinishLaunchingWithOptions: launchOptions
+              )
     print("SwiftUI_2_Lifecycle_PhoneNumber_AuthApp application is starting up. ApplicationDelegate didFinishLaunchingWithOptions.")
     return true
   }
@@ -49,6 +54,12 @@ class AppDelegate: NSObject, UIApplicationDelegate {
   
   func application(_ application: UIApplication, open url: URL, options: [UIApplication.OpenURLOptionsKey : Any]) -> Bool {
     print("\(#function)")
+      ApplicationDelegate.shared.application(
+                  application,
+                  open: url,
+                  sourceApplication: options[UIApplication.OpenURLOptionsKey.sourceApplication] as? String,
+                  annotation: options[UIApplication.OpenURLOptionsKey.annotation]
+              )
     if Auth.auth().canHandle(url) {
       return true
     }
