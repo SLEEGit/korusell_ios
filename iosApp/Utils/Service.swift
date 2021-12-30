@@ -96,14 +96,7 @@ struct ExpandedServiceDetails: View {
     var body: some View {
         Form {
             UrlImageView(urlString: service.uid)
-            //            Image(uiImage: image)
-            //                .resizable()
                 .scaledToFit()
-            //                .onAppear {
-            //                    DB().getImage(uid: service.uid, directory: "images") { image in
-            //                        self.image = image
-            //                    }
-            //                }
             Section {
                 
                 Text(service.name)
@@ -156,6 +149,41 @@ struct ExpandedServiceDetails: View {
                     }
                 }
             }
+            Section {
+                Link(destination: URL(string: "https://www.instagram.com/k0jihero/")!, label: {
+                    Image("facebook")
+                        .resizable()
+                        .scaledToFit()
+                        .frame(width: 50, height: 50)
+                })
+                Link(destination: URL(string: "https://www.instagram.com/k0jihero/")!, label: {
+                    Image("instagram")
+                        .resizable()
+                        .scaledToFit()
+                        .frame(width: 50, height: 50)
+                })
+                Link(destination: URL(string: "https://www.instagram.com/k0jihero/")!, label: {
+                    Image("youtube")
+                        .resizable()
+                        .scaledToFit()
+                        .frame(width: 50, height: 50)
+                })
+                Link(destination: URL(string: "https://www.instagram.com/k0jihero/")!, label: {
+                    Image("webpage")
+                        .resizable()
+                        .scaledToFit()
+                        .frame(width: 50, height: 50)
+                })
+                Link(destination: URL(string: "https://www.instagram.com/k0jihero/")!, label: {
+                    Image("telegram")
+                        .resizable()
+                        .scaledToFit()
+                        .frame(width: 50, height: 50)
+                })
+            }
+            
+            
+        
             if service.uid.count > 10 {
                 Section {
                     Button(action: {
