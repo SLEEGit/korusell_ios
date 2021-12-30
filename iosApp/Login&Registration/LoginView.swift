@@ -119,13 +119,13 @@ struct LoginView : View {
     
     func getFBUserData(){
         if AccessToken.current != nil{
-            GraphRequest(graphPath: "me", parameters: ["fields": "id, name, first_name, last_name, picture.type(large), email"]).start { (connection, result, err) in
+            GraphRequest(graphPath: "me", parameters: ["fields": "id, name, picture.type(large), email"]).start { (connection, result, err) in
                 if(err == nil){
                     self.fbFirebaseAuth()
                     let data:[String:AnyObject] = result as! [String : AnyObject]
                     let data2:[String:AnyObject] = data["picture"]! as! [String : AnyObject]
                     let data3:[String:AnyObject] = data2["data"] as! [String : AnyObject]
-                    Pref.userDefault.setValue(data["first_name"]!, forKey: "first_name")
+                    Pref.userDefault.setValue(data["email"]!, forKey: "email")
                     Pref.userDefault.setValue(data["name"]!, forKey: "name")
                     Pref.userDefault.setValue(data3["url"]!, forKey: "imageURL")
                     print(Pref.userDefault.string(forKey: "imageURL") ?? "")
@@ -146,9 +146,7 @@ struct LoginView : View {
                 Pref.userDefault.synchronize()
                 Pref.registerCompletion = "success"
                 let created_date = Date().description
-                DB().createUserInDB(user: user!.user, name: Pref.userDefault.string(forKey: "name") ?? "", created_date: created_date) {
-                }
-                
+                DB().createUserInDB(user: user!.user, email: Pref.userDefault.string(forKey: "email") ?? "", name: Pref.userDefault.string(forKey: "name") ?? "", created_date: created_date) {}
                 DB().getImageByURL(from: URL(string: Pref.userDefault.string(forKey: "imageURL")!)!) { image in
                     DB().postImage(image: image, directory: "avatars", uid: user?.user.uid ?? "", quality: 1.0)
                 }

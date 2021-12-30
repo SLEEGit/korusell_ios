@@ -17,6 +17,7 @@ struct ProfileView: View {
     @State var name: String = ""
     @State var phone: String = ""
     @State var avatar: String = ""
+    @State var email: String = ""
     
     @State private var isShowPhotoLibrary = false
     @State private var isShowInfo = false
@@ -85,7 +86,7 @@ struct ProfileView: View {
                 HStack {
                     Text("Эл. почта")
                     Spacer()
-                    Text(user.email ?? "")
+                    Text(email)
                 }
                 HStack {
                     Text("Имя")
@@ -158,6 +159,7 @@ struct ProfileView: View {
             DB().getUser(uid: user.uid) { user in
                 name = user.name ?? ""
                 phone = user.phone ?? ""
+                email = user.email
             }
             DB().updateLastLogin(user: user, last_login: Date().description.localizedLowercase) {}
             DB().getMyBusiness(uid: user.uid) { business in

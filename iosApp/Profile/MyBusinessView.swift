@@ -158,11 +158,11 @@ struct MyBusinessView: View {
                         Util().getCoordinates(address: address) { lat, long in
                             self.latitude = lat
                             self.longitude = long
-                            //                                                DispatchQueue.main.asyncAfter(deadline: .now() + 0.3) {
+                            DispatchQueue.main.asyncAfter(deadline: .now() + 0.1) {
                             DB().updateBusiness(uid: uid, name: name, category: category, city: city, address: address, phone: phone, descrition: description, latitude: latitude, longitude: longitude) {
                                 showingAlert = true
                             }
-                            //                                                }
+                            }
                         }
 
                         
