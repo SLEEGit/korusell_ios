@@ -40,8 +40,8 @@ struct LoginView : View {
                                     warningText = Pref.registerCompletion
                                     if warningText == "success" {
                                         logging.isSignedIn = true
-                                        isLoading = false
                                     }
+                                    isLoading = false
                                     print(logging.isSignedIn)
                                 }
                             }, label: {
