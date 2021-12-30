@@ -144,8 +144,8 @@ class DB: ObservableObject {
     
     
     //    POST
-    func createUserInDB(user: FirebaseAuth.User, name: String = "", created_date: String = "", completion: @escaping () -> Void) {
-        ref.reference(withPath: "users").child(user.uid).updateChildValues(["uid" : user.uid, "email" : user.email as Any, "name" : name, "created_date" : created_date])
+    func createUserInDB(user: FirebaseAuth.User, name: String = "", created_date: String = "", phone: String = "", completion: @escaping () -> Void) {
+        ref.reference(withPath: "users").child(user.uid).updateChildValues(["uid" : user.uid, "email" : user.email as Any, "name" : name, "created_date" : created_date, "phone" : phone])
         DispatchQueue.main.async {
             completion()
         }
@@ -221,6 +221,7 @@ class DB: ObservableObject {
     func deleteAccount(uid: String) {
         deleteImage(uid: uid, directory: "avatars")
         ref.reference(withPath: "users").child(uid).removeValue()
+        deleteBusiness(uid: uid)
     }
     
     func deleteBusiness(uid: String) {

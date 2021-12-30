@@ -87,9 +87,6 @@ class Authentication {
                 print("FAIL")
                 print(err?.localizedDescription as Any)
             } else {
-                Pref.userDefault.set(true, forKey: "usersignedin")
-                Pref.userDefault.synchronize()
-                Pref.registerCompletion = "success"
                 completion()
                 print("SUCCESS")
             }
@@ -111,7 +108,7 @@ class Authentication {
     }
     
 
-    func signUp(email: String, password: String, completion: @escaping () -> Void) {
+    func signUp(email: String, password: String, phone: String, completion: @escaping () -> Void) {
         Auth.auth().languageCode = "ru";
         Auth.auth().createUser(withEmail: email, password: password) { result, error in
             guard result != nil, error == nil else {
@@ -123,7 +120,7 @@ class Authentication {
                 return
             }
             if let user = result?.user {
-                DB().createUserInDB(user: user) {
+                DB().createUserInDB(user: user, phone: phone) {
                     Pref.registerCompletion = "success"
                     completion()
                 }

@@ -24,6 +24,9 @@ struct RegistrationView: View {
     @State var isEmailValid: Bool = false
     @State var isPassValid: Bool = false
     @State var showingHint: Bool = false
+    @State var phoneVerifyungSuccess: Bool = false
+    
+    
     @ObservedObject var logging = Logging()
     var body: some View {
         Form {
@@ -57,30 +60,27 @@ struct RegistrationView: View {
                         
                     }
                 }
-                SecureField("Пароль", text: $password)
+                SecureField("Пароль (минимум 8 символов)", text: $password)
                 SecureField("Повторите пароль", text: $rePassword)
-                VStack{
-                    Text("Введите Ваш номер телефона чтобы проверить ваш Аккаунт")
+            }
+                Section(header: Text("Введите Ваш номер телефона")) {
                     HStack {
-                        TextField("+82", text: $code)
-                        TextField("Номер телефона", text: $phonenumber)
+                        Text("+82 10")
+                        TextField("0000-0000", text: $phonenumber)
                     }
                     
                     Button(action: {
-                        
-                        Authentication().phoneValidation(code: code, number: phonenumber) { ID in
+                        Authentication().phoneValidation(code: "8210", number: phonenumber) { ID in
                             self.ID = ID
                         }
-                    }, label: {Text("Отправить код")})
-                    
-                    
-                }
+                    }, label: {Text("Получить SMS с кодом")})
+                
             }
             Section {
-                
+                TextField("Код полученный в SMS", text: $code)
                 Button(action: {
-                    Authentication().phoneAuth(ID: self.ID, code: "123456") {
-                    logging.isSignedIn = true
+                    Authentication().phoneAuth(ID: self.ID, code: self.code) {
+                        phoneVerifyungSuccess = true
                     }
                 }, label: {Text("Отправить код")})
             }
@@ -92,7 +92,7 @@ struct RegistrationView: View {
                         warningText = "Пароль должен содержать минимум 8 символов!"
                     } else {
                         warningText = ""
-                        Authentication().signUp(email: email, password: password) {
+                        Authentication().signUp(email: email, password: password, phone: "010\(phonenumber)") {
                             warningText = Pref.registerCompletion
                             if warningText == "success" {
                                 showingAlertSuccess = true
@@ -107,12 +107,14 @@ struct RegistrationView: View {
                 .alert(isPresented: $showingAlertSuccess) {
                     Alert(
                         title: Text("Регистрация выполнена успешно!"),
-                        dismissButton: .default(Text("Ок"))
+                        dismissButton: .destructive(Text("Ок"), action: {
+                            presentationMode.wrappedValue.dismiss()
+                        })
                     )
             }
                 
                 
-                .disabled(email.isEmpty || password.isEmpty || rePassword.isEmpty)
+                .disabled(email.isEmpty || password.isEmpty || rePassword.isEmpty || !phoneVerifyungSuccess)
                 
             }
         }.navigationBarTitle("Регистрация")
