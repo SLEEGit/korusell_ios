@@ -18,13 +18,14 @@ struct iosAppApp: App {
             ContentView()
                 .onOpenURL { url in
                   print("Received URL: \(url)")
-                  Auth.auth().canHandle(url) // <- just for information purposes
+                    Auth.auth().canHandle(url) // <- just for information purposes
                 }
+                .onOpenURL(perform: { url in
+                    ApplicationDelegate.shared.application(UIApplication.shared, open: url, sourceApplication: nil, annotation: UIApplication.OpenURLOptionsKey.annotation)
+                })
         }
     }
 }
-
-
 
 
 class AppDelegate: NSObject, UIApplicationDelegate {

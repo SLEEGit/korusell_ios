@@ -26,6 +26,9 @@ struct MyBusinessView: View {
     @State private var showingAlertDelete = false
     @State private var showingHint = false
     @State private var showingHint2 = false
+    @State private var businessWarning = false
+    
+    
     @Environment(\.presentationMode) var presentationMode: Binding<PresentationMode>
     
     
@@ -209,8 +212,21 @@ struct MyBusinessView: View {
                     Spacer()
                 }
             }
-        }.navigationTitle("Мой Бизнес")
+        }.alert(isPresented: $businessWarning) {
+            Alert(
+                title: Text("Создавая бизнес страницу, информация из Вашего профиля становится также доступной"),
+                dismissButton: .default(Text("Ок"))
+            )
+        }
+        
+        .navigationTitle("Мой Бизнес")
             .onAppear {
+                businessWarning = true
+                if Pref.userDefault.bool(forKey: "business") {
+                    businessWarning = false
+                }
+                Pref.userDefault.set(true, forKey: "business")
+                Pref.userDefault.synchronize()
                 
                 DB().getImage(uid: uid, directory: "images") { image in
                     self.image = image

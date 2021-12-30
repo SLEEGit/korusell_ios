@@ -13,6 +13,7 @@ class Pref {
     static var registerCompletion: String = ""
     
     static var isLoggedIn: Bool = false
+    static let business = UserDefaults.standard.bool(forKey: "business")
     
     static var any: Bool {
         get {
