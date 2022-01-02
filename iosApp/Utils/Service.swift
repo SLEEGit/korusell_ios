@@ -20,6 +20,7 @@ struct Service: Codable, Identifiable {
     let description: String
     let latitude: String
     let longitude: String
+    var social: [String] = ["", "", "", "", ""]
     
     init(dictionary: [String: Any]) {
         self.uid = dictionary["uid"] as? String ?? ""
@@ -31,9 +32,10 @@ struct Service: Codable, Identifiable {
         self.description = dictionary["description"] as? String ?? ""
         self.latitude = dictionary["latitude"] as? String ?? ""
         self.longitude = dictionary["longitude"] as? String ?? ""
+        self.social = dictionary["social"] as? [String] ?? []
     }
     
-    init(uid: String, name: String, category: String, city: String, address: String, phone: String, description: String, latitude: String, longitude: String) {
+    init(uid: String, name: String, category: String, city: String, address: String, phone: String, description: String, latitude: String, longitude: String, social: [String]) {
         self.uid = uid
         self.name = name
         self.category = category
@@ -43,6 +45,7 @@ struct Service: Codable, Identifiable {
         self.description = description
         self.latitude = latitude
         self.longitude = longitude
+        self.social = social
     }
 }
 
@@ -94,26 +97,29 @@ struct ExpandedServiceDetails: View {
     @State var image: UIImage
     @State var isShowSheet: Bool = false
     var body: some View {
-        Form {
-            UrlImageView(urlString: service.uid)
-                .scaledToFit()
-            Section {
-                
+        ScrollView {
+            VStack(alignment: .leading) {
+                UrlImageView(urlString: service.uid)
+                    .scaledToFill()
+                    .cornerRadius(15)
+                    .padding()
                 Text(service.name)
-                    .font(.title3)
-                
+                    .font(.title)
+                    .bold()
+                    .padding(.leading, 15)
                 HStack {
                     Text("Город")
-                        .font(.caption)
+                        .font(.body)
                         .foregroundColor(.gray)
                     Divider()
                     Text(service.city)
-                        .font(.caption)
-                }
+                        .font(.body)
+                }.padding(.leading, 15)
                 HStack {
                     Text("Адрес")
-                        .font(.caption)
+                        .font(.body)
                         .foregroundColor(.gray)
+                        .padding(.bottom, 15)
                     Divider()
                     Text(service.address)
                         .contextMenu {
@@ -124,79 +130,100 @@ struct ExpandedServiceDetails: View {
                                 Image(systemName: "doc.on.doc")
                             }
                         }
-                        .font(.caption)
-                }
-
+                        .font(.body)
+                }.padding(.horizontal, 15)
+                
+                Divider()
+                Text("Описание")
+                    .font(.headline)
+                    .padding(15)
                 Text(service.description)
-                    .font(.caption)
+                    .font(.body)
                     .multilineTextAlignment(.leading)
                     .lineLimit(nil)
-                    .padding(.bottom, 10)
+                    .padding(.horizontal, 15)
+                    .padding(.bottom, 20)
                 // эта штука снизу убрала троеточие в тексте
                     .minimumScaleFactor(0.1)
                 
-            }
-            
-            Section {
-                Button(action: {
-                    Util().call(numberString: service.phone)
-                }) {
-                    HStack(alignment: .center) {
-                        Spacer()
+                
+                Group {
+                    Divider().padding(.bottom, 20)
+                    Button(action: {
+                        Util().call(numberString: service.phone)
+                    }) {
                         Image(systemName: "phone.fill")
                         Text(service.phone)
-                        Spacer()
                     }
-                }
-            }
-            Section {
-                Link(destination: URL(string: "https://www.instagram.com/k0jihero/")!, label: {
-                    Image("facebook")
-                        .resizable()
-                        .scaledToFit()
-                        .frame(width: 50, height: 50)
-                })
-                Link(destination: URL(string: "https://www.instagram.com/k0jihero/")!, label: {
-                    Image("instagram")
-                        .resizable()
-                        .scaledToFit()
-                        .frame(width: 50, height: 50)
-                })
-                Link(destination: URL(string: "https://www.instagram.com/k0jihero/")!, label: {
-                    Image("youtube")
-                        .resizable()
-                        .scaledToFit()
-                        .frame(width: 50, height: 50)
-                })
-                Link(destination: URL(string: "https://www.instagram.com/k0jihero/")!, label: {
-                    Image("webpage")
-                        .resizable()
-                        .scaledToFit()
-                        .frame(width: 50, height: 50)
-                })
-                Link(destination: URL(string: "https://www.instagram.com/k0jihero/")!, label: {
-                    Image("telegram")
-                        .resizable()
-                        .scaledToFit()
-                        .frame(width: 50, height: 50)
-                })
-            }
-            
-            
-        
-            if service.uid.count > 10 {
-                Section {
-                    Button(action: {
-                        isShowSheet = true
-                    }) {
-                        HStack(alignment: .center) {
-                            Spacer()
-                            Image(systemName: "person.crop.circle")
-                            Text("Контактное лицо")
-                            Spacer()
+                    .foregroundColor(.white)
+                    .padding()
+                    .background(Color.accentColor)
+                    .cornerRadius(8)
+                }.position(x: UIScreen.main.bounds.width/2)
+                    .padding(.vertical, 20)
+                    
+                HStack(spacing: 30) {
+                    Spacer()
+                    if service.social[0] != "" {
+                        Link(destination: URL(string: service.social[0])!, label: {
+                                Image("facebook")
+                                    .resizable()
+                                    .scaledToFit()
+                                    .frame(width: 40, height: 40)
+                        })
+                    }
+                    if service.social[1] != "" {
+                        Link(destination: URL(string: service.social[1])!, label: {
+                                Image("instagram")
+                                    .resizable()
+                                    .scaledToFit()
+                                    .frame(width: 40, height: 40)
+                        })
+                    }
+                    if service.social[2] != "" {
+                        Link(destination: URL(string: service.social[2])!, label: {
+                                Image("telegram")
+                                    .resizable()
+                                    .scaledToFit()
+                                    .frame(width: 40, height: 40)
+                        })
+                    }
+                    if service.social[3] != "" {
+                        Link(destination: URL(string: service.social[3])!, label: {
+                                Image("youtube")
+                                    .resizable()
+                                    .scaledToFit()
+                                    .frame(width: 40, height: 40)
+                        })
+                    }
+                    if service.social[4] != "" {
+                        Link(destination: URL(string: service.social[4])!, label: {
+                                Image("webpage")
+                                    .resizable()
+                                    .scaledToFit()
+                                    .frame(width: 40, height: 40)
+                        })
+                    }
+                    Spacer()
+                }.padding(.bottom, 30)
+                
+                
+                
+                if service.uid.count > 10 {
+                    Section {
+                        Button(action: {
+                            isShowSheet = true
+                        }) {
+                            HStack(alignment: .center) {
+                                Spacer()
+                                Image(systemName: "person.crop.circle")
+                                Text("Контактное лицо")
+                                Spacer()
+                            }
+                        }.padding(30)
+                        .sheet(isPresented: $isShowSheet) {
+                            OwnerView(ownerUid: service.uid)
                         }
-                    }.sheet(isPresented: $isShowSheet) {
-                        OwnerView(ownerUid: service.uid)
                     }
                 }
             }

@@ -120,7 +120,7 @@ class Authentication {
                 return
             }
             if let user = result?.user {
-                DB().createUserInDB(user: user, phone: phone) {
+                DB().createUserInDB(user: user, email: email, phone: phone) {
                     Pref.registerCompletion = "success"
                     completion()
                 }

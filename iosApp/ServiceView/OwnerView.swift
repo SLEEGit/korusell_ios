@@ -63,19 +63,22 @@ struct OwnerView: View {
                 Spacer()
                 Text(name)
             }
-            Section {
-                Button(action: {
-                    Util().call(numberString: phone)
-                }) {
-                    HStack(alignment: .center) {
-                        Spacer()
-                        Image(systemName: "phone.fill")
-                        Text(phone)
-                        Spacer()
+            if phone != "" {
+                Section {
+                    Button(action: {
+                        Util().call(numberString: phone)
+                    }) {
+                        HStack(alignment: .center) {
+                            Spacer()
+                            Image(systemName: "phone.fill")
+                            Text(phone)
+                            Spacer()
+                        }
                     }
+                    
                 }
-                
             }
+
             
         }
         .onAppear {

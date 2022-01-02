@@ -34,6 +34,7 @@ struct ProfileView: View {
     @State var latitude: String = ""
     @State var longitude: String = ""
     @State var category: String = ""
+    @State var social: [String] = ["","","","",""]
     
     //    @Environment(\.presentationMode) var presentationMode
     //    @Binding var selectedImage: UIImage
@@ -99,7 +100,7 @@ struct ProfileView: View {
                     Text(phone)
                 }
                 Section {
-                    NavigationLink(destination: MyBusinessView(uid: $uid, name: $bname, city: $city, address: $address, phone: $bphone, description: $description, latitude: $latitude, longitude: $longitude, category: $category)) {
+                    NavigationLink(destination: MyBusinessView(uid: $uid, name: $bname, city: $city, address: $address, phone: $bphone, description: $description, latitude: $latitude, longitude: $longitude, category: $category, social: $social)) {
                         HStack {
                             Text("Мой Бизнес")
                             Spacer()
@@ -174,6 +175,7 @@ struct ProfileView: View {
                 self.latitude = business.latitude
                 self.longitude = business.longitude
                 self.category = business.category
+                self.social = business.social
             }
             
             DB().getImage(uid: uid, directory: "avatars") { image in

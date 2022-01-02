@@ -18,6 +18,7 @@ struct MyBusinessView: View {
     @Binding var latitude: String
     @Binding var longitude: String
     @Binding var category: String
+    @Binding var social: [String]
     
     @State var directory: String = "images"
     @State private var image = UIImage(named: "blank")!
@@ -27,8 +28,6 @@ struct MyBusinessView: View {
     @State private var showingHint = false
     @State private var showingHint2 = false
     @State private var businessWarning = false
-    
-    
     @Environment(\.presentationMode) var presentationMode: Binding<PresentationMode>
     
     
@@ -47,7 +46,7 @@ struct MyBusinessView: View {
                         .frame(maxWidth: .infinity, maxHeight: .infinity, alignment: .center)
                         .listRowInsets(EdgeInsets())
                         .background(Color(UIColor.systemGroupedBackground).opacity(0.1))
-//                        .background(Color(UIColor.systemGroupedBackground))
+                    //                        .background(Color(UIColor.systemGroupedBackground))
                 }
                 Button("Выбрать картинку") {
                     isShowPhotoLibrary = true
@@ -150,68 +149,77 @@ struct MyBusinessView: View {
                 TextEditor(text: $description)
                     .frame(height: 100)
             }
-            
-            Section {
-                HStack {
-                    Spacer()
-                    Button("Обновить данные") {
-                        Util().getCoordinates(address: address) { lat, long in
-                            self.latitude = lat
-                            self.longitude = long
-                            DispatchQueue.main.asyncAfter(deadline: .now() + 0.1) {
-                            DB().updateBusiness(uid: uid, name: name, category: category, city: city, address: address, phone: phone, descrition: description, latitude: latitude, longitude: longitude) {
-                                showingAlert = true
+            Group {
+                Section {
+                    NavigationLink(destination: AddLinksView(social: $social), label: {
+                        Text("Добавить ссылки")
+                    })
+                }
+                
+                Section {
+                    HStack {
+                        Spacer()
+                        Button("Обновить данные") {
+                            Util().getCoordinates(address: address) { lat, long in
+                                self.latitude = lat
+                                self.longitude = long
+                                DispatchQueue.main.asyncAfter(deadline: .now() + 0.1) {
+                                    DB().updateBusiness(uid: uid, name: name, category: category, city: city, address: address, phone: phone, descrition: description, latitude: latitude, longitude: longitude, social: social) {
+                                        showingAlert = true
+                                    }
+                                }
                             }
-                            }
+                            
+                            
+                        }.alert(isPresented: $showingAlert) {
+                            Alert(
+                                title: Text("Данные успешно обновлены"),
+                                dismissButton: .destructive((Text("Ок")), action: {
+                                    presentationMode.wrappedValue.dismiss()
+                                })
+                            )
                         }
-
-                        
-                    }.alert(isPresented: $showingAlert) {
-                        Alert(
-                            title: Text("Данные успешно обновлены"),
-                            dismissButton: .destructive((Text("Ок")), action: {
-                                presentationMode.wrappedValue.dismiss()
-                            })
-                        )
+                        Spacer()
                     }
-                    Spacer()
                 }
-            }
-            
-            Section {
-                HStack {
-                    Spacer()
-                    Button(action: {
-                        showingAlertDelete = true
-                    }) {
-                        Text("Удалить бизнес")
-                            .foregroundColor(Color.red)
-                    }.disabled(
-                        self.name == "" &&
-                        self.category == "" &&
-                        self.city == "" &&
-                        self.address == "" &&
-                        self.phone == "" &&
-                        self.description == ""
-                    ).alert(isPresented: $showingAlertDelete) {
-                        Alert(
-                            title: Text("Вы уверены что хотите удалить Ваш бизнес?"),
-                            primaryButton: .destructive(Text("Удалить"), action: {
-                                DB().deleteBusiness(uid: uid)
-                                self.name = ""
-                                self.category = ""
-                                self.city = ""
-                                self.address = ""
-                                self.phone = ""
-                                self.description = ""
-                                presentationMode.wrappedValue.dismiss()
-                                
-                            }),
-                            secondaryButton: .cancel(Text("Отмена"))
-                        )
+                
+                
+                Section {
+                    HStack {
+                        Spacer()
+                        Button(action: {
+                            showingAlertDelete = true
+                        }) {
+                            Text("Удалить бизнес")
+                                .foregroundColor(Color.red)
+                        }.disabled(
+                            self.name == "" &&
+                            self.category == "" &&
+                            self.city == "" &&
+                            self.address == "" &&
+                            self.phone == "" &&
+                            self.description == ""
+                        ).alert(isPresented: $showingAlertDelete) {
+                            Alert(
+                                title: Text("Вы уверены что хотите удалить Ваш бизнес?"),
+                                primaryButton: .destructive(Text("Удалить"), action: {
+                                    DB().deleteBusiness(uid: uid)
+                                    self.name = ""
+                                    self.category = ""
+                                    self.city = ""
+                                    self.address = ""
+                                    self.phone = ""
+                                    self.description = ""
+                                    presentationMode.wrappedValue.dismiss()
+                                    
+                                }),
+                                secondaryButton: .cancel(Text("Отмена"))
+                            )
+                        }
+                        Spacer()
                     }
-                    Spacer()
                 }
+                
             }
         }.alert(isPresented: $businessWarning) {
             Alert(
@@ -221,39 +229,19 @@ struct MyBusinessView: View {
         }
         
         .navigationTitle("Мой Бизнес")
-            .onAppear {
-                businessWarning = true
-                if Pref.userDefault.bool(forKey: "business") {
-                    businessWarning = false
-                }
-                Pref.userDefault.set(true, forKey: "business")
-                Pref.userDefault.synchronize()
-                
-                DB().getImage(uid: uid, directory: "images") { image in
-                    self.image = image
-                }
+        .onAppear {
+            businessWarning = true
+            if Pref.userDefault.bool(forKey: "business") {
+                businessWarning = false
             }
-        //        .toolbar {
-        //            Button("Готово") {
-        //                Util().getCoordinates(address: address) { lat, long in
-        //                    self.latitude = lat
-        //                    self.longitude = long
-        //                }
-        //                DispatchQueue.main.asyncAfter(deadline: .now() + 1) {
-        //                    DB().updateBusiness(uid: uid, name: name, category: category, city: city, address: address, phone: phone, descrition: description, latitude: latitude, longitude: longitude) {
-        //                        showingAlert = true
-        //                    }
-        //                }
-        //
-        //            }.alert("Данные успешно обновлены", isPresented: $showingAlert) {
-        //                Button("Ок") {
-        //                    presentationMode.wrappedValue.dismiss()
-        //                }
-        //            }
-        //        }
-        
+            Pref.userDefault.set(true, forKey: "business")
+            Pref.userDefault.synchronize()
+            
+            DB().getImage(uid: uid, directory: "images") { image in
+                self.image = image
+            }
+        }
     }
-    
 }
 
 //struct MyBusinessView_Previews: PreviewProvider {

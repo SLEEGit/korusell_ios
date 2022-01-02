@@ -13,6 +13,7 @@
 		253305CB275603A60061DD28 /* AdsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 253305CA275603A60061DD28 /* AdsView.swift */; };
 		253305CD27560E450061DD28 /* MenuItems.swift in Sources */ = {isa = PBXBuildFile; fileRef = 253305CC27560E440061DD28 /* MenuItems.swift */; };
 		253305CF27571F690061DD28 /* ServiceView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 253305CE27571F690061DD28 /* ServiceView.swift */; };
+		254084FE2781602D00D30CF5 /* AddLinksView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 254084FD2781602D00D30CF5 /* AddLinksView.swift */; };
 		2542E347277436B600883E0D /* OwnerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2542E346277436B500883E0D /* OwnerView.swift */; };
 		2542E3492774664800883E0D /* MyAdvView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2542E3482774664800883E0D /* MyAdvView.swift */; };
 		25441F8C2767260D00B6E240 /* MapView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 25441F8B2767260D00B6E240 /* MapView.swift */; };
@@ -54,6 +55,7 @@
 		253305CA275603A60061DD28 /* AdsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AdsView.swift; sourceTree = "<group>"; };
 		253305CC27560E440061DD28 /* MenuItems.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MenuItems.swift; sourceTree = "<group>"; };
 		253305CE27571F690061DD28 /* ServiceView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ServiceView.swift; sourceTree = "<group>"; };
+		254084FD2781602D00D30CF5 /* AddLinksView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddLinksView.swift; sourceTree = "<group>"; };
 		2542E346277436B500883E0D /* OwnerView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OwnerView.swift; sourceTree = "<group>"; };
 		2542E3482774664800883E0D /* MyAdvView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyAdvView.swift; sourceTree = "<group>"; };
 		25441F8B2767260D00B6E240 /* MapView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MapView.swift; sourceTree = "<group>"; };
@@ -226,6 +228,7 @@
 				25ED2B602771A08900575FEB /* Info.swift */,
 				2542E3482774664800883E0D /* MyAdvView.swift */,
 				25558EE427774B9300E1481B /* OtherCity.swift */,
+				254084FD2781602D00D30CF5 /* AddLinksView.swift */,
 			);
 			path = Profile;
 			sourceTree = "<group>";
@@ -384,6 +387,7 @@
 				253305CB275603A60061DD28 /* AdsView.swift in Sources */,
 				259936142769E33900F468B6 /* RegistrationView.swift in Sources */,
 				25441F922768476A00B6E240 /* LocationManager2.swift in Sources */,
+				254084FE2781602D00D30CF5 /* AddLinksView.swift in Sources */,
 				25558EE527774B9300E1481B /* OtherCity.swift in Sources */,
 				2542E3492774664800883E0D /* MyAdvView.swift in Sources */,
 				25ED2B55276CE75000575FEB /* MyBusinessView.swift in Sources */,
