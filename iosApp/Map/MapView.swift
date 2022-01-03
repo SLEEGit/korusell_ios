@@ -48,7 +48,7 @@ struct MapView: View {
     
     var body: some View {
         NavigationView {
-            ZStack(alignment: .top) {
+            ZStack(alignment: .bottom) {
                 Map(coordinateRegion: $mapRegion, interactionModes: .all, showsUserLocation: true, userTrackingMode: $trackingMode, annotationItems: list)
             { service in
                     MapAnnotation(coordinate: CLLocationCoordinate2D(latitude: Double(service.latitude) ?? 0.0, longitude: Double(service.longitude) ?? 0.0)) {
@@ -233,6 +233,7 @@ struct MapView: View {
                         .foregroundColor(.white)
                         .frame(width: 60, height: 60)
                         .shadow(color: Color.gray, radius: 1, x: 1, y: 1)
+                        .padding()
                     } else {
                         Button(action: {
                             locationManager.requestLocation()

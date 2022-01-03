@@ -19,7 +19,6 @@
 		25441F8C2767260D00B6E240 /* MapView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 25441F8B2767260D00B6E240 /* MapView.swift */; };
 		25441F8E2768269C00B6E240 /* DetailsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 25441F8D2768269C00B6E240 /* DetailsView.swift */; };
 		25441F90276844C700B6E240 /* LocationManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 25441F8F276844C700B6E240 /* LocationManager.swift */; };
-		25441F922768476A00B6E240 /* LocationManager2.swift in Sources */ = {isa = PBXBuildFile; fileRef = 25441F912768476A00B6E240 /* LocationManager2.swift */; };
 		254B21C9275C63340099E287 /* ProfileView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 254B21C8275C63340099E287 /* ProfileView.swift */; };
 		25558EE32777225D00E1481B /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 25558EE22777225D00E1481B /* GoogleService-Info.plist */; };
 		25558EE527774B9300E1481B /* OtherCity.swift in Sources */ = {isa = PBXBuildFile; fileRef = 25558EE427774B9300E1481B /* OtherCity.swift */; };
@@ -61,7 +60,6 @@
 		25441F8B2767260D00B6E240 /* MapView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MapView.swift; sourceTree = "<group>"; };
 		25441F8D2768269C00B6E240 /* DetailsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailsView.swift; sourceTree = "<group>"; };
 		25441F8F276844C700B6E240 /* LocationManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocationManager.swift; sourceTree = "<group>"; };
-		25441F912768476A00B6E240 /* LocationManager2.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocationManager2.swift; sourceTree = "<group>"; };
 		254B21C8275C63340099E287 /* ProfileView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileView.swift; sourceTree = "<group>"; };
 		25558EE22777225D00E1481B /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		25558EE427774B9300E1481B /* OtherCity.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OtherCity.swift; sourceTree = "<group>"; };
@@ -122,7 +120,6 @@
 				25441F8B2767260D00B6E240 /* MapView.swift */,
 				25441F8D2768269C00B6E240 /* DetailsView.swift */,
 				25441F8F276844C700B6E240 /* LocationManager.swift */,
-				25441F912768476A00B6E240 /* LocationManager2.swift */,
 			);
 			path = Map;
 			sourceTree = "<group>";
@@ -386,7 +383,6 @@
 				25441F8C2767260D00B6E240 /* MapView.swift in Sources */,
 				253305CB275603A60061DD28 /* AdsView.swift in Sources */,
 				259936142769E33900F468B6 /* RegistrationView.swift in Sources */,
-				25441F922768476A00B6E240 /* LocationManager2.swift in Sources */,
 				254084FE2781602D00D30CF5 /* AddLinksView.swift in Sources */,
 				25558EE527774B9300E1481B /* OtherCity.swift in Sources */,
 				2542E3492774664800883E0D /* MyAdvView.swift in Sources */,
