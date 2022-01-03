@@ -18,6 +18,7 @@ struct LoginView : View {
     @State var warningText: String = ""
     @State var showAlert: Bool = false
     @State var isLoading: Bool = false
+    @State var isShowInfo: Bool = false
     
     var body: some View {
         ZStack {
@@ -73,24 +74,38 @@ struct LoginView : View {
                                 .foregroundColor(.accentColor)
                         }
                     }
-                }.toolbar {
-                    Button(action: {
-                        Authentication().passwordResetRequest(email: email, onSuccess: {
-                            showAlert = true
-                            print("---> onSuccess")
-                        }) { error in
-                            
-                            warningText = error
+                }.navigationBarTitle("Войти")
+                .toolbar {
+                    ToolbarItem(placement: .navigationBarLeading) {
+                        Button(action: {
+                                isShowInfo = true
+                        }, label: {
+                            Text("ℹ️")
+                        }).alert(isPresented: $isShowInfo) {
+                            Alert(
+                                title: Text("Чтобы разместить свой бизнес или объявление, создайте аккаунт"),
+                                dismissButton: .default(Text("Ок"))
+                            )
                         }
-                    }, label: {
-                        Text("Забыли пароль?")
-                    }).alert(isPresented: $showAlert) {
-                        Alert(
-                            title: Text("На Вашу почту отправлена ссылка для восстановления пароля"),
-                            dismissButton: .default(Text("Ок"))
-                        )
                     }
-                    .navigationBarTitle("Войти")
+                    ToolbarItem(placement: .navigationBarTrailing) {
+                        Button(action: {
+                            Authentication().passwordResetRequest(email: email, onSuccess: {
+                                showAlert = true
+                                print("---> onSuccess")
+                            }) { error in
+                                
+                                warningText = error
+                            }
+                        }, label: {
+                            Text("Забыли пароль?")
+                        }).alert(isPresented: $showAlert) {
+                            Alert(
+                                title: Text("На Вашу почту отправлена ссылка для восстановления пароля"),
+                                dismissButton: .default(Text("Ок"))
+                            )
+                        }
+                    }
                 }
                 
             }.disabled(isLoading)

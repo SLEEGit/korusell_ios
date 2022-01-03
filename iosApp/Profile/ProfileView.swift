@@ -140,6 +140,21 @@ struct ProfileView: View {
                 }
                 Section {
                     Button(action: {
+                        isShowInfo = true
+                    }) {
+                        HStack {
+                            Spacer()
+                            Image(systemName: "message.fill")
+                            Text("Написать разработчикам")
+                            Spacer()
+                        }
+                        
+                    }.sheet(isPresented: $isShowInfo) {
+                        Info()
+                    }
+                }
+                Section {
+                    Button(action: {
                         showingAlert = true
                     })
                     {
@@ -164,18 +179,18 @@ struct ProfileView: View {
                 }
             }
             .navigationBarTitle("Моя страница")
-            .toolbar {
-                Button(action: {
-                    isShowInfo = true
-                }) {
-                    Image(systemName: "questionmark.circle.fill")
-                        .renderingMode(.original)
-                        .shadow(radius: 2)
-                }.sheet(isPresented: $isShowInfo) {
-                    Info()
-                }
-                
-            }
+//            .toolbar {
+//                Button(action: {
+//                    isShowInfo = true
+//                }) {
+//                    Image(systemName: "questionmark.circle.fill")
+//                        .renderingMode(.original)
+//                        .shadow(radius: 2)
+//                }.sheet(isPresented: $isShowInfo) {
+//                    Info()
+//                }
+//
+//            }
             
         }.onAppear {
             DB().getUser(uid: user.uid) { user in
