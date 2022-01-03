@@ -60,11 +60,13 @@ struct LoginView : View {
                                     .resizable()
                                     .scaledToFill()
                                     .frame(width: 30, height: 30)
-                                Text("Войти через Фейсбук")
+                                Text("Вход через Facebook")
+                                    .bold()
                             }
                             
                         })
                     }
+                    
                     Section(header: Text("Создать новый аккаунт")) {
                         NavigationLink(destination: RegistrationView()) {
                             Text("Зарегистрироваться")

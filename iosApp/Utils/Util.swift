@@ -134,7 +134,7 @@ class Util {
         case "change":
             afterCategory = unsortedList.filter { $0.category == "change" }
         default:
-            afterCategory = unsortedList
+            afterCategory = unsortedList.filter  { $0.category == "zavod" }
         }
         
         switch city {
