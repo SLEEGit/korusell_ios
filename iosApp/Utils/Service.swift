@@ -55,7 +55,7 @@ struct ExpandedService: View {
     var body: some View {
         HStack {
             //            FirebaseImage(id: "vishenka")
-            UrlImageView(urlString: service.uid)
+            UrlImageView(urlString: service.uid, directory: "images")
                 .frame(width: 100, height: 100)
             //            Image(uiImage: self.image)
             //                .resizable()
@@ -99,7 +99,7 @@ struct ExpandedServiceDetails: View {
     var body: some View {
         ScrollView {
             VStack(alignment: .leading) {
-                UrlImageView(urlString: service.uid)
+                UrlImageView(urlString: service.uid, directory: "images")
                     .scaledToFill()
                     .cornerRadius(15)
                     .padding()

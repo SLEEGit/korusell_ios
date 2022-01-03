@@ -50,7 +50,7 @@ struct ExpandedAdv: View {
     var body: some View {
         HStack {
             //            FirebaseImage(id: "vishenka")
-            UrlImageView(urlString: adv.uid)
+            UrlImageView(urlString: adv.uid, directory: "advImages")
                 .frame(width: 100, height: 100)
             //            Image(uiImage: self.image)
             //                .resizable()
@@ -101,7 +101,7 @@ struct ExpandedAdvDetails: View {
     var body: some View {
         ScrollView {
             VStack(alignment: .leading) {
-                UrlImageView(urlString: adv.uid)
+                UrlImageView(urlString: adv.uid, directory: "advImages")
                     .scaledToFill()
                     .cornerRadius(15)
                     .padding()
@@ -174,7 +174,7 @@ struct ExpandedAdvDetails: View {
                                 Text("Контактное лицо")
                                 Spacer()
                             }
-                        }.padding(30)
+                        }.padding(20)
                         .sheet(isPresented: $isShowSheet) {
                             OwnerView(ownerUid: adv.uid)
                         }

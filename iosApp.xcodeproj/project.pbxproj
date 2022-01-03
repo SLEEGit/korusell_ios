@@ -234,8 +234,8 @@
 				254B21C8275C63340099E287 /* ProfileView.swift */,
 				25ED2B56276CE9A600575FEB /* EditNameView.swift */,
 				25ED2B54276CE75000575FEB /* MyBusinessView.swift */,
-				25ED2B602771A08900575FEB /* Info.swift */,
 				2542E3482774664800883E0D /* MyAdvView.swift */,
+				25ED2B602771A08900575FEB /* Info.swift */,
 				25558EE427774B9300E1481B /* OtherCity.swift */,
 				254084FD2781602D00D30CF5 /* AddLinksView.swift */,
 			);

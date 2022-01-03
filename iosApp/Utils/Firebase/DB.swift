@@ -164,7 +164,25 @@ class DB: ObservableObject {
         })
     }
     
-    
+    func getMyAdv(uid: String, completion: @escaping (Adv) -> ()) {
+        let defaultAdv = Adv(uid: "", name: "", category: "", city: "", price: "", phone: "", description: "", createdAt: "")
+        ref.reference(withPath: "adv").child(uid).getData(completion:  { error, snapshot in
+            guard error == nil else {
+                print(error!.localizedDescription)
+                return;
+            }
+            if snapshot.exists() {
+                let values = snapshot.value as! [String:Any]
+                let adv = Adv(dictionary: values)
+                DispatchQueue.main.async {
+                    completion(adv)
+                }
+            } else {
+                completion(defaultAdv)
+                self.updateAdv(uid: "", name: "", category: "", city: "", price: "", phone: "", descrition: "") {}
+            }
+        })
+    }
     
     //    POST
     func createUserInDB(user: FirebaseAuth.User, email: String = "", name: String = "", created_date: String = "", phone: String = "", completion: @escaping () -> Void) {
@@ -205,6 +223,13 @@ class DB: ObservableObject {
         }
     }
     
+    func updateAdv(uid: String, name: String, category: String, city: String, price: String, phone: String, descrition: String, completion: @escaping () -> Void) {
+
+        ref.reference(withPath: "adv").child(uid).updateChildValues(["uid" : uid, "name" : name, "city" : city, "category" : category, "price" : price, "phone" : phone, "description" : descrition, "createdAt": Date().description])
+        DispatchQueue.main.async {
+            completion()
+        }
+    }
     
     func postImage(image: UIImage, directory: String, uid: String, quality: Double) {
         let storage = Storage.storage().reference().child("\(directory)/\(uid).jpg")
@@ -250,6 +275,12 @@ class DB: ObservableObject {
     func deleteBusiness(uid: String) {
         deleteImage(uid: uid, directory: "images")
         ref.reference(withPath: "services").child(uid).removeValue()
+        
+    }
+    
+    func deleteAdv(uid: String) {
+        deleteImage(uid: uid, directory: "advImages")
+        ref.reference(withPath: "adv").child(uid).removeValue()
         
     }
     

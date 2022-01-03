@@ -18,18 +18,22 @@ struct ContentView: View {
             ServiceMenuView()
                 .tabItem {
                     Image(systemName: "house")
-                }
-            AdvMenuView()
-                .tabItem {
-                    Image(systemName: "bag.fill")
+                    Text("Услуги")
                 }
             MapView()
                 .tabItem {
                     Image(systemName: "map")
+                    Text("Карта")
+                }
+            AdvMenuView()
+                .tabItem {
+                    Image(systemName: "bag.fill")
+                    Text("Объявления")
                 }
             CheckStatusView()
                 .tabItem {
                     Image(systemName: "person.crop.circle")
+                    Text("Профиль")
                 }
         }
         .onAppear {

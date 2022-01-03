@@ -11,8 +11,8 @@ import SwiftUI
 struct UrlImageView: View {
     @ObservedObject var urlImageModel: UrlImageModel
     
-    init(urlString: String?) {
-        urlImageModel = UrlImageModel(urlString: urlString)
+    init(urlString: String?, directory: String?) {
+        urlImageModel = UrlImageModel(urlString: urlString, directory: directory)
     }
     
     var body: some View {
@@ -30,10 +30,12 @@ struct UrlImageView: View {
 class UrlImageModel: ObservableObject {
     @Published var image: UIImage?
     var urlString: String?
+    var directory: String?
     var imageCache = ImageCache.getImageCache()
     
-    init(urlString: String?) {
+    init(urlString: String?, directory: String?) {
         self.urlString = urlString
+        self.directory = directory
         loadImage()
     }
     
@@ -62,8 +64,13 @@ class UrlImageModel: ObservableObject {
         guard let urlString = urlString else {
             return
         }
+        guard let directory = directory else {
+            return
+        }
+
         
-        DB().getImage(uid: urlString, directory: "images") { img in
+        
+        DB().getImage(uid: urlString, directory: directory) { img in
             self.getImageFromResponse(loadedImage: img, response: nil, error: nil)
             self.image = img
         }

@@ -36,6 +36,16 @@ struct ProfileView: View {
     @State var category: String = ""
     @State var social: [String] = ["","","","",""]
     
+    @State var adv: Adv!
+    @State var aname: String = ""
+    @State var aphone: String = ""
+    @State var acity: String = ""
+    @State var aaddress: String = ""
+    @State var adescription: String = ""
+    @State var price: String = ""
+    @State var createdAt: String = ""
+    @State var acategory: String = ""
+    
     //    @Environment(\.presentationMode) var presentationMode
     //    @Binding var selectedImage: UIImage
     //    @Environment(\.presentationMode) private var presentationMode
@@ -109,10 +119,12 @@ struct ProfileView: View {
                         }
                         
                     }
-                    NavigationLink(destination: MyAdvView()) {
+                    NavigationLink(destination: MyAdvView(uid: $uid, name: $aname, city: $acity, price: $price, phone: $aphone, description: $adescription, createdAt: $createdAt, category: $acategory)) {
                         HStack {
                             Text("🏷")
                             Text("Мои Объявления")
+                            Spacer()
+                            Text(aname)
                         }
                         
                     }
@@ -185,6 +197,19 @@ struct ProfileView: View {
                 self.longitude = business.longitude
                 self.category = business.category
                 self.social = business.social
+            }
+            
+            DB().getMyAdv(uid: user.uid) { adv in
+                print("getting adv in profile")
+                print(adv)
+                self.adv = adv
+                self.aname = adv.name
+                self.aphone = adv.phone
+                self.acity = adv.city
+                self.price = adv.price
+                self.adescription = adv.description
+                self.createdAt = adv.createdAt
+                self.acategory = adv.category
             }
             
             DB().getImage(uid: uid, directory: "avatars") { image in

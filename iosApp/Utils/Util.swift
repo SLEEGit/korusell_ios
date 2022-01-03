@@ -197,13 +197,13 @@ class Util {
 //
     func formatDate(date: String) -> String {
         let dateFormatterGet = DateFormatter()
-        dateFormatterGet.dateFormat = "yyyy-MM-dd'T'HH:mm:ss.SSSZ"
+        dateFormatterGet.dateFormat = "yyyy-MM-dd HH:mm:ss ZZZ"
         let dateFormatterPrint = DateFormatter()
         dateFormatterPrint.dateFormat = "dd MMMM yyyy г."
         dateFormatterPrint.locale = Locale(identifier: "ru_RU")
         let date: Date? = dateFormatterGet.date(from: date)
 
-        return dateFormatterPrint.string(from: date! as Date) 
+        return dateFormatterPrint.string(from: date! as Date)
 
     }
     
