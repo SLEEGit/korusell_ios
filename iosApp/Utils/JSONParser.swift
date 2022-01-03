@@ -8,8 +8,8 @@
 import Foundation
 
 struct Work: Codable, Identifiable {
-//    let id = UUID()
-    var id = UUID()
+    let id = UUID()
+//    var id = UUID()
     let _id: String
     let createdAt: String
     let updatedAt: String
@@ -43,8 +43,14 @@ class JSONParser {
         } else {
             menu = fileName
         }
-            guard let url = Bundle.main.url(forResource: menu, withExtension: "json") else { return }
+            guard let url = Bundle.main.url(forResource: menu, withExtension: "json") else {
+                
+                return
+            }
+        print(menu)
+        print(fileName)
             URLSession.shared.dataTask(with: url) { (data, _, _) in
+                print(data)
                 var list = try! JSONDecoder().decode([Work].self, from: data!)
                 print(list)
                 

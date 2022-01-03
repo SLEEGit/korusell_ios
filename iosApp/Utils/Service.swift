@@ -146,22 +146,24 @@ struct ExpandedServiceDetails: View {
                 // эта штука снизу убрала троеточие в тексте
                     .minimumScaleFactor(0.1)
                 
+                if service.phone != "" {
+                    Group {
+                        Divider().padding(.bottom, 20)
+                        Button(action: {
+                            Util().call(numberString: service.phone)
+                        }) {
+                            Image(systemName: "phone.fill")
+                            Text(service.phone)
+                        }
+                        .foregroundColor(.white)
+                        .padding()
+                        .background(Color.accentColor)
+                        .cornerRadius(8)
+                    }.position(x: UIScreen.main.bounds.width/2)
+                        .padding(.vertical, 20)
+                        
+                }
                 
-                Group {
-                    Divider().padding(.bottom, 20)
-                    Button(action: {
-                        Util().call(numberString: service.phone)
-                    }) {
-                        Image(systemName: "phone.fill")
-                        Text(service.phone)
-                    }
-                    .foregroundColor(.white)
-                    .padding()
-                    .background(Color.accentColor)
-                    .cornerRadius(8)
-                }.position(x: UIScreen.main.bounds.width/2)
-                    .padding(.vertical, 20)
-                    
                 HStack(spacing: 30) {
                     Spacer()
                     if service.social[0] != "" {

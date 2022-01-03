@@ -31,7 +31,7 @@
 ////                JSONParser().getWorkList(fileName: item) { (list) in
 ////                    workCount = String(list.count) }
 ////            }
-//            .navigationTitle("ОБЪЯВЛЕНИЯ")
+//            .navigationTitle("Объявления")
 ////                .toolbar{
 ////                        NavigationLink(destination: InformationView()) {
 ////                        Text("info")

@@ -108,17 +108,17 @@ public class DataFetcher: ObservableObject {
         
         self.menuItem = [
             MenuItem(name: "Работа", image: "🛠", category: "work", children: workMenuItems),
-            MenuItem(name: "Транспорт", image: "🚗", children: carsMenuItems),
-            MenuItem(name: "Недвижимость", image: "🏢", children: realMenuItems),
-            MenuItem(name: "Телефоны и Аксессуары", image: "📱", children: phonesMenuItems),
-            MenuItem(name: "Для дома, хобби", image: "🏠", children: homeMenuItems),
-            MenuItem(name: "Автозапчасти и Аксессуары", image: "⚙️", children: carpartsMenuItems),
-            MenuItem(name: "Электроника", image: "📺", children: electronicsMenuItems),
-            MenuItem(name: "Детские товары", image: "👶🏻", children: childrenMenuItems),
-            MenuItem(name: "Одежда", image: "👕", children: clothesMenuItems),
-            MenuItem(name: "Спорт, туризм и отдых", image: "🏓", children: sportMenuItems),
-            MenuItem(name: "Домашние животные", image: "🐶", children: petsMenuItems),
-            MenuItem(name: "Обмен, отдам бесплатно", image: "🔄")
+            MenuItem(name: "Транспорт", image: "🚗", category: "transport", children: carsMenuItems),
+            MenuItem(name: "Недвижимость", image: "🏢", category: "house", children: realMenuItems),
+            MenuItem(name: "Телефоны и Аксессуары", image: "📱", category: "phone", children: phonesMenuItems),
+            MenuItem(name: "Для дома, хобби", image: "🏠", category: "hobby", children: homeMenuItems),
+            MenuItem(name: "Автозапчасти и Аксессуары", image: "⚙️", category: "car", children: carpartsMenuItems),
+            MenuItem(name: "Электроника", image: "📺", category: "electronic", children: electronicsMenuItems),
+            MenuItem(name: "Детские товары", image: "👶🏻", category: "children", children: childrenMenuItems),
+            MenuItem(name: "Одежда", image: "👕", category: "clothes", children: clothesMenuItems),
+            MenuItem(name: "Спорт, туризм и отдых", image: "🏓", category: "sport", children: sportMenuItems),
+            MenuItem(name: "Домашние животные", image: "🐶", category: "pet", children: petsMenuItems),
+            MenuItem(name: "Обмен, отдам бесплатно", image: "🔄", category: "change")
             ]
         
         self.serviceItem = [

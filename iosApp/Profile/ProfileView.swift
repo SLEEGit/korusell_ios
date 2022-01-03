@@ -102,6 +102,7 @@ struct ProfileView: View {
                 Section {
                     NavigationLink(destination: MyBusinessView(uid: $uid, name: $bname, city: $city, address: $address, phone: $bphone, description: $description, latitude: $latitude, longitude: $longitude, category: $category, social: $social)) {
                         HStack {
+                            Text("💼")
                             Text("Мой Бизнес")
                             Spacer()
                             Text(bname)
@@ -109,12 +110,20 @@ struct ProfileView: View {
                         
                     }
                     NavigationLink(destination: MyAdvView()) {
-                        Text("Мои Объявления")
+                        HStack {
+                            Text("🏷")
+                            Text("Мои Объявления")
+                        }
+                        
                     }
                 }
                 Section {
                     NavigationLink(destination: getDestination(name: name, phone: phone)) {
-                        Text("Управление аккаунтом")
+                        HStack {
+                            Text("👨🏻‍💻")
+                            Text("Управление аккаунтом")
+                        }
+                        
                     }
                 }
                 Section {

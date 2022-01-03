@@ -77,7 +77,7 @@ struct MapView: View {
                     .navigationBarTitleDisplayMode(.inline)
                     .onAppear {
 //                        locationManager2.requestLocation()
-                        session.fetchData(category: "all") { (list) in
+                        session.getServices(category: "all") { (list) in
                             globalServices = list
                             self.isLoading = false
                         }

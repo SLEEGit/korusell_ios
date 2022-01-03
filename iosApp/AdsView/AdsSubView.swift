@@ -21,14 +21,14 @@
 //    
 //    var body: some View {
 //        List(list) { item in
-//            let icon = Util().parseCategory(category: item.category)[0]
-//            let name = Util().parseCategory(category: item.category)[1]
+//            let icon = ""
+//            let name = ""
 //            let date = Util().formatDate(date: item.createdAt)
 //            NavigationLink(destination: AdvView(work: item)) {
 //                HStack {
 //                    Text(icon)
 //                    VStack(alignment: .leading) {
-//                        Text(name)
+//                        Text("name")
 //                            .font(.title2)
 //                        Text(item.salary + " \u{20A9}")
 //                            .font(.title3)
@@ -63,7 +63,7 @@
 //        .navigationTitle(barTitle)
 //        .navigationBarTitleDisplayMode(.inline)
 //        .toolbar{
-//            FilterView()
+//            
 //        }
 //    }
 //    

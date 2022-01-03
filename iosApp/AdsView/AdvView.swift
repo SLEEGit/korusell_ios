@@ -12,11 +12,10 @@
 //    var work: Work!
 //    
 //    var body: some View {
-////        let date = Util().formatDate(date: work.updatedAt)
+//        let date = Util().formatDate(date: work.updatedAt)
 ////        let icon = Util().parseCategory(category: work.category)[0]
 ////        let name = Util().parseCategory(category: work.category)[1]
 //        VStack {
-//            if work.image != [] {
 //                TabView {
 //                    ForEach(work.image, id: \.self) { image in
 //                        Image(image)
@@ -28,20 +27,13 @@
 //                }.indexViewStyle(.page(backgroundDisplayMode: .always))
 //                .tabViewStyle(.page)
 //                    
-//                
-//                    
-//            } else {
-//                Text(icon)
-//                    .font(.system(size: 50))
-//            }
-//
 //            Form {
 //                Section {
 //                    Text(date)
 //                        .font(.caption)
 //                        .foregroundColor(.gray)
 //                    HStack {
-//                        Text(name)
+//                        Text("name")
 //                            .font(.title2)
 //                        Divider()
 //                        Text(work.salary + " \u{20A9}")

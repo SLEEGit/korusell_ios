@@ -1,17 +1,15 @@
 //
-//  TestView.swift
+//  AdvMenuView.swift
 //  iosApp
 //
-//  Created by Sergey Lee on 2021/12/01.
+//  Created by Sergey Lee on 2022/01/03.
 //
 
 import SwiftUI
 
-var globalServices: [Service] = []
-var globalCity: String = "Все города"
-var globalCategory: String = "all"
+var globalAdv: [Adv] = []
 
-struct ServiceMenuView: View {
+struct AdvMenuView: View {
     
     @ObservedObject var fetcher = DataFetcher()
     @State private var city = "Все города"
@@ -21,12 +19,12 @@ struct ServiceMenuView: View {
     @State var isShowInfo: Bool = false
     
     var body: some View {
-        
         ZStack {
 
             NavigationView {
-                List(fetcher.serviceItem) { item in
-                    NavigationLink(destination: ServiceSubView(category: item.category, barTitle: item.image + " " + item.name)) {
+                List(fetcher.menuItem) { item in
+//                List(fetcher.menuItem, children: \.children){ item in
+                    NavigationLink(destination: AdvSubView(category: item.category, barTitle: item.image + " " + item.name)) {
                         HStack{
                             Text(item.image)
                                 .font(.title)
@@ -42,12 +40,12 @@ struct ServiceMenuView: View {
                                         .frame(width: 100, height: 20)
                                         .shadow(color: Color.gray, radius: 1, x: 1, y: 1)
                 )
-                .navigationTitle("Услуги")
+                .navigationTitle("Объявления")
                 .onAppear{
                     
                     city = globalCity
-                    session.getServices(category: "all") { (list) in
-                        globalServices = list
+                    session.getAdvs(category: "all") { (list) in
+                        globalAdv = list
                         self.isLoading = false
                     }
                     
@@ -116,11 +114,5 @@ struct ServiceMenuView: View {
                     .background(Color(UIColor.systemGroupedBackground).opacity(0.1))
             }
         }.navigationViewStyle(StackNavigationViewStyle())
-    }
-}
-
-struct ServiceMenuView_Previews: PreviewProvider {
-    static var previews: some View {
-        ServiceMenuView()
     }
 }

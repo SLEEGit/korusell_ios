@@ -102,7 +102,62 @@ class Util {
         }
     }
     
-    
+    func filterAdv(city: String, category: String, unsortedList: [Adv]) -> [Adv] {
+        
+        var afterCategory: [Adv] = []
+        
+        switch category {
+        case "all":
+            afterCategory = unsortedList
+        case "work":
+            afterCategory = unsortedList.filter { $0.category == "work" }
+        case "transport":
+            afterCategory = unsortedList.filter { $0.category == "transport" }
+        case "house":
+            afterCategory = unsortedList.filter { $0.category == "house" }
+        case "phone":
+            afterCategory = unsortedList.filter { $0.category == "phone" }
+        case "hobby":
+            afterCategory = unsortedList.filter { $0.category == "hobby" }
+        case "car":
+            afterCategory = unsortedList.filter { $0.category == "car" }
+        case "electronic":
+            afterCategory = unsortedList.filter { $0.category == "electronic" }
+        case "children":
+            afterCategory = unsortedList.filter { $0.category == "children" }
+        case "clothes":
+            afterCategory = unsortedList.filter { $0.category == "clothes" }
+        case "sport":
+            afterCategory = unsortedList.filter { $0.category == "sport" }
+        case "pet":
+            afterCategory = unsortedList.filter { $0.category == "pet" }
+        case "change":
+            afterCategory = unsortedList.filter { $0.category == "change" }
+        default:
+            afterCategory = unsortedList
+        }
+        
+        switch city {
+        case "Все города":
+            return afterCategory
+        case "Ансан":
+            return afterCategory.filter { $0.city == "Ансан"}
+        case "Хвасонг":
+            return afterCategory.filter { $0.city == "Хвасонг"}
+        case "Сеул":
+            return afterCategory.filter { $0.city == "Сеул"}
+        case "Инчхон":
+            return afterCategory.filter { $0.city == "Инчхон"}
+        case "Асан":
+            return afterCategory.filter { $0.city == "Асан"}
+        case "Чхонан":
+            return afterCategory.filter { $0.city == "Чхонан"}
+        case "Другой город":
+            return afterCategory.filter { $0.city != "Чхонан" && $0.city != "Хвасонг" && $0.city != "Ансан" && $0.city != "Асан" && $0.city != "Сеул" && $0.city != "Инчхон" && $0.city != "Хвасонг"}
+        default:
+            return afterCategory
+        }
+    }
     
 //        func parseCategory(category: String) -> [String] {
 //            var list: [String] = []
@@ -140,17 +195,17 @@ class Util {
 //            return list
 //        }
 //
-//    func formatDate(date: String) -> String {
-//        let dateFormatterGet = DateFormatter()
-//        dateFormatterGet.dateFormat = "yyyy-MM-dd'T'HH:mm:ss.SSSZ"
-//        let dateFormatterPrint = DateFormatter()
-//        dateFormatterPrint.dateFormat = "dd MMMM yyyy г."
-//        dateFormatterPrint.locale = Locale(identifier: "ru_RU")
-//        let date: Date? = dateFormatterGet.date(from: date)
-//
-//        return dateFormatterPrint.string(from: date! as Date)
-//
-//    }
+    func formatDate(date: String) -> String {
+        let dateFormatterGet = DateFormatter()
+        dateFormatterGet.dateFormat = "yyyy-MM-dd'T'HH:mm:ss.SSSZ"
+        let dateFormatterPrint = DateFormatter()
+        dateFormatterPrint.dateFormat = "dd MMMM yyyy г."
+        dateFormatterPrint.locale = Locale(identifier: "ru_RU")
+        let date: Date? = dateFormatterGet.date(from: date)
+
+        return dateFormatterPrint.string(from: date! as Date) 
+
+    }
     
     
     

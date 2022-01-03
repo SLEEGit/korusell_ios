@@ -65,7 +65,7 @@ class DB: ObservableObject {
         }
     }
     
-    func fetchData(category: String, completion: @escaping ([Service]) -> ()) {
+    func getServices(category: String, completion: @escaping ([Service]) -> ()) {
         ref.reference(withPath: "services").observeSingleEvent(of: .value, with: { snapshot in
             var innerServices: [Service] = []
             if let values = snapshot.value as? [String : [String:Any]] {
@@ -73,6 +73,29 @@ class DB: ObservableObject {
                 for i in values {
                     let service = Service(dictionary: i.value)
                     innerServices.append(service)
+                }
+                DispatchQueue.main.async {
+                    if category != "all" {
+                        innerServices = innerServices.filter { $0.category == category }
+                    }
+                    completion(innerServices)
+                }
+            } else {
+//                тут надо добавить ошибку для юзера!
+                print("FETCHING ERROR!")
+                completion(innerServices)
+            }
+        })
+    }
+    
+    func getAdvs(category: String, completion: @escaping ([Adv]) -> ()) {
+        ref.reference(withPath: "adv").observeSingleEvent(of: .value, with: { snapshot in
+            var innerServices: [Adv] = []
+            if let values = snapshot.value as? [String : [String:Any]] {
+                
+                for i in values {
+                    let adv = Adv(dictionary: i.value)
+                    innerServices.append(adv)
                 }
                 DispatchQueue.main.async {
                     if category != "all" {

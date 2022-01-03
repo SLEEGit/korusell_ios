@@ -19,6 +19,10 @@ struct ContentView: View {
                 .tabItem {
                     Image(systemName: "house")
                 }
+            AdvMenuView()
+                .tabItem {
+                    Image(systemName: "bag.fill")
+                }
             MapView()
                 .tabItem {
                     Image(systemName: "map")
