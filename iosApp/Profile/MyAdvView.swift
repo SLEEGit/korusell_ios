@@ -140,7 +140,7 @@ struct MyAdvView: View {
                 HStack {
                     Spacer()
                     Button("Обновить данные") {
-                        DB().updateAdv(uid: uid, name: name, category: category, city: city, price: price, phone: phone, descrition: description) {
+                        DB().updateAdv(uid: uid, name: name, category: category, city: city, price: price, phone: phone, descrition: description, createdAt: createdAt) {
                             showingAlert = true
                         }
                     }

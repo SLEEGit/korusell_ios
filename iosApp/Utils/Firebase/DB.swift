@@ -179,7 +179,7 @@ class DB: ObservableObject {
                 }
             } else {
                 completion(defaultAdv)
-                self.updateAdv(uid: "", name: "", category: "", city: "", price: "", phone: "", descrition: "") {}
+                self.updateAdv(uid: uid, name: "", category: "", city: "", price: "", phone: "", descrition: "", createdAt: "") {}
             }
         })
     }
@@ -223,7 +223,7 @@ class DB: ObservableObject {
         }
     }
     
-    func updateAdv(uid: String, name: String, category: String, city: String, price: String, phone: String, descrition: String, completion: @escaping () -> Void) {
+    func updateAdv(uid: String, name: String, category: String, city: String, price: String, phone: String, descrition: String, createdAt: String, completion: @escaping () -> Void) {
 
         ref.reference(withPath: "adv").child(uid).updateChildValues(["uid" : uid, "name" : name, "city" : city, "category" : category, "price" : price, "phone" : phone, "description" : descrition, "createdAt": Date().description])
         DispatchQueue.main.async {
