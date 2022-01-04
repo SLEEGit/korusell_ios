@@ -140,7 +140,7 @@ struct MyAdvView: View {
                 HStack {
                     Spacer()
                     Button("Обновить данные") {
-                        DB().updateAdv(uid: uid, name: name, category: category, city: city, price: price, phone: phone, descrition: description, createdAt: createdAt) {
+                        DB().updateAdv(uid: uid, name: name, category: category, city: city, price: price, phone: phone, descrition: description, createdAt: Util().dateByTimeZone()) {
                             showingAlert = true
                         }
                     }
@@ -155,8 +155,6 @@ struct MyAdvView: View {
                 }
                 
             }
-            
-            
             
                 Section {
                     HStack {
@@ -206,6 +204,7 @@ struct MyAdvView: View {
         
         .navigationTitle("Мои объявления")
         .onAppear {
+            
             businessWarning = true
             if Pref.userDefault.bool(forKey: "adv") {
                 businessWarning = false

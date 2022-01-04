@@ -207,6 +207,23 @@ class Util {
 
     }
     
+    func dateByTimeZone() -> String {
+        let currentDate = Date()
+         
+        // 1) Create a DateFormatter() object.
+        let format = DateFormatter()
+         
+        // 2) Set the current timezone to .current, or America/Chicago.
+        format.timeZone = .current
+         
+        // 3) Set the format of the altered date.
+        format.dateFormat = "yyyy-MM-dd HH:mm:ss ZZZ"
+         
+        // 4) Set the current date, altered by timezone.
+        print(currentDate.description)
+        print(format.string(from: currentDate))
+        return format.string(from: currentDate)
+    }
     
     
 }

@@ -198,7 +198,7 @@ struct ProfileView: View {
                 phone = user.phone ?? ""
                 email = user.email
             }
-            DB().updateLastLogin(user: user, last_login: Date().description.localizedLowercase) {}
+            DB().updateLastLogin(user: user, last_login: Util().dateByTimeZone()) {}
             DB().getMyBusiness(uid: user.uid) { business in
                 print("getting business in profile")
                 print(business)

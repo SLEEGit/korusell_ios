@@ -209,7 +209,7 @@ class DB: ObservableObject {
     
     
     func sendMessage(user: FirebaseAuth.User, message: String, completion: @escaping () -> Void) {
-        ref.reference(withPath: "messages").child(user.uid).updateChildValues([Date().description : message, "user" : user.email!])
+        ref.reference(withPath: "messages").child(user.uid).updateChildValues([Util().dateByTimeZone() : message, "user" : user.email!])
         DispatchQueue.main.async {
             completion()
         }
@@ -225,7 +225,7 @@ class DB: ObservableObject {
     
     func updateAdv(uid: String, name: String, category: String, city: String, price: String, phone: String, descrition: String, createdAt: String, completion: @escaping () -> Void) {
 
-        ref.reference(withPath: "adv").child(uid).updateChildValues(["uid" : uid, "name" : name, "city" : city, "category" : category, "price" : price, "phone" : phone, "description" : descrition, "createdAt": Date().description])
+        ref.reference(withPath: "adv").child(uid).updateChildValues(["uid" : uid, "name" : name, "city" : city, "category" : category, "price" : price, "phone" : phone, "description" : descrition, "createdAt": createdAt])
         DispatchQueue.main.async {
             completion()
         }
