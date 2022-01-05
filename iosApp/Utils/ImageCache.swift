@@ -19,9 +19,9 @@ struct UrlImageView: View {
         Image(uiImage: urlImageModel.image ?? UrlImageView.defaultImage!)
             .resizable()
             .scaledToFit()
-            .frame(maxWidth: .infinity, maxHeight: .infinity, alignment: .center)
-            .listRowInsets(EdgeInsets())
-            .background(Color(UIColor.systemGroupedBackground))
+//            .frame(maxWidth: .infinity, maxHeight: .infinity, alignment: .center)
+//            .listRowInsets(EdgeInsets())
+//            .background(Color(UIColor.systemGroupedBackground))
     }
     
     static var defaultImage = UIImage(named: "blank")

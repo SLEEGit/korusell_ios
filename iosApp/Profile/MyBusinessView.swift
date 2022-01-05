@@ -29,7 +29,8 @@ struct MyBusinessView: View {
     @State private var showingHint2 = false
     @State private var businessWarning = false
     @State private var photos: [UIImage] = []
-
+    @State var images: String = "0"
+    
     @Environment(\.presentationMode) var presentationMode: Binding<PresentationMode>
     
     var body: some View {
@@ -40,7 +41,7 @@ struct MyBusinessView: View {
                     ForEach(self.photos, id: \.self) { photo in
                         Image(uiImage: photo)
                             .resizable()
-                            .scaledToFill()
+                            .scaledToFit()
                             .frame(height: 300)
                             .cornerRadius(10)
                             .contextMenu {
@@ -172,11 +173,12 @@ struct MyBusinessView: View {
                     HStack {
                         Spacer()
                         Button("Обновить данные") {
+                            self.images = String(photos.count)
                             Util().getCoordinates(address: address) { lat, long in
                                 self.latitude = lat
                                 self.longitude = long
                                 DispatchQueue.main.asyncAfter(deadline: .now() + 0.1) {
-                                    DB().updateBusiness(uid: uid, name: name, category: category, city: city, address: address, phone: phone, descrition: description, latitude: latitude, longitude: longitude, social: social) {
+                                    DB().updateBusiness(uid: uid, name: name, category: category, city: city, address: address, phone: phone, descrition: description, latitude: latitude, longitude: longitude, social: social, images: images) {
                                         var n = 0
                                         for photo1 in photos {
                                             DB().postImage(image: photo1, directory: directory, uid: uid+String(n), quality: 0.1)

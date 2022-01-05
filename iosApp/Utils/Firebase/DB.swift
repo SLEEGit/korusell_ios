@@ -190,7 +190,7 @@ class DB: ObservableObject {
     }
     
     func getMyBusiness(uid: String, completion: @escaping (Service) -> ()) {
-        let defaultService = Service(uid: "", name: "", category: "", city: "", address: "", phone: "", description: "", latitude: "", longitude: "", social: ["", "", "", "", ""])
+        let defaultService = Service(uid: "", name: "", category: "", city: "", address: "", phone: "", description: "", latitude: "", longitude: "", social: ["", "", "", "", ""], images: "0")
         ref.reference(withPath: "services").child(uid).getData(completion:  { error, snapshot in
             guard error == nil else {
                 print(error!.localizedDescription)
@@ -204,7 +204,7 @@ class DB: ObservableObject {
                 }
             } else {
                 completion(defaultService)
-                self.updateBusiness(uid: uid, name: "", category: "", city: "", address: "", phone: "", descrition: "", latitude: "", longitude: "", social: ["", "", "", "", ""]) { }
+                self.updateBusiness(uid: uid, name: "", category: "", city: "", address: "", phone: "", descrition: "", latitude: "", longitude: "", social: ["", "", "", "", ""], images: "0") { }
             }
         })
     }
@@ -260,9 +260,9 @@ class DB: ObservableObject {
         }
     }
     
-    func updateBusiness(uid: String, name: String, category: String, city: String, address: String, phone: String, descrition: String, latitude: String, longitude: String, social: [String], completion: @escaping () -> Void) {
+    func updateBusiness(uid: String, name: String, category: String, city: String, address: String, phone: String, descrition: String, latitude: String, longitude: String, social: [String], images: String, completion: @escaping () -> Void) {
 
-        ref.reference(withPath: "services").child(uid).updateChildValues(["uid" : uid, "name" : name, "city" : city, "category" : category, "address" : address, "phone" : phone, "description" : descrition, "latitude": latitude, "longitude": longitude, "social": social])
+        ref.reference(withPath: "services").child(uid).updateChildValues(["uid" : uid, "name" : name, "city" : city, "category" : category, "address" : address, "phone" : phone, "description" : descrition, "latitude": latitude, "longitude": longitude, "social": social, "images": images])
         DispatchQueue.main.async {
             completion()
         }

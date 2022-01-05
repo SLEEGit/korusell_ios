@@ -21,6 +21,7 @@ struct Service: Codable, Identifiable {
     let latitude: String
     let longitude: String
     var social: [String] = ["", "", "", "", ""]
+    let images: String
     
     init(dictionary: [String: Any]) {
         self.uid = dictionary["uid"] as? String ?? ""
@@ -33,9 +34,10 @@ struct Service: Codable, Identifiable {
         self.latitude = dictionary["latitude"] as? String ?? ""
         self.longitude = dictionary["longitude"] as? String ?? ""
         self.social = dictionary["social"] as? [String] ?? []
+        self.images = dictionary["images"] as? String ?? ""
     }
     
-    init(uid: String, name: String, category: String, city: String, address: String, phone: String, description: String, latitude: String, longitude: String, social: [String]) {
+    init(uid: String, name: String, category: String, city: String, address: String, phone: String, description: String, latitude: String, longitude: String, social: [String], images: String) {
         self.uid = uid
         self.name = name
         self.category = category
@@ -46,6 +48,7 @@ struct Service: Codable, Identifiable {
         self.latitude = latitude
         self.longitude = longitude
         self.social = social
+        self.images = images
     }
 }
 
@@ -55,7 +58,7 @@ struct ExpandedService: View {
     var body: some View {
         HStack {
             //            FirebaseImage(id: "vishenka")
-            UrlImageView(urlString: service.uid, directory: "images")
+            UrlImageView(urlString: service.uid + "0", directory: "images")
                 .frame(width: 100, height: 100)
             //            Image(uiImage: self.image)
             //                .resizable()
@@ -96,13 +99,39 @@ struct ExpandedServiceDetails: View {
     @State var service: Service
     @State var image: UIImage
     @State var isShowSheet: Bool = false
+    @State var array: [Int] = [0,1,2,3]
+    @State var arrayIm: [UIImage] = []
+    @State var newArray: [Int] = []
     var body: some View {
         ScrollView {
             VStack(alignment: .leading) {
-                UrlImageView(urlString: service.uid, directory: "images")
-                    .scaledToFill()
-                    .cornerRadius(15)
+//                if !self.arrayIm.isEmpty {
+                    TabView {
+                        ForEach(array, id: \.self) { photo in
+                            UrlImageView(urlString: service.uid + String(photo), directory: "images")
+//                            Image(uiImage: photo)
+//                                .resizable()
+//                                .scaledToFit()
+//                                .frame(height: 300)
+//                                .cornerRadius(10)
+                        }
+                    }
                     .padding()
+                    .frame(height: 350)
+                    .cornerRadius(15)
+                        .indexViewStyle(.page(backgroundDisplayMode: .always))
+                        .tabViewStyle(.page)
+//                } else {
+//                    Image("blank")
+//                        .padding()
+//                        .frame(height: 350)
+//                        .cornerRadius(15)
+//
+//                }
+//                UrlImageView(urlString: service.uid, directory: "images")
+//                    .scaledToFill()
+//                    .cornerRadius(15)
+//                    .padding()
                 Text(service.name)
                     .font(.title)
                     .bold()
@@ -211,7 +240,7 @@ struct ExpandedServiceDetails: View {
                 
                 
                 
-                if service.uid.count > 10 {
+                if !service.uid.contains("aaaaaaaaaaaaaaaaaaaaaaa") {
                     Section {
                         Button(action: {
                             isShowSheet = true
@@ -228,6 +257,24 @@ struct ExpandedServiceDetails: View {
                         }
                     }
                 }
+            }.onAppear {
+                self.newArray = []
+                if Int(service.images) == 0 {
+                    newArray.append(0)
+                } else {
+                    for i in 1...Int(service.images)! {
+                        newArray.append(i-1)
+                    }
+                }
+                
+//                DB().getMultiImages(uid: service.uid, directory: "images") { images in
+//                    var newArray: [Int] = []
+//                    for i in 0...images.count-1 {
+//                        newArray.append(i)
+//                    }
+                    self.array = newArray
+//                }
+                
             }
         }
     }
