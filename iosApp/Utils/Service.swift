@@ -140,17 +140,23 @@ struct ExpandedServiceDetails: View {
                     Text("Город")
                         .font(.body)
                         .foregroundColor(.gray)
+                    
                     Divider()
                     Text(service.city)
                         .font(.body)
+                        
                 }.padding(.leading, 15)
+                    .padding(.bottom, 10)
+                    .padding(.top, 10)
                 HStack {
                     Text("Адрес")
                         .font(.body)
                         .foregroundColor(.gray)
-                        .padding(.bottom, 15)
+//                        .padding(.bottom, 15)
+//                        .padding(.trailing, 30)
                     Divider()
                     Text(service.address)
+                        
                         .contextMenu {
                             Button(action: {
                                 UIPasteboard.general.string = service.address
@@ -160,7 +166,8 @@ struct ExpandedServiceDetails: View {
                             }
                         }
                         .font(.body)
-                }.padding(.horizontal, 15)
+                }.padding(.leading, 15)
+                    .padding(.bottom, 15)
                 
                 Divider()
                 Text("Описание")

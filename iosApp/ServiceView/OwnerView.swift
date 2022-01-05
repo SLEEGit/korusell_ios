@@ -34,11 +34,16 @@ struct OwnerView: View {
                     .listRowSeparator(.hidden)
                 } else {
                     VStack {
-                        Image(uiImage: self.image)
-                            .resizable()
-                            .scaledToFill()
-                            .frame(width: 100, height: 100)
-                            .cornerRadius(75)
+                        HStack {
+                            Spacer()
+                            Image(uiImage: self.image)
+                                .resizable()
+                                .scaledToFill()
+                                .frame(width: 100, height: 100)
+                                .cornerRadius(75)
+                            Spacer()
+                        }
+
                     }
                     .frame(maxWidth: .infinity, maxHeight: .infinity, alignment: .leading)
                         .listRowInsets(EdgeInsets())
