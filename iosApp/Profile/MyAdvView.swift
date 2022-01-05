@@ -27,35 +27,47 @@ struct MyAdvView: View {
     @State private var showingHint = false
     @State private var showingHint2 = false
     @State private var businessWarning = false
+    @State private var photos: [UIImage] = []
     @Environment(\.presentationMode) var presentationMode: Binding<PresentationMode>
     
     
     var body: some View {
         Form {
-            VStack {
-                if #available(iOS 15.0, *) {
-                    Image(uiImage: self.image)
-                        .resizable()
-                        .scaledToFill()
-                        .listRowSeparator(.hidden)
-                } else {
-                    Image(uiImage: self.image)
-                        .resizable()
-                        .scaledToFill()
-                        .frame(maxWidth: .infinity, maxHeight: .infinity, alignment: .center)
-                        .listRowInsets(EdgeInsets())
-                        .background(Color(UIColor.systemGroupedBackground).opacity(0.1))
-                    //                        .background(Color(UIColor.systemGroupedBackground))
-                }
-                Button("Выбрать картинку") {
-                    isShowPhotoLibrary = true
-                }
-                .sheet(isPresented: $isShowPhotoLibrary) {
-                    ImagePicker(selectedImage: self.$image, currentUid: self.$uid, directory: $directory, sourceType: .photoLibrary)
-                }
-                
+            Section {
+            if !self.photos.isEmpty {
+                TabView {
+                    ForEach(self.photos, id: \.self) { photo in
+                        Image(uiImage: photo)
+                            .resizable()
+                            .scaledToFill()
+                            .frame(height: 300)
+                            .cornerRadius(10)
+                            .contextMenu {
+                                Button(action: {
+                                    self.photos = self.photos.filter { $0 != photo }
+                                }) {
+                                    Text("Удалить")
+                                    Image(systemName: "trash")
+                                }
+                            }
+                        
+                    }
+                }.frame(height: 300)
+                    .indexViewStyle(.page(backgroundDisplayMode: .always))
+                    .tabViewStyle(.page)
             }
-            .padding()
+                HStack {
+                    Spacer()
+                    Button("Выбрать изображения") {
+                        isShowPhotoLibrary.toggle()
+                    }
+                    .sheet(isPresented: $isShowPhotoLibrary) {
+                        PhotoPicker(photos: $photos, showPicker: self.$isShowPhotoLibrary, directory: "images", uid: uid)
+                    }
+                    Spacer()
+                }
+            
+            }
             HStack {
                 
                 Text("Название")
@@ -141,6 +153,16 @@ struct MyAdvView: View {
                     Spacer()
                     Button("Обновить данные") {
                         DB().updateAdv(uid: uid, name: name, category: category, city: city, price: price, phone: phone, descrition: description, createdAt: Util().dateByTimeZone()) {
+                            var n = 0
+                            for photo1 in photos {
+                                DB().postImage(image: photo1, directory: directory, uid: uid+String(n), quality: 0.1)
+                                n += 1
+                            }
+                            for i in photos.count...4 {
+                                print(i)
+                                print("iii")
+                                DB().deleteImage(uid: uid + String(i), directory: directory)
+                            }
                             showingAlert = true
                         }
                     }
@@ -212,8 +234,8 @@ struct MyAdvView: View {
             Pref.userDefault.set(true, forKey: "adv")
             Pref.userDefault.synchronize()
             
-            DB().getImage(uid: uid, directory: "advImages") { image in
-                self.image = image
+            DB().getMultiImages(uid: uid, directory: directory) { images in
+                self.photos = images
             }
         }
     }

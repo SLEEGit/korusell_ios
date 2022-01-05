@@ -45,10 +45,6 @@ struct PhotoPicker: UIViewControllerRepresentable {
         func picker(_ picker: PHPickerViewController, didFinishPicking results: [PHPickerResult]) {
             self.phot.showPicker.toggle()
             self.phot.photos = []
-//            for i in 0...3 {
-//                DB().deleteImage(uid: self.phot.uid+String(i), directory: "images")
-//            }
-            var i = 0
             for photo in results {
                 if photo.itemProvider.canLoadObject(ofClass: UIImage.self) {
                     photo.itemProvider.loadObject(ofClass: UIImage.self) { image, err in
@@ -56,11 +52,7 @@ struct PhotoPicker: UIViewControllerRepresentable {
                             print("\(String(describing: err?.localizedDescription))")
                             return
                         }
-//                        self.phot.photos[i] = photo1 as! UIImage
-//                        i += 1
                         self.phot.photos.append(photo1 as! UIImage)
-//                        DB().postImage(image: photo1 as! UIImage, directory: self.phot.directory, uid: self.phot.uid+String(n), quality: 0.1)
-//                        n += 1
                     }
                 } else {
                     print("No photos or videos was loaded")

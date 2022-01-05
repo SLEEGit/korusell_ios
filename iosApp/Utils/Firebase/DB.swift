@@ -315,18 +315,22 @@ class DB: ObservableObject {
         deleteImage(uid: uid, directory: "avatars")
         ref.reference(withPath: "users").child(uid).removeValue()
         deleteBusiness(uid: uid)
+        deleteAdv(uid: uid)
     }
     
     func deleteBusiness(uid: String) {
-        deleteImage(uid: uid, directory: "images")
         ref.reference(withPath: "services").child(uid).removeValue()
+        for i in 0...4 {
+            deleteImage(uid: uid + String(i), directory: "images")
+        }
         
     }
     
     func deleteAdv(uid: String) {
-        deleteImage(uid: uid, directory: "advImages")
         ref.reference(withPath: "adv").child(uid).removeValue()
-        
+        for i in 0...4 {
+            deleteImage(uid: uid + String(i), directory: "advImages")
+        }
     }
     
 

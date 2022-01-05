@@ -185,7 +185,7 @@ struct MyBusinessView: View {
                                         for i in photos.count...4 {
                                             print(i)
                                             print("iii")
-                                            DB().deleteImage(uid: uid + String(i), directory: "images")
+                                            DB().deleteImage(uid: uid + String(i), directory: directory)
                                         }
                                         showingAlert = true
                                     }
@@ -226,6 +226,11 @@ struct MyBusinessView: View {
                                 title: Text("Вы уверены что хотите удалить Ваш бизнес?"),
                                 primaryButton: .destructive(Text("Удалить"), action: {
                                     DB().deleteBusiness(uid: uid)
+                                    for i in 0...4 {
+                                        print(i)
+                                        print("iii")
+                                        DB().deleteImage(uid: uid + String(i), directory: directory)
+                                    }
                                     self.name = ""
                                     self.category = ""
                                     self.city = ""
@@ -252,14 +257,13 @@ struct MyBusinessView: View {
         
         .navigationTitle("Мой Бизнес")
         .onAppear {
-            print(uid)
             businessWarning = true
             if Pref.userDefault.bool(forKey: "business") {
                 businessWarning = false
             }
             Pref.userDefault.set(true, forKey: "business")
             Pref.userDefault.synchronize()
-            DB().getMultiImages(uid: uid, directory: "images") { images in
+            DB().getMultiImages(uid: uid, directory: directory) { images in
                 self.photos = images
             }
         }
