@@ -65,6 +65,51 @@ class DB: ObservableObject {
         }
     }
     
+    func getMultiImages(uid: String, directory: String, completion: @escaping ([UIImage]) -> ()) {
+        var images: [UIImage] = []
+        let storage = Storage.storage().reference().child("\(directory)/\(uid)0.jpg")
+        storage.getData(maxSize: 1 * 1024 * 1024) { (metadata, error) in
+            if let error = error {
+                completion(images)
+                return
+            } else {
+                let image1 = UIImage(data: metadata!)
+                images.append(image1!)
+                let storage1 = Storage.storage().reference().child("\(directory)/\(uid)1.jpg")
+                storage1.getData(maxSize: 1 * 1024 * 1024) { (metadata, error) in
+                    if error != nil {
+                        completion(images)
+                        return
+                    } else {
+                        let image1 = UIImage(data: metadata!)
+                        images.append(image1!)
+                        let storage2 = Storage.storage().reference().child("\(directory)/\(uid)2.jpg")
+                        storage2.getData(maxSize: 1 * 1024 * 1024) { (metadata, error) in
+                            if error != nil {
+                                completion(images)
+                                return
+                            } else {
+                                let image1 = UIImage(data: metadata!)
+                                images.append(image1!)
+                                let storage3 = Storage.storage().reference().child("\(directory)/\(uid)3.jpg")
+                                storage3.getData(maxSize: 1 * 1024 * 1024) { (metadata, error) in
+                                    if error != nil {
+                                        completion(images)
+                                        return
+                                    } else {
+                                        let image1 = UIImage(data: metadata!)
+                                        images.append(image1!)
+                                        completion(images)
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        }
+    }
+    
     func getServices(category: String, completion: @escaping ([Service]) -> ()) {
         ref.reference(withPath: "services").observeSingleEvent(of: .value, with: { snapshot in
             var innerServices: [Service] = []

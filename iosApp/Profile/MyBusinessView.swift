@@ -28,35 +28,47 @@ struct MyBusinessView: View {
     @State private var showingHint = false
     @State private var showingHint2 = false
     @State private var businessWarning = false
+    @State private var photos: [UIImage] = []
+
     @Environment(\.presentationMode) var presentationMode: Binding<PresentationMode>
-    
     
     var body: some View {
         Form {
-            VStack {
-                if #available(iOS 15.0, *) {
-                    Image(uiImage: self.image)
-                        .resizable()
-                        .scaledToFill()
-                        .listRowSeparator(.hidden)
-                } else {
-                    Image(uiImage: self.image)
-                        .resizable()
-                        .scaledToFill()
-                        .frame(maxWidth: .infinity, maxHeight: .infinity, alignment: .center)
-                        .listRowInsets(EdgeInsets())
-                        .background(Color(UIColor.systemGroupedBackground).opacity(0.1))
-                    //                        .background(Color(UIColor.systemGroupedBackground))
-                }
-                Button("Выбрать картинку") {
-                    isShowPhotoLibrary = true
-                }
-                .sheet(isPresented: $isShowPhotoLibrary) {
-                    ImagePicker(selectedImage: self.$image, currentUid: self.$uid, directory: $directory, sourceType: .photoLibrary)
-                }
-                
+            Section {
+            if !self.photos.isEmpty {
+                TabView {
+                    ForEach(self.photos, id: \.self) { photo in
+                        Image(uiImage: photo)
+                            .resizable()
+                            .scaledToFill()
+                            .frame(height: 300)
+                            .cornerRadius(10)
+                            .contextMenu {
+                                Button(action: {
+                                    self.photos = self.photos.filter { $0 != photo }
+                                }) {
+                                    Text("Удалить")
+                                    Image(systemName: "trash")
+                                }
+                            }
+                        
+                    }
+                }.frame(height: 300)
+                    .indexViewStyle(.page(backgroundDisplayMode: .always))
+                    .tabViewStyle(.page)
             }
-            .padding()
+                HStack {
+                    Spacer()
+                    Button("Выбрать изображения") {
+                        isShowPhotoLibrary.toggle()
+                    }
+                    .sheet(isPresented: $isShowPhotoLibrary) {
+                        PhotoPicker(photos: $photos, showPicker: self.$isShowPhotoLibrary, directory: "images", uid: uid)
+                    }
+                    Spacer()
+                }
+            
+            }
             HStack {
                 
                 Text("Название")
@@ -165,6 +177,16 @@ struct MyBusinessView: View {
                                 self.longitude = long
                                 DispatchQueue.main.asyncAfter(deadline: .now() + 0.1) {
                                     DB().updateBusiness(uid: uid, name: name, category: category, city: city, address: address, phone: phone, descrition: description, latitude: latitude, longitude: longitude, social: social) {
+                                        var n = 0
+                                        for photo1 in photos {
+                                            DB().postImage(image: photo1, directory: directory, uid: uid+String(n), quality: 0.1)
+                                            n += 1
+                                        }
+                                        for i in photos.count...4 {
+                                            print(i)
+                                            print("iii")
+                                            DB().deleteImage(uid: uid + String(i), directory: "images")
+                                        }
                                         showingAlert = true
                                     }
                                 }
@@ -230,15 +252,15 @@ struct MyBusinessView: View {
         
         .navigationTitle("Мой Бизнес")
         .onAppear {
+            print(uid)
             businessWarning = true
             if Pref.userDefault.bool(forKey: "business") {
                 businessWarning = false
             }
             Pref.userDefault.set(true, forKey: "business")
             Pref.userDefault.synchronize()
-            
-            DB().getImage(uid: uid, directory: "images") { image in
-                self.image = image
+            DB().getMultiImages(uid: uid, directory: "images") { images in
+                self.photos = images
             }
         }
     }
@@ -253,4 +275,3 @@ struct MyBusinessView: View {
 //#if DEBUG
 //let example_service = Service(_id: "HNyHZZjtq298izgub", owner: "hPQwM9F7L9CxTZdRm", name: "Кафе RELAX", category: "food", city: "Ансан", address: "경기 안산시 단원구 원곡동 962, 지하 1층", phone: "010-2428-4522", image: ["relax", "relax"], description: "Европейская и азиатская кухня. Шашлыки, самса, тандырные лепешки Европейская и азиатская кухня. Шашлыки, самса, тандырные лепешки Европейская и азиатская кухня. Шашлыки, самса, тандырные лепешки Европейская и азиатская кухня. Шашлыки, самса, тандырные лепешки")
 //#endif
-
