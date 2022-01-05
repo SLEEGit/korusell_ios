@@ -17,19 +17,6 @@ class DB: ObservableObject {
     
     //    GET
     
-//    func getImage(uid: String, completion: @escaping (URL) -> ()) {
-//        let storage = Storage.storage().reference().child("images/\(uid).jpg")
-//        storage.downloadURL() { url, error in
-//            if let url = url {
-//                print(url)
-//                completion(url)
-//            } else {
-//                return
-//            }
-//
-//        }
-//    }
-    
     func getData(from url: URL, completion: @escaping (Data?, URLResponse?, Error?) -> ()) {
         URLSession.shared.dataTask(with: url, completionHandler: completion).resume()
     }
