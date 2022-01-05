@@ -199,7 +199,7 @@ class Util {
         let dateFormatterGet = DateFormatter()
         dateFormatterGet.dateFormat = "yyyy-MM-dd HH:mm:ss ZZZ"
         let dateFormatterPrint = DateFormatter()
-        dateFormatterPrint.dateFormat = "dd MMMM yyyy г."
+        dateFormatterPrint.dateFormat = "dd MMMM yyyy г. в HH:mm"
         dateFormatterPrint.locale = Locale(identifier: "ru_RU")
         let date: Date? = dateFormatterGet.date(from: date)
 
@@ -227,3 +227,4 @@ class Util {
     
     
 }
+

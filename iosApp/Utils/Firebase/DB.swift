@@ -210,7 +210,7 @@ class DB: ObservableObject {
     }
     
     func getMyAdv(uid: String, completion: @escaping (Adv) -> ()) {
-        let defaultAdv = Adv(uid: "", name: "", category: "", city: "", price: "", phone: "", description: "", createdAt: "")
+        let defaultAdv = Adv(uid: "", name: "", category: "", city: "", price: "", phone: "", description: "", createdAt: "", images: "0")
         ref.reference(withPath: "adv").child(uid).getData(completion:  { error, snapshot in
             guard error == nil else {
                 print(error!.localizedDescription)
@@ -224,7 +224,7 @@ class DB: ObservableObject {
                 }
             } else {
                 completion(defaultAdv)
-                self.updateAdv(uid: uid, name: "", category: "", city: "", price: "", phone: "", descrition: "", createdAt: "") {}
+                self.updateAdv(uid: uid, name: "", category: "", city: "", price: "", phone: "", descrition: "", createdAt: "", images: "0") {}
             }
         })
     }
@@ -268,9 +268,9 @@ class DB: ObservableObject {
         }
     }
     
-    func updateAdv(uid: String, name: String, category: String, city: String, price: String, phone: String, descrition: String, createdAt: String, completion: @escaping () -> Void) {
+    func updateAdv(uid: String, name: String, category: String, city: String, price: String, phone: String, descrition: String, createdAt: String, images: String, completion: @escaping () -> Void) {
 
-        ref.reference(withPath: "adv").child(uid).updateChildValues(["uid" : uid, "name" : name, "city" : city, "category" : category, "price" : price, "phone" : phone, "description" : descrition, "createdAt": createdAt])
+        ref.reference(withPath: "adv").child(uid).updateChildValues(["uid" : uid, "name" : name, "city" : city, "category" : category, "price" : price, "phone" : phone, "description" : descrition, "createdAt": createdAt, "images": images])
         DispatchQueue.main.async {
             completion()
         }

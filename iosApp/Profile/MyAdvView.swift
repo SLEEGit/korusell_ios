@@ -28,6 +28,8 @@ struct MyAdvView: View {
     @State private var showingHint2 = false
     @State private var businessWarning = false
     @State private var photos: [UIImage] = []
+    @State var images: String = "0"
+
     @Environment(\.presentationMode) var presentationMode: Binding<PresentationMode>
     
     
@@ -39,7 +41,7 @@ struct MyAdvView: View {
                     ForEach(self.photos, id: \.self) { photo in
                         Image(uiImage: photo)
                             .resizable()
-                            .scaledToFill()
+                            .scaledToFit()
                             .frame(height: 300)
                             .cornerRadius(10)
                             .contextMenu {
@@ -152,7 +154,8 @@ struct MyAdvView: View {
                 HStack {
                     Spacer()
                     Button("Обновить данные") {
-                        DB().updateAdv(uid: uid, name: name, category: category, city: city, price: price, phone: phone, descrition: description, createdAt: Util().dateByTimeZone()) {
+                        self.images = String(photos.count)
+                        DB().updateAdv(uid: uid, name: name, category: category, city: city, price: price, phone: phone, descrition: description, createdAt: Util().dateByTimeZone(), images: images) {
                             var n = 0
                             for photo1 in photos {
                                 DB().postImage(image: photo1, directory: directory, uid: uid+String(n), quality: 0.1)

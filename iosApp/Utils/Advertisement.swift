@@ -18,7 +18,8 @@ struct Adv: Codable, Identifiable {
     let description: String
     let phone: String
     let createdAt: String
-//    let image: [String]
+    let images: String
+    //    let image: [String]
     
     init(dictionary: [String: Any]) {
         self.uid = dictionary["uid"] as? String ?? ""
@@ -29,9 +30,10 @@ struct Adv: Codable, Identifiable {
         self.description = dictionary["description"] as? String ?? ""
         self.createdAt = dictionary["createdAt"] as? String ?? ""
         self.price = dictionary["price"] as? String ?? ""
+        self.images = dictionary["images"] as? String ?? ""
     }
     
-    init(uid: String, name: String, category: String, city: String, price: String, phone: String, description: String, createdAt: String) {
+    init(uid: String, name: String, category: String, city: String, price: String, phone: String, description: String, createdAt: String, images: String) {
         self.uid = uid
         self.name = name
         self.category = category
@@ -40,6 +42,7 @@ struct Adv: Codable, Identifiable {
         self.description = description
         self.price = price
         self.createdAt = createdAt
+        self.images = images
     }
 }
 
@@ -50,7 +53,7 @@ struct ExpandedAdv: View {
     var body: some View {
         HStack {
             //            FirebaseImage(id: "vishenka")
-            UrlImageView(urlString: adv.uid, directory: "advImages")
+            UrlImageView(urlString: adv.uid + "0", directory: "advImages")
                 .frame(width: 100, height: 100)
             //            Image(uiImage: self.image)
             //                .resizable()
@@ -98,13 +101,26 @@ struct ExpandedAdvDetails: View {
     @State var adv: Adv
     @State var image: UIImage
     @State var isShowSheet: Bool = false
+    @State var array: [Int] = [0,1,2,3]
+    @State var newArray: [Int] = []
     var body: some View {
         ScrollView {
             VStack(alignment: .leading) {
-                UrlImageView(urlString: adv.uid, directory: "advImages")
-                    .scaledToFill()
-                    .cornerRadius(15)
-                    .padding()
+                
+                TabView {
+                    ForEach(array, id: \.self) { photo in
+                        UrlImageView(urlString: adv.uid + String(photo), directory: "advImages")
+                    }
+                }
+                .padding()
+                .frame(height: 350)
+                .cornerRadius(15)
+                .indexViewStyle(.page(backgroundDisplayMode: .always))
+                .tabViewStyle(.page)
+                //                UrlImageView(urlString: adv.uid, directory: "advImages")
+                //                    .scaledToFill()
+                //                    .cornerRadius(15)
+                //                    .padding()
                 if adv.createdAt != "" {
                     Text("Добавлено: \(Util().formatDate(date: adv.createdAt))")
                         .font(.caption)
@@ -161,9 +177,9 @@ struct ExpandedAdvDetails: View {
                         .padding(.vertical, 20)
                     
                 }
-
                 
-                if adv.uid.count > 10 {
+                
+                if !adv.uid.contains("aaaaaaaaaaaaaaaaaaaaaaa") {
                     Section {
                         Button(action: {
                             isShowSheet = true
@@ -175,11 +191,21 @@ struct ExpandedAdvDetails: View {
                                 Spacer()
                             }
                         }.padding(20)
-                        .sheet(isPresented: $isShowSheet) {
-                            OwnerView(ownerUid: adv.uid)
-                        }
+                            .sheet(isPresented: $isShowSheet) {
+                                OwnerView(ownerUid: adv.uid)
+                            }
                     }
                 }
+            }.onAppear {
+                self.newArray = []
+                if Int(adv.images) == 0 {
+                    newArray.append(0)
+                } else {
+                    for i in 1...Int(adv.images)! {
+                        newArray.append(i-1)
+                    }
+                }
+                self.array = newArray
             }
         }
     }
