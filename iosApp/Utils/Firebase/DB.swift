@@ -56,7 +56,7 @@ class DB: ObservableObject {
         var images: [UIImage] = []
         let storage = Storage.storage().reference().child("\(directory)/\(uid)0.jpg")
         storage.getData(maxSize: 1 * 1024 * 1024) { (metadata, error) in
-            if let error = error {
+            if error != nil {
                 completion(images)
                 return
             } else {
@@ -157,23 +157,6 @@ class DB: ObservableObject {
             }
 
         });
-    }
-    
-    func fetchData2(category: String, completion: @escaping ([Service]) -> ()) {
-        ref.reference(withPath: "services").observeSingleEvent(of: .value, with: { snapshot in
-            let values = snapshot.value as! [[String:Any]]
-            var innerServices: [Service] = []
-            for i in values {
-                let service = Service(dictionary: i)
-                innerServices.append(service)
-            }
-            DispatchQueue.main.async {
-                if category != "all" {
-                    innerServices = innerServices.filter { $0.category == category }
-                }
-                completion(innerServices)
-            }
-        })
     }
     
     func getMyBusiness(uid: String, completion: @escaping (Service) -> ()) {

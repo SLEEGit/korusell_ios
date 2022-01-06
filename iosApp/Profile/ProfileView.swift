@@ -230,9 +230,6 @@ struct ProfileView: View {
             DB().getImage(uid: uid, directory: "avatars") { image in
                 self.image = image
             }
-            //            DB().fetchData2(category: "") { service in
-            ////                self.business = service
-            //            }
         }
     }
     

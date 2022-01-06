@@ -41,6 +41,7 @@
 		259936102769BF4300F468B6 /* Authentication.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2599360F2769BF4300F468B6 /* Authentication.swift */; };
 		259936122769DD6900F468B6 /* Pref.swift in Sources */ = {isa = PBXBuildFile; fileRef = 259936112769DD6900F468B6 /* Pref.swift */; };
 		259936142769E33900F468B6 /* RegistrationView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 259936132769E33900F468B6 /* RegistrationView.swift */; };
+		25C6DB61278670780026ACE6 /* AppleAuth.swift in Sources */ = {isa = PBXBuildFile; fileRef = 25C6DB60278670780026ACE6 /* AppleAuth.swift */; };
 		25ED2B55276CE75000575FEB /* MyBusinessView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 25ED2B54276CE75000575FEB /* MyBusinessView.swift */; };
 		25ED2B57276CE9A600575FEB /* EditNameView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 25ED2B56276CE9A600575FEB /* EditNameView.swift */; };
 		25ED2B59276F012A00575FEB /* ImagePicker.swift in Sources */ = {isa = PBXBuildFile; fileRef = 25ED2B58276F012A00575FEB /* ImagePicker.swift */; };
@@ -88,6 +89,7 @@
 		2599360F2769BF4300F468B6 /* Authentication.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Authentication.swift; sourceTree = "<group>"; };
 		259936112769DD6900F468B6 /* Pref.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Pref.swift; sourceTree = "<group>"; };
 		259936132769E33900F468B6 /* RegistrationView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RegistrationView.swift; sourceTree = "<group>"; };
+		25C6DB60278670780026ACE6 /* AppleAuth.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppleAuth.swift; sourceTree = "<group>"; };
 		25ED2B54276CE75000575FEB /* MyBusinessView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyBusinessView.swift; sourceTree = "<group>"; };
 		25ED2B56276CE9A600575FEB /* EditNameView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditNameView.swift; sourceTree = "<group>"; };
 		25ED2B58276F012A00575FEB /* ImagePicker.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImagePicker.swift; sourceTree = "<group>"; };
@@ -135,6 +137,7 @@
 			children = (
 				256D59082761E555002EDC6A /* DB.swift */,
 				2599360F2769BF4300F468B6 /* Authentication.swift */,
+				25C6DB60278670780026ACE6 /* AppleAuth.swift */,
 			);
 			path = Firebase;
 			sourceTree = "<group>";
@@ -203,8 +206,8 @@
 				256D58FE2761DA30002EDC6A /* ServiceMenuView.swift */,
 				25973E01275B27CF00DC016B /* ServiceSubView.swift */,
 				253305CE27571F690061DD28 /* ServiceView.swift */,
-				2542E346277436B500883E0D /* OwnerView.swift */,
 				25ED2B5A2770373800575FEB /* Service.swift */,
+				2542E346277436B500883E0D /* OwnerView.swift */,
 			);
 			path = ServiceView;
 			sourceTree = "<group>";
@@ -414,6 +417,7 @@
 				253305CF27571F690061DD28 /* ServiceView.swift in Sources */,
 				259936122769DD6900F468B6 /* Pref.swift in Sources */,
 				259936082769A0BB00F468B6 /* CheckStatusView.swift in Sources */,
+				25C6DB61278670780026ACE6 /* AppleAuth.swift in Sources */,
 				2542E347277436B600883E0D /* OwnerView.swift in Sources */,
 				253305CD27560E450061DD28 /* MenuItems.swift in Sources */,
 				25441F8E2768269C00B6E240 /* DetailsView.swift in Sources */,
