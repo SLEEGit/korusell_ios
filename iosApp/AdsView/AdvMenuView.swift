@@ -45,7 +45,7 @@ struct AdvMenuView: View {
                     
                     city = globalCity
                     session.getAdvs(category: "all") { (list) in
-                        globalAdv = list
+                        globalAdv = list.sorted { $0.createdAt > $1.createdAt }
                         self.isLoading = false
                     }
                     
