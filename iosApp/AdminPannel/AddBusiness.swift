@@ -18,7 +18,7 @@ struct AddBusinessView: View {
     @State var latitude: String = ""
     @State var longitude: String = ""
     @State var category: String = ""
-    @State var social: [String] = []
+    @State var social: [String] = ["","","","",""]
     
     @State var directory: String = "images"
     @State private var image = UIImage(named: "blank")!

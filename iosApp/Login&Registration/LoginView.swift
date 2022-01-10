@@ -108,12 +108,15 @@ struct LoginView : View {
                                             print(error?.localizedDescription as Any)
                                             return
                                         }
-                                        logging.isSignedIn = true
-                                        Pref.userDefault.set(true, forKey: "usersignedin")
-                                        Pref.userDefault.synchronize()
-                                        isLoading = false
-                                        print(logging.isSignedIn)
-                                        print("signed in")
+                                        DB().createUserInDB(user: authResult!.user, email: authResult!.user.email!) {
+                                            logging.isSignedIn = true
+                                            Pref.userDefault.set(true, forKey: "usersignedin")
+                                            Pref.userDefault.synchronize()
+                                            isLoading = false
+                                            print(logging.isSignedIn)
+                                            print("signed in")
+                                        }
+                                        
                                     }
                                     
                                     print("\(String(describing: Auth.auth().currentUser?.uid))")
