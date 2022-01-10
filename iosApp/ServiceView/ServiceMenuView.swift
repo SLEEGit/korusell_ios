@@ -6,6 +6,7 @@
 //
 
 import SwiftUI
+import FirebaseAuth
 
 var globalServices: [Service] = []
 var globalCity: String = "Все города"
@@ -19,6 +20,7 @@ struct ServiceMenuView: View {
     @StateObject private var session = DB()
     @State var isLoading: Bool = true
     @State var isShowInfo: Bool = false
+    @State var email: String = ""
     
     var body: some View {
         
@@ -36,15 +38,16 @@ struct ServiceMenuView: View {
                     }
                 }
                 .navigationBarItems(leading:
-                                        Image("logo_blue_line")
-                                        .resizable()
-                                        .scaledToFill()
-                                        .frame(width: 100, height: 20)
-                                        .shadow(color: Color.gray, radius: 1, x: 1, y: 1)
-                )
+                    NavigationLink(destination: getDestination()) {
+                        Image("logo_blue_line")
+                            .resizable()
+                            .scaledToFill()
+                            .frame(width: 100, height: 20)
+                            .shadow(color: Color.gray, radius: 1, x: 1, y: 1)
+                })
                 .navigationTitle("Услуги")
                 .onAppear{
-                    
+                    email = Auth.auth().currentUser?.email ?? ""
                     city = globalCity
                     session.getServices(category: "all") { (list) in
                         globalServices = list
@@ -117,6 +120,14 @@ struct ServiceMenuView: View {
                     .background(Color(UIColor.systemGroupedBackground).opacity(0.1))
             }
         }.navigationViewStyle(StackNavigationViewStyle())
+    }
+    
+    func getDestination() -> AnyView {
+        if email == "guagetru.bla@inbox.ru" {
+            return AnyView(AdminPanelView())
+        } else {
+            return AnyView(Text("🥚"))
+        }
     }
 }
 
