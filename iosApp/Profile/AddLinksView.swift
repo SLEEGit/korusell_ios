@@ -77,6 +77,11 @@ struct AddLinksView: View {
                     Spacer()
                 }
             }
+        }.onAppear {
+            if self.social == [] || self.social == ["","","","",""] {
+                self.social = ["https://www.facebook.com/", "https://www.instagram.com/", "https://t.me/", "https://www.youtube.com/channel/", "https://"]
+            }
+            
         }
 //        .padding(.top, 20)
     }
