@@ -99,6 +99,7 @@ struct ExpandedServiceDetails: View {
     @State var service: Service
     @State var image: UIImage
     @State var isShowSheet: Bool = false
+    @State var addressCopy: Bool = false
     @State var array: [Int] = [0,1,2,3]
     @State var arrayIm: [UIImage] = []
     @State var newArray: [Int] = []
@@ -148,27 +149,32 @@ struct ExpandedServiceDetails: View {
                 }.padding(.leading, 15)
                     .padding(.bottom, 10)
                     .padding(.top, 10)
-                HStack {
-                    Text("Адрес")
-                        .font(.body)
-                        .foregroundColor(.gray)
-//                        .padding(.bottom, 15)
-//                        .padding(.trailing, 30)
-                    Divider()
-                    Text(service.address)
+                if service.address != "" {
+                    HStack {
+                        Text("Адрес")
+                            .font(.body)
+                            .foregroundColor(.gray)
+                        //                        .padding(.bottom, 15)
+                        //                        .padding(.trailing, 30)
+                        Divider()
+                        Text(service.address)
+                            .font(.body)
                         
-                        .contextMenu {
-                            Button(action: {
-                                UIPasteboard.general.string = service.address
-                            }) {
-                                Text("Скопировать")
-                                Image(systemName: "doc.on.doc")
-                            }
+                        Button(action: {
+                            UIPasteboard.general.string = service.address
+                            addressCopy = true
+                        }) {
+                            Image(systemName: "doc.on.doc")
+                        }.alert(isPresented: $addressCopy) {
+                            Alert (
+                                title: Text("Адрес скопирован"),
+                                dismissButton: .default(Text("Ok"))
+                            )
                         }
-                        .font(.body)
-                }.padding(.leading, 15)
-                    .padding(.bottom, 15)
-                
+                        
+                    }.padding(.leading, 15)
+                        .padding(.bottom, 15)
+                }
                 Divider()
                 Text("Описание")
                     .font(.headline)
@@ -202,7 +208,7 @@ struct ExpandedServiceDetails: View {
                 
                 HStack(spacing: 30) {
                     Spacer()
-                    if service.social[0] != "" {
+                    if service.social[0] != "" && service.social[0] != "https://www.facebook.com/" {
                         Link(destination: URL(string: service.social[0])!, label: {
                                 Image("facebook")
                                     .resizable()
@@ -210,7 +216,7 @@ struct ExpandedServiceDetails: View {
                                     .frame(width: 40, height: 40)
                         })
                     }
-                    if service.social[1] != "" {
+                    if service.social[1] != "" && service.social[1] != "https://www.instagram.com/" {
                         Link(destination: URL(string: service.social[1])!, label: {
                                 Image("instagram")
                                     .resizable()
@@ -218,7 +224,7 @@ struct ExpandedServiceDetails: View {
                                     .frame(width: 40, height: 40)
                         })
                     }
-                    if service.social[2] != "" {
+                    if service.social[2] != "" && service.social[2] != "https://t.me/" {
                         Link(destination: URL(string: service.social[2])!, label: {
                                 Image("telegram")
                                     .resizable()
@@ -226,7 +232,7 @@ struct ExpandedServiceDetails: View {
                                     .frame(width: 40, height: 40)
                         })
                     }
-                    if service.social[3] != "" {
+                    if service.social[3] != "" && service.social[3] != "https://www.youtube.com/channel/" {
                         Link(destination: URL(string: service.social[3])!, label: {
                                 Image("youtube")
                                     .resizable()
@@ -234,7 +240,7 @@ struct ExpandedServiceDetails: View {
                                     .frame(width: 40, height: 40)
                         })
                     }
-                    if service.social[4] != "" {
+                    if service.social[4] != "" && service.social[4] != "https://" {
                         Link(destination: URL(string: service.social[4])!, label: {
                                 Image("webpage")
                                     .resizable()

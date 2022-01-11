@@ -17,7 +17,8 @@ struct AdvMenuView: View {
     @StateObject private var session = DB()
     @State var isLoading: Bool = true
     @State var isShowInfo: Bool = false
-    
+    @Environment(\.colorScheme) var colorScheme
+
     var body: some View {
         ZStack {
 
@@ -34,12 +35,21 @@ struct AdvMenuView: View {
                     }
                 }
                 .navigationBarItems(leading:
-                                        Image("logo_blue_line")
-                                        .resizable()
-                                        .scaledToFill()
-                                        .frame(width: 100, height: 20)
-                                        .shadow(color: Color.gray, radius: 1, x: 1, y: 1)
-                )
+                    NavigationLink(destination: Text("🥚")) {
+                    if colorScheme == .dark {
+                        Image("logo_blue_line")
+                            .resizable()
+                            .scaledToFill()
+                            .frame(width: 100, height: 20)
+                    } else {
+                        Image("logo_blue_line")
+                            .resizable()
+                            .scaledToFill()
+                            .frame(width: 100, height: 20)
+                            .shadow(color: Color.gray, radius: 1, x: 1, y: 1)
+                    }
+                        
+                })
                 .navigationTitle("Объявления")
                 .onAppear{
                     

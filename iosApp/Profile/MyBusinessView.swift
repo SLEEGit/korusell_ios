@@ -80,7 +80,7 @@ struct MyBusinessView: View {
             Picker("Категории", selection: $category) {
                 Group {
                     Text("Рестораны/Кафе").tag("food")
-                    Text("Магазины").tag("shop")
+                    Text("Продукты").tag("shop")
                     Text("Связь").tag("connect")
                     Text("Образование").tag("study")
                     Text("Мероприятия/Фото/Видео").tag("party")
@@ -240,6 +240,7 @@ struct MyBusinessView: View {
                                     self.address = ""
                                     self.phone = ""
                                     self.description = ""
+                                    self.social = ["","","","",""]
                                     presentationMode.wrappedValue.dismiss()
                                     
                                 }),

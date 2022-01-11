@@ -21,6 +21,7 @@ struct ServiceMenuView: View {
     @State var isLoading: Bool = true
     @State var isShowInfo: Bool = false
     @State var email: String = ""
+    @Environment(\.colorScheme) var colorScheme
     
     var body: some View {
         
@@ -39,11 +40,19 @@ struct ServiceMenuView: View {
                 }
                 .navigationBarItems(leading:
                     NavigationLink(destination: getDestination()) {
+                    if colorScheme == .dark {
+                        Image("logo_blue_line")
+                            .resizable()
+                            .scaledToFill()
+                            .frame(width: 100, height: 20)
+                    } else {
                         Image("logo_blue_line")
                             .resizable()
                             .scaledToFill()
                             .frame(width: 100, height: 20)
                             .shadow(color: Color.gray, radius: 1, x: 1, y: 1)
+                    }
+                        
                 })
                 .navigationTitle("Услуги")
                 .onAppear{
