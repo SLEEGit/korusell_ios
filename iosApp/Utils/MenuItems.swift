@@ -125,15 +125,17 @@ public class DataFetcher: ObservableObject {
             MenuItem(name: "Рестораны/Кафе", image: "🍲", category: "food"),
             MenuItem(name: "Магазины", image: "🍞", category: "shop"),
             MenuItem(name: "Связь", image: "📱", category: "connect"),
-            MenuItem(name: "Документы/Переводы", image: "📑", category: "docs"),
-            MenuItem(name: "Транспорт/Переезд", image: "🚛", category: "transport"),
-            MenuItem(name: "Юридические услуги", image: "👩🏻‍⚖️", category: "law"),
-            MenuItem(name: "Мероприятия/Фото/Видео", image: "🥳", category: "party"),
-            MenuItem(name: "Красота/Здоровье", image: "💅🏼", category: "health"),
-            MenuItem(name: "СТО/Тюнинг", image: "🧑🏻‍🔧", category: "car"),
-            MenuItem(name: "Няни/Детсад", image: "👵🏼", category: "nanny"),
             MenuItem(name: "Образование", image: "📚", category: "study"),
-            MenuItem(name: "Туризм", image: "🗿", category: "tourism")
+            MenuItem(name: "Мероприятия/Фото/Видео", image: "🥳", category: "party"),
+            MenuItem(name: "Документы/Переводы", image: "📑", category: "docs"),
+            MenuItem(name: "Типография/Печать", image: "🖨", category: "design"),
+            MenuItem(name: "Авто Купля/Продажа", image: "🚗", category: "cars"),
+            MenuItem(name: "Красота/Здоровье", image: "💅🏼", category: "health"),
+            MenuItem(name: "Трансфер/Переезд", image: "🚛", category: "transport"),
+            MenuItem(name: "Юридические услуги", image: "👩🏻‍⚖️", category: "law"),
+            MenuItem(name: "СТО/Тюнинг", image: "🧑🏻‍🔧", category: "workshop"),
+            MenuItem(name: "Другое", image: "🥷", category: "other")
+            
             ]
     }
 }

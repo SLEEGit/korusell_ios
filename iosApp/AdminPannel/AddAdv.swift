@@ -91,7 +91,7 @@ struct AddAdvView: View {
                     Text("Недвижимость").tag("house")
                     Text("Телефоны и Аксессуары").tag("phone")
                     Text("Для дома, хобби").tag("hobby")
-                    Text("Автозапчасти и Аксессуары").tag("car")
+                    Text("Автозапчасти и Аксессуары").tag("workshop")
                     Text("Электроника").tag("electronic")
                     Text("Детские товары").tag("children")
                     Text("Одежда").tag("clothes")

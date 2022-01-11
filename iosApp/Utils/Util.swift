@@ -68,16 +68,20 @@ class Util {
             afterCategory = unsortedList.filter { $0.category == "party" }
         case "health":
             afterCategory = unsortedList.filter { $0.category == "health" }
-        case "car":
-            afterCategory = unsortedList.filter { $0.category == "car" }
-        case "nanny":
-            afterCategory = unsortedList.filter { $0.category == "nanny" }
+        case "workshop":
+            afterCategory = unsortedList.filter { $0.category == "workshop" }
+        case "design":
+            afterCategory = unsortedList.filter { $0.category == "design" }
         case "study":
             afterCategory = unsortedList.filter { $0.category == "study" }
         case "tourism":
             afterCategory = unsortedList.filter { $0.category == "tourism" }
+        case "cars":
+            afterCategory = unsortedList.filter { $0.category == "cars" }
+        case "other":
+            afterCategory = unsortedList.filter { $0.category == "other" }
         default:
-            afterCategory = unsortedList
+            afterCategory = unsortedList.filter { $0.category == "no" }
         }
         
         switch city {
