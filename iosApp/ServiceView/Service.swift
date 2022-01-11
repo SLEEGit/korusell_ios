@@ -264,7 +264,9 @@ struct ExpandedServiceDetails: View {
                         }
                     }
                 }
-            }.onAppear {
+            }
+            .onAppear {
+                //сделать тут функцию с эскейпом!
                 self.newArray = []
                 if Int(service.images) == 0 {
                     newArray.append(0)
@@ -273,13 +275,18 @@ struct ExpandedServiceDetails: View {
                         newArray.append(i-1)
                     }
                 }
+                // функция изза чего вылетает
+                DispatchQueue.main.asyncAfter(deadline: .now() + 0.2) {
+                    self.array = newArray
+                }
+                
                 
 //                DB().getMultiImages(uid: service.uid, directory: "images") { images in
 //                    var newArray: [Int] = []
 //                    for i in 0...images.count-1 {
 //                        newArray.append(i)
 //                    }
-                    self.array = newArray
+                    
 //                }
                 
             }
