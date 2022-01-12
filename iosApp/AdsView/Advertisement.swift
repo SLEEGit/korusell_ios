@@ -197,16 +197,25 @@ struct ExpandedAdvDetails: View {
                     }
                 }
             }.onAppear {
-                self.newArray = []
-                if Int(adv.images) == 0 {
-                    newArray.append(0)
-                } else {
-                    for i in 1...Int(adv.images)! {
-                        newArray.append(i-1)
+                sortImages() {
+                    DispatchQueue.main.asyncAfter(deadline: .now() + 0.2) {
+                        self.array = newArray
                     }
                 }
-                self.array = newArray
             }
+        }
+    }
+    
+    func sortImages(completion: @escaping () -> Void) {
+        self.newArray = []
+        if Int(adv.images) == 0 {
+            newArray.append(0)
+            completion()
+        } else {
+            for i in 1...Int(adv.images)! {
+                newArray.append(i-1)
+            }
+            completion()
         }
     }
 }
