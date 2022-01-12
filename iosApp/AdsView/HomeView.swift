@@ -8,7 +8,7 @@
 import SwiftUI
 import FirebaseAuth
 
-var globalAdv: [Adv] = []
+//var globalAdv: [Adv] = []
 var globalAdvCategory: String = "all"
 
 struct HomeView: View {

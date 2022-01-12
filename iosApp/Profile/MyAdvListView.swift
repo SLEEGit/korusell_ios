@@ -26,8 +26,8 @@ struct MyAdvListView: View {
     
     var body: some View {
         List(list) { item in
-//            NavigationLink(destination: AdvDetailsView(adv: item)) {
-            NavigationLink(destination: MyAdvView(adv: item) {
+            NavigationLink(destination: AdvDetailsView(adv: item)) {
+//            NavigationLink(destination: MyAdvView(adv: item) {
                 ExpandedAdv(adv: item, image: image)
             }
         }
