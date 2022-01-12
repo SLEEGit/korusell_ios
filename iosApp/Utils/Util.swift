@@ -112,31 +112,31 @@ class Util {
         
         switch category {
         case "all":
-            afterCategory = unsortedList
+            afterCategory = unsortedList.filter { $0.category == "work" || $0.category == "transport" || $0.category == "house" || $0.category == "phone" || $0.category == "hobby" || $0.category == "car" || $0.category == "electronic" || $0.category == "children" || $0.category == "clothes" || $0.category == "sport" || $0.category == "pet" || $0.category == "change" || $0.category == "admin"}
         case "work":
-            afterCategory = unsortedList.filter { $0.category == "work" }
+            afterCategory = unsortedList.filter { $0.category == "work" || $0.category == "admin"}
         case "transport":
-            afterCategory = unsortedList.filter { $0.category == "transport" }
+            afterCategory = unsortedList.filter { $0.category == "transport" || $0.category == "admin"}
         case "house":
-            afterCategory = unsortedList.filter { $0.category == "house" }
+            afterCategory = unsortedList.filter { $0.category == "house" || $0.category == "admin"}
         case "phone":
-            afterCategory = unsortedList.filter { $0.category == "phone" }
+            afterCategory = unsortedList.filter { $0.category == "phone" || $0.category == "admin"}
         case "hobby":
-            afterCategory = unsortedList.filter { $0.category == "hobby" }
+            afterCategory = unsortedList.filter { $0.category == "hobby" || $0.category == "admin"}
         case "car":
-            afterCategory = unsortedList.filter { $0.category == "car" }
+            afterCategory = unsortedList.filter { $0.category == "car" || $0.category == "admin"}
         case "electronic":
-            afterCategory = unsortedList.filter { $0.category == "electronic" }
+            afterCategory = unsortedList.filter { $0.category == "electronic" || $0.category == "admin"}
         case "children":
-            afterCategory = unsortedList.filter { $0.category == "children" }
+            afterCategory = unsortedList.filter { $0.category == "children" || $0.category == "admin"}
         case "clothes":
-            afterCategory = unsortedList.filter { $0.category == "clothes" }
+            afterCategory = unsortedList.filter { $0.category == "clothes" || $0.category == "admin"}
         case "sport":
-            afterCategory = unsortedList.filter { $0.category == "sport" }
+            afterCategory = unsortedList.filter { $0.category == "sport" || $0.category == "admin"}
         case "pet":
-            afterCategory = unsortedList.filter { $0.category == "pet" }
+            afterCategory = unsortedList.filter { $0.category == "pet" || $0.category == "admin"}
         case "change":
-            afterCategory = unsortedList.filter { $0.category == "change" }
+            afterCategory = unsortedList.filter { $0.category == "change" || $0.category == "admin"}
         default:
             afterCategory = unsortedList.filter  { $0.category == "zavod" }
         }
@@ -145,19 +145,19 @@ class Util {
         case "Все города":
             return afterCategory
         case "Ансан":
-            return afterCategory.filter { $0.city == "Ансан"}
+            return afterCategory.filter { $0.city == "Ансан" || $0.city == "admin"}
         case "Хвасонг":
-            return afterCategory.filter { $0.city == "Хвасонг"}
+            return afterCategory.filter { $0.city == "Хвасонг" || $0.city == "admin"}
         case "Сеул":
-            return afterCategory.filter { $0.city == "Сеул"}
+            return afterCategory.filter { $0.city == "Сеул" || $0.city == "admin"}
         case "Инчхон":
-            return afterCategory.filter { $0.city == "Инчхон"}
+            return afterCategory.filter { $0.city == "Инчхон" || $0.city == "admin"}
         case "Асан":
-            return afterCategory.filter { $0.city == "Асан"}
+            return afterCategory.filter { $0.city == "Асан" || $0.city == "admin"}
         case "Чхонан":
-            return afterCategory.filter { $0.city == "Чхонан"}
+            return afterCategory.filter { $0.city == "Чхонан" || $0.city == "admin"}
         case "Другой город":
-            return afterCategory.filter { $0.city != "Чхонан" && $0.city != "Хвасонг" && $0.city != "Ансан" && $0.city != "Асан" && $0.city != "Сеул" && $0.city != "Инчхон" && $0.city != "Хвасонг"}
+            return afterCategory.filter { $0.city != "Чхонан" && $0.city != "Хвасонг" && $0.city != "Ансан" && $0.city != "Асан" && $0.city != "Сеул" && $0.city != "Инчхон" && $0.city != "Хвасонг" || $0.city == "admin"}
         default:
             return afterCategory
         }

@@ -132,14 +132,18 @@ struct ExpandedAdvDetails: View {
                     .font(.title)
                     .bold()
                     .padding(.leading, 15)
-                HStack {
-                    Text("Город")
-                        .font(.body)
-                        .foregroundColor(.gray)
-                    Divider()
-                    Text(adv.city)
-                        .font(.body)
-                }.padding(.leading, 15)
+                if adv.city != "admin" && adv.city != "" {
+                    HStack {
+                        Text("Город")
+                            .font(.body)
+                            .foregroundColor(.gray)
+                        Divider()
+                        Text(adv.city)
+                            .font(.body)
+                    }.padding(.leading, 15)
+                }
+                
+                
                 if adv.price != "" {
                     Text("\u{20A9} \(adv.price)")
                         .font(.system(size: 16))
@@ -200,6 +204,7 @@ struct ExpandedAdvDetails: View {
                 sortImages() {
                     DispatchQueue.main.asyncAfter(deadline: .now() + 0.2) {
                         self.array = newArray
+                        print(adv.city)
                     }
                 }
             }
