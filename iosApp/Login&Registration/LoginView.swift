@@ -128,7 +128,8 @@ struct LoginView : View {
                                 break
                             }
                         }
-                    ).listRowInsets(EdgeInsets(top: 0, leading: 0, bottom: 0, trailing: 0))
+                    )
+                        .listRowInsets(EdgeInsets(top: 1, leading: 1, bottom: 1, trailing: 1))
                         .background(Color.black)
                     
                     Section(header: Text("Создать новый аккаунт")) {

@@ -79,7 +79,7 @@ struct AddLinksView: View {
             }
         }.onAppear {
             if self.social == [] || self.social == ["","","","",""] {
-                self.social = ["https://www.facebook.com/", "https://www.instagram.com/", "https://t.me/", "https://www.youtube.com/channel/", "https://"]
+                self.social = ["https://www.facebook.com/", "https://www.instagram.com/", "https://t.me/", "https://www.youtube.com/", "https://"]
             }
             
         }

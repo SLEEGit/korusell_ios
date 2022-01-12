@@ -114,7 +114,7 @@ struct ExpandedServiceDetails: View {
 //                                .resizable()
 //                                .scaledToFit()
 //                                .frame(height: 300)
-//                                .cornerRadius(10)
+                                .cornerRadius(10)
                         }
                     }
                     .padding()
@@ -232,7 +232,7 @@ struct ExpandedServiceDetails: View {
                                     .frame(width: 40, height: 40)
                         })
                     }
-                    if service.social[3] != "" && service.social[3] != "https://www.youtube.com/channel/" {
+                    if service.social[3] != "" && service.social[3] != "https://www.youtube.com/" {
                         Link(destination: URL(string: service.social[3])!, label: {
                                 Image("youtube")
                                     .resizable()
@@ -272,30 +272,25 @@ struct ExpandedServiceDetails: View {
                 }
             }
             .onAppear {
-                //сделать тут функцию с эскейпом!
-                self.newArray = []
-                if Int(service.images) == 0 {
-                    newArray.append(0)
-                } else {
-                    for i in 1...Int(service.images)! {
-                        newArray.append(i-1)
+                sortImages() {
+                    DispatchQueue.main.asyncAfter(deadline: .now() + 0.2) {
+                        self.array = newArray
                     }
                 }
-                // функция изза чего вылетает
-                DispatchQueue.main.asyncAfter(deadline: .now() + 0.2) {
-                    self.array = newArray
-                }
-                
-                
-//                DB().getMultiImages(uid: service.uid, directory: "images") { images in
-//                    var newArray: [Int] = []
-//                    for i in 0...images.count-1 {
-//                        newArray.append(i)
-//                    }
-                    
-//                }
-                
             }
+        }
+    }
+    
+    func sortImages(completion: @escaping () -> Void) {
+        self.newArray = []
+        if Int(service.images) == 0 {
+            newArray.append(0)
+            completion()
+        } else {
+            for i in 1...Int(service.images)! {
+                newArray.append(i-1)
+            }
+            completion()
         }
     }
 }

@@ -230,6 +230,7 @@ struct MapView: View {
                             }
                         }
                     }
+                Group {
                 HStack {
                     Spacer()
                     if #available(iOS 15.0, *) {
@@ -261,6 +262,7 @@ struct MapView: View {
                         }
                     }
             
+                }
                 }
             }
             if isLoading {

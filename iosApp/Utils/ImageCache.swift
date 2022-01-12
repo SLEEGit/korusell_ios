@@ -24,7 +24,7 @@ struct UrlImageView: View {
 //            .background(Color(UIColor.systemGroupedBackground))
     }
     
-    static var defaultImage = UIImage(named: "blank")
+    static var defaultImage = UIImage(named: "launchicon_mini")
 }
 
 class UrlImageModel: ObservableObject {

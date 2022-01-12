@@ -35,7 +35,7 @@ struct AdvMenuView: View {
                     }
                 }
                 .navigationBarItems(leading:
-                    NavigationLink(destination: Text("🥚")) {
+                    NavigationLink(destination: Text("🥚 ver. 1.2")) {
                     if colorScheme == .dark {
                         Image("logo_blue_line")
                             .resizable()
