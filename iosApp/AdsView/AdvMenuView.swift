@@ -95,6 +95,12 @@ struct AdvMenuView: View {
                             Text("Сеул")
                         }
                         Button {
+                            globalCity = "Сувон"
+                            city = globalCity
+                        } label: {
+                            Text("Сувон")
+                        }
+                        Button {
                             globalCity = "Асан"
                             city = globalCity
                         } label: {

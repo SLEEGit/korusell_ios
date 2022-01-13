@@ -50,6 +50,10 @@ struct ServiceSubView: View {
                     globalCity = "Сеул"
                     self.list = Util().filter(city: globalCity, category: category, unsortedList: globalServices)
                 }
+                Button("Сувон") {
+                    globalCity = "Сувон"
+                    self.list = Util().filter(city: globalCity, category: category, unsortedList: globalServices)
+                }
                 Button("Асан") {
                     globalCity = "Асан"
                     self.list = Util().filter(city: globalCity, category: category, unsortedList: globalServices)

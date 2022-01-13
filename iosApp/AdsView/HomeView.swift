@@ -73,6 +73,10 @@ struct HomeView: View {
                                 globalCity = "Сеул"
                                 self.list = Util().filterAdv(city: globalCity, category: globalAdvCategory, unsortedList: globalAdv)
                             }
+                            Button("Сувон") {
+                                globalCity = "Сувон"
+                                self.list = Util().filterAdv(city: globalCity, category: globalAdvCategory, unsortedList: globalAdv)
+                            }
                             Button("Асан") {
                                 globalCity = "Асан"
                                 self.list = Util().filterAdv(city: globalCity, category: globalAdvCategory, unsortedList: globalAdv)

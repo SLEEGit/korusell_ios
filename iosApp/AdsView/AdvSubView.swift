@@ -57,6 +57,11 @@ struct AdvSubView: View {
                     self.city = globalCity
                     self.list = Util().filterAdv(city: globalCity, category: category, unsortedList: globalAdv)
                 }
+                Button("Сувон") {
+                    globalCity = "Сувон"
+                    self.city = globalCity
+                    self.list = Util().filterAdv(city: globalCity, category: category, unsortedList: globalAdv)
+                }
                 Button("Асан") {
                     globalCity = "Асан"
                     self.city = globalCity

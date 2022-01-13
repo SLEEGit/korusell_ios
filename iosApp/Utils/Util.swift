@@ -62,8 +62,8 @@ class Util {
             afterCategory = unsortedList.filter { $0.category == "docs" }
         case "transport":
             afterCategory = unsortedList.filter { $0.category == "transport" }
-        case "law":
-            afterCategory = unsortedList.filter { $0.category == "law" }
+        case "travel":
+            afterCategory = unsortedList.filter { $0.category == "travel" }
         case "party":
             afterCategory = unsortedList.filter { $0.category == "party" }
         case "health":
@@ -97,10 +97,12 @@ class Util {
             return afterCategory.filter { $0.city == "Инчхон"}
         case "Асан":
             return afterCategory.filter { $0.city == "Асан"}
+        case "Сувон":
+            return afterCategory.filter { $0.city == "Сувон"}
         case "Чхонан":
             return afterCategory.filter { $0.city == "Чхонан"}
         case "Другой город":
-            return afterCategory.filter { $0.city != "Чхонан" && $0.city != "Хвасонг" && $0.city != "Ансан" && $0.city != "Асан" && $0.city != "Сеул" && $0.city != "Инчхон" && $0.city != "Хвасонг"}
+            return afterCategory.filter { $0.city != "Чхонан" && $0.city != "Хвасонг" && $0.city != "Ансан" && $0.city != "Асан" && $0.city != "Сеул" && $0.city != "Инчхон" && $0.city != "Хвасонг" && $0.city != "Сувон"}
         default:
             return afterCategory
         }
@@ -154,10 +156,12 @@ class Util {
             return afterCategory.filter { $0.city == "Инчхон" || $0.city == "admin"}
         case "Асан":
             return afterCategory.filter { $0.city == "Асан" || $0.city == "admin"}
+        case "Сувон":
+            return afterCategory.filter { $0.city == "Сувон" || $0.city == "admin"}
         case "Чхонан":
             return afterCategory.filter { $0.city == "Чхонан" || $0.city == "admin"}
         case "Другой город":
-            return afterCategory.filter { $0.city != "Чхонан" && $0.city != "Хвасонг" && $0.city != "Ансан" && $0.city != "Асан" && $0.city != "Сеул" && $0.city != "Инчхон" && $0.city != "Хвасонг" || $0.city == "admin"}
+            return afterCategory.filter { $0.city != "Чхонан" && $0.city != "Хвасонг" && $0.city != "Ансан" && $0.city != "Асан" && $0.city != "Сеул" && $0.city != "Инчхон" && $0.city != "Хвасонг" && $0.city != "Сувон" || $0.city == "admin"}
         default:
             return afterCategory
         }

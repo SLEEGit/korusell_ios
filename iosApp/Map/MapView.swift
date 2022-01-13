@@ -150,9 +150,9 @@ struct MapView: View {
                                         self.category = "transport"
                                         self.list = Util().filter(city: globalCity, category: self.category, unsortedList: globalServices)
                                     }
-                                    Button("Юридические услуги") {
-                                        self.categoryName = "Юридические услуги"
-                                        self.category = "law"
+                                    Button("Туризм/Почта") {
+                                        self.categoryName = "Туризм/Почта"
+                                        self.category = "travel"
                                         self.list = Util().filter(city: globalCity, category: self.category, unsortedList: globalServices)
                                     }
                                     Button("СТО/Тюнинг") {
@@ -203,6 +203,11 @@ struct MapView: View {
                                 Button("Сеул") {
                                     mapRegion = MKCoordinateRegion(center: CLLocationCoordinate2D(latitude: 37.52146229568448, longitude: 126.98610893732737), span: MKCoordinateSpan(latitudeDelta: 0.3, longitudeDelta: 0.3))
                                     globalCity = "Сеул"
+                                    self.list = Util().filter(city: globalCity, category: self.category, unsortedList: globalServices)
+                                }
+                                Button("Сувон") {
+                                    mapRegion = MKCoordinateRegion(center: CLLocationCoordinate2D(latitude: 37.28338391588353, longitude: 127.01187706655084), span: MKCoordinateSpan(latitudeDelta: 0.2, longitudeDelta: 0.2))
+                                    globalCity = "Сувон"
                                     self.list = Util().filter(city: globalCity, category: self.category, unsortedList: globalServices)
                                 }
                                 Button("Асан") {

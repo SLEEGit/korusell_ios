@@ -132,7 +132,7 @@ public class DataFetcher: ObservableObject {
             MenuItem(name: "Авто Купля/Продажа", image: "🚗", category: "cars"),
             MenuItem(name: "Красота/Здоровье", image: "💅🏼", category: "health"),
             MenuItem(name: "Трансфер/Переезд", image: "🚛", category: "transport"),
-            MenuItem(name: "Юридические услуги", image: "👩🏻‍⚖️", category: "law"),
+            MenuItem(name: "Туризм/Почта", image: "✈️", category: "travel"),
             MenuItem(name: "СТО/Тюнинг", image: "🧑🏻‍🔧", category: "workshop"),
             MenuItem(name: "Другое", image: "🥷", category: "other")
             

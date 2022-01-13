@@ -110,6 +110,7 @@ struct AddAdvView: View {
                         Text("Хвасонг").tag("Хвасонг")
                         Text("Сеул").tag("Сеул")
                         Text("Инчхон").tag("Инчхон")
+                        Text("Сувон").tag("Сувон")
                         Text("Асан").tag("Асан")
                         Text("Чхонан").tag("Чхонан")
                     }

@@ -95,7 +95,7 @@ struct MyBusinessView: View {
                 .foregroundColor(Color("textColor"))
                 Group {
                     Text("Трансфер/Переезд").tag("transport")
-                    Text("Юридические услуги").tag("law")
+                    Text("Туризм/Почта").tag("travel")
                     Text("СТО/Тюнинг").tag("workshop")
                     Text("Другое").tag("other")
                 }.foregroundColor(Color("textColor"))
@@ -106,6 +106,7 @@ struct MyBusinessView: View {
                         Text("Ансан").tag("Ансан")
                         Text("Хвасонг").tag("Хвасонг")
                         Text("Сеул").tag("Сеул")
+                        Text("Сувон").tag("Сувон")
                         Text("Инчхон").tag("Инчхон")
                         Text("Асан").tag("Асан")
                         Text("Чхонан").tag("Чхонан")
