@@ -7,6 +7,8 @@
 
 import SwiftUI
 import FirebaseAuth
+import AppTrackingTransparency
+import AdSupport
 
 var globalServices: [Service] = []
 var globalCity: String = "Все города"
@@ -22,6 +24,8 @@ struct ServiceMenuView: View {
     @State var isShowInfo: Bool = false
     @State var email: String = ""
     @Environment(\.colorScheme) var colorScheme
+    
+    @ObservedObject var trackingHelper = ATTrackingHelper()
     
     var body: some View {
         
@@ -56,6 +60,7 @@ struct ServiceMenuView: View {
                 })
                 .navigationTitle("Услуги")
                 .onAppear{
+                    trackingHelper.requestAuth()
                     email = Auth.auth().currentUser?.email ?? ""
                     city = globalCity
                     session.getServices(category: "all") { (list) in
@@ -145,5 +150,26 @@ struct ServiceMenuView: View {
 struct ServiceMenuView_Previews: PreviewProvider {
     static var previews: some View {
         ServiceMenuView()
+    }
+}
+
+
+class ATTrackingHelper: ObservableObject {
+    @Published var status = ATTrackingManager.trackingAuthorizationStatus
+    @Published var currentUUID = ASIdentifierManager.shared().advertisingIdentifier
+
+    func requestAuth() {
+        guard ATTrackingManager.trackingAuthorizationStatus != .authorized else {
+            return
+        }
+        
+        ATTrackingManager.requestTrackingAuthorization { status in
+            DispatchQueue.main.async { [unowned self] in
+                self.status = status
+                if status == .authorized {
+                    self.currentUUID = ASIdentifierManager.shared().advertisingIdentifier
+                }
+            }
+        }
     }
 }

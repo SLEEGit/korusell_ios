@@ -29,6 +29,8 @@
 		256D58FF2761DA30002EDC6A /* ServiceMenuView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 256D58FE2761DA30002EDC6A /* ServiceMenuView.swift */; };
 		256D59032761DA86002EDC6A /* service.json in Resources */ = {isa = PBXBuildFile; fileRef = 256D59012761DA86002EDC6A /* service.json */; };
 		256D59092761E555002EDC6A /* DB.swift in Sources */ = {isa = PBXBuildFile; fileRef = 256D59082761E555002EDC6A /* DB.swift */; };
+		2592E22D27900D0F00508B01 /* Test.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2592E22C27900D0F00508B01 /* Test.swift */; };
+		2592E22F2790159B00508B01 /* Test2.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2592E22E2790159B00508B01 /* Test2.swift */; };
 		2593A6D927539FAC00081698 /* iosAppApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2593A6D827539FAC00081698 /* iosAppApp.swift */; };
 		2593A6DB27539FAC00081698 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2593A6DA27539FAC00081698 /* ContentView.swift */; };
 		2593A6DD27539FAF00081698 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 2593A6DC27539FAF00081698 /* Assets.xcassets */; };
@@ -80,6 +82,8 @@
 		256D59082761E555002EDC6A /* DB.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DB.swift; sourceTree = "<group>"; };
 		25717C5D275F520A00C2CD01 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = Info.plist; sourceTree = "<group>"; };
 		257CC4E1277C0C7F00AFE5E8 /* iosApp.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = iosApp.entitlements; sourceTree = "<group>"; };
+		2592E22C27900D0F00508B01 /* Test.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Test.swift; sourceTree = "<group>"; };
+		2592E22E2790159B00508B01 /* Test2.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Test2.swift; sourceTree = "<group>"; };
 		2593A6D527539FAC00081698 /* korusell.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = korusell.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		2593A6D827539FAC00081698 /* iosAppApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = iosAppApp.swift; sourceTree = "<group>"; };
 		2593A6DA27539FAC00081698 /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
@@ -176,6 +180,8 @@
 				257CC4E1277C0C7F00AFE5E8 /* iosApp.entitlements */,
 				2593A6D827539FAC00081698 /* iosAppApp.swift */,
 				2593A6DA27539FAC00081698 /* ContentView.swift */,
+				2592E22C27900D0F00508B01 /* Test.swift */,
+				2592E22E2790159B00508B01 /* Test2.swift */,
 				25441F6A2767178600B6E240 /* Map */,
 				25973E00275A4D0100DC016B /* ServiceView */,
 				25973DE42759969300DC016B /* AdsView */,
@@ -443,9 +449,11 @@
 				25C6DB61278670780026ACE6 /* AppleAuth.swift in Sources */,
 				2542E347277436B600883E0D /* OwnerView.swift in Sources */,
 				253305CD27560E450061DD28 /* MenuItems.swift in Sources */,
+				2592E22D27900D0F00508B01 /* Test.swift in Sources */,
 				25441F8E2768269C00B6E240 /* DetailsView.swift in Sources */,
 				25C6DB6D278C090B0026ACE6 /* AddAdv.swift in Sources */,
 				2599360A2769A0FA00F468B6 /* LoginView.swift in Sources */,
+				2592E22F2790159B00508B01 /* Test2.swift in Sources */,
 				2515C95727841754007C376F /* MultipleImagePicker.swift in Sources */,
 				2593A6D927539FAC00081698 /* iosAppApp.swift in Sources */,
 				2599360E2769B42C00F468B6 /* User.swift in Sources */,
@@ -590,6 +598,7 @@
 				INFOPLIST_KEY_CFBundleDisplayName = korusell;
 				INFOPLIST_KEY_NSLocationAlwaysAndWhenInUseUsageDescription = "Включение служб определения местоположения позволяет нам показывать Ваше текущее местоположение на карте";
 				INFOPLIST_KEY_NSLocationWhenInUseUsageDescription = "Включение служб определения местоположения позволяет нам показывать Ваше текущее местоположение на карте";
+				INFOPLIST_KEY_NSUserTrackingUsageDescription = "Это позволит \"Korusell\" показывать Вам более подходящую рекламу.";
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen;
@@ -626,6 +635,7 @@
 				INFOPLIST_KEY_CFBundleDisplayName = korusell;
 				INFOPLIST_KEY_NSLocationAlwaysAndWhenInUseUsageDescription = "Включение служб определения местоположения позволяет нам показывать Ваше текущее местоположение на карте";
 				INFOPLIST_KEY_NSLocationWhenInUseUsageDescription = "Включение служб определения местоположения позволяет нам показывать Ваше текущее местоположение на карте";
+				INFOPLIST_KEY_NSUserTrackingUsageDescription = "Это позволит \"Korusell\" показывать Вам более подходящую рекламу.";
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen;

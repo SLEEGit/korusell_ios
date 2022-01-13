@@ -142,7 +142,7 @@ struct ExpandedAdvDetails: View {
 //                        Divider()
                         Text(adv.city)
                             .font(.body)
-                    }.padding(.leading, 15)
+                    }.padding(.leading, 15).padding(.bottom, 10)
                 }
                 
                 
