@@ -53,7 +53,7 @@ struct ExpandedAdv: View {
     var body: some View {
         HStack {
             //            FirebaseImage(id: "vishenka")
-            UrlImageView(urlString: adv.uid + "0", directory: "advImages")
+            UrlImageView(urlString: adv.uid + "ADV" + "0", directory: "advImages")
                 .frame(width: 100, height: 100)
             //            Image(uiImage: self.image)
             //                .resizable()
@@ -101,15 +101,16 @@ struct ExpandedAdvDetails: View {
     @State var adv: Adv
     @State var image: UIImage
     @State var isShowSheet: Bool = false
-    @State var array: [Int] = [0,1,2,3]
+    @State var array: [Int] = [0]
     @State var newArray: [Int] = []
+    @State var count: String = ""
     var body: some View {
         ScrollView {
             VStack(alignment: .leading) {
                 
                 TabView {
                     ForEach(array, id: \.self) { photo in
-                        UrlImageView(urlString: adv.uid + String(photo), directory: "advImages")
+                        UrlImageView(urlString: adv.uid  + "ADV" + String(photo), directory: "advImages")
                     }
                 }
                 .padding()
@@ -121,6 +122,7 @@ struct ExpandedAdvDetails: View {
                 //                    .scaledToFill()
                 //                    .cornerRadius(15)
                 //                    .padding()
+                Group {
                 if adv.createdAt != "" {
                     Text("Добавлено: \(Util().formatDate(date: adv.createdAt))")
                         .font(.caption)
@@ -137,7 +139,7 @@ struct ExpandedAdvDetails: View {
                         Text("Город")
                             .font(.body)
                             .foregroundColor(.gray)
-                        Divider()
+//                        Divider()
                         Text(adv.city)
                             .font(.body)
                     }.padding(.leading, 15)
@@ -156,17 +158,20 @@ struct ExpandedAdvDetails: View {
                     .font(.headline)
                     .padding(15)
                 Text(adv.description)
+                // эта штука снизу убрала троеточие в тексте
+                    .minimumScaleFactor(0.1)
                     .font(.body)
                     .multilineTextAlignment(.leading)
                     .lineLimit(nil)
                     .padding(.horizontal, 15)
                     .padding(.bottom, 20)
-                // эта штука снизу убрала троеточие в тексте
-                    .minimumScaleFactor(0.1)
+                
+                    Divider().padding(.bottom, 20)
+                }
                 
                 if adv.phone != "" {
-                    Group {
-                        Divider().padding(.bottom, 20)
+                    HStack {
+                        Spacer()
                         Button(action: {
                             Util().call(numberString: adv.phone)
                         }) {
@@ -177,14 +182,15 @@ struct ExpandedAdvDetails: View {
                         .padding()
                         .background(Color.accentColor)
                         .cornerRadius(8)
-                    }.position(x: UIScreen.main.bounds.width/2)
+//                        .position(x: UIScreen.main.bounds.width/2)
                         .padding(.vertical, 20)
-                    
+                        Spacer()
+                }
                 }
                 
                 
                 if !adv.uid.contains("aaaaaaaaaaaaaaaaaaaaaaa") {
-                    Section {
+//                    Group {
                         Button(action: {
                             isShowSheet = true
                         }) {
@@ -198,29 +204,40 @@ struct ExpandedAdvDetails: View {
                             .sheet(isPresented: $isShowSheet) {
                                 OwnerView(ownerUid: adv.uid)
                             }
-                    }
+//                    }
                 }
             }.onAppear {
-                sortImages() {
-                    DispatchQueue.main.asyncAfter(deadline: .now() + 0.2) {
-                        self.array = newArray
-                        print(adv.city)
-                    }
-                }
+                countToArray()
+//                sortImages() {
+//                    DispatchQueue.main.asyncAfter(deadline: .now() + 0.2) {
+//                        self.array = newArray
+//                    }
+//                }
             }
         }
     }
     
-    func sortImages(completion: @escaping () -> Void) {
-        self.newArray = []
-        if Int(adv.images) == 0 {
-            newArray.append(0)
-            completion()
-        } else {
-            for i in 1...Int(adv.images)! {
-                newArray.append(i-1)
+//    func sortImages(completion: @escaping () -> Void) {
+//        self.newArray = []
+//        if Int(adv.images) == 0 {
+//            newArray.append(0)
+//            completion()
+//        } else {
+//            for i in 1...Int(adv.images)! {
+//                newArray.append(i-1)
+//            }
+//            completion()
+//        }
+//    }
+    
+    func countToArray() {
+        if let int = Int(count) {
+            if int != 0 && int != 1 {
+                for i in 2...int {
+                    array.append(i-1)
+                }
             }
-            completion()
+            
         }
     }
 }

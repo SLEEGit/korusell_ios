@@ -166,13 +166,13 @@ struct AddAdvView: View {
                         DB().updateAdv(uid: uid, name: name, category: category, city: city, price: price, phone: phone, descrition: description, createdAt: Util().dateByTimeZone(), images: images) {
                             var n = 0
                             for photo1 in photos {
-                                DB().postImage(image: photo1, directory: directory, uid: uid+String(n), quality: 0.1)
+                                DB().postImage(image: photo1, directory: directory, uid: uid + "ADV" + String(n), quality: 0.1)
                                 n += 1
                             }
                             for i in photos.count...4 {
                                 print(i)
                                 print("iii")
-                                DB().deleteImage(uid: uid + String(i), directory: directory)
+                                DB().deleteImage(uid: uid + "ADV" + String(i), directory: directory)
                             }
                             showingAlert = true
                         }
@@ -245,7 +245,7 @@ struct AddAdvView: View {
             Pref.userDefault.set(true, forKey: "adv")
             Pref.userDefault.synchronize()
             
-            DB().getMultiImages(uid: uid, directory: directory) { images in
+            DB().getMultiImages(uid: uid + "ADV", directory: directory) { images in
                 self.photos = images
             }
         }

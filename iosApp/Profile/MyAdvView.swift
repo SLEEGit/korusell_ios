@@ -65,7 +65,7 @@ struct MyAdvView: View {
                         isShowPhotoLibrary.toggle()
                     }
                     .sheet(isPresented: $isShowPhotoLibrary) {
-                        PhotoPicker(photos: $photos, showPicker: self.$isShowPhotoLibrary, directory: "images", uid: uid)
+                        PhotoPicker(photos: $photos, showPicker: self.$isShowPhotoLibrary, directory: "advImages", uid: uid)
                     }
                     Spacer()
                 }
@@ -245,7 +245,7 @@ struct MyAdvView: View {
             Pref.userDefault.set(true, forKey: "adv")
             Pref.userDefault.synchronize()
             if !checked {
-                DB().getMultiImages(uid: uid, directory: directory) { images in
+                DB().getMultiImages(uid: uid + "ADV", directory: directory) { images in
                     self.photos = images
                     self.checked = true
                 }
@@ -256,7 +256,7 @@ struct MyAdvView: View {
     func postImages(completion: @escaping () -> Void) {
         var n = 0
         for photo1 in photos {
-            DB().postImage(image: photo1, directory: directory, uid: uid+String(n), quality: 0.1)
+            DB().postImage(image: photo1, directory: directory, uid: uid + "ADV" + String(n), quality: 0.1)
             n += 1
             print("adding photo")
         }
@@ -269,7 +269,7 @@ struct MyAdvView: View {
         for i in photos.count...4 {
             print(i)
             print("deleting")
-            DB().deleteImage(uid: uid + String(i), directory: directory)
+            DB().deleteImage(uid: uid + "ADV" + String(i), directory: directory)
         }
         DispatchQueue.main.asyncAfter(deadline: .now() + 0.2) {
             completion()

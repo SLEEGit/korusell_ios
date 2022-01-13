@@ -10,9 +10,13 @@ import MobileCoreServices
 
 struct AdvDetailsView: View {
     var adv: Adv!
+    
+    @State var array: [Int] = []
     @State private var image = UIImage(named: "blank")!
     
     var body: some View {
-        ExpandedAdvDetails(adv: adv, image: image)
+        ExpandedAdvDetails(adv: adv, image: image, count: adv.images)
     }
+    
+
 }
