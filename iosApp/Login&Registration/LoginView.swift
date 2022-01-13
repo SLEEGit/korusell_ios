@@ -19,7 +19,7 @@ struct LoginView : View {
     @State var warningText: String = ""
     @State var showAlert: Bool = false
     @State var isLoading: Bool = false
-    @State var isShowInfo: Bool = false
+    @State var isShowInfoL: Bool = false
     
     @State var currentNonce: String?
     
@@ -143,10 +143,10 @@ struct LoginView : View {
                     .toolbar {
                         ToolbarItem(placement: .navigationBarLeading) {
                             Button(action: {
-                                isShowInfo = true
+                                isShowInfoL = true
                             }, label: {
                                 Text("ℹ️")
-                            }).alert(isPresented: $isShowInfo) {
+                            }).alert(isPresented: $isShowInfoL) {
                                 Alert(
                                     title: Text("Чтобы разместить свой бизнес или объявление, создайте аккаунт"),
                                     dismissButton: .default(Text("Ок"))
@@ -164,6 +164,8 @@ struct LoginView : View {
                                 }
                             }, label: {
                                 Text("Забыли пароль?")
+//                                    .font(.system(size: 15))
+//                                    .minimumScaleFactor(0.1)
                             }).alert(isPresented: $showAlert) {
                                 Alert(
                                     title: Text("На Вашу почту отправлена ссылка для восстановления пароля"),

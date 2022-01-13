@@ -91,16 +91,7 @@ struct MapView: View {
                 
                     .toolbar {
                         ToolbarItem(placement: .navigationBarLeading) {
-                            Menu(self.categoryName) {
-                                //                                ForEach(categories.identified(by: \.id)) { cat in
-                                //                                    Button {
-                                //                                        self.categoryName = cat.name
-                                //                                        self.category = cat.category
-                                //                                        self.list = Util().getCity(city: globalCity, category: self.category, unsortedList: globalServices)
-                                //                                    } label: {
-                                //                                        Text(cat.name)
-                                //                                    }
-                                //                                }
+                            Menu {
                                 Group {
                                     Button("Все категории") {
                                         self.categoryName = "Все категории"
@@ -181,6 +172,10 @@ struct MapView: View {
 //                                        self.list = Util().filter(city: globalCity, category: self.category, unsortedList: globalServices)
 //                                    }
                                 }
+                            } label: {
+                                Text(self.categoryName)
+                                    .font(.system(size: 15))
+                                    .minimumScaleFactor(0.1)
                             }
                         }
                         ToolbarItem(placement: .navigationBarTrailing) {
@@ -227,6 +222,8 @@ struct MapView: View {
                                 }
                             } label: {
                                 Text(globalCity)
+                                    .font(.system(size: 15))
+                                    .minimumScaleFactor(0.1)
                             }
                         }
                     }

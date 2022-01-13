@@ -9,7 +9,7 @@ import SwiftUI
 
 struct AddBusinessView: View {
     //    @State var service: Service!
-    @State var uid: String = ""
+    @State var uid: String = "aaaaaaaaaaaaaaaaaaaaaaaa00"
     @State var name: String = ""
     @State var city: String = ""
     @State var address: String = ""
@@ -30,6 +30,7 @@ struct AddBusinessView: View {
     @State private var businessWarning = false
     @State private var photos: [UIImage] = []
     @State var images: String = "0"
+    @State var checked: Bool = false
     
     @Environment(\.presentationMode) var presentationMode: Binding<PresentationMode>
     
@@ -187,17 +188,24 @@ struct AddBusinessView: View {
                                 self.longitude = long
                                 DispatchQueue.main.asyncAfter(deadline: .now() + 0.1) {
                                     DB().updateBusiness(uid: uid, name: name, category: category, city: city, address: address, phone: phone, descrition: description, latitude: latitude, longitude: longitude, social: social, images: images) {
-                                        var n = 0
-                                        for photo1 in photos {
-                                            DB().postImage(image: photo1, directory: directory, uid: uid+String(n), quality: 0.1)
-                                            n += 1
+                                        postImages() {
+                                            deleteImages() {
+                                                DispatchQueue.main.asyncAfter(deadline: .now() + 0.3) {
+                                                    showingAlert = true
+                                                }
+                                            }
                                         }
-                                        for i in photos.count...4 {
-                                            print(i)
-                                            print("iii")
-                                            DB().deleteImage(uid: uid + String(i), directory: directory)
-                                        }
-                                        showingAlert = true
+//                                        var n = 0
+//                                        for photo1 in photos {
+//                                            DB().postImage(image: photo1, directory: directory, uid: uid+String(n), quality: 0.1)
+//                                            n += 1
+//                                        }
+//                                        for i in photos.count...4 {
+//                                            print(i)
+//                                            print("iii")
+//                                            DB().deleteImage(uid: uid + String(i), directory: directory)
+//                                        }
+//                                        showingAlert = true
                                     }
                                 }
                             }
@@ -273,9 +281,35 @@ struct AddBusinessView: View {
             }
             Pref.userDefault.set(true, forKey: "business")
             Pref.userDefault.synchronize()
-            DB().getMultiImages(uid: uid, directory: directory) { images in
-                self.photos = images
+            if !checked {
+                DB().getMultiImages(uid: uid, directory: directory) { images in
+                    self.photos = images
+                    self.checked = true
+                }
             }
+        }
+        
+    }
+    func postImages(completion: @escaping () -> Void) {
+        var n = 0
+        for photo1 in photos {
+            DB().postImage(image: photo1, directory: directory, uid: uid+String(n), quality: 0.1)
+            n += 1
+            print("adding photo")
+        }
+        DispatchQueue.main.asyncAfter(deadline: .now() + 0.2) {
+            completion()
+        }
+    }
+    
+    func deleteImages(completion: @escaping () -> Void) {
+        for i in photos.count...4 {
+            print(i)
+            print("deleting")
+            DB().deleteImage(uid: uid + String(i), directory: directory)
+        }
+        DispatchQueue.main.asyncAfter(deadline: .now() + 0.2) {
+            completion()
         }
     }
 }

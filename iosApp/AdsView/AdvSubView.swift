@@ -12,6 +12,7 @@ struct AdvSubView: View {
     @State var list: [Adv] = []
     @State var afterCatlList: [Adv] = []
     @State private var image = UIImage(named: "blank")!
+    @State var city : String = "Все города"
     var category: String
     var barTitle: String = ""
     
@@ -24,45 +25,59 @@ struct AdvSubView: View {
         }
         .onAppear {
             globalCategory = category
+            city = globalCity
             self.list = Util().filterAdv(city: globalCity, category: category, unsortedList: globalAdv)
         }
         .navigationTitle(barTitle)
         .navigationBarTitleDisplayMode(.inline)
         .toolbar{
-            Menu(globalCity) {
+            Menu {
                 Button("Все города") {
                     globalCity = "Все города"
+                    self.city = globalCity
                     self.list = Util().filterAdv(city: globalCity, category: category, unsortedList: globalAdv)
                 }
                 Button("Ансан") {
                     globalCity = "Ансан"
+                    self.city = globalCity
                     self.list = Util().filterAdv(city: globalCity, category: category, unsortedList: globalAdv)
                 }
                 Button("Хвасонг") {
                     globalCity = "Хвасонг"
+                    self.city = globalCity
                     self.list = Util().filterAdv(city: globalCity, category: category, unsortedList: globalAdv)
                 }
                 Button("Инчхон") {
                     globalCity = "Инчхон"
+                    self.city = globalCity
                     self.list = Util().filterAdv(city: globalCity, category: category, unsortedList: globalAdv)
                 }
                 Button("Сеул") {
                     globalCity = "Сеул"
+                    self.city = globalCity
                     self.list = Util().filterAdv(city: globalCity, category: category, unsortedList: globalAdv)
                 }
                 Button("Асан") {
                     globalCity = "Асан"
+                    self.city = globalCity
                     self.list = Util().filterAdv(city: globalCity, category: category, unsortedList: globalAdv)
                 }
                 Button("Чхонан") {
                     globalCity = "Чхонан"
+                    self.city = globalCity
                     self.list = Util().filterAdv(city: globalCity, category: category, unsortedList: globalAdv)
                 }
                 Button("Другой город") {
                     globalCity = "Другой город"
+                    self.city = globalCity
                     self.list = Util().filterAdv(city: globalCity, category: category, unsortedList: globalAdv)
                 }
+            } label: {
+                Text(city)
+                    .font(.system(size: 15))
+                    .minimumScaleFactor(0.1)
             }
+            
         }
     }
     

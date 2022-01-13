@@ -29,7 +29,8 @@ struct MyAdvView: View {
     @State private var businessWarning = false
     @State private var photos: [UIImage] = []
     @State var images: String = "0"
-
+    @State var checked: Bool = false
+    
     @Environment(\.presentationMode) var presentationMode: Binding<PresentationMode>
     
     
@@ -156,17 +157,24 @@ struct MyAdvView: View {
                     Button("Обновить данные") {
                         self.images = String(photos.count)
                         DB().updateAdv(uid: uid, name: name, category: category, city: city, price: price, phone: phone, descrition: description, createdAt: Util().dateByTimeZone(), images: images) {
-                            var n = 0
-                            for photo1 in photos {
-                                DB().postImage(image: photo1, directory: directory, uid: uid+String(n), quality: 0.1)
-                                n += 1
+                            postImages() {
+                                deleteImages() {
+                                    DispatchQueue.main.asyncAfter(deadline: .now() + 0.3) {
+                                        showingAlert = true
+                                    }
+                                }
                             }
-                            for i in photos.count...4 {
-                                print(i)
-                                print("iii")
-                                DB().deleteImage(uid: uid + String(i), directory: directory)
-                            }
-                            showingAlert = true
+//                            var n = 0
+//                            for photo1 in photos {
+//                                DB().postImage(image: photo1, directory: directory, uid: uid+String(n), quality: 0.1)
+//                                n += 1
+//                            }
+//                            for i in photos.count...4 {
+//                                print(i)
+//                                print("iii")
+//                                DB().deleteImage(uid: uid + String(i), directory: directory)
+//                            }
+//                            showingAlert = true
                         }
                     }
                     Spacer()
@@ -236,10 +244,35 @@ struct MyAdvView: View {
             }
             Pref.userDefault.set(true, forKey: "adv")
             Pref.userDefault.synchronize()
-            
-            DB().getMultiImages(uid: uid, directory: directory) { images in
-                self.photos = images
+            if !checked {
+                DB().getMultiImages(uid: uid, directory: directory) { images in
+                    self.photos = images
+                    self.checked = true
+                }
             }
+        }
+    }
+    
+    func postImages(completion: @escaping () -> Void) {
+        var n = 0
+        for photo1 in photos {
+            DB().postImage(image: photo1, directory: directory, uid: uid+String(n), quality: 0.1)
+            n += 1
+            print("adding photo")
+        }
+        DispatchQueue.main.asyncAfter(deadline: .now() + 0.2) {
+            completion()
+        }
+    }
+    
+    func deleteImages(completion: @escaping () -> Void) {
+        for i in photos.count...4 {
+            print(i)
+            print("deleting")
+            DB().deleteImage(uid: uid + String(i), directory: directory)
+        }
+        DispatchQueue.main.asyncAfter(deadline: .now() + 0.2) {
+            completion()
         }
     }
 }

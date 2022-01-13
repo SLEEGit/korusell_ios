@@ -30,6 +30,7 @@ struct MyBusinessView: View {
     @State private var businessWarning = false
     @State private var photos: [UIImage] = []
     @State var images: String = "0"
+    @State var checked: Bool = false
     
     @Environment(\.presentationMode) var presentationMode: Binding<PresentationMode>
     
@@ -65,6 +66,8 @@ struct MyBusinessView: View {
                     }
                     .sheet(isPresented: $isShowPhotoLibrary) {
                         PhotoPicker(photos: $photos, showPicker: self.$isShowPhotoLibrary, directory: "images", uid: uid)
+                    }.onDisappear {
+                        
                     }
                     Spacer()
                 }
@@ -181,10 +184,11 @@ struct MyBusinessView: View {
                                 DispatchQueue.main.asyncAfter(deadline: .now() + 0.1) {
                                     DB().updateBusiness(uid: uid, name: name, category: category, city: city, address: address, phone: phone, descrition: description, latitude: latitude, longitude: longitude, social: social, images: images) {
                                         postImages() {
-                                            DispatchQueue.main.asyncAfter(deadline: .now() + 0.3) {
-                                                showingAlert = true
+                                            deleteImages() {
+                                                DispatchQueue.main.asyncAfter(deadline: .now() + 0.3) {
+                                                    showingAlert = true
+                                                }
                                             }
-                                            
                                         }
 //                                        var n = 0
 //                                        for photo1 in photos {
@@ -267,14 +271,18 @@ struct MyBusinessView: View {
         
         .navigationTitle("Мой Бизнес")
         .onAppear {
+            print("кол во фоток: \(photos.count)")
             businessWarning = true
             if Pref.userDefault.bool(forKey: "business") {
                 businessWarning = false
             }
             Pref.userDefault.set(true, forKey: "business")
             Pref.userDefault.synchronize()
-            DB().getMultiImages(uid: uid, directory: directory) { images in
-                self.photos = images
+            if !checked {
+                DB().getMultiImages(uid: uid, directory: directory) { images in
+                    self.photos = images
+                    self.checked = true
+                }
             }
         }
     }
@@ -286,12 +294,20 @@ struct MyBusinessView: View {
             n += 1
             print("adding photo")
         }
+        DispatchQueue.main.asyncAfter(deadline: .now() + 0.2) {
+            completion()
+        }
+    }
+    
+    func deleteImages(completion: @escaping () -> Void) {
         for i in photos.count...4 {
             print(i)
             print("deleting")
             DB().deleteImage(uid: uid + String(i), directory: directory)
         }
-        completion()
+        DispatchQueue.main.asyncAfter(deadline: .now() + 0.2) {
+            completion()
+        }
     }
 }
 

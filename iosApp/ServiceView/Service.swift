@@ -103,6 +103,7 @@ struct ExpandedServiceDetails: View {
     @State var array: [Int] = [0,1,2,3]
     @State var arrayIm: [UIImage] = []
     @State var newArray: [Int] = []
+    
     var body: some View {
         ScrollView {
             VStack(alignment: .leading) {
@@ -209,7 +210,7 @@ struct ExpandedServiceDetails: View {
                 HStack(spacing: 30) {
                     Spacer()
                     if service.social[0] != "" && service.social[0] != "https://www.facebook.com/" {
-                        Link(destination: URL(string: service.social[0])!, label: {
+                        Link(destination: URL(string: service.social[0]) ?? URL(string: "https://www.facebook.com/")!, label: {
                                 Image("facebook")
                                     .resizable()
                                     .scaledToFit()
@@ -217,7 +218,7 @@ struct ExpandedServiceDetails: View {
                         })
                     }
                     if service.social[1] != "" && service.social[1] != "https://www.instagram.com/" {
-                        Link(destination: URL(string: service.social[1])!, label: {
+                        Link(destination: URL(string: service.social[1]) ?? URL(string: "https://www.instagram.com/")!, label: {
                                 Image("instagram")
                                     .resizable()
                                     .scaledToFit()
@@ -225,7 +226,7 @@ struct ExpandedServiceDetails: View {
                         })
                     }
                     if service.social[2] != "" && service.social[2] != "https://t.me/" {
-                        Link(destination: URL(string: service.social[2])!, label: {
+                        Link(destination: URL(string: service.social[2]) ?? URL(string: "https://t.me/")!, label: {
                                 Image("telegram")
                                     .resizable()
                                     .scaledToFit()
@@ -233,7 +234,7 @@ struct ExpandedServiceDetails: View {
                         })
                     }
                     if service.social[3] != "" && service.social[3] != "https://www.youtube.com/" {
-                        Link(destination: URL(string: service.social[3])!, label: {
+                        Link(destination: URL(string: service.social[3]) ?? URL(string: "https://www.youtube.com/")! , label: {
                                 Image("youtube")
                                     .resizable()
                                     .scaledToFit()
@@ -241,7 +242,7 @@ struct ExpandedServiceDetails: View {
                         })
                     }
                     if service.social[4] != "" && service.social[4] != "https://" {
-                        Link(destination: URL(string: service.social[4])!, label: {
+                        Link(destination: URL(string: service.social[4]) ?? URL(string: "https://")!, label: {
                                 Image("webpage")
                                     .resizable()
                                     .scaledToFit()

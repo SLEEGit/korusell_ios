@@ -29,7 +29,7 @@ struct ServiceSubView: View {
         .navigationTitle(barTitle)
         .navigationBarTitleDisplayMode(.inline)
         .toolbar{
-            Menu(globalCity) {
+            Menu {
                 Button("Все города") {
                     globalCity = "Все города"
                     self.list = Util().filter(city: globalCity, category: category, unsortedList: globalServices)
@@ -62,6 +62,10 @@ struct ServiceSubView: View {
                     globalCity = "Другой город"
                     self.list = Util().filter(city: globalCity, category: category, unsortedList: globalServices)
                 }
+            } label: {
+                Text(globalCity)
+                .font(.system(size: 15))
+                .minimumScaleFactor(0.1)
             }
         }
     }

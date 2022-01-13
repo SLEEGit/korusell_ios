@@ -120,6 +120,8 @@ struct ServiceMenuView: View {
                     } label: {
                         //                Image(systemName: "eye.circle")
                         Text(city)
+                            .font(.system(size: 15))
+                            .minimumScaleFactor(0.1)
                     }
                 }
 
