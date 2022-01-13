@@ -36,7 +36,7 @@ class AppDelegate: NSObject, UIApplicationDelegate {
                      didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey : Any]? = nil) -> Bool {
         window?.makeKeyAndVisible()
         Siren.shared.presentationManager = PresentationManager(forceLanguageLocalization: .russian)
-        Siren.shared.rulesManager = RulesManager(globalRules: .annoying, showAlertAfterCurrentVersionHasBeenReleasedForDays: 3)
+        Siren.shared.rulesManager = RulesManager(globalRules: .persistent, showAlertAfterCurrentVersionHasBeenReleasedForDays: 3)
         Siren.shared.wail()
         
         FirebaseApp.configure()

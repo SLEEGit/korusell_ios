@@ -76,7 +76,7 @@ struct MapView: View {
                     .navigationTitle("Карта")
                     .navigationBarTitleDisplayMode(.inline)
                     .onAppear {
-//                        locationManager2.requestLocation()
+//                        locationManager.requestLocation()
                         session.getServices(category: "all") { (list) in
                             globalServices = list
                             self.isLoading = false
@@ -233,20 +233,22 @@ struct MapView: View {
                 Group {
                 HStack {
                     Spacer()
-                    if #available(iOS 15.0, *) {
-                        LocationButton {
-                            if let location = locationManager.lastLocation?.coordinate {
-                                mapRegion = MKCoordinateRegion(center: CLLocationCoordinate2D(latitude: location.latitude, longitude: location.longitude), span: MKCoordinateSpan(latitudeDelta: 0.05, longitudeDelta: 0.05))
-                            }
-                        }
-                        .labelStyle(.iconOnly)
-                        .symbolVariant(.fill)
-                        .cornerRadius(30)
-                        .foregroundColor(.white)
-                        .frame(width: 60, height: 60)
-                        .shadow(color: Color.gray, radius: 1, x: 1, y: 1)
-                        .padding()
-                    } else {
+//                    if #available(iOS 15.0, *) {
+//                        LocationButton {
+//                            locationManager.requestLocation()
+//                            if let location = locationManager.lastLocation?.coordinate {
+//
+//                                mapRegion = MKCoordinateRegion(center: CLLocationCoordinate2D(latitude: location.latitude, longitude: location.longitude), span: MKCoordinateSpan(latitudeDelta: 0.05, longitudeDelta: 0.05))
+//                            }
+//                        }
+//                        .labelStyle(.iconOnly)
+//                        .symbolVariant(.fill)
+//                        .cornerRadius(30)
+//                        .foregroundColor(.white)
+//                        .frame(width: 60, height: 60)
+//                        .shadow(color: Color.gray, radius: 1, x: 1, y: 1)
+//                        .padding()
+//                    } else {
                         Button(action: {
                             locationManager.requestLocation()
                             if let location = locationManager.lastLocation?.coordinate {
@@ -260,7 +262,7 @@ struct MapView: View {
                                 .padding()
                                 .shadow(color: Color.gray, radius: 1, x: 1, y: 1)
                         }
-                    }
+//                    }
             
                 }
                 }

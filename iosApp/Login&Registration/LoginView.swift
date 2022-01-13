@@ -106,6 +106,7 @@ struct LoginView : View {
                                             // you're sending the SHA256-hashed nonce as a hex string with
                                             // your request to Apple.
                                             print(error?.localizedDescription as Any)
+                                            self.warningText = error?.localizedDescription ?? ""
                                             return
                                         }
                                         DB().createUserInDB(user: authResult!.user, email: authResult!.user.email!) {

@@ -180,17 +180,23 @@ struct MyBusinessView: View {
                                 self.longitude = long
                                 DispatchQueue.main.asyncAfter(deadline: .now() + 0.1) {
                                     DB().updateBusiness(uid: uid, name: name, category: category, city: city, address: address, phone: phone, descrition: description, latitude: latitude, longitude: longitude, social: social, images: images) {
-                                        var n = 0
-                                        for photo1 in photos {
-                                            DB().postImage(image: photo1, directory: directory, uid: uid+String(n), quality: 0.1)
-                                            n += 1
+                                        postImages() {
+                                            DispatchQueue.main.asyncAfter(deadline: .now() + 0.3) {
+                                                showingAlert = true
+                                            }
+                                            
                                         }
-                                        for i in photos.count...4 {
-                                            print(i)
-                                            print("iii")
-                                            DB().deleteImage(uid: uid + String(i), directory: directory)
-                                        }
-                                        showingAlert = true
+//                                        var n = 0
+//                                        for photo1 in photos {
+//                                            DB().postImage(image: photo1, directory: directory, uid: uid+String(n), quality: 0.1)
+//                                            n += 1
+//                                        }
+//                                        for i in photos.count...4 {
+//                                            print(i)
+//                                            print("iii")
+//                                            DB().deleteImage(uid: uid + String(i), directory: directory)
+//                                        }
+//                                        showingAlert = true
                                     }
                                 }
                             }
@@ -271,6 +277,21 @@ struct MyBusinessView: View {
                 self.photos = images
             }
         }
+    }
+    
+    func postImages(completion: @escaping () -> Void) {
+        var n = 0
+        for photo1 in photos {
+            DB().postImage(image: photo1, directory: directory, uid: uid+String(n), quality: 0.1)
+            n += 1
+            print("adding photo")
+        }
+        for i in photos.count...4 {
+            print(i)
+            print("deleting")
+            DB().deleteImage(uid: uid + String(i), directory: directory)
+        }
+        completion()
     }
 }
 
