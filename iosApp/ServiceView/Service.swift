@@ -88,7 +88,7 @@ struct ExpandedService: View {
                     .padding(.top, 5)
                     .lineLimit(3)
             }
-            .frame(width: 180)
+//            .frame(width: 180)
             Spacer()
         }
     }
