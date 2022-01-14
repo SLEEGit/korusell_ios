@@ -12,7 +12,7 @@ struct DetailsView: View {
     @State private var image = UIImage(named: "blank")!
     
     var body: some View {
-        ExpandedServiceDetails(service: service, image: image)
+        ExpandedServiceDetails(service: service, image: image, count: service.images)
     }
 }
 

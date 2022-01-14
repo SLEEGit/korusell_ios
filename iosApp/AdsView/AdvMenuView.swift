@@ -7,7 +7,7 @@
 
 import SwiftUI
 
-var globalAdv: [Adv] = []
+//var globalAdv: [Adv] = []
 
 struct AdvMenuView: View {
     

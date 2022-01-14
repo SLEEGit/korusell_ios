@@ -107,6 +107,7 @@ public class DataFetcher: ObservableObject {
         ]
         
         self.menuItem = [
+            MenuItem(name: "Все категории", image: "🗂", category: "all"),
             MenuItem(name: "Работа", image: "🛠", category: "work", children: workMenuItems),
             MenuItem(name: "Транспорт", image: "🚗", category: "transport", children: carsMenuItems),
             MenuItem(name: "Недвижимость", image: "🏢", category: "house", children: realMenuItems),
@@ -118,7 +119,8 @@ public class DataFetcher: ObservableObject {
             MenuItem(name: "Одежда", image: "👕", category: "clothes", children: clothesMenuItems),
             MenuItem(name: "Спорт, туризм и отдых", image: "🏓", category: "sport", children: sportMenuItems),
             MenuItem(name: "Домашние животные", image: "🐶", category: "pet", children: petsMenuItems),
-            MenuItem(name: "Обмен, отдам бесплатно", image: "🔄", category: "change")
+            MenuItem(name: "Обмен, отдам бесплатно", image: "🔄", category: "change"),
+            MenuItem(name: "Другое", image: "🥷", category: "other")
             ]
         
         self.serviceItem = [

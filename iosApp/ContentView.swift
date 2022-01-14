@@ -11,8 +11,6 @@ import SwiftUI
 
 struct ContentView: View {
     
-    
-    
     var body: some View {
         TabView {
             ServiceMenuView()
@@ -25,7 +23,8 @@ struct ContentView: View {
                     Image(systemName: "map")
                     Text("Карта")
                 }
-            AdvMenuView()
+//            AdvMenuView()
+            HomeView()
                 .tabItem {
                     Image(systemName: "bag.fill")
                     Text("Объявления")

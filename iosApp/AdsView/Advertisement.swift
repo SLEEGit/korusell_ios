@@ -104,6 +104,12 @@ struct ExpandedAdvDetails: View {
     @State var array: [Int] = [0]
     @State var newArray: [Int] = []
     @State var count: String = ""
+    @State var fromAdv: Bool = false
+    
+    @State var service: Service = Service(uid: "", name: "", category: "", city: "", address: "", phone: "", description: "", latitude: "", longitude: "", social: ["","","","",""], images: "")
+    
+    @State var servImage = UIImage(named: "blank")!
+    
     var body: some View {
         ScrollView {
             VStack(alignment: .leading) {
@@ -111,10 +117,11 @@ struct ExpandedAdvDetails: View {
                 TabView {
                     ForEach(array, id: \.self) { photo in
                         UrlImageView(urlString: adv.uid  + "ADV" + String(photo), directory: "advImages")
+                            
                     }
                 }
                 .padding()
-                .frame(height: 350)
+                .frame(height: 400)
                 .cornerRadius(15)
                 .indexViewStyle(.page(backgroundDisplayMode: .always))
                 .tabViewStyle(.page)
@@ -190,24 +197,47 @@ struct ExpandedAdvDetails: View {
                 
                 
                 if !adv.uid.contains("aaaaaaaaaaaaaaaaaaaaaaa") {
-//                    Group {
-                        Button(action: {
-                            isShowSheet = true
-                        }) {
+                    VStack {
+                        NavigationLink(destination: OwnerView(ownerUid: adv.uid)) {
                             HStack(alignment: .center) {
                                 Spacer()
-                                Image(systemName: "person.crop.circle")
+                                Text("👩‍💻")
                                 Text("Контактное лицо")
                                 Spacer()
                             }
-                        }.padding(20)
-                            .sheet(isPresented: $isShowSheet) {
-                                OwnerView(ownerUid: adv.uid)
+                        }.simultaneousGesture(TapGesture().onEnded {
+                            fromAdv = true
+                        })
+                        .padding(.bottom, 20)
+                        
+                        if service.category != "" {
+                            NavigationLink(destination: ExpandedServiceDetails(service: service, image: servImage, count: service.images)) {
+                                HStack(alignment: .center) {
+                                    Spacer()
+                                    Text("💼")
+                                    Text("Бизнес")
+                                    Spacer()
+                                }
                             }
-//                    }
+                            .simultaneousGesture(TapGesture().onEnded {
+                                fromAdv = true
+                            })
+                            .padding(.bottom, 20)
+                        }
+                        
+                    }
                 }
-            }.onAppear {
-                countToArray()
+            }
+            .navigationBarTitleDisplayMode(.inline)
+            .onAppear {
+                DB().getMyBusiness(uid: adv.uid) { service in
+                    self.service = service
+                    print(service)
+                }
+                if fromAdv == false {
+                    countToArray()
+                }
+                
 //                sortImages() {
 //                    DispatchQueue.main.asyncAfter(deadline: .now() + 0.2) {
 //                        self.array = newArray
