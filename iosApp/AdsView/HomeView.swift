@@ -202,35 +202,39 @@ struct HomeView_Previews: PreviewProvider {
 
 struct PostView: View {
     let adv: Adv
-    @State var width: CGFloat = 0
+//    @State var width: CGFloat = 0
     
     var body: some View {
         HStack(alignment: .top) {
             UrlImageView(urlString: adv.uid  + "ADV" + "0", directory: "advImages")
-                .frame(width: self.width, height: 150)
+                .frame(width: 150, height: 130)
             VStack(alignment: .leading) {
                 Text(Util().formatDate(date: adv.createdAt))
-                    .padding(.leading, 16).padding(.bottom, 5)
+                    .padding(.leading, 4).padding(.trailing, 4).padding(.bottom, 3).padding(.top, 2)
                     .font(.caption)
                     .foregroundColor(Color.gray)
                 Text(adv.name)
-                    .lineLimit(5)
+                    .lineLimit(2)
                     .font(.headline)
-                //                    .font(.system(size: 15))
-                    .padding(.leading, 4).padding(.trailing, 4).padding(.bottom, 4)
-                Text(adv.description)
+                    .padding(.leading, 4).padding(.trailing, 4).padding(.bottom, 2)
+                Text(adv.city)
+                    .foregroundColor(Color.gray)
                     .lineLimit(5)
                     .font(.caption)
-                    .padding(.leading, 4).padding(.trailing, 4).padding(.bottom, 4)
+                    .padding(.leading, 4).padding(.trailing, 4).padding(.bottom, 2)
+                Text(adv.price)
+                    .font(.title3)
+                Spacer()
+                
             }.frame(height: 150, alignment: .leading)
-        }
+        }.frame(alignment: .top)
         .onAppear {
 //            #question не знаю нужно убирать картинку или нет
-            if adv.images == "0" {
-                self.width = 0
-            } else {
-                self.width = 150
-            }
+//            if adv.images == "0" {
+//                self.width = 0
+//            } else {
+//                self.width = 150
+//            }
         }
     }
     

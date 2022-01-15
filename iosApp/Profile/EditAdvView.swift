@@ -73,7 +73,7 @@ struct EditAdvView: View {
             }
             HStack {
                 
-                Text("Название")
+                Text("Заголовок")
                     .foregroundColor(.gray)
                 TextField("Название", text: $name)
                     .disableAutocorrection(true)

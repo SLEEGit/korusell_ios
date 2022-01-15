@@ -112,6 +112,11 @@ struct ExpandedAdvDetails: View {
     
     @State var height: CGFloat = 0
     
+    
+    @State var avatar: UIImage = UIImage(named: "avatar")!
+    @State var businessImage: UIImage = UIImage(named: "logo")!
+    @State var name: String = "Контактное лицо"
+    
     var body: some View {
         ScrollView {
             VStack(alignment: .leading) {
@@ -121,23 +126,68 @@ struct ExpandedAdvDetails: View {
                         UrlImageView(urlString: adv.uid  + "ADV" + String(photo), directory: "advImages")
                     }
                 }
-                .padding()
+//                .padding()
                 .frame(height: height)
                 .cornerRadius(15)
                 .indexViewStyle(.page(backgroundDisplayMode: .always))
                 .tabViewStyle(.page)
+                
                 Group {
+                    
+                    if !adv.uid.contains("aaaaaaaaaaaaaaaaaaaaaaa") {
+                        VStack(alignment: .leading) {
+                            NavigationLink(destination: OwnerView(ownerUid: String(adv.uid.prefix(28)))) {
+                                HStack {
+                                    
+                                    Image(uiImage: self.avatar)
+                                        .resizable()
+                                        .scaledToFill()
+                                        .frame(width: 25, height: 25)
+                                        .clipShape(Circle())
+                                    Text(self.name)
+                                        .foregroundColor(Color("textColor"))
+                                    
+                                }
+                            }.simultaneousGesture(TapGesture().onEnded {
+                                fromAdv = true
+                            })
+                                .padding(.bottom, 5)
+                                .padding(.leading, 15)
+                            
+                            if service.category != "" {
+                                NavigationLink(destination: ExpandedServiceDetails(service: service, image: servImage, count: service.images)) {
+                                    HStack {
+                                        Image(uiImage: self.businessImage)
+                                            .resizable()
+                                            .scaledToFill()
+                                            .frame(width: 25, height: 25)
+                                            .clipShape(Circle())
+                                        Text(self.service.name)
+                                            .foregroundColor(Color("textColor"))
+                                            .lineLimit(1)
+                                    }
+                                }
+                                .simultaneousGesture(TapGesture().onEnded {
+                                    fromAdv = true
+                                })
+                                .padding(.bottom, 5)
+                                .padding(.leading, 15)
+                            }
+                            
+                        }.padding(.bottom, 5)
+                    }
+                    
                 if adv.createdAt != "" {
                     Text("Добавлено: \(Util().formatDate(date: adv.createdAt))")
                         .font(.caption)
                         .foregroundColor(.gray)
-                        .padding(.bottom, 10)
+                        .padding(.bottom, 5)
                         .padding(.leading, 15)
                 }
                 Text(adv.name)
                     .font(.title)
                     .bold()
-                    .padding(.leading, 15)
+                    .padding(.leading, 15).padding(.bottom, 5)
                 if adv.city != "admin" && adv.city != "" {
                     HStack {
                         Text("Город")
@@ -193,39 +243,6 @@ struct ExpandedAdvDetails: View {
                         Spacer()
                 }
                 }
-                
-                
-                if !adv.uid.contains("aaaaaaaaaaaaaaaaaaaaaaa") {
-                    VStack {
-                        NavigationLink(destination: OwnerView(ownerUid: String(adv.uid.prefix(28)))) {
-                            HStack(alignment: .center) {
-                                Spacer()
-                                Text("👩‍💻")
-                                Text("Контактное лицо")
-                                Spacer()
-                            }
-                        }.simultaneousGesture(TapGesture().onEnded {
-                            fromAdv = true
-                        })
-                        .padding(.bottom, 20)
-                        
-                        if service.category != "" {
-                            NavigationLink(destination: ExpandedServiceDetails(service: service, image: servImage, count: service.images)) {
-                                HStack(alignment: .center) {
-                                    Spacer()
-                                    Text("💼")
-                                    Text("Бизнес")
-                                    Spacer()
-                                }
-                            }
-                            .simultaneousGesture(TapGesture().onEnded {
-                                fromAdv = true
-                            })
-                            .padding(.bottom, 20)
-                        }
-                        
-                    }
-                }
             }
             .navigationBarTitleDisplayMode(.inline)
             .onAppear {
@@ -236,7 +253,16 @@ struct ExpandedAdvDetails: View {
                 }
                 DB().getMyBusiness(uid: String(adv.uid.prefix(28))) { service in
                     self.service = service
-                    print(service)
+                    DB().getImage(uid: String(adv.uid.prefix(28)) + "0", directory: "images") { image in
+                        self.businessImage = image
+                    }
+                    
+                }
+                DB().getUser(uid: String(adv.uid.prefix(28))) { user in
+                    self.name = user.name ?? "Контактное лицо"
+                    DB().getImage(uid: String(adv.uid.prefix(28)), directory: "avatars") { image in
+                        self.avatar = image
+                    }
                 }
                 if fromAdv == false {
                     countToArray()
