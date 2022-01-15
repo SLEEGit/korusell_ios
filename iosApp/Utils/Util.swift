@@ -13,6 +13,10 @@ class Logging: ObservableObject {
     @Published var isSignedIn: Bool = false
 }
 
+class WidthClass: ObservableObject {
+    @Published var wirdth: Int = 400
+}
+
 class Util {
     
     func getCoordinates(address: String, completion: @escaping (String, String) -> Void) {
@@ -114,7 +118,7 @@ class Util {
         
         switch category {
         case "all":
-            afterCategory = unsortedList.filter { $0.category == "work" || $0.category == "transport" || $0.category == "house" || $0.category == "phone" || $0.category == "hobby" || $0.category == "car" || $0.category == "electronic" || $0.category == "children" || $0.category == "clothes" || $0.category == "sport" || $0.category == "pet" || $0.category == "change" || $0.category == "admin"}
+            afterCategory = unsortedList.filter { $0.category == "work" || $0.category == "transport" || $0.category == "house" || $0.category == "phone" || $0.category == "hobby" || $0.category == "car" || $0.category == "electronic" || $0.category == "children" || $0.category == "clothes" || $0.category == "sport" || $0.category == "pet" || $0.category == "change" || $0.category == "other" || $0.category == "admin"}
         case "work":
             afterCategory = unsortedList.filter { $0.category == "work" || $0.category == "admin"}
         case "transport":
@@ -139,6 +143,8 @@ class Util {
             afterCategory = unsortedList.filter { $0.category == "pet" || $0.category == "admin"}
         case "change":
             afterCategory = unsortedList.filter { $0.category == "change" || $0.category == "admin"}
+        case "other":
+            afterCategory = unsortedList.filter { $0.category == "other" || $0.category == "admin"}
         default:
             afterCategory = unsortedList.filter  { $0.category == "zavod" }
         }
@@ -210,10 +216,27 @@ class Util {
 //        dateFormatterPrint.dateFormat = "dd MMMM yyyy г. в HH:mm"
         dateFormatterPrint.dateFormat = "dd-MM-yyyy HH:mm"
         dateFormatterPrint.locale = Locale(identifier: "ru_RU")
-        let date: Date? = dateFormatterGet.date(from: date)
-
-        return dateFormatterPrint.string(from: date! as Date)
-
+        let dated: Date? = dateFormatterGet.date(from: date)
+        if date != "" {
+            return dateFormatterPrint.string(from: dated! as Date)
+        } else {
+            return ""
+        }
+    }
+    
+    func dateForAdv(date: String) -> String {
+        let dateFormatterGet = DateFormatter()
+        dateFormatterGet.dateFormat = "yyyy-MM-dd HH:mm:ss ZZZ"
+        let dateFormatterPrint = DateFormatter()
+//        dateFormatterPrint.dateFormat = "dd MMMM yyyy г. в HH:mm"
+        dateFormatterPrint.dateFormat = "yy-MM-dd-HH-mm"
+        dateFormatterPrint.locale = Locale(identifier: "ru_RU")
+        let dated: Date? = dateFormatterGet.date(from: date)
+        if date != "" {
+            return dateFormatterPrint.string(from: dated! as Date)
+        } else {
+            return ""
+        }
     }
     
     func dateByTimeZone() -> String {

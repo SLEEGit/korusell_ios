@@ -28,7 +28,7 @@ struct ServiceSubView: View {
         }
         .navigationTitle(barTitle)
         .navigationBarTitleDisplayMode(.inline)
-        .toolbar{
+        .navigationBarItems(trailing:
             Menu {
                 Button("Все города") {
                     globalCity = "Все города"
@@ -71,7 +71,7 @@ struct ServiceSubView: View {
                 .font(.system(size: 15))
                 .minimumScaleFactor(0.1)
             }
-        }
+        )
     }
     
 }

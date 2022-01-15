@@ -7,7 +7,7 @@
 
 import SwiftUI
 
-struct MyAdvView: View {
+struct EditAdvView: View {
     //    @State var service: Service!
     @Binding var uid: String
     @Binding var name: String
@@ -27,7 +27,7 @@ struct MyAdvView: View {
     @State private var showingHint = false
     @State private var showingHint2 = false
     @State private var businessWarning = false
-    @State private var photos: [UIImage] = []
+    @Binding var photos: [UIImage]
     @State var images: String = "0"
     @State var checked: Bool = false
     
@@ -80,21 +80,22 @@ struct MyAdvView: View {
             }
             Picker("Категории", selection: $category) {
                 Group {
-                    Text("Работа").tag("work")
-                    Text("Транспорт").tag("transport")
-                    Text("Недвижимость").tag("house")
-                    Text("Телефоны и Аксессуары").tag("phone")
-                    Text("Для дома, хобби").tag("hobby")
-                    Text("Автозапчасти и Аксессуары").tag("car")
-                    Text("Электроника").tag("electronic")
-                    Text("Детские товары").tag("children")
-                    Text("Одежда").tag("clothes")
-                    Text("Спорт, туризм и отдых").tag("sport")
+                    Text("🛠 Работа").tag("work")
+                    Text("🚗 Транспорт").tag("transport")
+                    Text("🏢 Недвижимость").tag("house")
+                    Text("📱 Телефоны и Аксессуары").tag("phone")
+                    Text("🏠 Для дома, хобби").tag("hobby")
+                    Text("⚙️ Автозапчасти и Аксессуары").tag("car")
+                    Text("📺 Электроника").tag("electronic")
+                    Text("👶🏻 Детские товары").tag("children")
+                    Text("👕 Одежда").tag("clothes")
+                    Text("🏓 Спорт, туризм и отдых").tag("sport")
                 }
                 .foregroundColor(Color("textColor"))
                 Group {
-                    Text("Домашние животные").tag("pet")
-                    Text("Обмен, отдам бесплатно").tag("change")
+                    Text("🐶 Домашние животные").tag("pet")
+                    Text("🔄 Обмен, отдам бесплатно").tag("change")
+                    Text("🥷 Другое").tag("other")
                 }.foregroundColor(Color("textColor"))
             }.foregroundColor(.gray)
             HStack {
@@ -165,17 +166,6 @@ struct MyAdvView: View {
                                     }
                                 }
                             }
-//                            var n = 0
-//                            for photo1 in photos {
-//                                DB().postImage(image: photo1, directory: directory, uid: uid+String(n), quality: 0.1)
-//                                n += 1
-//                            }
-//                            for i in photos.count...4 {
-//                                print(i)
-//                                print("iii")
-//                                DB().deleteImage(uid: uid + String(i), directory: directory)
-//                            }
-//                            showingAlert = true
                         }
                     }
                     Spacer()
@@ -190,67 +180,58 @@ struct MyAdvView: View {
                 
             }
             
-                Section {
-                    HStack {
-                        Spacer()
-                        Button(action: {
-                            showingAlertDelete = true
-                        }) {
-                            Text("Удалить объявление")
-                                .foregroundColor(Color.red)
-                        }.disabled(
-                            self.name == "" &&
-                            self.category == "" &&
-                            self.city == "" &&
-                            self.price == "" &&
-                            self.phone == "" &&
-                            self.description == "" &&
-                            self.createdAt == ""
-                        ).alert(isPresented: $showingAlertDelete) {
-                            Alert(
-                                title: Text("Вы уверены что хотите удалить Ваше объявление?"),
-                                primaryButton: .destructive(Text("Удалить"), action: {
-                                    DB().deleteAdv(uid: uid)
-                                    self.name = ""
-                                    self.category = ""
-                                    self.city = ""
-                                    self.price = ""
-                                    self.phone = ""
-                                    self.description = ""
-                                    self.createdAt = ""
-                                    presentationMode.wrappedValue.dismiss()
-                                    
-                                }),
-                                secondaryButton: .cancel(Text("Отмена"))
-                            )
-                        }
-                        Spacer()
-                    
-                }
-                
-            }
-        }.alert(isPresented: $businessWarning) {
-            Alert(
-                title: Text("Создавая объявление, информация из Вашего профиля становится также доступной"),
-                dismissButton: .default(Text("Ок"))
-            )
+//                Section {
+//                    HStack {
+//                        Spacer()
+//                        Button(action: {
+//                            showingAlertDelete = true
+//                        }) {
+//                            Text("Удалить объявление")
+//                                .foregroundColor(Color.red)
+//                        }
+//                        .alert(isPresented: $showingAlertDelete) {
+//                            Alert(
+//                                title: Text("Вы уверены что хотите удалить Ваше объявление?"),
+//                                primaryButton: .destructive(Text("Удалить"), action: {
+//                                    DB().deleteAdv(uid: uid)
+//                                    self.name = ""
+//                                    self.category = ""
+//                                    self.city = ""
+//                                    self.price = ""
+//                                    self.phone = ""
+//                                    self.description = ""
+//                                    self.createdAt = ""
+//                                    presentationMode.wrappedValue.dismiss()
+//                                    
+//                                }),
+//                                secondaryButton: .cancel(Text("Отмена"))
+//                            )
+//                        }
+//                        Spacer()
+//                }
+//                
+//            }
         }
-        
-        .navigationTitle("Мои объявления")
+//        .alert(isPresented: $businessWarning) {
+//            Alert(
+//                title: Text("Создавая объявление, информация из Вашего профиля становится также доступной"),
+//                dismissButton: .default(Text("Ок"))
+//            )
+//        }
         .onAppear {
             
-            businessWarning = true
-            if Pref.userDefault.bool(forKey: "adv") {
-                businessWarning = false
-            }
-            Pref.userDefault.set(true, forKey: "adv")
-            Pref.userDefault.synchronize()
-            if !checked {
-                DB().getMultiImages(uid: uid + "ADV", directory: directory) { images in
-                    self.photos = images
-                    self.checked = true
-                }
-            }
+//            businessWarning = true
+//            if Pref.userDefault.bool(forKey: "adv") {
+//                businessWarning = false
+//            }
+//            Pref.userDefault.set(true, forKey: "adv")
+//            Pref.userDefault.synchronize()
+//            if !checked {
+//                DB().getMultiImages(uid: uid + "ADV", directory: directory) { images in
+//                    self.photos = images
+//                    self.checked = true
+//                }
+//            }
         }
     }
     
@@ -277,3 +258,6 @@ struct MyAdvView: View {
         }
     }
 }
+
+
+

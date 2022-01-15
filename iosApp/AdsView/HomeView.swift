@@ -27,7 +27,7 @@ struct HomeView: View {
                 List {
                     ForEach(self.list, id: \.id) { adv in
                         NavigationLink(destination: AdvDetailsView(adv: adv)) {
-                            PostView(post: adv)
+                            PostView(adv: adv)
                         }
                     }
                 }
@@ -201,27 +201,36 @@ struct HomeView_Previews: PreviewProvider {
 }
 
 struct PostView: View {
-    let post: Adv
+    let adv: Adv
+    @State var width: CGFloat = 0
     
     var body: some View {
         HStack(alignment: .top) {
-            UrlImageView(urlString: post.uid  + "ADV" + "0", directory: "advImages")
-                .frame(width: 150, height: 150)
+            UrlImageView(urlString: adv.uid  + "ADV" + "0", directory: "advImages")
+                .frame(width: self.width, height: 150)
             VStack(alignment: .leading) {
-                Text(Util().formatDate(date: post.createdAt))
+                Text(Util().formatDate(date: adv.createdAt))
                     .padding(.leading, 16).padding(.bottom, 5)
                     .font(.caption)
                     .foregroundColor(Color.gray)
-                Text(post.name)
+                Text(adv.name)
                     .lineLimit(5)
                     .font(.headline)
                 //                    .font(.system(size: 15))
                     .padding(.leading, 4).padding(.trailing, 4).padding(.bottom, 4)
-                Text(post.description)
+                Text(adv.description)
                     .lineLimit(5)
                     .font(.caption)
                     .padding(.leading, 4).padding(.trailing, 4).padding(.bottom, 4)
             }.frame(height: 150, alignment: .leading)
+        }
+        .onAppear {
+//            #question не знаю нужно убирать картинку или нет
+            if adv.images == "0" {
+                self.width = 0
+            } else {
+                self.width = 150
+            }
         }
     }
     

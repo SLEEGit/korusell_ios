@@ -64,7 +64,7 @@ struct AddAdvView: View {
                         isShowPhotoLibrary.toggle()
                     }
                     .sheet(isPresented: $isShowPhotoLibrary) {
-                        PhotoPicker(photos: $photos, showPicker: self.$isShowPhotoLibrary, directory: "images", uid: uid)
+                        PhotoPicker(photos: $photos, showPicker: self.$isShowPhotoLibrary, directory: "advImages", uid: uid)
                     }
                     Spacer()
                 }
@@ -210,15 +210,17 @@ struct AddAdvView: View {
                             Alert(
                                 title: Text("Вы уверены что хотите удалить Ваше объявление?"),
                                 primaryButton: .destructive(Text("Удалить"), action: {
-                                    DB().deleteAdv(uid: uid)
-                                    self.name = ""
-                                    self.category = ""
-                                    self.city = ""
-                                    self.price = ""
-                                    self.phone = ""
-                                    self.description = ""
-                                    self.createdAt = ""
-                                    presentationMode.wrappedValue.dismiss()
+                                    DB().deleteAdv(uid: uid) {
+                                        self.name = ""
+                                        self.category = ""
+                                        self.city = ""
+                                        self.price = ""
+                                        self.phone = ""
+                                        self.description = ""
+                                        self.createdAt = ""
+                                        presentationMode.wrappedValue.dismiss()
+                                    }
+                                    
                                     
                                 }),
                                 secondaryButton: .cancel(Text("Отмена"))

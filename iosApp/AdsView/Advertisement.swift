@@ -110,6 +110,8 @@ struct ExpandedAdvDetails: View {
     
     @State var servImage = UIImage(named: "blank")!
     
+    @State var height: CGFloat = 0
+    
     var body: some View {
         ScrollView {
             VStack(alignment: .leading) {
@@ -117,18 +119,13 @@ struct ExpandedAdvDetails: View {
                 TabView {
                     ForEach(array, id: \.self) { photo in
                         UrlImageView(urlString: adv.uid  + "ADV" + String(photo), directory: "advImages")
-                            
                     }
                 }
                 .padding()
-                .frame(height: 400)
+                .frame(height: height)
                 .cornerRadius(15)
                 .indexViewStyle(.page(backgroundDisplayMode: .always))
                 .tabViewStyle(.page)
-                //                UrlImageView(urlString: adv.uid, directory: "advImages")
-                //                    .scaledToFill()
-                //                    .cornerRadius(15)
-                //                    .padding()
                 Group {
                 if adv.createdAt != "" {
                     Text("Добавлено: \(Util().formatDate(date: adv.createdAt))")
@@ -161,6 +158,7 @@ struct ExpandedAdvDetails: View {
                         .padding(.leading, 15)
                 }
                 Divider()
+                if adv.description != "" {
                 Text("Описание")
                     .font(.headline)
                     .padding(15)
@@ -174,6 +172,7 @@ struct ExpandedAdvDetails: View {
                     .padding(.bottom, 20)
                 
                     Divider().padding(.bottom, 20)
+                }
                 }
                 
                 if adv.phone != "" {
@@ -198,7 +197,7 @@ struct ExpandedAdvDetails: View {
                 
                 if !adv.uid.contains("aaaaaaaaaaaaaaaaaaaaaaa") {
                     VStack {
-                        NavigationLink(destination: OwnerView(ownerUid: adv.uid)) {
+                        NavigationLink(destination: OwnerView(ownerUid: String(adv.uid.prefix(28)))) {
                             HStack(alignment: .center) {
                                 Spacer()
                                 Text("👩‍💻")
@@ -230,7 +229,12 @@ struct ExpandedAdvDetails: View {
             }
             .navigationBarTitleDisplayMode(.inline)
             .onAppear {
-                DB().getMyBusiness(uid: adv.uid) { service in
+                if adv.images == "0" {
+                    self.height = 0
+                } else {
+                    self.height = 400
+                }
+                DB().getMyBusiness(uid: String(adv.uid.prefix(28))) { service in
                     self.service = service
                     print(service)
                 }

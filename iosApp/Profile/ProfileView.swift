@@ -36,15 +36,10 @@ struct ProfileView: View {
     @State var category: String = ""
     @State var social: [String] = ["","","","",""]
     
-    @State var adv: Adv!
-    @State var aname: String = ""
-    @State var aphone: String = ""
-    @State var acity: String = ""
-    @State var aaddress: String = ""
-    @State var adescription: String = ""
-    @State var price: String = ""
-    @State var createdAt: String = ""
-    @State var acategory: String = ""
+
+    
+    @State var list: [Adv] = []
+    @State var count: Int = 0
     
     //    @Environment(\.presentationMode) var presentationMode
     //    @Binding var selectedImage: UIImage
@@ -119,14 +114,15 @@ struct ProfileView: View {
                         }
                         
                     }
-                    NavigationLink(destination: MyAdvView(uid: $uid, name: $aname, city: $acity, price: $price, phone: $aphone, description: $adescription, createdAt: $createdAt, category: $acategory)) {
+                    NavigationLink(destination: MyAdvList2(myUID: uid, count: $count)) {
                         HStack {
                             Text("🏷")
                             Text("Мои Объявления")
                             Spacer()
-                            Text(aname)
+                            if count != 0 {
+                                Text(String(count))
+                            }
                         }
-                        
                     }
                 }
                 Section {
@@ -192,7 +188,8 @@ struct ProfileView: View {
 //
 //            }
             
-        }.onAppear {
+        }
+        .onAppear {
             DB().getUser(uid: user.uid) { user in
                 name = user.name ?? ""
                 phone = user.phone ?? ""
@@ -213,23 +210,30 @@ struct ProfileView: View {
                 self.category = business.category
                 self.social = business.social
             }
-            
-            DB().getMyAdv(uid: user.uid) { adv in
-                print("getting adv in profile")
-                print(adv)
-                self.adv = adv
-                self.aname = adv.name
-                self.aphone = adv.phone
-                self.acity = adv.city
-                self.price = adv.price
-                self.adescription = adv.description
-                self.createdAt = adv.createdAt
-                self.acategory = adv.category
+            DB().getAdvs(category: "all") { (list) in
+            self.list = list.filter { $0.uid.contains(user.uid) }
+                            .sorted { $0.createdAt > $1.createdAt }
+                self.count = self.list.count
             }
+            
+//            DB().getMyAdv(uid: user.uid) { adv in
+//                print("getting adv in profile")
+//                print(adv)
+//                self.adv = adv
+//                self.aname = adv.name
+//                self.aphone = adv.phone
+//                self.acity = adv.city
+//                self.price = adv.price
+//                self.adescription = adv.description
+//                self.createdAt = adv.createdAt
+//                self.acategory = adv.category
+//            }
             
             DB().getImage(uid: uid, directory: "avatars") { image in
                 self.image = image
             }
+            print("qqq")
+            print(list.count)
         }
     }
     
@@ -243,73 +247,3 @@ struct ProfileView: View {
     }
     
 }
-//struct Profile_Previews: PreviewProvider {
-//    static var previews: some View {
-//        Profile(person: example3, viewModel: viewModel)
-//    }
-//}
-
-//#if DEBUG
-////let example3 = Person(_id: "HNyHZZjtq298izgub", avatar: "", name: "sd", username: "username", email:"asdasda", phone: "010 1233 1111")
-//let example3 = User(uid: "123", displayName: "dis name", email: "test@test.thisistest", avatar: "avatar", phone: "010-0000-0000")
-//#endif
-
-
-//struct ExtractedView: View {
-//    var body: some View {
-//        Form {
-//            Section {
-//                HStack {
-//                    Text("Имя")
-//                        .font(.caption)
-//                    Spacer()
-//                    TextField(namePlaceholder, text: $name)
-//                        .font(.caption)
-//                }
-//                HStack {
-//                    Text("Номер телефона")
-//                        .font(.caption)
-//                    Spacer()
-//                    TextField(phonePlaceholder, text: $phone)
-//                        .font(.caption)
-//                }
-//            }
-//            Section {
-//                Button(action: {
-//                    showingAlert = true
-//                })
-//                {
-//                    HStack {
-//                        Spacer()
-//                        Text("Выйти")
-//                            .foregroundColor(Color.red)
-//                        Spacer()
-//                    }
-//                }
-//                .alert("Вы действительно хотите выйти?", isPresented: $showingAlert) {
-//                    Button("Отмена", role: .cancel) {}
-//                    Button("Выйти") {
-//                        Authentication().signOut() {
-//                            logging.isSignedIn = false
-//                        }
-//                    }
-//                }
-//            }
-//        }
-//    }
-//}
-//        .toolbar {
-//            Button("Обновить данные") {
-//                DB().addNamePhone(user: user, name: name, phone: phone) {
-//                    showingAlert2 = true
-//                }
-//            }.alert("Данные успешно обновлены", isPresented: $showingAlert2) {
-//                Button("Ок", role: .cancel) {}
-//            }
-//        }
-//}.onAppear {
-//    DB().getUser(uid: user.uid) { user in
-//        name = user.name ?? ""
-//        phone = user.phone ?? ""
-//    }
-//}

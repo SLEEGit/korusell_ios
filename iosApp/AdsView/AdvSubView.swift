@@ -30,7 +30,7 @@ struct AdvSubView: View {
         }
         .navigationTitle(barTitle)
         .navigationBarTitleDisplayMode(.inline)
-        .toolbar{
+        .navigationBarItems(trailing:
             Menu {
                 Button("Все города") {
                     globalCity = "Все города"
@@ -83,7 +83,7 @@ struct AdvSubView: View {
                     .minimumScaleFactor(0.1)
             }
             
-        }
+        )
     }
     
 }

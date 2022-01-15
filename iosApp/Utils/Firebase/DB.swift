@@ -285,7 +285,7 @@ class DB: ObservableObject {
         deleteImage(uid: uid, directory: "avatars")
         ref.reference(withPath: "users").child(uid).removeValue()
         deleteBusiness(uid: uid)
-        deleteAdv(uid: uid)
+        deleteAdv(uid: uid) {}
     }
     
     func deleteBusiness(uid: String) {
@@ -296,10 +296,14 @@ class DB: ObservableObject {
         
     }
     
-    func deleteAdv(uid: String) {
+    func deleteAdv(uid: String, completion: @escaping () -> Void) {
         ref.reference(withPath: "adv").child(uid).removeValue()
+        print(uid)
         for i in 0...4 {
-            deleteImage(uid: uid + String(i), directory: "advImages")
+            deleteImage(uid: uid + "ADV" + String(i), directory: "advImages")
+        }
+        DispatchQueue.main.async {
+            completion()
         }
     }
     

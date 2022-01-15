@@ -61,7 +61,7 @@ struct AdvMenuView: View {
                     
                 }
 
-                .toolbar{
+                .navigationBarItems(trailing:
                     
                     Menu {
                         Button {
@@ -124,7 +124,7 @@ struct AdvMenuView: View {
                             .font(.system(size: 15))
                             .minimumScaleFactor(0.1)
                     }
-                }
+                )
 
             }.disabled(isLoading)
             if isLoading {

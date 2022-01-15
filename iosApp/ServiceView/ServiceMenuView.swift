@@ -71,8 +71,7 @@ struct ServiceMenuView: View {
                     
                 }
 
-                .toolbar{
-                    
+                .navigationBarItems(trailing:
                     Menu {
                         Button {
                             globalCity = "Все города"
@@ -134,7 +133,7 @@ struct ServiceMenuView: View {
                             .font(.system(size: 15))
                             .minimumScaleFactor(0.1)
                     }
-                }
+                )
 
             }.disabled(isLoading)
             if isLoading {
