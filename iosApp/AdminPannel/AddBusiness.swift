@@ -89,7 +89,7 @@ struct AddBusinessView: View {
                 Group {
                     Text("Рестораны/Кафе").tag("food")
                     Text("Продукты").tag("shop")
-                    Text("Связь").tag("connect")
+                    Text("Связь/Электроника").tag("connect")
                     Text("Образование").tag("study")
                     Text("Мероприятия/Фото/Видео").tag("party")
                     Text("Документы/Переводы").tag("docs")

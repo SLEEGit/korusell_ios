@@ -108,8 +108,8 @@ struct MapView: View {
                                         self.category = "shop"
                                         self.list = Util().filter(city: globalCity, category: self.category, unsortedList: globalServices)
                                     }
-                                    Button("📱 Связь") {
-                                        self.categoryName = "Связь"
+                                    Button("📱 Связь/Электроника") {
+                                        self.categoryName = "📱"
                                         self.category = "connect"
                                         self.list = Util().filter(city: globalCity, category: self.category, unsortedList: globalServices)
                                     }
