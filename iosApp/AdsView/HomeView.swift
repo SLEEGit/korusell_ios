@@ -103,8 +103,8 @@ struct HomeView: View {
                                     self.category = "change"
                                     self.list = Util().filterAdv(city: city, category: category, unsortedList: globalAdv)
                                 }
-                                Button("🥷 Другое") {
-                                    self.categoryName = "🥷"
+                                Button("🪆 Другое") {
+                                    self.categoryName = "🪆"
                                     self.category = "other"
                                     self.list = Util().filterAdv(city: city, category: category, unsortedList: globalAdv)
                                 }

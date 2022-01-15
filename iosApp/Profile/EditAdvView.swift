@@ -95,7 +95,7 @@ struct EditAdvView: View {
                 Group {
                     Text("🐶 Домашние животные").tag("pet")
                     Text("🔄 Обмен, отдам бесплатно").tag("change")
-                    Text("🥷 Другое").tag("other")
+                    Text("🪆 Другое").tag("other")
                 }.foregroundColor(Color("textColor"))
             }.foregroundColor(.gray)
             HStack {

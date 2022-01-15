@@ -88,7 +88,6 @@ struct MyBusinessView: View {
                     Text("Образование").tag("study")
                     Text("Мероприятия/Фото/Видео").tag("party")
                     Text("Документы/Переводы").tag("docs")
-                    Text("Типография/Печать").tag("design")
                     Text("Авто Купля/Продажа").tag("cars")
                     Text("Красота/Здоровье").tag("health")
                 }
@@ -97,7 +96,8 @@ struct MyBusinessView: View {
                     Text("Трансфер/Переезд").tag("transport")
                     Text("Туризм/Почта").tag("travel")
                     Text("СТО/Тюнинг").tag("workshop")
-                    Text("Другое").tag("other")
+                    Text("Другие услуги").tag("other")
+                    Text("Другие товары").tag("products")
                 }.foregroundColor(Color("textColor"))
             }.foregroundColor(.gray)
             HStack {

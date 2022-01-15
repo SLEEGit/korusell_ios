@@ -38,11 +38,10 @@ struct MyAdvList2: View {
                     } else {
                         Text("Нажмите 'Добавить', чтобы добавить объявление")
                     }
-                        
                 }
                     .padding()
                     .foregroundColor(Color("graytext"))
-                    .font(.system(size: 13))
+                    .font(.system(size: 15))
                     .frame(maxWidth: .infinity, maxHeight: .infinity, alignment: .leading)
                     .listRowInsets(EdgeInsets())
                     .background(Color(UIColor.systemGroupedBackground).opacity(0.1))

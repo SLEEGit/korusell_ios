@@ -74,8 +74,8 @@ class Util {
             afterCategory = unsortedList.filter { $0.category == "health" }
         case "workshop":
             afterCategory = unsortedList.filter { $0.category == "workshop" }
-        case "design":
-            afterCategory = unsortedList.filter { $0.category == "design" }
+        case "products":
+            afterCategory = unsortedList.filter { $0.category == "products" }
         case "study":
             afterCategory = unsortedList.filter { $0.category == "study" }
         case "tourism":
