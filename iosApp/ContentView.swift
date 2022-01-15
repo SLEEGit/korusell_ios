@@ -11,29 +11,37 @@ import SwiftUI
 
 struct ContentView: View {
     
+    @State var selection: Int = 0
+    
     var body: some View {
-        TabView {
+        TabView(selection: $selection) {
             ServiceMenuView()
                 .tabItem {
                     Image(systemName: "house")
                     Text("Услуги")
-                }
+                }.tag(0)
             MapView()
                 .tabItem {
                     Image(systemName: "map")
                     Text("Карта")
-                }
+                }.tag(1)
 //            AdvMenuView()
             HomeView()
                 .tabItem {
-                    Image(systemName: "bag.fill")
-                    Text("Объявления")
-                }
+                    VStack {
+                        if selection == 2 {
+                            Image("carrot")
+                        } else {
+                            Image("carrot_trans")
+                        }
+                    }
+                    Text("Морковка")
+                }.tag(2)
             CheckStatusView()
                 .tabItem {
                     Image(systemName: "person.crop.circle")
                     Text("Профиль")
-                }
+                }.tag(3)
         }
         .onAppear {
             
