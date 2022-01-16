@@ -155,7 +155,7 @@ struct ExpandedAdvDetails: View {
                                 .padding(.leading, 15)
                             
                             if service.category != "" {
-                                NavigationLink(destination: ExpandedServiceDetails(service: service, image: servImage, count: service.images)) {
+                                NavigationLink(destination: ExpandedServiceDetails2(service: service, image: servImage, count: service.images)) {
                                     HStack {
                                         UrlImageView(urlString: String(adv.uid.prefix(28) + "0"), directory: "images")
 //                                        Image(uiImage: self.businessImage)
@@ -238,7 +238,7 @@ struct ExpandedAdvDetails: View {
                         .foregroundColor(.white)
                         .padding()
                         .background(Color.accentColor)
-                        .cornerRadius(8)
+                        .cornerRadius(15)
 //                        .position(x: UIScreen.main.bounds.width/2)
                         .padding(.vertical, 20)
                         Spacer()

@@ -83,12 +83,13 @@ struct ExpandedAdvDetails2: View {
                             .font(.caption)
                             .foregroundColor(.gray)
                             .padding(.bottom, 10)
-                            .padding(.leading, 15)
+                            .padding(.leading, 30)
+                            
                     }
                     Text(name)
                         .font(.title)
                         .bold()
-                        .padding(.leading, 15)
+                        .padding(.leading, 30).padding(.bottom, 10)
                     if city != "admin" && city != "" {
                         HStack {
                             Text("Город")
@@ -97,7 +98,7 @@ struct ExpandedAdvDetails2: View {
                             //                        Divider()
                             Text(city)
                                 .font(.body)
-                        }.padding(.leading, 15).padding(.bottom, 10)
+                        }.padding(.leading, 30).padding(.bottom, 10)
                     }
                     
                     
@@ -106,19 +107,19 @@ struct ExpandedAdvDetails2: View {
                             .font(.system(size: 16))
                             .bold()
                             .minimumScaleFactor(0.1)
-                            .padding(.leading, 15)
+                            .padding(.leading, 30)
                     }
                     Divider()
                     Text("Описание")
                         .font(.headline)
-                        .padding(15)
+                        .padding(30)
                     Text(description)
                     // эта штука снизу убрала троеточие в тексте
                         .minimumScaleFactor(0.1)
                         .font(.body)
                         .multilineTextAlignment(.leading)
                         .lineLimit(nil)
-                        .padding(.horizontal, 15)
+                        .padding(.horizontal, 30)
                         .padding(.bottom, 20)
                     
                     Divider().padding(.bottom, 20)
@@ -136,8 +137,8 @@ struct ExpandedAdvDetails2: View {
 //                        .foregroundColor(.white)
                         .padding()
 //                        .background(Color.accentColor)
-                        .cornerRadius(8)
-                        .padding(.vertical, 20)
+                        .cornerRadius(15)
+                        .padding(.vertical, 15)
                         Spacer()
                     }
                 }
@@ -145,15 +146,15 @@ struct ExpandedAdvDetails2: View {
                     HStack {
                         Spacer()
                         HStack {
-                            Image(systemName: "pencil")
+//                            Image(systemName: "pencil")
                             Text("Редактировать")
                                 .bold()
                         }
-                        .foregroundColor(.white)
+                        .foregroundColor(Color.accentColor)
                         .padding()
-                        .background(Color.accentColor)
-                        .cornerRadius(10)
-                        .padding(.vertical, 20)
+                        .background(Color("graybg"))
+                        .cornerRadius(15)
+                        .padding(.vertical, 10)
                         Spacer()
                     }
                     
@@ -165,7 +166,7 @@ struct ExpandedAdvDetails2: View {
                                 showingAlertDelete = true
                             }) {
                                 HStack {
-                                    Image(systemName: "trash")
+//                                    Image(systemName: "trash")
                                     Text("Удалить")
                                         .bold()
                                    
@@ -184,11 +185,11 @@ struct ExpandedAdvDetails2: View {
                                 secondaryButton: .cancel(Text("Отмена"))
                             )
                         }
-                        .foregroundColor(Color.white)
+                        .foregroundColor(Color.red)
                         .padding()
-                        .background(Color.red)
-                        .cornerRadius(10)
-                        .padding(.vertical, 20)
+                        .background(Color("graybg"))
+                        .cornerRadius(15)
+                        .padding(.vertical, 10)
                     Spacer()
                 }
             }

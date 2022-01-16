@@ -61,11 +61,11 @@ struct EditAdvView: View {
             } else {
                 Image("launchicon_mini")
                     .resizable()
-                    .scaledToFit()
+                    .scaledToFill()
 //                    ProgressView().progressViewStyle(CircularProgressViewStyle(tint: Color("textColor")))
 //                        .background(Color(UIColor.systemGroupedBackground).opacity(0.1))
-                    .frame(width: 300, height: 300, alignment: .center)
-                    .padding(.leading, 8)
+//                    .frame(width: 350, height: 300)
+                    .clipped()
             }
                 HStack {
                     Spacer()
