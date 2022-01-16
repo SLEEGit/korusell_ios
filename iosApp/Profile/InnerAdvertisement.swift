@@ -42,12 +42,12 @@ struct ExpandedAdvDetails2: View {
     @State var category: String = ""
     @State private var photos: [UIImage] = []
 //    @State var servImage = UIImage(named: "blank")!
-    
+    @State var showingAlertDelete: Bool = false
+    @Environment(\.presentationMode) var presentationMode: Binding<PresentationMode>
     
     var body: some View {
         ScrollView {
             VStack(alignment: .leading) {
-                
                 if !self.photos.isEmpty {
                     TabView {
                         ForEach(self.photos, id: \.self) { photo in
@@ -62,6 +62,15 @@ struct ExpandedAdvDetails2: View {
                      .frame(height: 400)
                      .indexViewStyle(.page(backgroundDisplayMode: .always))
                      .tabViewStyle(.page)
+                     .padding(.leading, 8)
+                } else {
+                    Image("launchicon_mini")
+                        .resizable()
+                        .scaledToFit()
+//                    ProgressView().progressViewStyle(CircularProgressViewStyle(tint: Color("textColor")))
+//                        .background(Color(UIColor.systemGroupedBackground).opacity(0.1))
+                        .frame(width: 400, height: 400, alignment: .center)
+                        .padding(.leading, 8)
                 }
 //                .padding()
 //                .frame(height: 400)
@@ -119,27 +128,74 @@ struct ExpandedAdvDetails2: View {
                     HStack {
                         Spacer()
                         Button(action: {
-                            Util().call(numberString: phone)
+//                            Util().call(numberString: phone)
                         }) {
                             Image(systemName: "phone.fill")
                             Text(phone)
                         }
-                        .foregroundColor(.white)
+//                        .foregroundColor(.white)
                         .padding()
-                        .background(Color.accentColor)
+//                        .background(Color.accentColor)
                         .cornerRadius(8)
                         .padding(.vertical, 20)
                         Spacer()
                     }
                 }
+                NavigationLink(destination: EditAdvView(uid: $uid, name: $name, city: $city, price: $price, phone: $phone, description: $description, createdAt: $createdAt, category: $category, photos: $photos)) {
+                    HStack {
+                        Spacer()
+                        HStack {
+                            Image(systemName: "pencil")
+                            Text("Редактировать")
+                                .bold()
+                        }
+                        .foregroundColor(.white)
+                        .padding()
+                        .background(Color.accentColor)
+                        .cornerRadius(10)
+                        .padding(.vertical, 20)
+                        Spacer()
+                    }
+                    
+                }
                 
-                
-                
+                HStack {
+                    Spacer()
+                            Button(action: {
+                                showingAlertDelete = true
+                            }) {
+                                HStack {
+                                    Image(systemName: "trash")
+                                    Text("Удалить")
+                                        .bold()
+                                   
+                                }
+                            }.alert(isPresented: $showingAlertDelete) {
+                            Alert(
+                                title: Text("Вы уверены что хотите удалить Ваше объявление?"),
+                                primaryButton: .destructive(Text("Удалить"), action: {
+                                    DB().deleteAdv(uid: adv.uid) {
+                                        DB().getAdvs(category: "all") { (list) in
+                                            globalAdv = list.sorted { $0.createdAt > $1.createdAt }
+                                            presentationMode.wrappedValue.dismiss()
+                                        }
+                                    }
+                                }),
+                                secondaryButton: .cancel(Text("Отмена"))
+                            )
+                        }
+                        .foregroundColor(Color.white)
+                        .padding()
+                        .background(Color.red)
+                        .cornerRadius(10)
+                        .padding(.vertical, 20)
+                    Spacer()
+                }
             }
-            .navigationBarItems(trailing:
-                    NavigationLink(destination: EditAdvView(uid: $uid, name: $name, city: $city, price: $price, phone: $phone, description: $description, createdAt: $createdAt, category: $category, photos: $photos)) {
-                        Text("Редактировать")
-                    })
+//            .navigationBarItems(trailing:
+//                    NavigationLink(destination: EditAdvView(uid: $uid, name: $name, city: $city, price: $price, phone: $phone, description: $description, createdAt: $createdAt, category: $category, photos: $photos)) {
+//                        Text("Редактировать")
+//                    })
             .navigationBarTitleDisplayMode(.inline)
             .onAppear {
                 self.uid = adv.uid

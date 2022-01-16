@@ -173,8 +173,9 @@ class DB: ObservableObject {
                     completion(service)
                 }
             } else {
-                completion(defaultService)
-                self.updateBusiness(uid: uid, name: "", category: "", city: "", address: "", phone: "", descrition: "", latitude: "", longitude: "", social: ["", "", "", "", ""], images: "0") { }
+                return
+//                completion(defaultService)
+//                self.updateBusiness(uid: uid, name: "", category: "", city: "", address: "", phone: "", descrition: "", latitude: "", longitude: "", social: ["", "", "", "", ""], images: "0") { }
             }
         })
     }
@@ -193,8 +194,9 @@ class DB: ObservableObject {
                     completion(adv)
                 }
             } else {
-                completion(defaultAdv)
-                self.updateAdv(uid: uid, name: "", category: "", city: "", price: "", phone: "", descrition: "", createdAt: "", images: "0") {}
+                return
+//                completion(defaultAdv)
+//                self.updateAdv(uid: uid, name: "", category: "", city: "", price: "", phone: "", descrition: "", createdAt: "", images: "0") {}
             }
         })
     }
@@ -306,7 +308,4 @@ class DB: ObservableObject {
             completion()
         }
     }
-    
-
-    
 }

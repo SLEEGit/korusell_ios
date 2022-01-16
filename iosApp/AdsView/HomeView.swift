@@ -8,7 +8,7 @@
 import SwiftUI
 import FirebaseAuth
 
-var globalAdv: [Adv] = []
+//var globalAdv: [Adv] = []
 var globalAdvCategory: String = "all"
 
 struct HomeView: View {
@@ -173,15 +173,10 @@ struct HomeView: View {
                 }
                 .onAppear {
                     email = Auth.auth().currentUser?.email ?? ""
+                    self.city = globalCity
+                    self.list = Util().filterAdv(city: city, category: category, unsortedList: globalAdv)
+                    self.isLoading = false
                     
-                    session.getAdvs(category: "all") { (list) in
-                        globalAdv = list.sorted { $0.createdAt > $1.createdAt }
-                        print(globalAdv)
-                        self.city = globalCity
-                        self.list = Util().filterAdv(city: city, category: category, unsortedList: globalAdv)
-                        print(self.list)
-                        self.isLoading = false
-                    }
                 }
             }.disabled(isLoading)
             if isLoading {

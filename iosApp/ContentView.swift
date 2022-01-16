@@ -7,7 +7,7 @@
 
 import SwiftUI
 
-
+var globalAdv: [Adv] = []
 
 struct ContentView: View {
     
@@ -44,7 +44,9 @@ struct ContentView: View {
                 }.tag(3)
         }
         .onAppear {
-            
+            DB().getAdvs(category: "all") { (list) in
+                globalAdv = list.sorted { $0.createdAt > $1.createdAt }
+            }
 //            Pref.userDefault.set(false, forKey: "usersignedin")
 //            Pref.userDefault.synchronize()
             

@@ -58,6 +58,14 @@ struct EditAdvView: View {
                 }.frame(height: 300)
                     .indexViewStyle(.page(backgroundDisplayMode: .always))
                     .tabViewStyle(.page)
+            } else {
+                Image("launchicon_mini")
+                    .resizable()
+                    .scaledToFit()
+//                    ProgressView().progressViewStyle(CircularProgressViewStyle(tint: Color("textColor")))
+//                        .background(Color(UIColor.systemGroupedBackground).opacity(0.1))
+                    .frame(width: 300, height: 300, alignment: .center)
+                    .padding(.leading, 8)
             }
                 HStack {
                     Spacer()
@@ -162,6 +170,9 @@ struct EditAdvView: View {
                             postImages() {
                                 deleteImages() {
                                     DispatchQueue.main.asyncAfter(deadline: .now() + 0.3) {
+                                        DB().getAdvs(category: "all") { (list) in
+                                            globalAdv = list.sorted { $0.createdAt > $1.createdAt }
+                                        }
                                         showingAlert = true
                                     }
                                 }

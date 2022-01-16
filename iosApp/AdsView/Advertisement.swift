@@ -138,10 +138,10 @@ struct ExpandedAdvDetails: View {
                         VStack(alignment: .leading) {
                             NavigationLink(destination: OwnerView(ownerUid: String(adv.uid.prefix(28)))) {
                                 HStack {
-                                    
-                                    Image(uiImage: self.avatar)
-                                        .resizable()
-                                        .scaledToFill()
+                                    UrlImageView(urlString: String(adv.uid.prefix(28)), directory: "avatars")
+//                                    Image(uiImage: self.avatar)
+//                                        .resizable()
+//                                        .scaledToFill()
                                         .frame(width: 25, height: 25)
                                         .clipShape(Circle())
                                     Text(self.name)
@@ -157,9 +157,10 @@ struct ExpandedAdvDetails: View {
                             if service.category != "" {
                                 NavigationLink(destination: ExpandedServiceDetails(service: service, image: servImage, count: service.images)) {
                                     HStack {
-                                        Image(uiImage: self.businessImage)
-                                            .resizable()
-                                            .scaledToFill()
+                                        UrlImageView(urlString: String(adv.uid.prefix(28) + "0"), directory: "images")
+//                                        Image(uiImage: self.businessImage)
+//                                            .resizable()
+//                                            .scaledToFill()
                                             .frame(width: 25, height: 25)
                                             .clipShape(Circle())
                                         Text(self.service.name)

@@ -49,7 +49,7 @@ struct MyAdvList2: View {
                 
                 ForEach(self.list, id: \.id) { adv in
                     NavigationLink(destination: InnerAdvertisement(adv: adv)) {
-                        MyAdvView2(post: adv)
+                        MyAdvView2(adv: adv)
                             .contextMenu {
                                 Button(action: {
                                     showingAlertDelete = true
@@ -64,9 +64,9 @@ struct MyAdvList2: View {
                                     title: Text("Вы уверены что хотите удалить Ваше объявление?"),
                                     primaryButton: .destructive(Text("Удалить"), action: {
                                         DB().deleteAdv(uid: adv.uid) {
-                                            session.getAdvs(category: "all") { (list) in
-                                                self.list = list.filter { $0.uid.contains(myUID) }
-                                                                .sorted { $0.createdAt > $1.createdAt }
+                                            DB().getAdvs(category: "all") { (list) in
+                                                globalAdv = list.sorted { $0.createdAt > $1.createdAt }
+                                                self.list = globalAdv.filter { $0.uid.contains(myUID) }
                                                 count = self.list.count
                                             }
                                         }
@@ -106,7 +106,7 @@ struct MyAdvList2: View {
 }
 
 struct MyAdvView2: View {
-    let post: Adv
+    let adv: Adv
     @State var imagename: String = "launchicon_mini"
     @State var image: UIImage = UIImage(named: "launchicon_mini")!
     
@@ -118,22 +118,24 @@ struct MyAdvView2: View {
                 .scaledToFit()
                 .frame(width: 150, height: 150)
             VStack(alignment: .leading) {
-                Text(Util().formatDate(date: post.createdAt))
-                    .padding(.leading, 16).padding(.bottom, 5)
+                Text(Util().formatDate(date: adv.createdAt))
+                    .padding(.leading, 4).padding(.trailing, 4).padding(.bottom, 3).padding(.top, 2)
                     .font(.caption)
                     .foregroundColor(Color.gray)
-                Text(post.name)
-                    .lineLimit(5)
+                Text(adv.name)
+                    .lineLimit(2)
                     .font(.headline)
-                //                    .font(.system(size: 15))
-                    .padding(.leading, 4).padding(.trailing, 4).padding(.bottom, 4)
-                Text(post.description)
+                    .padding(.leading, 4).padding(.trailing, 4).padding(.bottom, 2)
+                Text(adv.city)
+                    .foregroundColor(Color.gray)
                     .lineLimit(5)
                     .font(.caption)
-                    .padding(.leading, 4).padding(.trailing, 4).padding(.bottom, 4)
+                    .padding(.leading, 4).padding(.trailing, 4).padding(.bottom, 2)
+                Text(adv.price)
+                    .font(.title3)
             }.frame(height: 150, alignment: .leading)
                 .onAppear {
-                    DB().getImage(uid: post.uid + "ADV" + "0", directory: "advImages") { image in
+                    DB().getImage(uid: adv.uid + "ADV" + "0", directory: "advImages") { image in
                         self.image = image
                     }
                 }
