@@ -260,6 +260,9 @@ struct ExpandedAdvDetails: View {
                 }
                 DB().getUser(uid: String(adv.uid.prefix(28))) { user in
                     self.name = user.name ?? "Контактное лицо"
+                    if user.name == "" {
+                        self.name = "Контактное лицо"
+                    }
                     DB().getImage(uid: String(adv.uid.prefix(28)), directory: "avatars") { image in
                         self.avatar = image
                     }

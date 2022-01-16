@@ -605,7 +605,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				MARKETING_VERSION = 0.1.3;
+				MARKETING_VERSION = 1.3;
 				PRODUCT_BUNDLE_IDENTIFIER = com.korusell.korusell;
 				PRODUCT_NAME = korusell;
 				SWIFT_EMIT_LOC_STRINGS = YES;
@@ -642,7 +642,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				MARKETING_VERSION = 0.1.3;
+				MARKETING_VERSION = 1.3;
 				PRODUCT_BUNDLE_IDENTIFIER = com.korusell.korusell;
 				PRODUCT_NAME = korusell;
 				SWIFT_EMIT_LOC_STRINGS = YES;
