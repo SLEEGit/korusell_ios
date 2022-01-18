@@ -147,7 +147,7 @@ struct ServiceMenuView: View {
         if email == "guagetru.bla@inbox.ru" {
             return AnyView(AdminPanelView())
         } else {
-            return AnyView(Text("🥚 ver. 1.2"))
+            return AnyView(Text("🥚 ver. 1.3"))
         }
     }
 }
@@ -173,6 +173,8 @@ class ATTrackingHelper: ObservableObject {
                 self.status = status
                 if status == .authorized {
                     self.currentUUID = ASIdentifierManager.shared().advertisingIdentifier
+                } else {
+                    return
                 }
             }
         }

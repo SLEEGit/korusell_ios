@@ -141,7 +141,7 @@ struct ExpandedServiceDetails: View {
                     Text(service.name)
                         .font(.title)
                         .bold()
-                        .padding(.leading, 15)
+                        .padding(.leading, 15).padding(.trailing, 15)
                     HStack {
                         Text("Город")
                             .font(.body)
@@ -178,6 +178,7 @@ struct ExpandedServiceDetails: View {
                             }
                             
                         }.padding(.leading, 15)
+                            .padding(.trailing, 15)
                             .padding(.bottom, 15)
                     }
                     Divider()

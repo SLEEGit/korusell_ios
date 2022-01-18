@@ -190,7 +190,7 @@ struct ExpandedAdvDetails: View {
                 Text(adv.name)
                     .font(.title)
                     .bold()
-                    .padding(.leading, 15).padding(.bottom, 5)
+                    .padding(.leading, 15).padding(.bottom, 5).padding(.trailing, 15)
                 if adv.city != "admin" && adv.city != "" {
                     HStack {
                         Text("Город")
@@ -223,7 +223,7 @@ struct ExpandedAdvDetails: View {
                     .lineLimit(nil)
                     .padding(.horizontal, 15)
                     .padding(.bottom, 20)
-                
+                    .padding(.trailing, 15)
                     Divider().padding(.bottom, 20)
                 }
                 }

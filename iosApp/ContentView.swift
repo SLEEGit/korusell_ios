@@ -19,7 +19,7 @@ struct ContentView: View {
                 .tabItem {
                     Image(systemName: "house")
                     Text("Услуги")
-                }.tag(0)
+                }
             MapView()
                 .tabItem {
                     Image(systemName: "map")
