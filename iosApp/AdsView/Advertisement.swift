@@ -54,6 +54,7 @@ struct ExpandedAdv: View {
         HStack {
             //            FirebaseImage(id: "vishenka")
             UrlImageView(urlString: adv.uid + "ADV" + "0", directory: "advImages")
+                .scaledToFit()
                 .frame(width: 100, height: 100)
             //            Image(uiImage: self.image)
             //                .resizable()
@@ -124,6 +125,7 @@ struct ExpandedAdvDetails: View {
                 TabView {
                     ForEach(array, id: \.self) { photo in
                         UrlImageView(urlString: adv.uid  + "ADV" + String(photo), directory: "advImages")
+                            .scaledToFit()
                     }
                 }
 //                .padding()
@@ -165,7 +167,7 @@ struct ExpandedAdvDetails: View {
                                             .clipShape(Circle())
                                         Text(self.service.name)
                                             .foregroundColor(Color("textColor"))
-                                            .lineLimit(1)
+//                                            .lineLimit(1)
                                     }
                                 }
                                 .simultaneousGesture(TapGesture().onEnded {

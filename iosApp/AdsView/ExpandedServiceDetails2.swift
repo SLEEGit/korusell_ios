@@ -25,6 +25,7 @@ struct ExpandedServiceDetails2: View {
                 TabView {
                     ForEach(array, id: \.self) { photo in
                         UrlImageView(urlString: service.uid + String(photo), directory: "images")
+                            .scaledToFit()
                         //                            Image(uiImage: photo)
                         //                                .resizable()
                         //                                .scaledToFit()

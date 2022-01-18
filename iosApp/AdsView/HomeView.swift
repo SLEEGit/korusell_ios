@@ -174,9 +174,11 @@ struct HomeView: View {
                 .onAppear {
                     email = Auth.auth().currentUser?.email ?? ""
                     self.city = globalCity
-                    self.list = Util().filterAdv(city: city, category: category, unsortedList: globalAdv)
-                    self.isLoading = false
-                    
+                    DB().getAdvs(category: "all") { list in
+                        globalAdv = list.sorted { $0.createdAt > $1.createdAt }
+                        self.list = Util().filterAdv(city: city, category: category, unsortedList: globalAdv)
+                        self.isLoading = false
+                    }
                 }
             }.disabled(isLoading)
             if isLoading {
@@ -202,6 +204,7 @@ struct PostView: View {
     var body: some View {
         HStack(alignment: .top) {
             UrlImageView(urlString: adv.uid  + "ADV" + "0", directory: "advImages")
+                .scaledToFit()
                 .frame(width: 150, height: 130)
             VStack(alignment: .leading) {
                 Text(Util().formatDate(date: adv.createdAt))

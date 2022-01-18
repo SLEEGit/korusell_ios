@@ -18,7 +18,7 @@ struct UrlImageView: View {
     var body: some View {
         Image(uiImage: urlImageModel.image ?? UrlImageView.defaultImage!)
             .resizable()
-            .scaledToFit()
+//            .scaledToFit()
 //            .frame(maxWidth: .infinity, maxHeight: .infinity, alignment: .center)
 //            .listRowInsets(EdgeInsets())
 //            .background(Color(UIColor.systemGroupedBackground))

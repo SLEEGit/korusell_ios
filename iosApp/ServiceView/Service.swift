@@ -59,6 +59,7 @@ struct ExpandedService: View {
         HStack {
             //            FirebaseImage(id: "vishenka")
             UrlImageView(urlString: service.uid + "0", directory: "images")
+                .scaledToFit()
                 .frame(width: 100, height: 100)
             //            Image(uiImage: self.image)
             //                .resizable()
@@ -112,6 +113,7 @@ struct ExpandedServiceDetails: View {
                 TabView {
                     ForEach(array, id: \.self) { photo in
                         UrlImageView(urlString: service.uid + String(photo), directory: "images")
+                            .scaledToFit()
                         //                            Image(uiImage: photo)
                         //                                .resizable()
                         //                                .scaledToFit()
