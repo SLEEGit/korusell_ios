@@ -11,7 +11,7 @@ var globalAdv: [Adv] = []
 
 struct ContentView: View {
     
-    @State var selection: Int = 0
+    @State var selection = 0
     
     var body: some View {
         TabView(selection: $selection) {
@@ -19,7 +19,7 @@ struct ContentView: View {
                 .tabItem {
                     Image(systemName: "house")
                     Text("Услуги")
-                }
+                }.tag(0)
             MapView()
                 .tabItem {
                     Image(systemName: "map")
