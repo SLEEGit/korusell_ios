@@ -12,6 +12,7 @@ var globalAdv: [Adv] = []
 struct ContentView: View {
     
     @State var selection = 0
+    @ObservedObject var trackingHelper = ATTrackingHelper()
     
     var body: some View {
         TabView(selection: $selection) {
@@ -44,6 +45,7 @@ struct ContentView: View {
                 }.tag(3)
         }
         .onAppear {
+            trackingHelper.requestAuth()
             DB().getAdvs(category: "all") { (list) in
                 globalAdv = list.sorted { $0.createdAt > $1.createdAt }
             }

@@ -25,7 +25,7 @@ struct ServiceMenuView: View {
     @State var email: String = ""
     @Environment(\.colorScheme) var colorScheme
     
-    @ObservedObject var trackingHelper = ATTrackingHelper()
+    
     
     var body: some View {
         
@@ -60,7 +60,7 @@ struct ServiceMenuView: View {
                 })
                 .navigationTitle("Услуги")
                 .onAppear{
-                    trackingHelper.requestAuth()
+                    
                     email = Auth.auth().currentUser?.email ?? ""
                     city = globalCity
                     session.getServices(category: "all") { (list) in
@@ -159,24 +159,4 @@ struct ServiceMenuView_Previews: PreviewProvider {
 }
 
 
-class ATTrackingHelper: ObservableObject {
-    @Published var status = ATTrackingManager.trackingAuthorizationStatus
-    @Published var currentUUID = ASIdentifierManager.shared().advertisingIdentifier
 
-    func requestAuth() {
-        guard ATTrackingManager.trackingAuthorizationStatus != .authorized else {
-            return
-        }
-        
-        ATTrackingManager.requestTrackingAuthorization { status in
-            DispatchQueue.main.async { [unowned self] in
-                self.status = status
-                if status == .authorized {
-                    self.currentUUID = ASIdentifierManager.shared().advertisingIdentifier
-                } else {
-                    return
-                }
-            }
-        }
-    }
-}
