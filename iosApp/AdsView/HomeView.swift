@@ -32,6 +32,7 @@ struct HomeView: View {
                     }
                 }
                 .navigationTitle("Объявления")
+                
                 .toolbar {
                     ToolbarItemGroup(placement: .navigationBarLeading) {
                         Menu {
@@ -176,6 +177,10 @@ struct HomeView: View {
                     self.city = globalCity
                     DB().getAdvs(category: "all") { list in
                         globalAdv = list.sorted { $0.createdAt > $1.createdAt }
+                        
+                        // filter for search
+//                        .filter { $0.name.lowercased().contains("iphone") }
+                        
                         self.list = Util().filterAdv(city: city, category: category, unsortedList: globalAdv)
                         self.isLoading = false
                     }

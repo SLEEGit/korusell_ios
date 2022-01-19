@@ -124,8 +124,10 @@ struct ExpandedAdvDetails: View {
                 
                 TabView {
                     ForEach(array, id: \.self) { photo in
-                        UrlImageView(urlString: adv.uid  + "ADV" + String(photo), directory: "advImages")
-                            .scaledToFit()
+                        NavigationLink(destination: FullScreenImages(imagename: adv.uid  + "ADV", count: count)) {
+                            UrlImageView(urlString: adv.uid  + "ADV" + String(photo), directory: "advImages")
+                                .scaledToFit()
+                        }
                     }
                 }
 //                .padding()
