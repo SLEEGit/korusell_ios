@@ -57,7 +57,6 @@ struct ExpandedService: View {
     @State var image: UIImage
     var body: some View {
         HStack {
-            //            FirebaseImage(id: "vishenka")
             UrlImageView(urlString: service.uid + "0", directory: "images")
                 .scaledToFit()
                 .frame(width: 100, height: 100)

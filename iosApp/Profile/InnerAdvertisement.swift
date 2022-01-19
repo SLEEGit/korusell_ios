@@ -217,6 +217,7 @@ struct ExpandedAdvDetails2: View {
 
                 if fromAdv == false {
                     countToArray()
+                    fromAdv = true
                 }
             }
         }

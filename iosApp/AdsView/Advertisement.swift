@@ -150,9 +150,7 @@ struct ExpandedAdvDetails: View {
                                         .foregroundColor(Color("textColor"))
                                     
                                 }
-                            }.simultaneousGesture(TapGesture().onEnded {
-                                fromAdv = true
-                            })
+                            }
                                 .padding(.bottom, 5)
                                 .padding(.leading, 15)
                             
@@ -170,9 +168,6 @@ struct ExpandedAdvDetails: View {
 //                                            .lineLimit(1)
                                     }
                                 }
-                                .simultaneousGesture(TapGesture().onEnded {
-                                    fromAdv = true
-                                })
                                 .padding(.bottom, 5)
                                 .padding(.leading, 15)
                             }
@@ -272,6 +267,7 @@ struct ExpandedAdvDetails: View {
                 }
                 if fromAdv == false {
                     countToArray()
+                    fromAdv = true
                 }
                 
 //                sortImages() {

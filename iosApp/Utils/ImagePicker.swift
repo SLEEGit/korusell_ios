@@ -50,7 +50,7 @@ final class Coordinator: NSObject, UIImagePickerControllerDelegate, UINavigation
  
     func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [UIImagePickerController.InfoKey : Any]) {
         if let image = info[UIImagePickerController.InfoKey.originalImage] as? UIImage {
-            DB().postImage(image: image, directory: parent.directory, uid: parent.currentUid, quality: 0.1)
+            DB().postImage(image: image, directory: parent.directory, uid: parent.currentUid, quality: 0.5)
             parent.selectedImage = image
         }
  

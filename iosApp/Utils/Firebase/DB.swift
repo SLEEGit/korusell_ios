@@ -11,6 +11,8 @@ import FirebaseStorage
 import Foundation
 import UIKit
 
+var globalImages: [UIImage] = []
+
 class DB: ObservableObject {
     
     let ref = Database.database(url: "https://korusell-default-rtdb.asia-southeast1.firebasedatabase.app/")
@@ -51,6 +53,26 @@ class DB: ObservableObject {
             completion(image)
         }
     }
+    
+//    func getMultipleImage(completion: @escaping ([UIImage]) -> ()) {
+//        var images: [UIImage] = []
+//        for i in globalServices {
+//            for j in 0...3 {
+//                let storage = Storage.storage().reference().child("images/\(i.uid)\(j)")
+//                storage.getData(maxSize: 1 * 1024 * 1024) { (metadata, error) in
+//                    if let error = error {
+//                        print("Error while uploading file: ", error)
+//                        return
+//                    } else {
+//                        let image = UIImage(data: metadata!)
+//                        globalImages.append(image!)
+//                        //                        print("Metadata: ", metadata!)
+//                    }
+//                }
+//            }
+//        }
+//        completion(images)
+//    }
     
     func getMultiImages(uid: String, directory: String, completion: @escaping ([UIImage]) -> ()) {
         var images: [UIImage] = []
@@ -248,17 +270,44 @@ class DB: ObservableObject {
         }
     }
     
+    func resizeImage(image: UIImage, targetSize: CGSize) -> UIImage? {
+        let size = image.size
+        
+        let widthRatio  = targetSize.width  / size.width
+        let heightRatio = targetSize.height / size.height
+        
+        // Figure out what our orientation is, and use that to form the rectangle
+        var newSize: CGSize
+        if(widthRatio > heightRatio) {
+            newSize = CGSize(width: size.width * heightRatio, height: size.height * heightRatio)
+        } else {
+            newSize = CGSize(width: size.width * widthRatio, height: size.height * widthRatio)
+        }
+        
+        // This is the rect that we've calculated out and this is what is actually used below
+        let rect = CGRect(origin: .zero, size: newSize)
+        
+        // Actually do the resizing to the rect using the ImageContext stuff
+        UIGraphicsBeginImageContextWithOptions(newSize, false, 1.0)
+        image.draw(in: rect)
+        let newImage = UIGraphicsGetImageFromCurrentImageContext()
+        UIGraphicsEndImageContext()
+        
+        return newImage
+    }
+    
     func postImage(image: UIImage, directory: String, uid: String, quality: Double) {
+        
         let storage = Storage.storage().reference().child("\(directory)/\(uid).jpg")
         
         // Resize the image to 200px in height with a custom extension
-        let resizedImage = image
-        
+        let resizedImage = resizeImage(image: image, targetSize: CGSize(width: 1024, height: 1024))
+
         // Convert the image into JPEG and compress the quality to reduce its size
-        let data = resizedImage.jpegData(compressionQuality: quality)
+        let data = resizedImage!.jpegData(compressionQuality: quality)
         let metadata = StorageMetadata()
         metadata.contentType = "image/jpg"
-        
+
         if let data = data {
             storage.putData(data, metadata: metadata) { (metadata, error) in
                 if let error = error {

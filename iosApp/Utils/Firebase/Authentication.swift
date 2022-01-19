@@ -120,7 +120,8 @@ class Authentication {
                 return
             }
             if let user = result?.user {
-                DB().createUserInDB(user: user, email: email, phone: phone) {
+                let created_date = Util().dateByTimeZone()
+                DB().createUserInDB(user: user, email: email, created_date: created_date, phone: phone) {
                     Pref.registerCompletion = "success"
                     completion()
                 }

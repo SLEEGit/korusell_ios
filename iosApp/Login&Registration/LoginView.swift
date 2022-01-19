@@ -109,7 +109,8 @@ struct LoginView : View {
                                             self.warningText = error?.localizedDescription ?? ""
                                             return
                                         }
-                                        DB().createUserInDB(user: authResult!.user, email: authResult!.user.email!) {
+                                        let created_date = Util().dateByTimeZone()
+                                        DB().createUserInDB(user: authResult!.user, email: authResult!.user.email!, created_date: created_date) {
                                             logging.isSignedIn = true
                                             Pref.userDefault.set(true, forKey: "usersignedin")
                                             Pref.userDefault.synchronize()

@@ -249,7 +249,7 @@ struct EditAdvView: View {
     func postImages(completion: @escaping () -> Void) {
         var n = 0
         for photo1 in photos {
-            DB().postImage(image: photo1, directory: directory, uid: uid + "ADV" + String(n), quality: 0.1)
+            DB().postImage(image: photo1, directory: directory, uid: uid + "ADV" + String(n), quality: 0.5)
             n += 1
             print("adding photo")
         }
