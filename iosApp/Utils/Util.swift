@@ -120,9 +120,7 @@ class Util {
         
         switch category {
         case "all":
-            afterCategory = unsortedList.filter { $0.category == "work" || $0.category == "transport" || $0.category == "house" || $0.category == "phone" || $0.category == "hobby" || $0.category == "car" || $0.category == "electronic" || $0.category == "children" || $0.category == "clothes" || $0.category == "sport" || $0.category == "pet" || $0.category == "change" || $0.category == "other" || $0.category == "admin"}
-        case "work":
-            afterCategory = unsortedList.filter { $0.category == "work" || $0.category == "admin"}
+            afterCategory = unsortedList.filter { $0.category == "transport" || $0.category == "house" || $0.category == "phone" || $0.category == "hobby" || $0.category == "car" || $0.category == "electronic" || $0.category == "children" || $0.category == "clothes" || $0.category == "sport" || $0.category == "pet" || $0.category == "change" || $0.category == "other" || $0.category == "admin"}
         case "transport":
             afterCategory = unsortedList.filter { $0.category == "transport" || $0.category == "admin"}
         case "house":
@@ -149,6 +147,58 @@ class Util {
             afterCategory = unsortedList.filter { $0.category == "other" || $0.category == "admin"}
         default:
             afterCategory = unsortedList.filter  { $0.category == "zavod" }
+        }
+        
+        switch city {
+        case "Все города":
+            return afterCategory
+        case "Ансан":
+            return afterCategory.filter { $0.city == "Ансан" || $0.city == "admin"}
+        case "Хвасонг":
+            return afterCategory.filter { $0.city == "Хвасонг" || $0.city == "admin"}
+        case "Сеул":
+            return afterCategory.filter { $0.city == "Сеул" || $0.city == "admin"}
+        case "Инчхон":
+            return afterCategory.filter { $0.city == "Инчхон" || $0.city == "admin"}
+        case "Асан":
+            return afterCategory.filter { $0.city == "Асан" || $0.city == "admin"}
+        case "Сувон":
+            return afterCategory.filter { $0.city == "Сувон" || $0.city == "admin"}
+        case "Чхонан":
+            return afterCategory.filter { $0.city == "Чхонан" || $0.city == "admin"}
+        case "Чхонджу":
+            return afterCategory.filter { $0.city == "Чхонджу" || $0.city == "admin"}
+        case "Другой город":
+            return afterCategory.filter { $0.city != "Чхонан" && $0.city != "Хвасонг" && $0.city != "Ансан" && $0.city != "Асан" && $0.city != "Сеул" && $0.city != "Инчхон" && $0.city != "Хвасонг" && $0.city != "Сувон" && $0.city != "Чхонджу" || $0.city == "admin"}
+        default:
+            return afterCategory
+        }
+    }
+    
+    func filterWork(city: String, category: String = "work", subcategory: String, unsortedList: [Adv]) -> [Adv] {
+        
+        var afterCategory: [Adv] = []
+        switch subcategory {
+        case "all":
+            afterCategory = unsortedList.filter { $0.subcategory == "factory" || $0.subcategory == "construction" || $0.subcategory == "motel" || $0.subcategory == "cafe" || $0.subcategory == "delivery" || $0.subcategory == "farm" || $0.subcategory == "office"}
+        case "factory":
+            afterCategory = unsortedList.filter { $0.subcategory == "factory"}
+        case "construction":
+            afterCategory = unsortedList.filter { $0.subcategory == "construction"}
+        case "motel":
+            afterCategory = unsortedList.filter { $0.subcategory == "motel"}
+        case "cafe":
+            afterCategory = unsortedList.filter { $0.subcategory == "cafe"}
+        case "delivery":
+            afterCategory = unsortedList.filter { $0.subcategory == "delivery"}
+        case "farm":
+            afterCategory = unsortedList.filter { $0.subcategory == "farm"}
+        case "office":
+            afterCategory = unsortedList.filter { $0.subcategory == "office"}
+        case "otherwork":
+            afterCategory = unsortedList.filter { $0.category == "otherwork"}
+        default:
+            afterCategory = unsortedList.filter  { $0.category == "none" }
         }
         
         switch city {
@@ -264,3 +314,5 @@ class Util {
     
 }
 
+
+    

@@ -38,11 +38,16 @@ struct ContentView: View {
                     }
                     Text("Морковка")
                 }.tag(2)
+            WorkView()
+                .tabItem {
+                    Image(systemName: "wrench.and.screwdriver.fill")
+                    Text("Работа")
+                }.tag(3)
             CheckStatusView()
                 .tabItem {
                     Image(systemName: "person.crop.circle")
                     Text("Профиль")
-                }.tag(3)
+                }.tag(4)
         }
         .onAppear {
             trackingHelper.requestAuth()

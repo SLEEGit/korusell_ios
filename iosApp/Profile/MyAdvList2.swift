@@ -27,7 +27,7 @@ struct MyAdvList2: View {
     @State var category: String = ""
     @State var updatedAt: String = ""
     @State var isActive: String = ""
-    @State var subcategory: String = ""
+    @State var subcategory: String = "subcategory"
     
     @State private var photos: [UIImage] = []
     

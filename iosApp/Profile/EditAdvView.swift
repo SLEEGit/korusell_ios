@@ -110,6 +110,23 @@ struct EditAdvView: View {
                     Text("🪆 Другое").tag("other")
                 }.foregroundColor(Color("textColor"))
             }.foregroundColor(.gray)
+            
+            if self.category == "work" {
+                Picker("Виды работ", selection: $subcategory) {
+                    Group {
+                        Text("🏭 Завод").tag("factory")
+                        Text("👷🏻‍♀️ Стройка").tag("construction")
+                        Text("🏩 Мотель").tag("motel")
+                        Text("🍽 Общепит").tag("cafe")
+                        Text("🧑🏽‍🌾 Сельхоз работы").tag("farm")
+                        Text("📦 Почта/Доставка").tag("delivery")
+                        Text("💼 Работа в офисе").tag("office")
+                        Text("👨‍🚀 Другая работа").tag("otherwork")
+                    }.foregroundColor(Color("textColor"))
+                }
+                .foregroundColor(.gray)
+            }
+            
             HStack {
                 Picker("Город", selection: $city) {
                     Group {

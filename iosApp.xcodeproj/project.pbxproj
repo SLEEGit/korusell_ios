@@ -58,6 +58,7 @@
 		25F9B33A2797FE5B0018662D /* FullScreenImages.swift in Sources */ = {isa = PBXBuildFile; fileRef = 25F9B3392797FE5B0018662D /* FullScreenImages.swift */; };
 		25F9B33C2798F6300018662D /* SegmentedViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 25F9B33B2798F6300018662D /* SegmentedViewController.swift */; };
 		25F9B33E2799011F0018662D /* NewAdvView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 25F9B33D2799011F0018662D /* NewAdvView.swift */; };
+		25F9B341279945B20018662D /* WorkView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 25F9B340279945B20018662D /* WorkView.swift */; };
 		7E4128007F7572B3F603FEEB /* Pods_iosApp.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = BCC3DBD7F6436A1D9D2C1C77 /* Pods_iosApp.framework */; };
 /* End PBXBuildFile section */
 
@@ -116,6 +117,7 @@
 		25F9B3392797FE5B0018662D /* FullScreenImages.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FullScreenImages.swift; sourceTree = "<group>"; };
 		25F9B33B2798F6300018662D /* SegmentedViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SegmentedViewController.swift; sourceTree = "<group>"; };
 		25F9B33D2799011F0018662D /* NewAdvView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NewAdvView.swift; sourceTree = "<group>"; };
+		25F9B340279945B20018662D /* WorkView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WorkView.swift; sourceTree = "<group>"; };
 		6BBB108F7637D033E3BED1F4 /* Pods-iosApp.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-iosApp.debug.xcconfig"; path = "Target Support Files/Pods-iosApp/Pods-iosApp.debug.xcconfig"; sourceTree = "<group>"; };
 		BCC3DBD7F6436A1D9D2C1C77 /* Pods_iosApp.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_iosApp.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		D9B96B5C301D3AD6549B202A /* Pods-iosApp.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-iosApp.release.xcconfig"; path = "Target Support Files/Pods-iosApp/Pods-iosApp.release.xcconfig"; sourceTree = "<group>"; };
@@ -185,9 +187,10 @@
 				257CC4E1277C0C7F00AFE5E8 /* iosApp.entitlements */,
 				2593A6D827539FAC00081698 /* iosAppApp.swift */,
 				2593A6DA27539FAC00081698 /* ContentView.swift */,
-				25441F6A2767178600B6E240 /* Map */,
 				25973E00275A4D0100DC016B /* ServiceView */,
+				25441F6A2767178600B6E240 /* Map */,
 				25973DE42759969300DC016B /* AdsView */,
+				25F9B33F279944930018662D /* WorkView */,
 				259936052769812B00F468B6 /* Profile */,
 				259936062769A09300F468B6 /* Login&Registration */,
 				25973E03275B48ED00DC016B /* Utils */,
@@ -297,6 +300,14 @@
 				2515C94C2782B151007C376F /* AdvDetailsView.swift */,
 			);
 			path = Old;
+			sourceTree = "<group>";
+		};
+		25F9B33F279944930018662D /* WorkView */ = {
+			isa = PBXGroup;
+			children = (
+				25F9B340279945B20018662D /* WorkView.swift */,
+			);
+			path = WorkView;
 			sourceTree = "<group>";
 		};
 		45A62DF6782E9C65FD75BB4F /* Frameworks */ = {
@@ -459,6 +470,7 @@
 				2593A6DB27539FAC00081698 /* ContentView.swift in Sources */,
 				25ED2B57276CE9A600575FEB /* EditNameView.swift in Sources */,
 				2592E23327916AFC00508B01 /* MyAdvList2.swift in Sources */,
+				25F9B341279945B20018662D /* WorkView.swift in Sources */,
 				2515C9552783F73A007C376F /* MyAdvListView.swift in Sources */,
 				25441F90276844C700B6E240 /* LocationManager.swift in Sources */,
 				25973E05275B492400DC016B /* Util.swift in Sources */,
@@ -613,7 +625,7 @@
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_ENTITLEMENTS = iosApp/iosApp.entitlements;
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 23;
+				CURRENT_PROJECT_VERSION = 24;
 				DEVELOPMENT_ASSET_PATHS = "\"iosApp/Preview Content\"";
 				DEVELOPMENT_TEAM = 4GZ4AH8Z6M;
 				ENABLE_PREVIEWS = YES;
@@ -650,7 +662,7 @@
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_ENTITLEMENTS = iosApp/iosApp.entitlements;
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 23;
+				CURRENT_PROJECT_VERSION = 24;
 				DEVELOPMENT_ASSET_PATHS = "\"iosApp/Preview Content\"";
 				DEVELOPMENT_TEAM = 4GZ4AH8Z6M;
 				ENABLE_PREVIEWS = YES;

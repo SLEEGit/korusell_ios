@@ -12,14 +12,6 @@ import FirebaseAuth
 var globalAdvCategory: String = "all"
 
 struct HomeView: View {
-    //    @StateObject private var session = DB()
-    //    @State var list: [Adv] = []
-    //    @State var categoryName: String = "🗂"
-    //    @State var email: String = ""
-    //    @State var city: String = "all"
-    //    @State var isLoading: Bool = true
-    //    @State var emoji: String = "🗂"
-    //    @State var category: String = "all"
     var body: some View {
         NavigationView {
             AdvList()
@@ -72,10 +64,8 @@ struct AdvList: View {
     @StateObject private var session = DB()
     @State var list: [Adv] = []
     @State var categoryName: String = "🗂"
-    @State var email: String = ""
     @State var city: String = "all"
     @State var isLoading: Bool = true
-    @State var emoji: String = "🗂"
     @State var category: String = "all"
     
     var body: some View {
@@ -94,11 +84,6 @@ struct AdvList: View {
                                 Button("🗂 Все категории") {
                                     self.categoryName = "🗂"
                                     self.category = "all"
-                                    self.list = Util().filterAdv(city: city, category: category, unsortedList: globalAdv)
-                                }
-                                Button("🛠 Работа") {
-                                    self.categoryName = "🛠"
-                                    self.category = "work"
                                     self.list = Util().filterAdv(city: city, category: category, unsortedList: globalAdv)
                                 }
                                 Button("🚗 Транспорт") {
@@ -232,7 +217,6 @@ struct AdvList: View {
                     }
                 }
                 .onAppear {
-                    email = Auth.auth().currentUser?.email ?? ""
                     self.city = globalCity
                     DB().getAdvs(category: "all") { list in
                         globalAdv = list

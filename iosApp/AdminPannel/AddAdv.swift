@@ -18,7 +18,7 @@ struct AddAdvView: View {
     @State var category: String = ""
     @State var updatedAt: String = ""
     @State var isActive: String = ""
-    @State var subcategory: String = ""
+    @State var subcategory: String = "subcategory"
     @State var createdAt: String = ""
     
     @State var directory: String = "advImages"
@@ -105,6 +105,23 @@ struct AddAdvView: View {
                     Text("Обмен, отдам бесплатно").tag("change")
                 }.foregroundColor(Color("textColor"))
             }.foregroundColor(.gray)
+            
+            if self.category == "work" {
+                Picker("Виды работ", selection: $subcategory) {
+                    Group {
+                        Text("🏭 Завод").tag("factory")
+                        Text("👷🏻‍♀️ Стройка").tag("construction")
+                        Text("🏩 Мотель").tag("motel")
+                        Text("🍽 Общепит").tag("cafe")
+                        Text("🧑🏽‍🌾 Сельхоз работы").tag("farm")
+                        Text("📦 Почта/Доставка").tag("delivery")
+                        Text("💼 Работа в офисе").tag("office")
+                        Text("👨‍🚀 Другая работа").tag("otherwork")
+                    }.foregroundColor(Color("textColor"))
+                }
+                .foregroundColor(.gray)
+            }
+            
             HStack {
                 Picker("Город", selection: $city) {
                     Group {
@@ -167,7 +184,7 @@ struct AddAdvView: View {
                     Spacer()
                     Button("Обновить данные") {
                         self.images = String(photos.count)
-                        DB().createAdv(uid: uid, name: name, category: category, city: city, price: price, phone: phone, descrition: description, createdAt: Util().dateByTimeZone(), images: images, updatedAt: Util().dateByTimeZone(), isActive: "1", subcategory: "subcategory") {
+                        DB().createAdv(uid: uid, name: name, category: category, city: city, price: price, phone: phone, descrition: description, createdAt: Util().dateByTimeZone(), images: images, updatedAt: Util().dateByTimeZone(), isActive: "1", subcategory: subcategory) {
                             var n = 0
                             for photo1 in photos {
                                 DB().postImage(image: photo1, directory: directory, uid: uid + "ADV" + String(n), quality: 0.5)

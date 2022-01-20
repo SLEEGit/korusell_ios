@@ -107,6 +107,24 @@ struct NewAdvView: View {
                     Text("🪆 Другое").tag("other")
                 }.foregroundColor(Color("textColor"))
             }.foregroundColor(.gray)
+            
+            if self.category == "work" {
+                Picker("Виды работ", selection: $subcategory) {
+                    Group {
+                        Text("🏭 Завод").tag("factory")
+                        Text("👷🏻‍♀️ Стройка").tag("construction")
+                        Text("🏩 Мотель").tag("motel")
+                        Text("🍽 Общепит").tag("cafe")
+                        Text("🧑🏽‍🌾 Сельхоз работы").tag("farm")
+                        Text("📦 Почта/Доставка").tag("delivery")
+                        Text("💼 Работа в офисе").tag("office")
+                        Text("👨‍🚀 Другая работа").tag("otherwork")
+                    }.foregroundColor(Color("textColor"))
+                }
+                .foregroundColor(.gray)
+            }
+            
+            
             HStack {
                 Picker("Город", selection: $city) {
                     Group {
@@ -168,7 +186,7 @@ struct NewAdvView: View {
                     Spacer()
                     Button("Создать") {
                         self.images = String(photos.count)
-                        DB().createAdv(uid: uid, name: name, category: category, city: city, price: price, phone: phone, descrition: description, createdAt: Util().dateByTimeZone(), images: images, updatedAt: Util().dateByTimeZone(), isActive: "1", subcategory: "subcategory") {
+                        DB().createAdv(uid: uid, name: name, category: category, city: city, price: price, phone: phone, descrition: description, createdAt: Util().dateByTimeZone(), images: images, updatedAt: Util().dateByTimeZone(), isActive: "1", subcategory: subcategory) {
                             postImages() {
                                 deleteImages() {
                                     DispatchQueue.main.asyncAfter(deadline: .now() + 0.3) {
