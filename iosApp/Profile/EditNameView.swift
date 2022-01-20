@@ -58,10 +58,12 @@ struct EditNameView: View {
                             Alert(
                                 title: Text("Ваш аккаунт будет удален! Вся информация будет утеряна!"),
                                 primaryButton: .destructive(Text("Удалить аккаунт"), action: {
-                                    Authentication().signOut() {
-                                        logging.isSignedIn = false
+                                    
+                                    DB().deleteAccount(uid: user.uid) {
+                                        Authentication().signOut() {
+                                            logging.isSignedIn = false
+                                        }
                                     }
-                                    DB().deleteAccount(uid: user.uid)
 //                                    presentationMode.wrappedValue.dismiss()
                                 }),
                                 secondaryButton: .cancel(Text("Отмена"))

@@ -332,11 +332,22 @@ class DB: ObservableObject {
         }
     }
     
-    func deleteAccount(uid: String) {
+    func deleteAccount(uid: String, completion: @escaping () -> Void) {
         deleteImage(uid: uid, directory: "avatars")
         ref.reference(withPath: "users").child(uid).removeValue()
         deleteBusiness(uid: uid)
         deleteAdv(uid: uid) {}
+        let user = Auth.auth().currentUser
+        
+        user?.delete { error in
+            if let error = error {
+                print("Error on deleting user:: \(error)")
+                completion()
+            } else {
+                print("\(String(describing: user)) successfully deleted")
+                completion()
+            }
+        }
     }
     
     func deleteBusiness(uid: String) {

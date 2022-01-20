@@ -52,18 +52,9 @@ struct ExpandedAdv: View {
     
     var body: some View {
         HStack {
-            //            FirebaseImage(id: "vishenka")
             UrlImageView(urlString: adv.uid + "ADV" + "0", directory: "advImages")
                 .scaledToFit()
                 .frame(width: 100, height: 100)
-            //            Image(uiImage: self.image)
-            //                .resizable()
-            //                .scaledToFit()
-            //                .onAppear {
-            //                    DB().getImage(uid: service.uid, directory: "images") { image in
-            //                        self.image = image
-            //                    }
-            //                }
             VStack(alignment: .leading) {
                 Text(adv.name)
                     .font(.system(size: 16))

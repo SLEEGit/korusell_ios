@@ -24,6 +24,7 @@ struct FullScreenImages: View {
                         self.scale = value.magnitude
                         
                     }.onEnded {_ in self.scale = 1.0}
+                             
                     )
                         .scaledToFit()
             }

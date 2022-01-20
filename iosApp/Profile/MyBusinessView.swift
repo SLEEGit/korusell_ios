@@ -261,7 +261,6 @@ struct MyBusinessView: View {
                         Spacer()
                     }
                 }
-                
             }
         }.alert(isPresented: $businessWarning) {
             Alert(
