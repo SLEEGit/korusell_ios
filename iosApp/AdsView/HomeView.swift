@@ -12,6 +12,63 @@ import FirebaseAuth
 var globalAdvCategory: String = "all"
 
 struct HomeView: View {
+    //    @StateObject private var session = DB()
+    //    @State var list: [Adv] = []
+    //    @State var categoryName: String = "🗂"
+    //    @State var email: String = ""
+    //    @State var city: String = "all"
+    //    @State var isLoading: Bool = true
+    //    @State var emoji: String = "🗂"
+    //    @State var category: String = "all"
+    var body: some View {
+        NavigationView {
+            AdvList()
+                .navigationBarTitle("Объявления")
+        }
+    }
+}
+
+struct HomeView_Previews: PreviewProvider {
+    static var previews: some View {
+        HomeView()
+    }
+}
+
+struct PostView: View {
+    let adv: Adv
+    //    @State var width: CGFloat = 0
+    
+    var body: some View {
+        HStack(alignment: .top) {
+            UrlImageView(urlString: adv.uid  + "ADV" + "0", directory: "advImages")
+                .scaledToFit()
+                .frame(width: 150, height: 130)
+            VStack(alignment: .leading) {
+                Text(Util().formatDate(date: adv.createdAt))
+                    .padding(.leading, 4).padding(.trailing, 4).padding(.bottom, 3).padding(.top, 2)
+                    .font(.caption)
+                    .foregroundColor(Color.gray)
+                Text(adv.name)
+                    .lineLimit(2)
+                    .font(.headline)
+                    .padding(.leading, 4).padding(.trailing, 4).padding(.bottom, 2)
+                Text(adv.city)
+                    .foregroundColor(Color.gray)
+                    .lineLimit(5)
+                    .font(.caption)
+                    .padding(.leading, 4).padding(.trailing, 4).padding(.bottom, 2)
+                Text(adv.price)
+                    .font(.title3)
+                Spacer()
+                
+            }.frame(height: 150, alignment: .leading)
+        }.frame(alignment: .top)
+            .onAppear {
+            }
+    }
+}
+
+struct AdvList: View {
     @StateObject private var session = DB()
     @State var list: [Adv] = []
     @State var categoryName: String = "🗂"
@@ -23,16 +80,13 @@ struct HomeView: View {
     
     var body: some View {
         ZStack {
-            NavigationView {
-                List {
-                    ForEach(self.list, id: \.id) { adv in
-                        NavigationLink(destination: AdvDetailsView(adv: adv)) {
-                            PostView(adv: adv)
-                        }
+            List {
+                ForEach(self.list, id: \.id) { adv in
+                    NavigationLink(destination: AdvDetailsView(adv: adv)) {
+                        PostView(adv: adv)
                     }
                 }
-                .navigationTitle("Объявления")
-                
+            }.disabled(isLoading)
                 .toolbar {
                     ToolbarItemGroup(placement: .navigationBarLeading) {
                         Menu {
@@ -159,6 +213,11 @@ struct HomeView: View {
                                 self.city = globalCity
                                 self.list = Util().filterAdv(city: globalCity, category: category, unsortedList: globalAdv)
                             }
+                            Button("Чхонджу") {
+                                globalCity = "Чхонджу"
+                                self.city = globalCity
+                                self.list = Util().filterAdv(city: globalCity, category: category, unsortedList: globalAdv)
+                            }
                             Button("Другой город") {
                                 globalCity = "Другой город"
                                 self.city = globalCity
@@ -176,92 +235,22 @@ struct HomeView: View {
                     email = Auth.auth().currentUser?.email ?? ""
                     self.city = globalCity
                     DB().getAdvs(category: "all") { list in
-                        globalAdv = list.sorted { $0.createdAt > $1.createdAt }
+                        globalAdv = list
+                        //                включен/выключен фильтр
+                            .filter { $0.isActive == "1" }
+                            .sorted { $0.createdAt > $1.createdAt }
                         
                         // filter for search
-//                        .filter { $0.name.lowercased().contains("iphone") }
+                        //                        .filter { $0.name.lowercased().contains("iphone") }
                         
                         self.list = Util().filterAdv(city: city, category: category, unsortedList: globalAdv)
                         self.isLoading = false
                     }
                 }
-            }.disabled(isLoading)
             if isLoading {
                 ProgressView().progressViewStyle(CircularProgressViewStyle(tint: Color("textColor")))
                     .background(Color(UIColor.systemGroupedBackground).opacity(0.1))
             }
         }
-        
     }
-    
-}
-
-struct HomeView_Previews: PreviewProvider {
-    static var previews: some View {
-        HomeView()
-    }
-}
-
-struct PostView: View {
-    let adv: Adv
-//    @State var width: CGFloat = 0
-    
-    var body: some View {
-        HStack(alignment: .top) {
-            UrlImageView(urlString: adv.uid  + "ADV" + "0", directory: "advImages")
-                .scaledToFit()
-                .frame(width: 150, height: 130)
-            VStack(alignment: .leading) {
-                Text(Util().formatDate(date: adv.createdAt))
-                    .padding(.leading, 4).padding(.trailing, 4).padding(.bottom, 3).padding(.top, 2)
-                    .font(.caption)
-                    .foregroundColor(Color.gray)
-                Text(adv.name)
-                    .lineLimit(2)
-                    .font(.headline)
-                    .padding(.leading, 4).padding(.trailing, 4).padding(.bottom, 2)
-                Text(adv.city)
-                    .foregroundColor(Color.gray)
-                    .lineLimit(5)
-                    .font(.caption)
-                    .padding(.leading, 4).padding(.trailing, 4).padding(.bottom, 2)
-                Text(adv.price)
-                    .font(.title3)
-                Spacer()
-                
-            }.frame(height: 150, alignment: .leading)
-        }.frame(alignment: .top)
-        .onAppear {
-//            #question не знаю нужно убирать картинку или нет
-//            if adv.images == "0" {
-//                self.width = 0
-//            } else {
-//                self.width = 150
-//            }
-        }
-    }
-    
-    //        var body: some View {
-    //            VStack(alignment: .leading, spacing: 8) {
-    //                UrlImageView(urlString: post.uid + "0", directory: "advImages")
-    //                    .frame(height: 250)
-    ////                    .scaledToFit()
-    //
-    ////                    .clipped()
-    //                Text(Util().formatDate(date: post.createdAt))
-    //                    .padding(.leading, 16).padding(.bottom, 5)
-    //                    .font(.caption)
-    //                    .foregroundColor(Color.gray)
-    //                HStack {
-    //                    Text(post.name).font(.headline)
-    //                }
-    //                .padding(EdgeInsets(top: 8, leading: 16, bottom: 0, trailing: 0))
-    //
-    //                Text(post.description)
-    //                    .lineLimit(3)
-    //                    .font(.system(size: 15))
-    //                    .padding(.leading, 16).padding(.trailing, 16).padding(.bottom, 16)
-    //            }
-    //            .listRowInsets(EdgeInsets())
-    //        }
 }

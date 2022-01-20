@@ -1,13 +1,12 @@
 //
-//  MyAdvView.swift
+//  AddAdvView.swift
 //  iosApp
 //
-//  Created by Sergey Lee on 2021/12/23.
+//  Created by Sergey Lee on 2022/01/20.
 //
-
 import SwiftUI
 
-struct EditAdvView: View {
+struct NewAdvView: View {
     //    @State var service: Service!
     @Binding var uid: String
     @Binding var name: String
@@ -20,6 +19,7 @@ struct EditAdvView: View {
     @Binding var isActive: String
     @Binding var subcategory: String
     
+    
     @State var directory: String = "advImages"
     @State private var image = UIImage(named: "blank")!
     @State private var isShowPhotoLibrary = false
@@ -31,9 +31,6 @@ struct EditAdvView: View {
     @Binding var photos: [UIImage]
     @State var images: String = "0"
     @State var checked: Bool = false
-    
-    
-    @State var isActiveStatus: String = "0"
     
     @Environment(\.presentationMode) var presentationMode: Binding<PresentationMode>
     
@@ -169,9 +166,9 @@ struct EditAdvView: View {
             Section {
                 HStack {
                     Spacer()
-                    Button("Обновить данные") {
+                    Button("Создать") {
                         self.images = String(photos.count)
-                        DB().updateAdv(uid: uid, name: name, category: category, city: city, price: price, phone: phone, descrition: description, images: images, updatedAt: Util().dateByTimeZone(), isActive: "1", subcategory: subcategory) {
+                        DB().createAdv(uid: uid, name: name, category: category, city: city, price: price, phone: phone, descrition: description, createdAt: Util().dateByTimeZone(), images: images, updatedAt: Util().dateByTimeZone(), isActive: "1", subcategory: "subcategory") {
                             postImages() {
                                 deleteImages() {
                                     DispatchQueue.main.asyncAfter(deadline: .now() + 0.3) {
@@ -198,8 +195,6 @@ struct EditAdvView: View {
                 
             }
             
-
-            
 //                Section {
 //                    HStack {
 //                        Spacer()
@@ -222,14 +217,14 @@ struct EditAdvView: View {
 //                                    self.description = ""
 //                                    self.createdAt = ""
 //                                    presentationMode.wrappedValue.dismiss()
-//                                    
+//
 //                                }),
 //                                secondaryButton: .cancel(Text("Отмена"))
 //                            )
 //                        }
 //                        Spacer()
 //                }
-//                
+//
 //            }
         }
 //        .alert(isPresented: $businessWarning) {
@@ -239,7 +234,7 @@ struct EditAdvView: View {
 //            )
 //        }
         .onAppear {
-
+            
 //            businessWarning = true
 //            if Pref.userDefault.bool(forKey: "adv") {
 //                businessWarning = false
@@ -278,6 +273,7 @@ struct EditAdvView: View {
         }
     }
 }
+
 
 
 

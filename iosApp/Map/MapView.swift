@@ -215,6 +215,11 @@ struct MapView: View {
                                     globalCity = "Чхонан"
                                     self.list = Util().filter(city: globalCity, category: self.category, unsortedList: globalServices)
                                 }
+                                Button("Чхонджу") {
+                                    mapRegion = MKCoordinateRegion(center: CLLocationCoordinate2D(latitude: 36.63926314157214, longitude: 127.47918258581026), span: MKCoordinateSpan(latitudeDelta: 0.2, longitudeDelta: 0.2))
+                                    globalCity = "Чхонджу"
+                                    self.list = Util().filter(city: globalCity, category: self.category, unsortedList: globalServices)
+                                }
                                 Button("Другой город") {
                                     mapRegion = MKCoordinateRegion(center: CLLocationCoordinate2D(latitude: 36.62257816899407, longitude: 127.91520089316795), span: MKCoordinateSpan(latitudeDelta: 3.5, longitudeDelta: 3.5))
                                     globalCity = "Другой город"

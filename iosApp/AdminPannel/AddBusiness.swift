@@ -115,6 +115,7 @@ struct AddBusinessView: View {
                         Text("Сувон").tag("Сувон")
                         Text("Асан").tag("Асан")
                         Text("Чхонан").tag("Чхонан")
+                        Text("Чхонджу").tag("Чхонджу")
                     }
                     .foregroundColor(Color("textColor"))
                 }.foregroundColor(.gray)

@@ -203,7 +203,7 @@ class DB: ObservableObject {
     }
     
     func getMyAdv(uid: String, completion: @escaping (Adv) -> ()) {
-        let defaultAdv = Adv(uid: "", name: "", category: "", city: "", price: "", phone: "", description: "", createdAt: "", images: "0")
+//        let defaultAdv = Adv(uid: "", name: "", category: "", city: "", price: "", phone: "", description: "", createdAt: "", images: "0")
         ref.reference(withPath: "adv").child(uid).getData(completion:  { error, snapshot in
             guard error == nil else {
                 print(error!.localizedDescription)
@@ -262,13 +262,30 @@ class DB: ObservableObject {
         }
     }
     
-    func updateAdv(uid: String, name: String, category: String, city: String, price: String, phone: String, descrition: String, createdAt: String, images: String, completion: @escaping () -> Void) {
+    func updateAdv(uid: String, name: String, category: String, city: String, price: String, phone: String, descrition: String, images: String, updatedAt: String, isActive: String, subcategory: String, completion: @escaping () -> Void) {
 
-        ref.reference(withPath: "adv").child(uid).updateChildValues(["uid" : uid, "name" : name, "city" : city, "category" : category, "price" : price, "phone" : phone, "description" : descrition, "createdAt": createdAt, "images": images])
+        ref.reference(withPath: "adv").child(uid).updateChildValues(["uid" : uid, "name" : name, "city" : city, "category" : category, "price" : price, "phone" : phone, "description" : descrition, "images": images, "updatedAt": updatedAt, "isActive" : isActive, "subcategory" : subcategory])
         DispatchQueue.main.async {
             completion()
         }
     }
+    
+    func changeAdvStatus(uid: String, isActive: String, completion: @escaping () -> Void) {
+
+        ref.reference(withPath: "adv").child(uid).updateChildValues(["isActive" : isActive])
+        DispatchQueue.main.async {
+            completion()
+        }
+    }
+    
+    func createAdv(uid: String, name: String, category: String, city: String, price: String, phone: String, descrition: String, createdAt: String, images: String, updatedAt: String, isActive: String, subcategory: String, completion: @escaping () -> Void) {
+
+        ref.reference(withPath: "adv").child(uid).updateChildValues(["uid" : uid, "name" : name, "city" : city, "category" : category, "price" : price, "phone" : phone, "description" : descrition, "createdAt": createdAt, "images": images, "updatedAt": updatedAt, "isActive" : isActive, "subcategory" : subcategory])
+        DispatchQueue.main.async {
+            completion()
+        }
+    }
+    
     
     func resizeImage(image: UIImage, targetSize: CGSize) -> UIImage? {
         let size = image.size

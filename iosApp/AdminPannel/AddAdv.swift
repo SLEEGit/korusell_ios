@@ -15,9 +15,11 @@ struct AddAdvView: View {
     @State var price: String = ""
     @State var phone: String = ""
     @State var description: String = ""
-    @State var createdAt: String = ""
     @State var category: String = ""
-    
+    @State var updatedAt: String = ""
+    @State var isActive: String = ""
+    @State var subcategory: String = ""
+    @State var createdAt: String = ""
     
     @State var directory: String = "advImages"
     @State private var image = UIImage(named: "blank")!
@@ -113,6 +115,7 @@ struct AddAdvView: View {
                         Text("Сувон").tag("Сувон")
                         Text("Асан").tag("Асан")
                         Text("Чхонан").tag("Чхонан")
+                        Text("Чхонджу").tag("Чхонджу")
                     }
                     .foregroundColor(Color("textColor"))
                 }.foregroundColor(.gray)
@@ -164,7 +167,7 @@ struct AddAdvView: View {
                     Spacer()
                     Button("Обновить данные") {
                         self.images = String(photos.count)
-                        DB().updateAdv(uid: uid, name: name, category: category, city: city, price: price, phone: phone, descrition: description, createdAt: Util().dateByTimeZone(), images: images) {
+                        DB().createAdv(uid: uid, name: name, category: category, city: city, price: price, phone: phone, descrition: description, createdAt: Util().dateByTimeZone(), images: images, updatedAt: Util().dateByTimeZone(), isActive: "1", subcategory: "subcategory") {
                             var n = 0
                             for photo1 in photos {
                                 DB().postImage(image: photo1, directory: directory, uid: uid + "ADV" + String(n), quality: 0.5)
@@ -205,7 +208,8 @@ struct AddAdvView: View {
                             self.price == "" &&
                             self.phone == "" &&
                             self.description == "" &&
-                            self.createdAt == ""
+                            self.updatedAt == "" &&
+                            self.subcategory == ""
                         ).alert(isPresented: $showingAlertDelete) {
                             Alert(
                                 title: Text("Вы уверены что хотите удалить Ваше объявление?"),

@@ -56,6 +56,8 @@
 		25ED2B612771A08900575FEB /* Info.swift in Sources */ = {isa = PBXBuildFile; fileRef = 25ED2B602771A08900575FEB /* Info.swift */; };
 		25ED2B632771CE1600575FEB /* ImageCache.swift in Sources */ = {isa = PBXBuildFile; fileRef = 25ED2B622771CE1600575FEB /* ImageCache.swift */; };
 		25F9B33A2797FE5B0018662D /* FullScreenImages.swift in Sources */ = {isa = PBXBuildFile; fileRef = 25F9B3392797FE5B0018662D /* FullScreenImages.swift */; };
+		25F9B33C2798F6300018662D /* SegmentedViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 25F9B33B2798F6300018662D /* SegmentedViewController.swift */; };
+		25F9B33E2799011F0018662D /* NewAdvView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 25F9B33D2799011F0018662D /* NewAdvView.swift */; };
 		7E4128007F7572B3F603FEEB /* Pods_iosApp.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = BCC3DBD7F6436A1D9D2C1C77 /* Pods_iosApp.framework */; };
 /* End PBXBuildFile section */
 
@@ -112,6 +114,8 @@
 		25ED2B602771A08900575FEB /* Info.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Info.swift; sourceTree = "<group>"; };
 		25ED2B622771CE1600575FEB /* ImageCache.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageCache.swift; sourceTree = "<group>"; };
 		25F9B3392797FE5B0018662D /* FullScreenImages.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FullScreenImages.swift; sourceTree = "<group>"; };
+		25F9B33B2798F6300018662D /* SegmentedViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SegmentedViewController.swift; sourceTree = "<group>"; };
+		25F9B33D2799011F0018662D /* NewAdvView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NewAdvView.swift; sourceTree = "<group>"; };
 		6BBB108F7637D033E3BED1F4 /* Pods-iosApp.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-iosApp.debug.xcconfig"; path = "Target Support Files/Pods-iosApp/Pods-iosApp.debug.xcconfig"; sourceTree = "<group>"; };
 		BCC3DBD7F6436A1D9D2C1C77 /* Pods_iosApp.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_iosApp.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		D9B96B5C301D3AD6549B202A /* Pods-iosApp.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-iosApp.release.xcconfig"; path = "Target Support Files/Pods-iosApp/Pods-iosApp.release.xcconfig"; sourceTree = "<group>"; };
@@ -241,6 +245,7 @@
 				259936112769DD6900F468B6 /* Pref.swift */,
 				253305CC27560E440061DD28 /* MenuItems.swift */,
 				253305C22754A7050061DD28 /* JSONParser.swift */,
+				25F9B33B2798F6300018662D /* SegmentedViewController.swift */,
 			);
 			path = Utils;
 			sourceTree = "<group>";
@@ -253,6 +258,7 @@
 				25ED2B54276CE75000575FEB /* MyBusinessView.swift */,
 				2592E23227916AFC00508B01 /* MyAdvList2.swift */,
 				257CD81827928C9F0000EF95 /* InnerAdvertisement.swift */,
+				25F9B33D2799011F0018662D /* NewAdvView.swift */,
 				2542E3482774664800883E0D /* EditAdvView.swift */,
 				25ED2B602771A08900575FEB /* Info.swift */,
 				254084FD2781602D00D30CF5 /* AddLinksView.swift */,
@@ -439,6 +445,7 @@
 				2592E23127911A2700508B01 /* Filter.swift in Sources */,
 				2515C9492782B0B0007C376F /* AdvMenuView.swift in Sources */,
 				25ED2B55276CE75000575FEB /* MyBusinessView.swift in Sources */,
+				25F9B33E2799011F0018662D /* NewAdvView.swift in Sources */,
 				25C6DB69278C03160026ACE6 /* AddBusiness.swift in Sources */,
 				257CD81927928C9F0000EF95 /* InnerAdvertisement.swift in Sources */,
 				25ED2B5B2770373800575FEB /* Service.swift in Sources */,
@@ -465,6 +472,7 @@
 				259936082769A0BB00F468B6 /* CheckStatusView.swift in Sources */,
 				25F9B33A2797FE5B0018662D /* FullScreenImages.swift in Sources */,
 				25C6DB61278670780026ACE6 /* AppleAuth.swift in Sources */,
+				25F9B33C2798F6300018662D /* SegmentedViewController.swift in Sources */,
 				2542E347277436B600883E0D /* OwnerView.swift in Sources */,
 				253305CD27560E450061DD28 /* MenuItems.swift in Sources */,
 				25441F8E2768269C00B6E240 /* DetailsView.swift in Sources */,

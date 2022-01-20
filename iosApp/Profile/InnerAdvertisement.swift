@@ -40,6 +40,14 @@ struct ExpandedAdvDetails2: View {
     @State var price: String = ""
     @State var createdAt: String = ""
     @State var category: String = ""
+    @State var updatedAt: String = ""
+    @State var isActive: String = ""
+    @State var subcategory: String = ""
+    
+    @State var alertText: String = ""
+    @State private var showingAlert2 = false
+    @State var hideAdvText: String = "Скрыть объявление"
+    
     @State private var photos: [UIImage] = []
 //    @State var servImage = UIImage(named: "blank")!
     @State var showingAlertDelete: Bool = false
@@ -142,7 +150,7 @@ struct ExpandedAdvDetails2: View {
                         Spacer()
                     }
                 }
-                NavigationLink(destination: EditAdvView(uid: $uid, name: $name, city: $city, price: $price, phone: $phone, description: $description, createdAt: $createdAt, category: $category, photos: $photos)) {
+                NavigationLink(destination: EditAdvView(uid: $uid, name: $name, city: $city, price: $price, phone: $phone, description: $description, category: $category, updatedAt: $updatedAt, isActive: $isActive, subcategory: $subcategory, photos: $photos)) {
                     HStack {
                         Spacer()
                         HStack {
@@ -158,6 +166,43 @@ struct ExpandedAdvDetails2: View {
                         Spacer()
                     }
                     
+                }
+                HStack {
+                    Spacer()
+                            Button(action: {
+                                if self.isActive == "0.3" {
+                                    self.hideAdvText = "Восстановить объявление"
+                                    self.isActive = "1"
+                                    self.alertText = "Объявление восстановлено"
+                                } else {
+                                    self.hideAdvText = "Скрыть объявление"
+                                    self.isActive = "0.3"
+                                    self.alertText = "Объявление скрыто"
+                                }
+                                DB().changeAdvStatus(uid: uid, isActive: self.isActive) {
+                                    self.showingAlert2 = true
+                                }
+                            }) {
+                                HStack {
+//                                    Image(systemName: "trash")
+                                    Text(self.hideAdvText)
+                                        .bold()
+                                   
+                                }
+                            }.alert(isPresented: $showingAlert2) {
+                                Alert(
+                                    title: Text(alertText),
+                                    dismissButton: .destructive((Text("Ок")), action: {
+                                        presentationMode.wrappedValue.dismiss()
+                                    })
+                                )
+                        }
+                        .foregroundColor(Color.accentColor)
+                        .padding()
+                        .background(Color("graybg"))
+                        .cornerRadius(15)
+                        .padding(.vertical, 10)
+                    Spacer()
                 }
                 
                 HStack {
@@ -177,7 +222,10 @@ struct ExpandedAdvDetails2: View {
                                 primaryButton: .destructive(Text("Удалить"), action: {
                                     DB().deleteAdv(uid: adv.uid) {
                                         DB().getAdvs(category: "all") { (list) in
-                                            globalAdv = list.sorted { $0.createdAt > $1.createdAt }
+                                            
+                                            globalAdv = list
+                                                .filter { $0.isActive == "1" }
+                                                .sorted { $0.createdAt > $1.createdAt }
                                             presentationMode.wrappedValue.dismiss()
                                         }
                                     }
@@ -192,6 +240,7 @@ struct ExpandedAdvDetails2: View {
                         .padding(.vertical, 10)
                     Spacer()
                 }
+                
             }
 //            .navigationBarItems(trailing:
 //                    NavigationLink(destination: EditAdvView(uid: $uid, name: $name, city: $city, price: $price, phone: $phone, description: $description, createdAt: $createdAt, category: $category, photos: $photos)) {
@@ -200,6 +249,8 @@ struct ExpandedAdvDetails2: View {
             .navigationBarTitleDisplayMode(.inline)
             .onAppear {
                 self.uid = adv.uid
+                
+
                 
                 DB().getMyAdv(uid: self.uid) { adv in
                     self.name = adv.name
@@ -210,6 +261,19 @@ struct ExpandedAdvDetails2: View {
                     self.createdAt = adv.createdAt
                     self.category = adv.category
                     self.count = adv.images
+                    self.isActive = adv.isActive
+                    self.subcategory = adv.subcategory
+                    self.updatedAt = self.updatedAt
+                    
+                    if self.isActive == "0.3" {
+                        self.hideAdvText = "Восстановить объявление"
+                        self.isActive = "0.3"
+                        self.alertText = "Объявление скрыто"
+                    } else {
+                        self.hideAdvText = "Скрыть объявление"
+                        self.isActive = "1"
+                        self.alertText = "Объявление восстановлено"
+                    }
                 }
                 DB().getMultiImages(uid: uid + "ADV", directory: "advImages") { images in
                     self.photos = images

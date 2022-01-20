@@ -25,6 +25,10 @@ struct MyAdvList2: View {
     @State var price: String = ""
     @State var createdAt: String = ""
     @State var category: String = ""
+    @State var updatedAt: String = ""
+    @State var isActive: String = ""
+    @State var subcategory: String = ""
+    
     @State private var photos: [UIImage] = []
     
     @Binding var count: Int
@@ -50,6 +54,7 @@ struct MyAdvList2: View {
                 ForEach(self.list, id: \.id) { adv in
                     NavigationLink(destination: InnerAdvertisement(adv: adv)) {
                         MyAdvView2(adv: adv)
+                            .opacity(Double(adv.isActive)!)
                             .contextMenu {
                                 Button(action: {
                                     showingAlertDelete = true
@@ -59,7 +64,9 @@ struct MyAdvList2: View {
                                         Text("Удалить")
                                     }
                                 }
-                            }.alert(isPresented: $showingAlertDelete) {
+                                
+                            }
+                            .alert(isPresented: $showingAlertDelete) {
                                 Alert(
                                     title: Text("Вы уверены что хотите удалить Ваше объявление?"),
                                     primaryButton: .destructive(Text("Удалить"), action: {
@@ -95,7 +102,7 @@ struct MyAdvList2: View {
             }
         }
         .navigationBarItems(trailing:
-                NavigationLink(destination: EditAdvView(uid: $newUid, name: $name, city: $city, price: $price, phone: $phone, description: $description, createdAt: $createdAt, category: $category, photos: $photos)) {
+                                NavigationLink(destination: NewAdvView(uid: $newUid, name: $name, city: $city, price: $price, phone: $phone, description: $description, category: $category, updatedAt: $updatedAt, isActive: $isActive, subcategory: $subcategory, photos: $photos)) {
                     Text("Добавить")
                 }
             
