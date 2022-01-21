@@ -18,7 +18,12 @@ struct AdminPanelView: View {
                 Text("Add advertisement")
                     .font(.title)
             }
-            
+            NavigationLink(destination: ChattingAdmin()) {
+                HStack {
+                    Text("Chatting")
+                        .font(.title)
+                }
+            }
         }
     }
 }

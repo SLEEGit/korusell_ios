@@ -10,7 +10,6 @@ import FirebaseAuth
 import FirebaseStorage
 import Foundation
 import UIKit
-import FirebaseFirestore
 
 var globalImages: [UIImage] = []
 
@@ -167,28 +166,25 @@ class DB: ObservableObject {
     }
     
     func getUser(uid: String, completion: @escaping (User) -> ()) {
-        ref.reference(withPath: "users").child(uid).getData(completion:  { error, snapshot in
-            guard error == nil else {
-                print(error!.localizedDescription)
-                return
-            }
+            
+//        ref.reference(withPath: "users").child(uid).getData(completion:  { error, snapshot in
+//            guard error == nil else {
+//                print(error!.localizedDescription)
+//                return
+//            }
+        ref.reference(withPath: "users").child(uid).observeSingleEvent(of: .value, with: { snapshot in
             if let values = snapshot.value as? [String:Any] {
                 let user = User(dictionary: values)
                 completion(user)
             } else {
                 return
             }
-
-        });
+        })
     }
     
     func getMyBusiness(uid: String, completion: @escaping (Service) -> ()) {
         let defaultService = Service(uid: "", name: "", category: "", city: "", address: "", phone: "", description: "", latitude: "", longitude: "", social: ["", "", "", "", ""], images: "0")
-        ref.reference(withPath: "services").child(uid).getData(completion:  { error, snapshot in
-            guard error == nil else {
-                print(error!.localizedDescription)
-                return;
-            }
+        ref.reference(withPath: "services").child(uid).observeSingleEvent(of: .value, with: { snapshot in
             if snapshot.exists() {
                 let values = snapshot.value as! [String:Any]
                 let service = Service(dictionary: values)
@@ -197,19 +193,14 @@ class DB: ObservableObject {
                 }
             } else {
                 return
-//                completion(defaultService)
-//                self.updateBusiness(uid: uid, name: "", category: "", city: "", address: "", phone: "", descrition: "", latitude: "", longitude: "", social: ["", "", "", "", ""], images: "0") { }
             }
         })
     }
     
     func getMyAdv(uid: String, completion: @escaping (Adv) -> ()) {
 //        let defaultAdv = Adv(uid: "", name: "", category: "", city: "", price: "", phone: "", description: "", createdAt: "", images: "0")
-        ref.reference(withPath: "adv").child(uid).getData(completion:  { error, snapshot in
-            guard error == nil else {
-                print(error!.localizedDescription)
-                return;
-            }
+        ref.reference(withPath: "adv").child(uid).observeSingleEvent(of: .value, with: { snapshot in
+
             if snapshot.exists() {
                 let values = snapshot.value as! [String:Any]
                 let adv = Adv(dictionary: values)

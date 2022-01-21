@@ -135,18 +135,11 @@ struct ProfileView: View {
                     }
                 }
                 Section {
-                    Button(action: {
-                        isShowInfo = true
-                    }) {
+                    NavigationLink(destination: Chatting()) {
                         HStack {
-                            Spacer()
-                            Image(systemName: "message.fill")
+                            Text("✉️")
                             Text("Написать разработчикам")
-                            Spacer()
                         }
-                        
-                    }.sheet(isPresented: $isShowInfo) {
-                        Info()
                     }
                 }
                 Section {

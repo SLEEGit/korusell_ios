@@ -17,7 +17,6 @@
 #import <Foundation/Foundation.h>
 
 @class FIRStoragePath;
-@class FIRStorageReference;
 
 NS_ASSUME_NONNULL_BEGIN
 
@@ -54,20 +53,20 @@ NS_ASSUME_NONNULL_BEGIN
 
 /**
  * Returns a base NSURLRequest used by all tasks.
- * @param reference The FIRStorageReference to create a request for.
+ * @param path The FIRStoragePath to create a request for.
  * @return Returns a properly formatted NSURLRequest of the form:
  * scheme://host/version/b/<bucket>/o[/path/to/object]
  */
-+ (NSURLRequest *)defaultRequestForReference:(FIRStorageReference *)reference;
++ (NSURLRequest *)defaultRequestForPath:(FIRStoragePath *)path;
 
 /**
  * Returns a base NSURLRequest with custom query parameters.
- * @param reference The FIRStorageReference to create a request for.
+ * @param path The FIRStoragePath to create a request for.
  * @param queryParams A key/value dictionary with query parameters.
  * @return Returns a formatted NSURLRequest
  */
-+ (NSURLRequest *)defaultRequestForReference:(FIRStorageReference *)reference
-                                 queryParams:(NSDictionary<NSString *, NSString *> *)queryParams;
++ (NSURLRequest *)defaultRequestForPath:(FIRStoragePath *)path
+                            queryParams:(NSDictionary<NSString *, NSString *> *)queryParams;
 
 /**
  * Creates the appropriate GCS percent escaped path for a given FIRStoragePath.

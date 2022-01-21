@@ -267,16 +267,11 @@ static NSString *trackedQueryKeysKey(NSUInteger trackedQueryId, NSString *key) {
 }
 
 + (NSString *)firebaseDir {
-#if TARGET_OS_IOS || TARGET_OS_WATCH
+#if TARGET_OS_IOS || TARGET_OS_TV
     NSArray *dirPaths = NSSearchPathForDirectoriesInDomains(
         NSDocumentDirectory, NSUserDomainMask, YES);
     NSString *documentsDir = [dirPaths objectAtIndex:0];
     return [documentsDir stringByAppendingPathComponent:@"firebase"];
-#elif TARGET_OS_TV
-    NSArray *dirPaths = NSSearchPathForDirectoriesInDomains(
-        NSCachesDirectory, NSUserDomainMask, YES);
-    NSString *cachesDir = [dirPaths objectAtIndex:0];
-    return [cachesDir stringByAppendingPathComponent:@"firebase"];
 #elif TARGET_OS_OSX
     return [NSHomeDirectory() stringByAppendingPathComponent:@".firebase"];
 #endif

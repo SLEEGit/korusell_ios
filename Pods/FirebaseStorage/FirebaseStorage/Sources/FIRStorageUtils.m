@@ -25,8 +25,6 @@
 #import "FirebaseStorage/Sources/FIRStorageConstants_Private.h"
 #import "FirebaseStorage/Sources/FIRStorageErrors.h"
 #import "FirebaseStorage/Sources/FIRStoragePath.h"
-#import "FirebaseStorage/Sources/FIRStorageReference_Private.h"
-#import "FirebaseStorage/Sources/FIRStorage_Private.h"
 
 #if SWIFT_PACKAGE
 @import GTMSessionFetcherCore;
@@ -80,25 +78,23 @@ NSString *const kGCSObjectAllowedCharacterSet =
   return [queryItems componentsJoinedByString:@"&"];
 }
 
-+ (NSURLRequest *)defaultRequestForReference:(FIRStorageReference *)reference {
++ (NSURLRequest *)defaultRequestForPath:(FIRStoragePath *)path {
   NSMutableURLRequest *request = [[NSMutableURLRequest alloc] init];
   NSURLComponents *components = [[NSURLComponents alloc] init];
-  [components setScheme:reference.storage.scheme];
-  [components setHost:reference.storage.host];
-  [components setPort:reference.storage.port];
-  NSString *encodedPath = [self encodedURLForPath:reference.path];
+  [components setScheme:kFIRStorageScheme];
+  [components setHost:kFIRStorageHost];
+  NSString *encodedPath = [self encodedURLForPath:path];
   [components setPercentEncodedPath:encodedPath];
   [request setURL:components.URL];
   return request;
 }
 
-+ (NSURLRequest *)defaultRequestForReference:(FIRStorageReference *)reference
-                                 queryParams:(NSDictionary<NSString *, NSString *> *)queryParams {
++ (NSURLRequest *)defaultRequestForPath:(FIRStoragePath *)path
+                            queryParams:(NSDictionary<NSString *, NSString *> *)queryParams {
   NSMutableURLRequest *request = [[NSMutableURLRequest alloc] init];
   NSURLComponents *components = [[NSURLComponents alloc] init];
-  [components setScheme:reference.storage.scheme];
-  [components setHost:reference.storage.host];
-  [components setPort:reference.storage.port];
+  [components setScheme:kFIRStorageScheme];
+  [components setHost:kFIRStorageHost];
 
   NSMutableArray<NSURLQueryItem *> *queryItems = [NSMutableArray new];
   for (NSString *key in queryParams) {
@@ -112,7 +108,7 @@ NSString *const kGCSObjectAllowedCharacterSet =
                                          stringByReplacingOccurrencesOfString:@"+"
                                                                    withString:@"%2B"]];
 
-  NSString *encodedPath = [self encodedURLForPath:reference.path];
+  NSString *encodedPath = [self encodedURLForPath:path];
   [components setPercentEncodedPath:encodedPath];
   [request setURL:components.URL];
   return request;

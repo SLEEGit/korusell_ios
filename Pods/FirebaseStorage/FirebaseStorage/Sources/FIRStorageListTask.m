@@ -78,9 +78,10 @@
       queryParams[@"pageToken"] = strongSelf->_previousPageToken;
     }
 
-    FIRStorageReference *root = self.reference.root;
+    FIRStoragePath *basePath = [[FIRStoragePath alloc] initWithBucket:self.reference.bucket
+                                                               object:nil];
     NSMutableURLRequest *request =
-        [[FIRStorageUtils defaultRequestForReference:root queryParams:queryParams] mutableCopy];
+        [[FIRStorageUtils defaultRequestForPath:basePath queryParams:queryParams] mutableCopy];
 
     request.HTTPMethod = @"GET";
     request.timeoutInterval = strongSelf.reference.storage.maxOperationRetryTime;

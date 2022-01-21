@@ -17,6 +17,8 @@
 		253305CD27560E450061DD28 /* MenuItems.swift in Sources */ = {isa = PBXBuildFile; fileRef = 253305CC27560E440061DD28 /* MenuItems.swift */; };
 		253305CF27571F690061DD28 /* ServiceView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 253305CE27571F690061DD28 /* ServiceView.swift */; };
 		254084FE2781602D00D30CF5 /* AddLinksView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 254084FD2781602D00D30CF5 /* AddLinksView.swift */; };
+		2542CAE1279A4B8300982C48 /* MessageBubble.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2542CAE0279A4B8300982C48 /* MessageBubble.swift */; };
+		2542CAE3279A757A00982C48 /* ChattingAdmin.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2542CAE2279A757A00982C48 /* ChattingAdmin.swift */; };
 		2542E347277436B600883E0D /* OwnerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2542E346277436B500883E0D /* OwnerView.swift */; };
 		2542E3492774664800883E0D /* EditAdvView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2542E3482774664800883E0D /* EditAdvView.swift */; };
 		25441F8C2767260D00B6E240 /* MapView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 25441F8B2767260D00B6E240 /* MapView.swift */; };
@@ -53,12 +55,15 @@
 		25ED2B57276CE9A600575FEB /* EditNameView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 25ED2B56276CE9A600575FEB /* EditNameView.swift */; };
 		25ED2B59276F012A00575FEB /* ImagePicker.swift in Sources */ = {isa = PBXBuildFile; fileRef = 25ED2B58276F012A00575FEB /* ImagePicker.swift */; };
 		25ED2B5B2770373800575FEB /* Service.swift in Sources */ = {isa = PBXBuildFile; fileRef = 25ED2B5A2770373800575FEB /* Service.swift */; };
-		25ED2B612771A08900575FEB /* Info.swift in Sources */ = {isa = PBXBuildFile; fileRef = 25ED2B602771A08900575FEB /* Info.swift */; };
+		25ED2B612771A08900575FEB /* Chatting.swift in Sources */ = {isa = PBXBuildFile; fileRef = 25ED2B602771A08900575FEB /* Chatting.swift */; };
 		25ED2B632771CE1600575FEB /* ImageCache.swift in Sources */ = {isa = PBXBuildFile; fileRef = 25ED2B622771CE1600575FEB /* ImageCache.swift */; };
 		25F9B33A2797FE5B0018662D /* FullScreenImages.swift in Sources */ = {isa = PBXBuildFile; fileRef = 25F9B3392797FE5B0018662D /* FullScreenImages.swift */; };
 		25F9B33C2798F6300018662D /* SegmentedViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 25F9B33B2798F6300018662D /* SegmentedViewController.swift */; };
 		25F9B33E2799011F0018662D /* NewAdvView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 25F9B33D2799011F0018662D /* NewAdvView.swift */; };
 		25F9B341279945B20018662D /* WorkView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 25F9B340279945B20018662D /* WorkView.swift */; };
+		25F9B343279A47580018662D /* Firestore.swift in Sources */ = {isa = PBXBuildFile; fileRef = 25F9B342279A47580018662D /* Firestore.swift */; };
+		25F9B345279A49B40018662D /* Message.swift in Sources */ = {isa = PBXBuildFile; fileRef = 25F9B344279A49B40018662D /* Message.swift */; };
+		25F9B347279A4ACC0018662D /* MessageField.swift in Sources */ = {isa = PBXBuildFile; fileRef = 25F9B346279A4ACB0018662D /* MessageField.swift */; };
 		7E4128007F7572B3F603FEEB /* Pods_iosApp.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = BCC3DBD7F6436A1D9D2C1C77 /* Pods_iosApp.framework */; };
 /* End PBXBuildFile section */
 
@@ -73,6 +78,8 @@
 		253305CC27560E440061DD28 /* MenuItems.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MenuItems.swift; sourceTree = "<group>"; };
 		253305CE27571F690061DD28 /* ServiceView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ServiceView.swift; sourceTree = "<group>"; };
 		254084FD2781602D00D30CF5 /* AddLinksView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddLinksView.swift; sourceTree = "<group>"; };
+		2542CAE0279A4B8300982C48 /* MessageBubble.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MessageBubble.swift; sourceTree = "<group>"; };
+		2542CAE2279A757A00982C48 /* ChattingAdmin.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChattingAdmin.swift; sourceTree = "<group>"; };
 		2542E346277436B500883E0D /* OwnerView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OwnerView.swift; sourceTree = "<group>"; };
 		2542E3482774664800883E0D /* EditAdvView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditAdvView.swift; sourceTree = "<group>"; };
 		25441F8B2767260D00B6E240 /* MapView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MapView.swift; sourceTree = "<group>"; };
@@ -112,12 +119,15 @@
 		25ED2B56276CE9A600575FEB /* EditNameView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditNameView.swift; sourceTree = "<group>"; };
 		25ED2B58276F012A00575FEB /* ImagePicker.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImagePicker.swift; sourceTree = "<group>"; };
 		25ED2B5A2770373800575FEB /* Service.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Service.swift; sourceTree = "<group>"; };
-		25ED2B602771A08900575FEB /* Info.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Info.swift; sourceTree = "<group>"; };
+		25ED2B602771A08900575FEB /* Chatting.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Chatting.swift; sourceTree = "<group>"; };
 		25ED2B622771CE1600575FEB /* ImageCache.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageCache.swift; sourceTree = "<group>"; };
 		25F9B3392797FE5B0018662D /* FullScreenImages.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FullScreenImages.swift; sourceTree = "<group>"; };
 		25F9B33B2798F6300018662D /* SegmentedViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SegmentedViewController.swift; sourceTree = "<group>"; };
 		25F9B33D2799011F0018662D /* NewAdvView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NewAdvView.swift; sourceTree = "<group>"; };
 		25F9B340279945B20018662D /* WorkView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WorkView.swift; sourceTree = "<group>"; };
+		25F9B342279A47580018662D /* Firestore.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Firestore.swift; sourceTree = "<group>"; };
+		25F9B344279A49B40018662D /* Message.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Message.swift; sourceTree = "<group>"; };
+		25F9B346279A4ACB0018662D /* MessageField.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MessageField.swift; sourceTree = "<group>"; };
 		6BBB108F7637D033E3BED1F4 /* Pods-iosApp.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-iosApp.debug.xcconfig"; path = "Target Support Files/Pods-iosApp/Pods-iosApp.debug.xcconfig"; sourceTree = "<group>"; };
 		BCC3DBD7F6436A1D9D2C1C77 /* Pods_iosApp.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_iosApp.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		D9B96B5C301D3AD6549B202A /* Pods-iosApp.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-iosApp.release.xcconfig"; path = "Target Support Files/Pods-iosApp/Pods-iosApp.release.xcconfig"; sourceTree = "<group>"; };
@@ -158,6 +168,7 @@
 				256D59082761E555002EDC6A /* DB.swift */,
 				2599360F2769BF4300F468B6 /* Authentication.swift */,
 				25C6DB60278670780026ACE6 /* AppleAuth.swift */,
+				25F9B342279A47580018662D /* Firestore.swift */,
 			);
 			path = Firebase;
 			sourceTree = "<group>";
@@ -263,10 +274,10 @@
 				257CD81827928C9F0000EF95 /* InnerAdvertisement.swift */,
 				25F9B33D2799011F0018662D /* NewAdvView.swift */,
 				2542E3482774664800883E0D /* EditAdvView.swift */,
-				25ED2B602771A08900575FEB /* Info.swift */,
 				254084FD2781602D00D30CF5 /* AddLinksView.swift */,
 				25558EE427774B9300E1481B /* OtherCity.swift */,
 				2515C9542783F73A007C376F /* MyAdvListView.swift */,
+				25F9B34A279A4B150018662D /* Chatting */,
 			);
 			path = Profile;
 			sourceTree = "<group>";
@@ -288,6 +299,7 @@
 				25C6DB6A278C07BB0026ACE6 /* AdminPanelView.swift */,
 				25C6DB68278C03160026ACE6 /* AddBusiness.swift */,
 				25C6DB6C278C090B0026ACE6 /* AddAdv.swift */,
+				2542CAE2279A757A00982C48 /* ChattingAdmin.swift */,
 			);
 			path = AdminPannel;
 			sourceTree = "<group>";
@@ -308,6 +320,17 @@
 				25F9B340279945B20018662D /* WorkView.swift */,
 			);
 			path = WorkView;
+			sourceTree = "<group>";
+		};
+		25F9B34A279A4B150018662D /* Chatting */ = {
+			isa = PBXGroup;
+			children = (
+				25ED2B602771A08900575FEB /* Chatting.swift */,
+				25F9B344279A49B40018662D /* Message.swift */,
+				25F9B346279A4ACB0018662D /* MessageField.swift */,
+				2542CAE0279A4B8300982C48 /* MessageBubble.swift */,
+			);
+			name = Chatting;
 			sourceTree = "<group>";
 		};
 		45A62DF6782E9C65FD75BB4F /* Frameworks */ = {
@@ -449,6 +472,7 @@
 				25ED2B632771CE1600575FEB /* ImageCache.swift in Sources */,
 				25441F8C2767260D00B6E240 /* MapView.swift in Sources */,
 				259936142769E33900F468B6 /* RegistrationView.swift in Sources */,
+				25F9B345279A49B40018662D /* Message.swift in Sources */,
 				254084FE2781602D00D30CF5 /* AddLinksView.swift in Sources */,
 				25558EE527774B9300E1481B /* OtherCity.swift in Sources */,
 				2542E3492774664800883E0D /* EditAdvView.swift in Sources */,
@@ -459,12 +483,14 @@
 				25F9B33E2799011F0018662D /* NewAdvView.swift in Sources */,
 				25C6DB69278C03160026ACE6 /* AddBusiness.swift in Sources */,
 				257CD81927928C9F0000EF95 /* InnerAdvertisement.swift in Sources */,
+				25F9B347279A4ACC0018662D /* MessageField.swift in Sources */,
 				25ED2B5B2770373800575FEB /* Service.swift in Sources */,
 				25C6DB6B278C07BB0026ACE6 /* AdminPanelView.swift in Sources */,
 				256D58FF2761DA30002EDC6A /* ServiceMenuView.swift in Sources */,
 				257CD81D27965DAD0000EF95 /* ATTrackingHelper.swift in Sources */,
 				25E0BD23278E84080021A326 /* HomeView.swift in Sources */,
 				25973E02275B27CF00DC016B /* ServiceSubView.swift in Sources */,
+				25F9B343279A47580018662D /* Firestore.swift in Sources */,
 				253305C32754A7050061DD28 /* JSONParser.swift in Sources */,
 				254B21C9275C63340099E287 /* ProfileView.swift in Sources */,
 				2593A6DB27539FAC00081698 /* ContentView.swift in Sources */,
@@ -473,9 +499,10 @@
 				25F9B341279945B20018662D /* WorkView.swift in Sources */,
 				2515C9552783F73A007C376F /* MyAdvListView.swift in Sources */,
 				25441F90276844C700B6E240 /* LocationManager.swift in Sources */,
+				2542CAE1279A4B8300982C48 /* MessageBubble.swift in Sources */,
 				25973E05275B492400DC016B /* Util.swift in Sources */,
 				25ED2B59276F012A00575FEB /* ImagePicker.swift in Sources */,
-				25ED2B612771A08900575FEB /* Info.swift in Sources */,
+				25ED2B612771A08900575FEB /* Chatting.swift in Sources */,
 				2515C9472782A1BE007C376F /* Advertisement.swift in Sources */,
 				257CD81B27946A530000EF95 /* ExpandedServiceDetails2.swift in Sources */,
 				256D59092761E555002EDC6A /* DB.swift in Sources */,
@@ -483,6 +510,7 @@
 				259936122769DD6900F468B6 /* Pref.swift in Sources */,
 				259936082769A0BB00F468B6 /* CheckStatusView.swift in Sources */,
 				25F9B33A2797FE5B0018662D /* FullScreenImages.swift in Sources */,
+				2542CAE3279A757A00982C48 /* ChattingAdmin.swift in Sources */,
 				25C6DB61278670780026ACE6 /* AppleAuth.swift in Sources */,
 				25F9B33C2798F6300018662D /* SegmentedViewController.swift in Sources */,
 				2542E347277436B600883E0D /* OwnerView.swift in Sources */,
@@ -552,7 +580,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 15.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 14.0;
 				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
 				MTL_FAST_MATH = YES;
 				ONLY_ACTIVE_ARCH = YES;
@@ -607,7 +635,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 15.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 14.0;
 				MTL_ENABLE_DEBUG_INFO = NO;
 				MTL_FAST_MATH = YES;
 				SDKROOT = iphoneos;
@@ -629,6 +657,7 @@
 				DEVELOPMENT_ASSET_PATHS = "\"iosApp/Preview Content\"";
 				DEVELOPMENT_TEAM = 4GZ4AH8Z6M;
 				ENABLE_PREVIEWS = YES;
+				EXCLUDED_ARCHS = "";
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = iosApp/Info.plist;
 				INFOPLIST_KEY_CFBundleDisplayName = korusell;
@@ -666,6 +695,7 @@
 				DEVELOPMENT_ASSET_PATHS = "\"iosApp/Preview Content\"";
 				DEVELOPMENT_TEAM = 4GZ4AH8Z6M;
 				ENABLE_PREVIEWS = YES;
+				EXCLUDED_ARCHS = "";
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = iosApp/Info.plist;
 				INFOPLIST_KEY_CFBundleDisplayName = korusell;
