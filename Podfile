@@ -13,5 +13,6 @@ target 'iosApp' do
   pod 'FacebookLogin'
   pod 'FacebookShare'
   pod 'Siren'
+  pod 'Firebase/Firestore'
 
 end

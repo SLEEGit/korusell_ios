@@ -10,6 +10,7 @@ import FirebaseAuth
 import FirebaseStorage
 import Foundation
 import UIKit
+import FirebaseFirestore
 
 var globalImages: [UIImage] = []
 
