@@ -86,3 +86,56 @@ class MessagesManager: ObservableObject {
         }
     }
 }
+
+
+class ServiceManager: ObservableObject {
+    @Published private(set) var services: [Service] = []
+    @Published var openServices: [Service] = []
+    
+    @Published var city: String = ""
+    @Published var category: String = "" 
+    let db = Firestore.firestore()
+
+    init() {
+        getServices()
+    }
+
+    func getServices() {
+        db.collection("services").addSnapshotListener { querySnapshot, error in
+            
+            guard let documents = querySnapshot?.documents else {
+                print("Error fetching documents: \(String(describing: error))")
+                return
+            }
+            
+            self.services = documents.compactMap { document -> Service? in
+                do {
+                    return try document.data(as: Service.self)
+                } catch {
+                    print("Error decoding document into Service: \(error)")
+                    return nil
+                }
+            }
+            
+            self.openServices = self.services.filter { $0.city == self.city && $0.category == self.category }
+            
+//            self.services.sort { $0.timestamp < $1.timestamp }
+            
+//            if let id = self.messages.last?.id {
+//                self.lastMessageId = id
+//            }
+        }
+    }
+    
+    
+    func postService(text: String) {
+        let uid = Auth.auth().currentUser!.uid
+        do {
+            let newService = Service(id: uid, uid: uid, name: "", category: "", city: "", address: "", phone: "", description: "", latitude: "", longitude: "", social: ["","","","",""], images: "")
+            try db.collection("services").document(uid).setData(from: newService)
+        } catch {
+            print("Error adding message to Firestore: \(error)")
+        }
+    }
+    
+}

@@ -9,6 +9,7 @@ import SwiftUI
 
 struct MyBusinessView: View {
     //    @State var service: Service!
+    @Binding var id: String
     @Binding var uid: String
     @Binding var name: String
     @Binding var city: String

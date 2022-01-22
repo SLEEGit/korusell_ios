@@ -5,26 +5,32 @@
 //  Created by Sergey Lee on 2021/12/04.
 //
 
-import SwiftUI
+import SwiftUI 
 
 struct ServiceSubView: View {
+//    @StateObject var serviceManager = ServiceManager()
+    
     @StateObject private var session = DB()
-    @State var list: [Service] = []
+    @State var list: [Service] = serviceManager.services
     @State var afterCatlList: [Service] = []
     @State private var image = UIImage(named: "blank")!
     var category: String
     var barTitle: String = ""
-    
+    @State var city: String = "Все города"
     
     var body: some View {
-        List(list) { item in
-            NavigationLink(destination: ServiceView(service: item)) {
-                ExpandedService(service: item, image: image)
+        List {
+            // Добавить логику для других городов и переходить на объявления с @StateObject чтобы убрать все фетчи после изменений
+            ForEach(self.list.filter { self.city == "Все города" ? $0.category == self.category : $0.category == self.category && $0.city == self.city }, id: \.uid) { service in
+            NavigationLink(destination: ServiceView(service: service)) {
+                ExpandedService(service: service, image: image)
             }
+        }
         }
         .onAppear {
             globalCategory = category
-            self.list = Util().filter(city: globalCity, category: category, unsortedList: globalServices)
+            self.city = globalCity
+//            self.list = serviceManager.services.filter { $0.category == self.category }
         }
         .navigationTitle(barTitle)
         .navigationBarTitleDisplayMode(.inline)
@@ -32,46 +38,52 @@ struct ServiceSubView: View {
             Menu {
                 Button("Все города") {
                     globalCity = "Все города"
-                    self.list = Util().filter(city: globalCity, category: category, unsortedList: globalServices)
+                    self.city = globalCity
+      
                 }
                 Button("Ансан") {
                     globalCity = "Ансан"
-                    self.list = Util().filter(city: globalCity, category: category, unsortedList: globalServices)
+                    self.city = globalCity
+      
                 }
                 Button("Хвасонг") {
                     globalCity = "Хвасонг"
-                    self.list = Util().filter(city: globalCity, category: category, unsortedList: globalServices)
+                    self.city = globalCity
+ 
                 }
                 Button("Инчхон") {
                     globalCity = "Инчхон"
-                    self.list = Util().filter(city: globalCity, category: category, unsortedList: globalServices)
+                    self.city = globalCity
+            
                 }
                 Button("Сеул") {
                     globalCity = "Сеул"
-                    self.list = Util().filter(city: globalCity, category: category, unsortedList: globalServices)
+                    self.city = globalCity
+           
                 }
                 Button("Сувон") {
                     globalCity = "Сувон"
-                    self.list = Util().filter(city: globalCity, category: category, unsortedList: globalServices)
+                    self.city = globalCity
                 }
                 Button("Асан") {
                     globalCity = "Асан"
-                    self.list = Util().filter(city: globalCity, category: category, unsortedList: globalServices)
+                    self.city = globalCity
                 }
                 Button("Чхонан") {
                     globalCity = "Чхонан"
-                    self.list = Util().filter(city: globalCity, category: category, unsortedList: globalServices)
+                    self.city = globalCity
                 }
             Button("Чхонджу") {
                 globalCity = "Чхонджу"
-                self.list = Util().filter(city: globalCity, category: category, unsortedList: globalServices)
+                self.city = globalCity
             }
             Button("Другой город") {
                     globalCity = "Другой город"
-                    self.list = Util().filter(city: globalCity, category: category, unsortedList: globalServices)
+                self.city = globalCity
+                self.list = self.list.filter { $0.category == self.category && $0.city != self.city }
                 }
             } label: {
-                Text(globalCity)
+                Text(self.city)
                 .font(.system(size: 15))
                 .minimumScaleFactor(0.1)
             }

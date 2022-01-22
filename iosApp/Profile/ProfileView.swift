@@ -105,7 +105,7 @@ struct ProfileView: View {
                     Text(phone)
                 }
                 Section {
-                    NavigationLink(destination: MyBusinessView(uid: $uid, name: $bname, city: $city, address: $address, phone: $bphone, description: $description, latitude: $latitude, longitude: $longitude, category: $category, social: $social)) {
+                    NavigationLink(destination: MyBusinessView(id: $uid, uid: $uid, name: $bname, city: $city, address: $address, phone: $bphone, description: $description, latitude: $latitude, longitude: $longitude, category: $category, social: $social)) {
                         HStack {
                             Text("💼")
                             Text("Мой Бизнес")

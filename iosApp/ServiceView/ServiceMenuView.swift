@@ -16,6 +16,7 @@ var globalCategory: String = "all"
 
 struct ServiceMenuView: View {
     
+    @ObservedObject var trackingHelper = ATTrackingHelper()
     @ObservedObject var fetcher = DataFetcher()
     @State private var city = "Все города"
     @State var selectCategory: Bool = false
@@ -24,8 +25,6 @@ struct ServiceMenuView: View {
     @State var isShowInfo: Bool = false
     @State var email: String = ""
     @Environment(\.colorScheme) var colorScheme
-    
-    
     
     var body: some View {
         
@@ -64,6 +63,7 @@ struct ServiceMenuView: View {
                     email = Auth.auth().currentUser?.email ?? ""
                     city = globalCity
                     session.getServices(category: "all") { (list) in
+                        trackingHelper.requestAuth()
                         globalServices = list
                         //                        globalServices = list.sorted { $0.name < $1.name }
                         self.isLoading = false

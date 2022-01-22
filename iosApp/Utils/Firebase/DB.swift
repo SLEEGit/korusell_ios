@@ -183,7 +183,7 @@ class DB: ObservableObject {
     }
     
     func getMyBusiness(uid: String, completion: @escaping (Service) -> ()) {
-        let defaultService = Service(uid: "", name: "", category: "", city: "", address: "", phone: "", description: "", latitude: "", longitude: "", social: ["", "", "", "", ""], images: "0")
+        let defaultService = Service(id: "", uid: "", name: "", category: "", city: "", address: "", phone: "", description: "", latitude: "", longitude: "", social: ["", "", "", "", ""], images: "0")
         ref.reference(withPath: "services").child(uid).observeSingleEvent(of: .value, with: { snapshot in
             if snapshot.exists() {
                 let values = snapshot.value as! [String:Any]
