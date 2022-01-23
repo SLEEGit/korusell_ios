@@ -9,7 +9,7 @@ import Foundation
 import SwiftUI
 
 struct Adv: Codable, Identifiable {
-    let id = UUID()
+    let id: String
     let uid: String
     let name: String
     let price : String
@@ -25,6 +25,7 @@ struct Adv: Codable, Identifiable {
     //    let image: [String]
     
     init(dictionary: [String: Any]) {
+        self.id = dictionary["id"] as? String ?? ""
         self.uid = dictionary["uid"] as? String ?? ""
         self.name = dictionary["name"] as? String ?? ""
         self.category = dictionary["category"] as? String ?? ""
@@ -39,7 +40,8 @@ struct Adv: Codable, Identifiable {
         self.subcategory = dictionary["subcategory"] as? String ?? ""
     }
     
-    init(uid: String, name: String, category: String, city: String, price: String, phone: String, description: String, createdAt: String, images: String, updatedAt: String, isActive: String, subcategory: String) {
+    init(id: String, uid: String, name: String, category: String, city: String, price: String, phone: String, description: String, createdAt: String, images: String, updatedAt: String, isActive: String, subcategory: String) {
+        self.id = id
         self.uid = uid
         self.name = name
         self.category = category

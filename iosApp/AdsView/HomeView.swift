@@ -67,11 +67,13 @@ struct AdvList: View {
     @State var city: String = "all"
     @State var isLoading: Bool = true
     @State var category: String = "all"
+    @StateObject var advManager = AdvManager()
+//    @State var list: [Adv] = advManager.advs
     
     var body: some View {
         ZStack {
             List {
-                ForEach(self.list, id: \.id) { adv in
+                ForEach(self.advManager.advs.sorted { $0.createdAt > $1.createdAt }, id: \.uid) { adv in
                     NavigationLink(destination: AdvDetailsView(adv: adv)) {
                         PostView(adv: adv)
                     }
@@ -227,7 +229,7 @@ struct AdvList: View {
                         // filter for search
                         //                        .filter { $0.name.lowercased().contains("iphone") }
                         
-                        self.list = Util().filterAdv(city: city, category: category, unsortedList: globalAdv)
+//                        self.list = Util().filterAdv(city: city, category: category, unsortedList: globalAdv)
                         self.isLoading = false
                     }
                 }

@@ -186,18 +186,19 @@ struct NewAdvView: View {
                     Spacer()
                     Button("Создать") {
                         self.images = String(photos.count)
-                        DB().createAdv(uid: uid, name: name, category: category, city: city, price: price, phone: phone, descrition: description, createdAt: Util().dateByTimeZone(), images: images, updatedAt: Util().dateByTimeZone(), isActive: "1", subcategory: subcategory) {
+                        AdvManager().postAdv(adv: Adv(id: uid, uid: uid, name: name, category: category, city: city, price: price, phone: phone, description: description, createdAt: Util().dateByTimeZone(), images: images, updatedAt: Util().dateByTimeZone(), isActive: "1", subcategory: subcategory))
+//                        DB().createAdv(uid: uid, name: name, category: category, city: city, price: price, phone: phone, descrition: description, createdAt: Util().dateByTimeZone(), images: images, updatedAt: Util().dateByTimeZone(), isActive: "1", subcategory: subcategory) {
                             postImages() {
                                 deleteImages() {
-                                    DispatchQueue.main.asyncAfter(deadline: .now() + 0.3) {
-                                        DB().getAdvs(category: "all") { (list) in
-                                            globalAdv = list
-                                                .filter { $0.isActive == "1" }
-                                                .sorted { $0.createdAt > $1.createdAt }
-                                        }
+//                                    DispatchQueue.main.asyncAfter(deadline: .now() + 0.3) {
+//                                        DB().getAdvs(category: "all") { (list) in
+//                                            globalAdv = list
+//                                                .filter { $0.isActive == "1" }
+//                                                .sorted { $0.createdAt > $1.createdAt }
+//                                        }
                                         showingAlert = true
-                                    }
-                                }
+//                                    }
+//                                }
                             }
                         }
                     }

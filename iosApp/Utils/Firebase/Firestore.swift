@@ -139,3 +139,58 @@ class ServiceManager: ObservableObject {
     }
     
 }
+
+
+class AdvManager: ObservableObject {
+    @Published private(set) var advs: [Adv] = []
+    @Published var openAdv: [Adv] = []
+    
+    @Published var city: String = ""
+    @Published var category: String = ""
+    let db = Firestore.firestore()
+
+    init() {
+        getAdvs()
+    }
+
+    func getAdvs() {
+        db.collection("adv").addSnapshotListener { querySnapshot, error in
+            
+            guard let documents = querySnapshot?.documents else {
+                print("Error fetching documents: \(String(describing: error))")
+                return
+            }
+            
+            self.advs = documents.compactMap { document -> Adv? in
+                do {
+                    return try document.data(as: Adv.self)
+                } catch {
+                    print("Error decoding document into Adv: \(error)")
+                    return nil
+                }
+            }
+            
+//            self.openAdv = self.advs.filter { $0.city == self.city && $0.category == self.category }
+            
+//            self.advs.sort { $0.createdAt < $1.createdAt }
+            
+//            if let id = self.messages.last?.id {
+//                self.lastMessageId = id
+//            }
+        }
+    }
+    
+    
+
+    
+    
+    func postAdv(adv: Adv) {
+        let uid = Auth.auth().currentUser!.uid
+        do {
+            try db.collection("adv").document(uid).setData(from: adv)
+        } catch {
+            print("Error adding message to Firestore: \(error)")
+        }
+    }
+    
+}
