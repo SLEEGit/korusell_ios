@@ -10,7 +10,7 @@ import SwiftUI
 
 struct Service: Codable, Identifiable {
     
-    var id: String
+    let id = UUID()
     let uid: String
     let name: String
     let category: String
@@ -24,7 +24,7 @@ struct Service: Codable, Identifiable {
     let images: String
     
     init(dictionary: [String: Any]) {
-        self.id = dictionary["id"] as? String ?? ""
+//        self.id = UUID()
         self.uid = dictionary["uid"] as? String ?? ""
         self.name = dictionary["name"] as? String ?? ""
         self.category = dictionary["category"] as? String ?? ""
@@ -39,7 +39,7 @@ struct Service: Codable, Identifiable {
     }
     
     init(id: String, uid: String, name: String, category: String, city: String, address: String, phone: String, description: String, latitude: String, longitude: String, social: [String], images: String) {
-        self.id = id
+//        self.id = id
         self.uid = uid
         self.name = name
         self.category = category
