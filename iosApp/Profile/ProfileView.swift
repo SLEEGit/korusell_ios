@@ -37,7 +37,7 @@ struct ProfileView: View {
     @State var social: [String] = ["","","","",""]
     
 
-    
+    @StateObject var advManager = AdvManager()
     @State var list: [Adv] = []
     @State var count: Int = 0
     
@@ -208,7 +208,7 @@ struct ProfileView: View {
                             .sorted { $0.createdAt > $1.createdAt }
                 self.count = self.list.count
             }
-            
+            advManager.getMyAdvs()
 //            DB().getMyAdv(uid: user.uid) { adv in
 //                print("getting adv in profile")
 //                print(adv)

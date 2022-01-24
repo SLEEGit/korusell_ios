@@ -10,11 +10,12 @@ import FirebaseAuth
 
 struct MyAdvList2: View {
     @StateObject private var session = DB()
-    @State var list: [Adv] = []
+//    @State var list: [Adv] = []
+    @StateObject var advManager = AdvManager()
     @State var isLoading: Bool = true
     @State var showingAlertDelete: Bool = false
     
-    var myUID: String = ""
+    @State var myUID: String
     @State var newUid: String = ""
     @State var uid: String = ""
     @State var name: String = ""
@@ -37,7 +38,7 @@ struct MyAdvList2: View {
         ZStack {
             List {
                 Section {
-                    if list.count != 0 {
+                    if count != 0 {
                         Text("Нажмите и удерживайте объявление, чтобы удалить")
                     } else {
                         Text("Нажмите 'Добавить', чтобы добавить объявление")
@@ -51,7 +52,7 @@ struct MyAdvList2: View {
                     .background(Color(UIColor.systemGroupedBackground).opacity(0.1))
                     .background(Color(UIColor.systemGroupedBackground))
                 
-                ForEach(self.list, id: \.id) { adv in
+                ForEach(advManager.myAdvs, id: \.uid) { adv in
                     NavigationLink(destination: InnerAdvertisement(adv: adv)) {
                         MyAdvView2(adv: adv)
                             .opacity(Double(adv.isActive)!)
@@ -70,13 +71,14 @@ struct MyAdvList2: View {
                                 Alert(
                                     title: Text("Вы уверены что хотите удалить Ваше объявление?"),
                                     primaryButton: .destructive(Text("Удалить"), action: {
-                                        DB().deleteAdv(uid: adv.uid) {
-                                            DB().getAdvs(category: "all") { (list) in
-                                                globalAdv = list.sorted { $0.createdAt > $1.createdAt }
-                                                self.list = globalAdv.filter { $0.uid.contains(myUID) }
-                                                count = self.list.count
-                                            }
-                                        }
+                                        advManager.deleteAdv(uid: adv.uid) {}
+//                                        DB().deleteAdv(uid: adv.uid) {
+//                                            DB().getAdvs(category: "all") { (list) in
+////                                                globalAdv = list.sorted { $0.createdAt > $1.createdAt }
+////                                                self.list = globalAdv.filter { $0.uid.contains(myUID) }
+////                                                count = self.list.count
+//                                            }
+//                                        }
                                     }),
                                     secondaryButton: .cancel(Text("Отмена"))
                                 )
@@ -86,14 +88,11 @@ struct MyAdvList2: View {
             }
                 .navigationTitle("Мои Объявления")
                 .onAppear {
-                    self.newUid = self.myUID + Util().dateForAdv(date: Util().dateByTimeZone())
-                        session.getAdvs(category: "all") { (list) in
-                            self.list = list.filter { $0.uid.contains(myUID) }
-                                            .sorted { $0.createdAt > $1.createdAt }
-                            count = self.list.count
+                    print("UID::: \(myUID)")
+                    
+                    advManager.getMyAdvs()
+                            count = advManager.myAdvs.count
                             self.isLoading = false
-                        }
-
                 }
             .disabled(isLoading)
             if isLoading {
@@ -102,7 +101,7 @@ struct MyAdvList2: View {
             }
         }
         .navigationBarItems(trailing:
-                                NavigationLink(destination: NewAdvView(uid: $newUid, name: $name, city: $city, price: $price, phone: $phone, description: $description, category: $category, updatedAt: $updatedAt, isActive: $isActive, subcategory: $subcategory, photos: $photos)) {
+                                NavigationLink(destination: NewAdvView(uid: $myUID, name: $name, city: $city, price: $price, phone: $phone, description: $description, category: $category, updatedAt: $updatedAt, isActive: $isActive, subcategory: $subcategory, photos: $photos)) {
                     Text("Добавить")
                 }
             

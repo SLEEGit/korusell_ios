@@ -31,6 +31,7 @@ struct ExpandedAdvDetails2: View {
     @State var count: String = ""
     @State var fromAdv: Bool = false
 
+    @State var id = UUID()
     @State var uid: String = ""
     @State var name: String = ""
     @State var phone: String = ""
@@ -52,6 +53,8 @@ struct ExpandedAdvDetails2: View {
 //    @State var servImage = UIImage(named: "blank")!
     @State var showingAlertDelete: Bool = false
     @Environment(\.presentationMode) var presentationMode: Binding<PresentationMode>
+    
+    @StateObject var advManager = AdvManager()
     
     var body: some View {
         ScrollView {
@@ -150,7 +153,7 @@ struct ExpandedAdvDetails2: View {
                         Spacer()
                     }
                 }
-                NavigationLink(destination: EditAdvView(uid: $uid, name: $name, city: $city, price: $price, phone: $phone, description: $description, category: $category, updatedAt: $updatedAt, isActive: $isActive, subcategory: $subcategory, photos: $photos)) {
+                NavigationLink(destination: EditAdvView(id: $id, uid: $uid, name: $name, city: $city, price: $price, phone: $phone, description: $description, category: $category, updatedAt: $updatedAt, createdAt: $createdAt, isActive: $isActive, subcategory: $subcategory, photos: $photos)) {
                     HStack {
                         Spacer()
                         HStack {
@@ -220,14 +223,8 @@ struct ExpandedAdvDetails2: View {
                             Alert(
                                 title: Text("Вы уверены что хотите удалить Ваше объявление?"),
                                 primaryButton: .destructive(Text("Удалить"), action: {
-                                    DB().deleteAdv(uid: adv.uid) {
-                                        DB().getAdvs(category: "all") { (list) in
-                                            
-                                            globalAdv = list
-                                                .filter { $0.isActive == "1" }
-                                                .sorted { $0.createdAt > $1.createdAt }
-                                            presentationMode.wrappedValue.dismiss()
-                                        }
+                                    advManager.deleteAdv(uid: adv.uid) {
+                                        presentationMode.wrappedValue.dismiss()
                                     }
                                 }),
                                 secondaryButton: .cancel(Text("Отмена"))
@@ -248,22 +245,35 @@ struct ExpandedAdvDetails2: View {
 //                    })
             .navigationBarTitleDisplayMode(.inline)
             .onAppear {
+                self.id = adv.id
                 self.uid = adv.uid
+                self.name = adv.name
+                self.phone = adv.phone
+                self.city = adv.city
+                self.price = adv.price
+                self.description = adv.description
+                self.createdAt = adv.createdAt
+                self.category = adv.category
+                self.count = adv.images
+                self.isActive = adv.isActive
+                self.subcategory = adv.subcategory
+                self.updatedAt = adv.updatedAt
+                
                 
 
                 
-                DB().getMyAdv(uid: self.uid) { adv in
-                    self.name = adv.name
-                    self.phone = adv.phone
-                    self.city = adv.city
-                    self.price = adv.price
-                    self.description = adv.description
-                    self.createdAt = adv.createdAt
-                    self.category = adv.category
-                    self.count = adv.images
-                    self.isActive = adv.isActive
-                    self.subcategory = adv.subcategory
-                    self.updatedAt = self.updatedAt
+//                DB().getMyAdv(uid: self.uid) { adv in
+//                    self.name = adv.name
+//                    self.phone = adv.phone
+//                    self.city = adv.city
+//                    self.price = adv.price
+//                    self.description = adv.description
+//                    self.createdAt = adv.createdAt
+//                    self.category = adv.category
+//                    self.count = adv.images
+//                    self.isActive = adv.isActive
+//                    self.subcategory = adv.subcategory
+//                    self.updatedAt = self.updatedAt
                     
                     if self.isActive == "0.3" {
                         self.hideAdvText = "Восстановить объявление"
@@ -274,7 +284,7 @@ struct ExpandedAdvDetails2: View {
                         self.isActive = "1"
                         self.alertText = "Объявление восстановлено"
                     }
-                }
+//                }
                 DB().getMultiImages(uid: uid + "ADV", directory: "advImages") { images in
                     self.photos = images
                 }

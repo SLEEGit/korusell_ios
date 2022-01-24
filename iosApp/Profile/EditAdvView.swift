@@ -9,6 +9,7 @@ import SwiftUI
 
 struct EditAdvView: View {
     //    @State var service: Service!
+    @Binding var id: UUID
     @Binding var uid: String
     @Binding var name: String
     @Binding var city: String
@@ -17,6 +18,7 @@ struct EditAdvView: View {
     @Binding var description: String
     @Binding var category: String
     @Binding var updatedAt: String
+    @Binding var createdAt: String
     @Binding var isActive: String
     @Binding var subcategory: String
     
@@ -32,6 +34,7 @@ struct EditAdvView: View {
     @State var images: String = "0"
     @State var checked: Bool = false
     
+    @StateObject var advManager = AdvManager()
     
     @State var isActiveStatus: String = "0"
     
@@ -188,15 +191,10 @@ struct EditAdvView: View {
                     Spacer()
                     Button("Обновить данные") {
                         self.images = String(photos.count)
-                        DB().updateAdv(uid: uid, name: name, category: category, city: city, price: price, phone: phone, descrition: description, images: images, updatedAt: Util().dateByTimeZone(), isActive: "1", subcategory: subcategory) {
+                        advManager.postAdv(adv: Adv(id: id.description, uid: uid, name: name, category: category, city: city, price: price, phone: phone, description: description, createdAt: createdAt, images: images, updatedAt: Util().dateByTimeZone(), isActive: "1", subcategory: subcategory)) {
                             postImages() {
                                 deleteImages() {
                                     DispatchQueue.main.asyncAfter(deadline: .now() + 0.3) {
-                                        DB().getAdvs(category: "all") { (list) in
-                                            globalAdv = list
-                                                .filter { $0.isActive == "1" }
-                                                .sorted { $0.createdAt > $1.createdAt }
-                                        }
                                         showingAlert = true
                                     }
                                 }
@@ -204,15 +202,14 @@ struct EditAdvView: View {
                         }
                     }
                     Spacer()
-                }.alert(isPresented: $showingAlert) {
-                    Alert(
-                        title: Text("Данные успешно обновлены"),
-                        dismissButton: .destructive((Text("Ок")), action: {
-                            presentationMode.wrappedValue.dismiss()
-                        })
-                    )
                 }
-                
+            }.alert(isPresented: $showingAlert) {
+                Alert(
+                    title: Text("Данные успешно обновлены"),
+                    dismissButton: .destructive((Text("Ок")), action: {
+                        presentationMode.wrappedValue.dismiss()
+                    })
+                )
             }
             
 

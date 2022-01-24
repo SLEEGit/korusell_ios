@@ -199,6 +199,7 @@ class ServiceManager: ObservableObject {
 class AdvManager: ObservableObject {
     @Published private(set) var advs: [Adv] = []
     @Published var openAdv: [Adv] = []
+    @Published private(set) var myAdvs: [Adv] = []
     
     @Published var city: String = "Все города"
     @Published var category: String = "all"
@@ -207,9 +208,8 @@ class AdvManager: ObservableObject {
     init() {
         getAdvs()
     }
-
+    
     func getAdvs() {
-        print("coming to getadvs")
         db.collection("adv").addSnapshotListener { querySnapshot, error in
             
             guard let documents = querySnapshot?.documents else {
@@ -288,16 +288,46 @@ class AdvManager: ObservableObject {
         }
     }
     
+    func getMyAdvs() {
+        db.collection("adv").addSnapshotListener { querySnapshot, error in
+            guard let documents = querySnapshot?.documents else {
+                print("Error fetching documents: \(String(describing: error))")
+                return
+            }
+            
+            self.advs = documents.compactMap { document -> Adv? in
+                do {
+                    return try document.data(as: Adv.self)
+                } catch {
+                    print("Error decoding document into Adv: \(error)")
+                    return nil
+                }
+            }
+            self.myAdvs = self.advs.filter { $0.uid.contains(Auth.auth().currentUser?.uid ?? "") }
+        }
+    }
     
-
-    
-    
-    func postAdv(adv: Adv) {
-        let uid = Auth.auth().currentUser!.uid
+    func postAdv(adv: Adv, completion: @escaping () -> Void) {
         do {
-            try db.collection("adv").document(uid).setData(from: adv)
+            try db.collection("adv").document(adv.uid).setData(from: adv)
+            DispatchQueue.main.async {
+                completion()
+            }
         } catch {
             print("Error adding message to Firestore: \(error)")
+            DispatchQueue.main.async {
+                completion()
+            }
+        }
+    }
+    
+    func deleteAdv(uid: String, completion: @escaping () -> Void) {
+        db.collection("adv").document(uid).delete()
+        for i in 0...4 {
+            DB().deleteImage(uid: uid + "ADV" + String(i), directory: "advImages")
+        }
+        DispatchQueue.main.async {
+            completion()
         }
     }
     

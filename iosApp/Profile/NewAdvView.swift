@@ -186,7 +186,7 @@ struct NewAdvView: View {
                     Spacer()
                     Button("Создать") {
                         self.images = String(photos.count)
-                        AdvManager().postAdv(adv: Adv(id: uid, uid: uid, name: name, category: category, city: city, price: price, phone: phone, description: description, createdAt: Util().dateByTimeZone(), images: images, updatedAt: Util().dateByTimeZone(), isActive: "1", subcategory: subcategory))
+                        AdvManager().postAdv(adv: Adv(id: uid + Util().dateForAdv(date: Util().dateByTimeZone()), uid: uid + Util().dateForAdv(date: Util().dateByTimeZone()), name: name, category: category, city: city, price: price, phone: phone, description: description, createdAt: Util().dateByTimeZone(), images: images, updatedAt: Util().dateByTimeZone(), isActive: "1", subcategory: subcategory)) {}
 //                        DB().createAdv(uid: uid, name: name, category: category, city: city, price: price, phone: phone, descrition: description, createdAt: Util().dateByTimeZone(), images: images, updatedAt: Util().dateByTimeZone(), isActive: "1", subcategory: subcategory) {
                             postImages() {
                                 deleteImages() {
