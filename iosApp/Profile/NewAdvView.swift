@@ -213,59 +213,8 @@ struct NewAdvView: View {
                 }
                 
             }
-            
-//                Section {
-//                    HStack {
-//                        Spacer()
-//                        Button(action: {
-//                            showingAlertDelete = true
-//                        }) {
-//                            Text("Удалить объявление")
-//                                .foregroundColor(Color.red)
-//                        }
-//                        .alert(isPresented: $showingAlertDelete) {
-//                            Alert(
-//                                title: Text("Вы уверены что хотите удалить Ваше объявление?"),
-//                                primaryButton: .destructive(Text("Удалить"), action: {
-//                                    DB().deleteAdv(uid: uid)
-//                                    self.name = ""
-//                                    self.category = ""
-//                                    self.city = ""
-//                                    self.price = ""
-//                                    self.phone = ""
-//                                    self.description = ""
-//                                    self.createdAt = ""
-//                                    presentationMode.wrappedValue.dismiss()
-//
-//                                }),
-//                                secondaryButton: .cancel(Text("Отмена"))
-//                            )
-//                        }
-//                        Spacer()
-//                }
-//
-//            }
         }
-//        .alert(isPresented: $businessWarning) {
-//            Alert(
-//                title: Text("Создавая объявление, информация из Вашего профиля становится также доступной"),
-//                dismissButton: .default(Text("Ок"))
-//            )
-//        }
         .onAppear {
-            
-//            businessWarning = true
-//            if Pref.userDefault.bool(forKey: "adv") {
-//                businessWarning = false
-//            }
-//            Pref.userDefault.set(true, forKey: "adv")
-//            Pref.userDefault.synchronize()
-//            if !checked {
-//                DB().getMultiImages(uid: uid + "ADV", directory: directory) { images in
-//                    self.photos = images
-//                    self.checked = true
-//                }
-//            }
         }
     }
     

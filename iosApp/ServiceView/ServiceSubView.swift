@@ -32,6 +32,7 @@ struct ServiceSubView: View {
             globalCategory = category
             self.city = globalCity
             serviceManager.category = category
+            serviceManager.city = globalCity
             serviceManager.getServices()
         }
         .navigationTitle(barTitle)

@@ -220,18 +220,10 @@ struct AdvList: View {
                 }
                 .onAppear {
                     self.city = globalCity
-                    DB().getAdvs(category: "all") { list in
-                        globalAdv = list
-                        //                включен/выключен фильтр
-                            .filter { $0.isActive == "1" }
-                            .sorted { $0.createdAt > $1.createdAt }
-                        
-                        // filter for search
-                        //                        .filter { $0.name.lowercased().contains("iphone") }
-                        
-//                        self.list = Util().filterAdv(city: city, category: category, unsortedList: globalAdv)
+                    advManager.city = globalCity
+                    self.advManager.getAdvs()
                         self.isLoading = false
-                    }
+                    
                 }
             if isLoading {
                 ProgressView().progressViewStyle(CircularProgressViewStyle(tint: Color("textColor")))
