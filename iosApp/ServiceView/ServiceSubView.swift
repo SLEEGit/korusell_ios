@@ -11,7 +11,8 @@ struct ServiceSubView: View {
 //    @StateObject var serviceManager = ServiceManager()
     
     @StateObject private var session = DB()
-    @State var list: [Service] = serviceManager.services
+//    @State var list: [Service] = serviceManager.services
+    @StateObject var serviceManager = ServiceManager()
     @State var afterCatlList: [Service] = []
     @State private var image = UIImage(named: "blank")!
     var category: String
@@ -21,7 +22,7 @@ struct ServiceSubView: View {
     var body: some View {
         List {
             // Добавить логику для других городов и переходить на объявления с @StateObject чтобы убрать все фетчи после изменений
-            ForEach(self.list.filter { self.city == "Все города" ? $0.category == self.category : $0.category == self.category && $0.city == self.city }.shuffled(), id: \.uid) { service in
+            ForEach(serviceManager.services, id: \.uid) { service in
                 NavigationLink(destination: ServiceView(service: service)) {
                     ExpandedService(service: service, image: image)
                 }
@@ -30,7 +31,8 @@ struct ServiceSubView: View {
         .onAppear {
             globalCategory = category
             self.city = globalCity
-            //            self.list = serviceManager.services.filter { $0.category == self.category }
+            serviceManager.category = category
+            serviceManager.getServices()
         }
         .navigationTitle(barTitle)
         .navigationBarTitleDisplayMode(.inline)
@@ -39,48 +41,62 @@ struct ServiceSubView: View {
                 Button("Все города") {
                     globalCity = "Все города"
                     self.city = globalCity
-      
+                    serviceManager.city = globalCity
+                    serviceManager.getServices()
                 }
                 Button("Ансан") {
                     globalCity = "Ансан"
                     self.city = globalCity
-      
+                    serviceManager.city = globalCity
+                    serviceManager.getServices()
                 }
                 Button("Хвасонг") {
                     globalCity = "Хвасонг"
                     self.city = globalCity
- 
+                    serviceManager.city = globalCity
+                    serviceManager.getServices()
                 }
                 Button("Инчхон") {
                     globalCity = "Инчхон"
                     self.city = globalCity
-            
+                    serviceManager.city = globalCity
+                    serviceManager.getServices()
                 }
                 Button("Сеул") {
                     globalCity = "Сеул"
                     self.city = globalCity
-           
+                    serviceManager.city = globalCity
+                    serviceManager.getServices()
                 }
                 Button("Сувон") {
                     globalCity = "Сувон"
                     self.city = globalCity
+                    serviceManager.city = globalCity
+                    serviceManager.getServices()
                 }
                 Button("Асан") {
                     globalCity = "Асан"
                     self.city = globalCity
+                    serviceManager.city = globalCity
+                    serviceManager.getServices()
                 }
                 Button("Чхонан") {
                     globalCity = "Чхонан"
                     self.city = globalCity
+                    serviceManager.city = globalCity
+                    serviceManager.getServices()
                 }
             Button("Чхонджу") {
                 globalCity = "Чхонджу"
                 self.city = globalCity
+                serviceManager.city = globalCity
+                serviceManager.getServices()
             }
             Button("Другой город") {
-                    globalCity = "Другой город"
+                globalCity = "Другой город"
                 self.city = globalCity
-                self.list = self.list.filter { $0.category == self.category && $0.city != self.city }
+                serviceManager.city = globalCity
+                serviceManager.getServices()
                 }
             } label: {
                 Text(self.city)

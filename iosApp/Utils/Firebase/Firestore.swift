@@ -93,8 +93,8 @@ class ServiceManager: ObservableObject {
     @Published private(set) var services: [Service] = []
     @Published var openServices: [Service] = []
     
-    @Published var city: String = ""
-    @Published var category: String = "" 
+    @Published var city: String = "Все города"
+    @Published var category: String = "all"
     let db = Firestore.firestore()
 
     init() {
@@ -118,13 +118,67 @@ class ServiceManager: ObservableObject {
                 }
             }
             
-            self.openServices = self.services.filter { $0.city == self.city && $0.category == self.category }
+//            self.openServices = self.services.filter { $0.city == self.city && $0.category == self.category }
             
-//            self.services.sort { $0.timestamp < $1.timestamp }
+            self.services = self.services.shuffled()
             
-//            if let id = self.messages.last?.id {
-//                self.lastMessageId = id
-//            }
+            switch self.category {
+            case "all":
+                self.services = self.services.filter { $0.category == "food" || $0.category == "shop" || $0.category == "connect" || $0.category == "study" || $0.category == "party" || $0.category == "docs" || $0.category == "cars" || $0.category == "health" || $0.category == "transport" || $0.category == "travel" || $0.category == "workshop" || $0.category == "other" || $0.category == "products" || $0.category == "admin"}
+            case "food":
+                self.services = self.services.filter { $0.category == "food" || $0.category == "admin"}
+            case "shop":
+                self.services = self.services.filter { $0.category == "shop" || $0.category == "admin"}
+            case "connect":
+                self.services = self.services.filter { $0.category == "connect" || $0.category == "admin"}
+            case "study":
+                self.services = self.services.filter { $0.category == "study" || $0.category == "admin"}
+            case "party":
+                self.services = self.services.filter { $0.category == "party" || $0.category == "admin"}
+            case "docs":
+                self.services = self.services.filter { $0.category == "docs" || $0.category == "admin"}
+            case "cars":
+                self.services = self.services.filter { $0.category == "cars" || $0.category == "admin"}
+            case "health":
+                self.services = self.services.filter { $0.category == "health" || $0.category == "admin"}
+            case "transport":
+                self.services = self.services.filter { $0.category == "transport" || $0.category == "admin"}
+            case "travel":
+                self.services = self.services.filter { $0.category == "travel" || $0.category == "admin"}
+            case "workshop":
+                self.services = self.services.filter { $0.category == "workshop" || $0.category == "admin"}
+            case "other":
+                self.services = self.services.filter { $0.category == "other" || $0.category == "admin"}
+            case "products":
+                self.services = self.services.filter  { $0.category == "products" || $0.category == "admin"}
+            default:
+                self.services = self.services.filter  { $0.category == "null" }
+            }
+            
+            switch self.city {
+            case "Все города":
+                self.services = self.services
+            case "Ансан":
+                self.services = self.services.filter  { $0.city == "Ансан" || $0.city == "admin"}
+            case "Хвасонг":
+                self.services = self.services.filter  { $0.city == "Хвасонг" || $0.city == "admin"}
+            case "Сеул":
+                self.services = self.services.filter  { $0.city == "Сеул" || $0.city == "admin"}
+            case "Инчхон":
+                self.services = self.services.filter  { $0.city == "Инчхон" || $0.city == "admin"}
+            case "Асан":
+                self.services = self.services.filter  { $0.city == "Асан" || $0.city == "admin"}
+            case "Сувон":
+                self.services = self.services.filter  { $0.city == "Сувон" || $0.city == "admin"}
+            case "Чхонан":
+                self.services = self.services.filter  { $0.city == "Чхонан" || $0.city == "admin"}
+            case "Чхонджу":
+                self.services = self.services.filter  { $0.city == "Чхонджу" || $0.city == "admin"}
+            case "Другой город":
+                self.services = self.services.filter  { $0.city != "Чхонан" && $0.city != "Хвасонг" && $0.city != "Ансан" && $0.city != "Асан" && $0.city != "Сеул" && $0.city != "Инчхон" && $0.city != "Хвасонг" && $0.city != "Сувон" && $0.city != "Чхонджу" || $0.city == "admin"}
+            default:
+                self.services = self.services.filter  { $0.city == "nil" || $0.city == "admin"}
+            }
         }
     }
     

@@ -10,12 +10,6 @@ import MapKit
 import CoreLocation
 import CoreLocationUI
 
-//struct catModel: Hashable {
-//    var id = UUID()
-//    let category: String
-//    let name: String
-//}
-
 struct MapView: View {
     
     @StateObject private var session = DB()
@@ -26,25 +20,9 @@ struct MapView: View {
     @State var trackingMode: MapUserTrackingMode = .follow
     
     @StateObject var locationManager = LocationManager()
+    @StateObject var serviceManager = ServiceManager()
     
     @State private var mapRegion = MKCoordinateRegion(center: CLLocationCoordinate2D(latitude: 36.62257816899407, longitude: 127.91520089316795), span: MKCoordinateSpan(latitudeDelta: 3.5, longitudeDelta: 3.5))
-    
-//    let categories: [catModel] = [
-//        catModel(category: "Все категории", name: "all"),
-//        catModel(category: "Рестораны/Кафе", name: "food"),
-//        catModel(category: "Связь", name: "connect"),
-//        catModel(category: "Магазины", name: "shop"),
-//        catModel(category: "Документы/Переводы", name: "docs"),
-//        catModel(category: "Юридические услуги", name: "law"),
-//        catModel(category: "Мероприятия/Фото/Видео", name: "party"),
-//        catModel(category: "Красота/Здоровье", name: "health"),
-//        catModel(category: "СТО/Тюнинг", name: "workshop")
-//        catModel(category: "Транспорт/Переезд", name: "transport"),
-//        catModel(category: "Няни/Детсад", name: "nanny"),
-//        catModel(category: "Образование", name: "study"),
-//        catModel(category: "Туризм", name: "tourism")
-        
-//    ]
     
     var body: some View {
         NavigationView {
@@ -56,16 +34,20 @@ struct MapView: View {
                             DetailsView(service: service)
                         } label: {
                             VStack {
-//                                Text(service.name)
-//                                    .font(.system(size: 10))
-//                                    .foregroundColor(.black)
-//                                    .shadow(color: .white, radius: 1, x: 1, y: 1)
                                 if service.latitude != "" {
-                                    Image(systemName: "mappin.circle.fill")
-                                        .renderingMode(.original)
-                                        .resizable()
-                                        .frame(width: 25, height: 25)
-//                                        .shadow(color: .gray, radius: 1, x: 1, y: 1)
+//                                    if service.category == "health" {
+//                                        Text("💅🏼")
+//                                    } else if service.category == "food" {
+//                                            Text("🍽")
+//                                            .border(Color.red)
+//                                    } else {
+                                        Image(systemName: "mappin.circle.fill")
+                                            .renderingMode(.original)
+                                            .resizable()
+                                            .frame(width: 25, height: 25)
+    //                                        .shadow(color: .gray, radius: 1, x: 1, y: 1)
+//                                    }
+                                    
                                 }
 
                             }

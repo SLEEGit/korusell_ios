@@ -8,7 +8,7 @@
 import SwiftUI
 
 var globalAdv: [Adv] = []
-var serviceManager = ServiceManager()
+
 
 struct ContentView: View {
     
