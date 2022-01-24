@@ -9,6 +9,7 @@ import Foundation
 import FirebaseFirestore
 import FirebaseFirestoreSwift
 import FirebaseAuth
+import SwiftUI
 
 class MessagesManager: ObservableObject {
     @Published private(set) var messages: [Message] = []
@@ -145,8 +146,8 @@ class AdvManager: ObservableObject {
     @Published private(set) var advs: [Adv] = []
     @Published var openAdv: [Adv] = []
     
-    @Published var city: String = ""
-    @Published var category: String = ""
+    @Published var city: String = "Все города"
+    @Published var category: String = "all"
     let db = Firestore.firestore()
 
     init() {
@@ -154,6 +155,7 @@ class AdvManager: ObservableObject {
     }
 
     func getAdvs() {
+        print("coming to getadvs")
         db.collection("adv").addSnapshotListener { querySnapshot, error in
             
             guard let documents = querySnapshot?.documents else {
@@ -170,13 +172,65 @@ class AdvManager: ObservableObject {
                 }
             }
             
-//            self.openAdv = self.advs.filter { $0.city == self.city && $0.category == self.category }
-            
 //            self.advs.sort { $0.createdAt < $1.createdAt }
+            self.advs = self.advs.filter { $0.isActive == "1" }.sorted { $0.createdAt > $1.createdAt }
             
-//            if let id = self.messages.last?.id {
-//                self.lastMessageId = id
-//            }
+            switch self.category {
+            case "all":
+                self.advs = self.advs.filter { $0.category == "transport" || $0.category == "house" || $0.category == "phone" || $0.category == "hobby" || $0.category == "car" || $0.category == "electronic" || $0.category == "children" || $0.category == "clothes" || $0.category == "sport" || $0.category == "pet" || $0.category == "change" || $0.category == "other" || $0.category == "admin"}
+            case "transport":
+                self.advs = self.advs.filter { $0.category == "transport" || $0.category == "admin"}
+            case "house":
+                self.advs = self.advs.filter { $0.category == "house" || $0.category == "admin"}
+            case "phone":
+                self.advs = self.advs.filter { $0.category == "phone" || $0.category == "admin"}
+            case "hobby":
+                self.advs = self.advs.filter { $0.category == "hobby" || $0.category == "admin"}
+            case "car":
+                self.advs = self.advs.filter { $0.category == "car" || $0.category == "admin"}
+            case "electronic":
+                self.advs = self.advs.filter { $0.category == "electronic" || $0.category == "admin"}
+            case "children":
+                self.advs = self.advs.filter { $0.category == "children" || $0.category == "admin"}
+            case "clothes":
+                self.advs = self.advs.filter { $0.category == "clothes" || $0.category == "admin"}
+            case "sport":
+                self.advs = self.advs.filter { $0.category == "sport" || $0.category == "admin"}
+            case "pet":
+                self.advs = self.advs.filter { $0.category == "pet" || $0.category == "admin"}
+            case "change":
+                self.advs = self.advs.filter { $0.category == "change" || $0.category == "admin"}
+            case "other":
+                self.advs = self.advs.filter { $0.category == "other" || $0.category == "admin"}
+            default:
+                self.advs = self.advs.filter  { $0.category == "zavod" }
+            }
+            
+            switch self.city {
+            case "Все города":
+                self.advs = self.advs
+            case "Ансан":
+                self.advs = self.advs.filter { $0.city == "Ансан" || $0.city == "admin"}
+            case "Хвасонг":
+                self.advs = self.advs.filter { $0.city == "Хвасонг" || $0.city == "admin"}
+            case "Сеул":
+                self.advs = self.advs.filter { $0.city == "Сеул" || $0.city == "admin"}
+            case "Инчхон":
+                self.advs = self.advs.filter { $0.city == "Инчхон" || $0.city == "admin"}
+            case "Асан":
+                self.advs = self.advs.filter { $0.city == "Асан" || $0.city == "admin"}
+            case "Сувон":
+                self.advs = self.advs.filter { $0.city == "Сувон" || $0.city == "admin"}
+            case "Чхонан":
+                self.advs = self.advs.filter { $0.city == "Чхонан" || $0.city == "admin"}
+            case "Чхонджу":
+                self.advs = self.advs.filter { $0.city == "Чхонджу" || $0.city == "admin"}
+            case "Другой город":
+                self.advs = self.advs.filter { $0.city != "Чхонан" && $0.city != "Хвасонг" && $0.city != "Ансан" && $0.city != "Асан" && $0.city != "Сеул" && $0.city != "Инчхон" && $0.city != "Хвасонг" && $0.city != "Сувон" && $0.city != "Чхонджу" || $0.city == "admin"}
+            default:
+                self.advs = self.advs.filter { $0.city == "nil" || $0.city == "admin"}
+            }
+            
         }
     }
     

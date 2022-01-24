@@ -7,9 +7,11 @@
 
 import SwiftUI
 import FirebaseAuth
+import AppTrackingTransparency
+import AdSupport
 
 struct CheckStatusView : View {
-    
+    @ObservedObject var trackingHelper = ATTrackingHelper()
     @StateObject var logging = Logging()
     @State var isLoggedIn: Bool = false
     
@@ -18,8 +20,10 @@ struct CheckStatusView : View {
         
         if !logging.isSignedIn && !Pref.userDefault.bool(forKey: "usersignedin") {
             LoginView(logging: logging)
+                .onAppear { trackingHelper.requestAuth() }
         } else {
             ProfileView(logging: logging)
+                .onAppear { trackingHelper.requestAuth() }
         }
     }
 }

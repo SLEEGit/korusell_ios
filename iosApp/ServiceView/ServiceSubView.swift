@@ -21,16 +21,16 @@ struct ServiceSubView: View {
     var body: some View {
         List {
             // Добавить логику для других городов и переходить на объявления с @StateObject чтобы убрать все фетчи после изменений
-            ForEach(self.list.filter { self.city == "Все города" ? $0.category == self.category : $0.category == self.category && $0.city == self.city }, id: \.uid) { service in
-            NavigationLink(destination: ServiceView(service: service)) {
-                ExpandedService(service: service, image: image)
+            ForEach(self.list.filter { self.city == "Все города" ? $0.category == self.category : $0.category == self.category && $0.city == self.city }.shuffled(), id: \.uid) { service in
+                NavigationLink(destination: ServiceView(service: service)) {
+                    ExpandedService(service: service, image: image)
+                }
             }
-        }
         }
         .onAppear {
             globalCategory = category
             self.city = globalCity
-//            self.list = serviceManager.services.filter { $0.category == self.category }
+            //            self.list = serviceManager.services.filter { $0.category == self.category }
         }
         .navigationTitle(barTitle)
         .navigationBarTitleDisplayMode(.inline)

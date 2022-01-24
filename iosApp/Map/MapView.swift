@@ -49,7 +49,7 @@ struct MapView: View {
     var body: some View {
         NavigationView {
             ZStack(alignment: .bottom) {
-                Map(coordinateRegion: $mapRegion, interactionModes: .all, showsUserLocation: true, userTrackingMode: $trackingMode, annotationItems: list)
+                Map(coordinateRegion: $mapRegion, interactionModes: .all, showsUserLocation: true, userTrackingMode: $trackingMode, annotationItems: serviceManager.services)
             { service in
                     MapAnnotation(coordinate: CLLocationCoordinate2D(latitude: Double(service.latitude) ?? 0.0, longitude: Double(service.longitude) ?? 0.0)) {
                         NavigationLink {
@@ -65,7 +65,7 @@ struct MapView: View {
                                         .renderingMode(.original)
                                         .resizable()
                                         .frame(width: 25, height: 25)
-                                        .shadow(color: .gray, radius: 1, x: 1, y: 1)
+//                                        .shadow(color: .gray, radius: 1, x: 1, y: 1)
                                 }
 
                             }
@@ -77,16 +77,16 @@ struct MapView: View {
                     .navigationBarTitleDisplayMode(.inline)
                     .onAppear {
 //                        locationManager.requestLocation()
-                        session.getServices(category: "all") { (list) in
-                            globalServices = list
+//                        session.getServices(category: "all") { (list) in
+//                            globalServices = list
                             self.isLoading = false
-                        }
+//                        }
                         
                         //                        self.category = globalCategory
                         //                        if globalCategory == "docs" {
                         //                            self.categoryName = "Документы/Переводы"
                         //                        }
-                        self.list = Util().filter(city: globalCity, category: self.category, unsortedList: globalServices)
+//                        self.list = Util().filter(city: globalCity, category: self.category, unsortedList: globalServices)
                     }
                 
                     .toolbar {
