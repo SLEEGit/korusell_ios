@@ -60,11 +60,11 @@ struct ServiceMenuView: View {
                     
                     email = Auth.auth().currentUser?.email ?? ""
                     city = globalCity
-                    session.getServices(category: "all") { (list) in
-                        globalServices = list
-                        //                        globalServices = list.sorted { $0.name < $1.name }
+//                    session.getServices(category: "all") { (list) in
+//                        globalServices = list
+//                        //                        globalServices = list.sorted { $0.name < $1.name }
                         self.isLoading = false
-                    }
+//                    }
                     
                 }
                 

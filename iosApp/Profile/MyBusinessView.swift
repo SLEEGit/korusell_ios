@@ -33,6 +33,8 @@ struct MyBusinessView: View {
     @State var images: String = "0"
     @State var checked: Bool = false
     
+    @StateObject var serviceManager = ServiceManager()
+    
     @Environment(\.presentationMode) var presentationMode: Binding<PresentationMode>
     
     var body: some View {
@@ -185,7 +187,9 @@ struct MyBusinessView: View {
                                 self.latitude = lat
                                 self.longitude = long
                                 DispatchQueue.main.asyncAfter(deadline: .now() + 0.1) {
-                                    DB().updateBusiness(uid: uid, name: name, category: category, city: city, address: address, phone: phone, descrition: description, latitude: latitude, longitude: longitude, social: social, images: images) {
+                                    serviceManager.postService(service: Service(uid: uid, name: name, category: category, city: city, address: address, phone: phone, description: description, latitude: latitude, longitude: longitude, social: social, images: images)) {
+//                                    DB().updateBusiness {
+                                        
                                         postImages() {
                                             deleteImages() {
                                                 DispatchQueue.main.asyncAfter(deadline: .now() + 0.3) {
@@ -220,8 +224,6 @@ struct MyBusinessView: View {
                         Spacer()
                     }
                 }
-                
-                
                 Section {
                     HStack {
                         Spacer()
@@ -241,21 +243,22 @@ struct MyBusinessView: View {
                             Alert(
                                 title: Text("Вы уверены что хотите удалить Ваш бизнес?"),
                                 primaryButton: .destructive(Text("Удалить"), action: {
-                                    DB().deleteBusiness(uid: uid)
-                                    for i in 0...4 {
-                                        print(i)
-                                        print("iii")
-                                        DB().deleteImage(uid: uid + String(i), directory: directory)
+//                                    DB().deleteBusiness(uid: uid)
+                                    serviceManager.deleteService(uid: uid) {
+                                        self.name = ""
+                                        self.category = ""
+                                        self.city = ""
+                                        self.address = ""
+                                        self.phone = ""
+                                        self.description = ""
+                                        self.social = ["","","","",""]
+                                        presentationMode.wrappedValue.dismiss()
                                     }
-                                    self.name = ""
-                                    self.category = ""
-                                    self.city = ""
-                                    self.address = ""
-                                    self.phone = ""
-                                    self.description = ""
-                                    self.social = ["","","","",""]
-                                    presentationMode.wrappedValue.dismiss()
-                                    
+//                                    for i in 0...4 {
+//                                        print(i)
+//                                        print("iii")
+//                                        DB().deleteImage(uid: uid + String(i), directory: directory)
+//                                    }
                                 }),
                                 secondaryButton: .cancel(Text("Отмена"))
                             )

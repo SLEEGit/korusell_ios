@@ -13,6 +13,7 @@ struct InnerAdvertisement: View {
     
     @State var array: [Int] = []
     @State private var images: [UIImage] = [UIImage(named: "blank")!]
+    @StateObject var advManager = AdvManager()
     
     var body: some View {
         ExpandedAdvDetails2(adv: adv, images: images, count: adv.images)
@@ -182,9 +183,12 @@ struct ExpandedAdvDetails2: View {
                                     self.isActive = "0.3"
                                     self.alertText = "Объявление скрыто"
                                 }
-                                DB().changeAdvStatus(uid: uid, isActive: self.isActive) {
+                                advManager.changeAdvStatus(uid: uid, isActive: self.isActive) {
                                     self.showingAlert2 = true
                                 }
+//                                DB().changeAdvStatus(uid: uid, isActive: self.isActive) {
+//                                    self.showingAlert2 = true
+//                                }
                             }) {
                                 HStack {
 //                                    Image(systemName: "trash")

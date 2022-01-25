@@ -88,11 +88,10 @@ struct MyAdvList2: View {
             }
                 .navigationTitle("Мои Объявления")
                 .onAppear {
-                    print("UID::: \(myUID)")
-                    
-                    advManager.getMyAdvs()
-                            count = advManager.myAdvs.count
-                            self.isLoading = false
+                    advManager.getMyAdvs() {
+                        count = advManager.myAdvs.count
+                        self.isLoading = false
+                    }
                 }
             .disabled(isLoading)
             if isLoading {

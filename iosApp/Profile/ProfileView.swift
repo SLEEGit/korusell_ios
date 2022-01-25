@@ -38,6 +38,7 @@ struct ProfileView: View {
     
 
     @StateObject var advManager = AdvManager()
+    @StateObject var serviceManager = ServiceManager()
     @State var list: [Adv] = []
     @State var count: Int = 0
     
@@ -189,9 +190,31 @@ struct ProfileView: View {
                 email = user.email
             }
             DB().updateLastLogin(user: user, last_login: Util().dateByTimeZone()) {}
-            DB().getMyBusiness(uid: user.uid) { business in
-                print("getting business in profile")
-                print(business)
+            
+//            DB().getMyBusiness(uid: user.uid) { business in
+//                print("getting business in profile")
+//                print(business)
+//                self.business = business
+//                self.bname = business.name
+//                self.bphone = business.phone
+//                self.city = business.city
+//                self.address = business.address
+//                self.description = business.description
+//                self.latitude = business.latitude
+//                self.longitude = business.longitude
+//                self.category = business.category
+//                self.social = business.social
+//            }
+//            DB().getAdvs(category: "all") { (list) in
+//            self.list = list.filter { $0.uid.contains(user.uid) }
+//                            .sorted { $0.createdAt > $1.createdAt }
+                
+//            }
+            advManager.getMyAdvs() {
+                self.count = advManager.myAdvs.count
+            }
+            
+            serviceManager.getMyService { business in
                 self.business = business
                 self.bname = business.name
                 self.bphone = business.phone
@@ -203,12 +226,6 @@ struct ProfileView: View {
                 self.category = business.category
                 self.social = business.social
             }
-            DB().getAdvs(category: "all") { (list) in
-            self.list = list.filter { $0.uid.contains(user.uid) }
-                            .sorted { $0.createdAt > $1.createdAt }
-                self.count = self.list.count
-            }
-            advManager.getMyAdvs()
 //            DB().getMyAdv(uid: user.uid) { adv in
 //                print("getting adv in profile")
 //                print(adv)

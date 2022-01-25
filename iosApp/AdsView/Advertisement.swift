@@ -109,7 +109,7 @@ struct ExpandedAdvDetails: View {
     @State var count: String = ""
     @State var fromAdv: Bool = false
     
-    @State var service: Service = Service(id: "", uid: "", name: "", category: "", city: "", address: "", phone: "", description: "", latitude: "", longitude: "", social: ["","","","",""], images: "")
+    @State var service: Service = Service(uid: "", name: "", category: "", city: "", address: "", phone: "", description: "", latitude: "", longitude: "", social: ["","","","",""], images: "")
     
     @State var servImage = UIImage(named: "blank")!
     

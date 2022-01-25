@@ -92,7 +92,7 @@ class MessagesManager: ObservableObject {
 class ServiceManager: ObservableObject {
     @Published private(set) var services: [Service] = []
     @Published var openServices: [Service] = []
-    
+//    @Published var myService: Service
     @Published var city: String = "Все города"
     @Published var category: String = "all"
     let db = Firestore.firestore()
@@ -183,13 +183,49 @@ class ServiceManager: ObservableObject {
     }
     
     
-    func postService(text: String) {
-        let uid = Auth.auth().currentUser!.uid
+//    func postService(text: String) {
+//        let uid = Auth.auth().currentUser!.uid
+//        do {
+//            let newService = Service(id: uid, uid: uid, name: "", category: "", city: "", address: "", phone: "", description: "", latitude: "", longitude: "", social: ["","","","",""], images: "")
+//            try db.collection("services").document(uid).setData(from: newService)
+//        } catch {
+//            print("Error adding message to Firestore: \(error)")
+//        }
+//    }
+    
+    func getMyService(completion: @escaping (Service) -> ()) {
+        db.collection("services").document(Auth.auth().currentUser?.uid ?? "").getDocument { (document, error) in
+            if let document = document, document.exists {
+                let values = document.data()!
+                let service = Service(dictionary: values)
+                completion(service)
+            } else {
+                print("Document does not exist")
+            }
+        }
+    }
+    
+    func postService(service: Service, completion: @escaping () -> Void) {
         do {
-            let newService = Service(id: uid, uid: uid, name: "", category: "", city: "", address: "", phone: "", description: "", latitude: "", longitude: "", social: ["","","","",""], images: "")
-            try db.collection("services").document(uid).setData(from: newService)
+            try db.collection("services").document(service.uid).setData(from: service)
+            DispatchQueue.main.async {
+                completion()
+            }
         } catch {
             print("Error adding message to Firestore: \(error)")
+            DispatchQueue.main.async {
+                completion()
+            }
+        }
+    }
+
+    func deleteService(uid: String, completion: @escaping () -> Void) {
+        db.collection("services").document(uid).delete()
+        for i in 0...4 {
+            DB().deleteImage(uid: uid + String(i), directory: "images")
+        }
+        DispatchQueue.main.async {
+            completion()
         }
     }
     
@@ -288,7 +324,7 @@ class AdvManager: ObservableObject {
         }
     }
     
-    func getMyAdvs() {
+    func getMyAdvs(completion: @escaping () -> Void) {
         db.collection("adv").addSnapshotListener { querySnapshot, error in
             guard let documents = querySnapshot?.documents else {
                 print("Error fetching documents: \(String(describing: error))")
@@ -304,6 +340,8 @@ class AdvManager: ObservableObject {
                 }
             }
             self.myAdvs = self.advs.filter { $0.uid.contains(Auth.auth().currentUser?.uid ?? "") }
+            completion()
+            
         }
     }
     
@@ -326,6 +364,14 @@ class AdvManager: ObservableObject {
         for i in 0...4 {
             DB().deleteImage(uid: uid + "ADV" + String(i), directory: "advImages")
         }
+        DispatchQueue.main.async {
+            completion()
+        }
+    }
+    
+    
+    func changeAdvStatus(uid: String, isActive: String, completion: @escaping () -> Void) {
+        db.collection("adv").document(uid).updateData(["isActive" : isActive])
         DispatchQueue.main.async {
             completion()
         }

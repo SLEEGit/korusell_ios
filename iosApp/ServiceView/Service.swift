@@ -38,7 +38,7 @@ struct Service: Codable, Identifiable {
         self.images = dictionary["images"] as? String ?? ""
     }
     
-    init(id: String, uid: String, name: String, category: String, city: String, address: String, phone: String, description: String, latitude: String, longitude: String, social: [String], images: String) {
+    init(uid: String, name: String, category: String, city: String, address: String, phone: String, description: String, latitude: String, longitude: String, social: [String], images: String) {
 //        self.id = id
         self.uid = uid
         self.name = name

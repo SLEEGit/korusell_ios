@@ -191,81 +191,27 @@ struct EditAdvView: View {
                     Spacer()
                     Button("Обновить данные") {
                         self.images = String(photos.count)
-                        advManager.postAdv(adv: Adv(id: id.description, uid: uid, name: name, category: category, city: city, price: price, phone: phone, description: description, createdAt: createdAt, images: images, updatedAt: Util().dateByTimeZone(), isActive: "1", subcategory: subcategory)) {
-                            postImages() {
-                                deleteImages() {
-                                    DispatchQueue.main.asyncAfter(deadline: .now() + 0.3) {
-                                        showingAlert = true
-                                    }
+                        postImages() {
+                            deleteImages() {
+                                advManager.postAdv(adv: Adv(id: id.description, uid: uid, name: name, category: category, city: city, price: price, phone: phone, description: description, createdAt: createdAt, images: images, updatedAt: Util().dateByTimeZone(), isActive: "1", subcategory: subcategory)) {
+//                                    showingAlert = true
                                 }
                             }
                         }
+
+                    }.alert(isPresented: $showingAlert) {
+                        Alert(
+                            title: Text("Данные успешно обновлены"),
+                            dismissButton: .destructive((Text("Ок")), action: {
+                                presentationMode.wrappedValue.dismiss()
+                            })
+                        )
                     }
                     Spacer()
                 }
-            }.alert(isPresented: $showingAlert) {
-                Alert(
-                    title: Text("Данные успешно обновлены"),
-                    dismissButton: .destructive((Text("Ок")), action: {
-                        presentationMode.wrappedValue.dismiss()
-                    })
-                )
             }
-            
-
-            
-//                Section {
-//                    HStack {
-//                        Spacer()
-//                        Button(action: {
-//                            showingAlertDelete = true
-//                        }) {
-//                            Text("Удалить объявление")
-//                                .foregroundColor(Color.red)
-//                        }
-//                        .alert(isPresented: $showingAlertDelete) {
-//                            Alert(
-//                                title: Text("Вы уверены что хотите удалить Ваше объявление?"),
-//                                primaryButton: .destructive(Text("Удалить"), action: {
-//                                    DB().deleteAdv(uid: uid)
-//                                    self.name = ""
-//                                    self.category = ""
-//                                    self.city = ""
-//                                    self.price = ""
-//                                    self.phone = ""
-//                                    self.description = ""
-//                                    self.createdAt = ""
-//                                    presentationMode.wrappedValue.dismiss()
-//                                    
-//                                }),
-//                                secondaryButton: .cancel(Text("Отмена"))
-//                            )
-//                        }
-//                        Spacer()
-//                }
-//                
-//            }
         }
-//        .alert(isPresented: $businessWarning) {
-//            Alert(
-//                title: Text("Создавая объявление, информация из Вашего профиля становится также доступной"),
-//                dismissButton: .default(Text("Ок"))
-//            )
-//        }
         .onAppear {
-
-//            businessWarning = true
-//            if Pref.userDefault.bool(forKey: "adv") {
-//                businessWarning = false
-//            }
-//            Pref.userDefault.set(true, forKey: "adv")
-//            Pref.userDefault.synchronize()
-//            if !checked {
-//                DB().getMultiImages(uid: uid + "ADV", directory: directory) { images in
-//                    self.photos = images
-//                    self.checked = true
-//                }
-//            }
         }
     }
     
