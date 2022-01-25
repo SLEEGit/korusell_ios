@@ -166,12 +166,6 @@ class DB: ObservableObject {
     }
     
     func getUser(uid: String, completion: @escaping (User) -> ()) {
-            
-//        ref.reference(withPath: "users").child(uid).getData(completion:  { error, snapshot in
-//            guard error == nil else {
-//                print(error!.localizedDescription)
-//                return
-//            }
         ref.reference(withPath: "users").child(uid).observeSingleEvent(of: .value, with: { snapshot in
             if let values = snapshot.value as? [String:Any] {
                 let user = User(dictionary: values)

@@ -121,7 +121,8 @@ class Authentication {
             }
             if let user = result?.user {
                 let created_date = Util().dateByTimeZone()
-                DB().createUserInDB(user: user, email: email, created_date: created_date, phone: phone) {
+                FireStore().createUserInDB(user: user, email: email, created_date: created_date, phone: phone) {
+                    DB().createUserInDB(user: user, email: email, created_date: created_date, phone: phone) {}
                     Pref.registerCompletion = "success"
                     completion()
                 }

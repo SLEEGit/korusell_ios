@@ -39,6 +39,7 @@ struct ProfileView: View {
 
     @StateObject var advManager = AdvManager()
     @StateObject var serviceManager = ServiceManager()
+    @StateObject var firestore = FireStore()
     @State var list: [Adv] = []
     @State var count: Int = 0
     
@@ -184,13 +185,17 @@ struct ProfileView: View {
             
         }
         .onAppear {
-            DB().getUser(uid: user.uid) { user in
+            firestore.getUser(uid: user.uid) { user in
                 name = user.name ?? ""
                 phone = user.phone ?? ""
                 email = user.email
             }
-            DB().updateLastLogin(user: user, last_login: Util().dateByTimeZone()) {}
-            
+//            DB().getUser(uid: user.uid) { user in
+//                name = user.name ?? ""
+//                phone = user.phone ?? ""
+//                email = user.email
+//            }
+            firestore.updateLastLogin(user: user, last_login: Util().dateByTimeZone()) {}
 //            DB().getMyBusiness(uid: user.uid) { business in
 //                print("getting business in profile")
 //                print(business)

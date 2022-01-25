@@ -11,6 +11,63 @@ import FirebaseFirestoreSwift
 import FirebaseAuth
 import SwiftUI
 
+class FireStore: ObservableObject {
+    let db = Firestore.firestore()
+    
+    func getUser(uid: String, completion: @escaping (User) -> ()) {
+        db.collection("users").document(Auth.auth().currentUser?.uid ?? "").getDocument { (document, error) in
+            if let document = document, document.exists {
+                let values = document.data()!
+                let user = User(dictionary: values)
+                completion(user)
+            } else {
+                print("User does not exist")
+            }
+        }
+    }
+    
+    func createUserInDB(user: FirebaseAuth.User, email: String = "", name: String = "", created_date: String = "", phone: String = "", completion: @escaping () -> Void) {
+        db.collection("users").document(user.uid).setData(["uid" : user.uid, "email" : email, "name" : name, "created_date" : created_date, "phone" : phone])
+        DispatchQueue.main.async {
+            completion()
+        }
+    }
+    
+    func updateLastLogin(user: FirebaseAuth.User, last_login: String, completion: @escaping () -> Void) {
+        db.collection("users").document(user.uid).updateData(["last_login" : last_login])
+            DispatchQueue.main.async {
+                completion()
+            }
+    }
+    
+    func addNamePhone(user: FirebaseAuth.User, name: String, phone: String, completion: @escaping () -> Void) {
+        db.collection("users").document(user.uid).updateData(["name" : name, "phone" : phone])
+            DispatchQueue.main.async {
+                completion()
+            }
+    }
+    
+    func deleteAccount(uid: String, completion: @escaping () -> Void) {
+        DB().deleteImage(uid: uid, directory: "avatars")
+        db.collection("users").document(uid).delete()
+        ServiceManager().deleteService(uid: uid) {}
+        AdvManager().deleteAdv(uid: uid) {}
+        let user = Auth.auth().currentUser
+        
+        user?.delete { error in
+            if let error = error {
+                print("Error on deleting user:: \(error)")
+                completion()
+            } else {
+                print("\(String(describing: user)) successfully deleted")
+                completion()
+            }
+        }
+    }
+    
+}
+
+
 class MessagesManager: ObservableObject {
     @Published private(set) var messages: [Message] = []
     @Published private(set) var lastMessageId: String = ""

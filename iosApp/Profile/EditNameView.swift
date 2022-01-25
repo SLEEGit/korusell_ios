@@ -15,6 +15,7 @@ struct EditNameView: View {
     @State private var showingAlert = false
     @ObservedObject var logging: Logging
     @Environment(\.presentationMode) var presentationMode: Binding<PresentationMode>
+    @StateObject var firestore = FireStore()
     
     var body: some View {
         Form {
@@ -29,9 +30,8 @@ struct EditNameView: View {
                 HStack {
                     Spacer()
                     Button(action: {
-                        DB().addNamePhone(user: user, name: name, phone: phone) {
+                        firestore.addNamePhone(user: user, name: name, phone: phone) {
                             showingAlert = true
-
                         }
                     }, label: {
                         Text("Обновить данные")
@@ -58,8 +58,8 @@ struct EditNameView: View {
                             Alert(
                                 title: Text("Ваш аккаунт будет удален! Вся информация будет утеряна!"),
                                 primaryButton: .destructive(Text("Удалить аккаунт"), action: {
-                                    
-                                    DB().deleteAccount(uid: user.uid) {
+                                    firestore.deleteAccount(uid: user.uid) {
+//                                    DB().deleteAccount(uid: user.uid) {
                                         Authentication().signOut() {
                                             logging.isSignedIn = false
                                         }
