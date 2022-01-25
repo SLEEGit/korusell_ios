@@ -22,7 +22,7 @@ struct ServiceSubView: View {
     var body: some View {
         List {
             // Добавить логику для других городов и переходить на объявления с @StateObject чтобы убрать все фетчи после изменений
-            ForEach(serviceManager.services, id: \.uid) { service in
+            ForEach(serviceManager.services, id: \.name) { service in
                 NavigationLink(destination: ServiceView(service: service)) {
                     ExpandedService(service: service, image: image)
                 }

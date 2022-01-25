@@ -52,17 +52,16 @@ struct OneWorkView: View {
 }
 
 struct WorkList: View {
-    @StateObject private var session = DB()
-    @State var list: [Adv] = []
     @State var categoryName: String = "🛠"
     @State var city: String = "all"
     @State var isLoading: Bool = true
     @State var subcategory: String = "all"
+    @StateObject var advManager = AdvManager()
     
     var body: some View {
         ZStack {
             List {
-                ForEach(self.list, id: \.id) { adv in
+                ForEach(self.advManager.workAdvs, id: \.id) { adv in
                     NavigationLink(destination: AdvDetailsView(adv: adv)) {
                         OneWorkView(adv: adv)
                     }
@@ -74,48 +73,48 @@ struct WorkList: View {
                             Group {                   
                                 Button("🛠 Вся Работа") {
                                     self.categoryName = "🛠"
-                                    self.subcategory = "all"
-                                    self.list = Util().filterWork(city: city, subcategory: subcategory, unsortedList: globalAdv)
+                                    self.advManager.subcategory = "all"
+                                    self.advManager.getAdvs()
                                 }
                                 Button("🏭 Завод") {
-                                    self.categoryName = "🏭"
-                                    self.subcategory = "factory"
-                                    self.list = Util().filterWork(city: city, subcategory: subcategory, unsortedList: globalAdv)
+                                    self.categoryName = "🏭 "
+                                    self.advManager.subcategory = "factory"
+                                    self.advManager.getAdvs()
                                 }
                                 Button("👷🏻‍♀️ Стройка") {
                                     self.categoryName = "👷🏻‍♀️"
-                                    self.subcategory = "construction"
-                                    self.list = Util().filterWork(city: city, subcategory: subcategory, unsortedList: globalAdv)
+                                    self.advManager.subcategory = "construction"
+                                    self.advManager.getAdvs()
                                 }
                                 Button("🏩 Мотель") {
                                     self.categoryName = "🏩"
-                                    self.subcategory = "motel"
-                                    self.list = Util().filterWork(city: city, subcategory: subcategory, unsortedList: globalAdv)
+                                    self.advManager.subcategory = "motel"
+                                    self.advManager.getAdvs()
                                 }
                                 Button("🍽 Общепит") {
                                     self.categoryName = "🍽"
-                                    self.subcategory = "cafe"
-                                    self.list = Util().filterWork(city: city, subcategory: subcategory, unsortedList: globalAdv)
+                                    self.advManager.subcategory = "cafe"
+                                    self.advManager.getAdvs()
                                 }
                                 Button("📦 Почта/Доставка") {
                                     self.categoryName = "📦"
-                                    self.subcategory = "delivery"
-                                    self.list = Util().filterWork(city: city, subcategory: subcategory, unsortedList: globalAdv)
+                                    self.advManager.subcategory = "delivery"
+                                    self.advManager.getAdvs()
                                 }
                                 Button("🧑🏽‍🌾 Сельхоз работы") {
                                     self.categoryName = "🧑🏽‍🌾"
-                                    self.subcategory = "farm"
-                                    self.list = Util().filterWork(city: city, subcategory: subcategory, unsortedList: globalAdv)
+                                    self.advManager.subcategory = "farm"
+                                    self.advManager.getAdvs()
                                 }
                                 Button("💼 Работа в офисе") {
                                     self.categoryName = "💼"
-                                    self.subcategory = "office"
-                                    self.list = Util().filterWork(city: city, subcategory: subcategory, unsortedList: globalAdv)
+                                    self.advManager.subcategory = "office"
+                                    self.advManager.getAdvs()
                                 }
                                 Button("👨‍🚀 Другая работа") {
                                     self.categoryName = "👨‍🚀"
-                                    self.subcategory = "otherwork"
-                                    self.list = Util().filterWork(city: city, subcategory: subcategory, unsortedList: globalAdv)
+                                    self.advManager.subcategory = "otherwork"
+                                    self.advManager.getAdvs()
                                 }
                             }
                         } label: {
@@ -129,57 +128,57 @@ struct WorkList: View {
                         Menu {
                             Button("Все города") {
                                 globalCity = "Все города"
-                                self.city = globalCity
-                                self.list = Util().filterWork(city: city, subcategory: subcategory, unsortedList: globalAdv)
+                                self.advManager.city = globalCity
+                                self.advManager.getAdvs()
                             }
                             Button("Ансан") {
                                 globalCity = "Ансан"
-                                self.city = globalCity
-                                self.list = Util().filterWork(city: city, subcategory: subcategory, unsortedList: globalAdv)
+                                self.advManager.city = globalCity
+                                self.advManager.getAdvs()
                             }
                             Button("Хвасонг") {
                                 globalCity = "Хвасонг"
-                                self.city = globalCity
-                                self.list = Util().filterWork(city: city, subcategory: subcategory, unsortedList: globalAdv)
+                                self.advManager.city = globalCity
+                                self.advManager.getAdvs()
                             }
                             Button("Инчхон") {
                                 globalCity = "Инчхон"
-                                self.city = globalCity
-                                self.list = Util().filterWork(city: city, subcategory: subcategory, unsortedList: globalAdv)
+                                self.advManager.city = globalCity
+                                self.advManager.getAdvs()
                             }
                             Button("Сеул") {
                                 globalCity = "Сеул"
-                                self.city = globalCity
-                                self.list = Util().filterWork(city: city, subcategory: subcategory, unsortedList: globalAdv)
+                                self.advManager.city = globalCity
+                                self.advManager.getAdvs()
                             }
                             Button("Сувон") {
                                 globalCity = "Сувон"
-                                self.city = globalCity
-                                self.list = Util().filterWork(city: city, subcategory: subcategory, unsortedList: globalAdv)
+                                self.advManager.city = globalCity
+                                self.advManager.getAdvs()
                             }
                             Button("Асан") {
                                 globalCity = "Асан"
-                                self.city = globalCity
-                                self.list = Util().filterWork(city: city, subcategory: subcategory, unsortedList: globalAdv)
+                                self.advManager.city = globalCity
+                                self.advManager.getAdvs()
                             }
                             Button("Чхонан") {
                                 globalCity = "Чхонан"
-                                self.city = globalCity
-                                self.list = Util().filterWork(city: city, subcategory: subcategory, unsortedList: globalAdv)
+                                self.advManager.city = globalCity
+                                self.advManager.getAdvs()
                             }
                             Button("Чхонджу") {
                                 globalCity = "Чхонджу"
-                                self.city = globalCity
-                                self.list = Util().filterWork(city: city, subcategory: subcategory, unsortedList: globalAdv)
+                                self.advManager.city = globalCity
+                                self.advManager.getAdvs()
                             }
                             Button("Другой город") {
                                 globalCity = "Другой город"
-                                self.city = globalCity
-                                self.list = Util().filterWork(city: city, subcategory: subcategory, unsortedList: globalAdv)
+                                self.advManager.city = globalCity
+                                self.advManager.getAdvs()
                             }
                         } label: {
                             HStack {
-                                Text(self.city)
+                                Text(globalCity)
                                     .font(.system(size: 15))
                             }
                         }
@@ -187,18 +186,10 @@ struct WorkList: View {
                 }
                 .onAppear {
                     self.city = globalCity
-                    DB().getAdvs(category: "all") { list in
-                        globalAdv = list
-                        //                включен/выключен фильтр
-                            .filter { $0.isActive == "1"}
-                            .sorted { $0.createdAt > $1.createdAt }
-                        
-                        // filter for search
-                        //                        .filter { $0.name.lowercased().contains("iphone") }
-                        
-                        self.list = Util().filterWork(city: city, subcategory: subcategory, unsortedList: globalAdv)
-                        self.isLoading = false
-                    }
+                    advManager.subcategory = subcategory
+                    advManager.city = globalCity
+                    self.advManager.getAdvs()
+                    self.isLoading = false
                 }
             if isLoading {
                 ProgressView().progressViewStyle(CircularProgressViewStyle(tint: Color("textColor")))

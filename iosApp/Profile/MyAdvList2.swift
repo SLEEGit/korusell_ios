@@ -10,10 +10,14 @@ import FirebaseAuth
 
 struct MyAdvList2: View {
     @StateObject private var session = DB()
-//    @State var list: [Adv] = []
+    //    @State var list: [Adv] = []
     @StateObject var advManager = AdvManager()
     @State var isLoading: Bool = true
     @State var showingAlertDelete: Bool = false
+    
+    @State var openAddAdv: Bool = false
+    @State var openAddWork: Bool = false
+    
     
     @State var myUID: String
     @State var newUid: String = ""
@@ -36,6 +40,8 @@ struct MyAdvList2: View {
     
     var body: some View {
         ZStack {
+            NavigationLink(destination: NewAdvView(uid: $myUID, name: $name, city: $city, price: $price, phone: $phone, description: $description, category: $category, updatedAt: $updatedAt, isActive: $isActive, subcategory: $subcategory, photos: $photos), isActive: $openAddAdv) {}
+            NavigationLink(destination: NewAdvView(uid: $myUID, name: $name, city: $city, price: $price, phone: $phone, description: $description, category: $category, updatedAt: $updatedAt, isActive: $isActive, subcategory: $subcategory, photos: $photos), isActive: $openAddWork) {}
             List {
                 Section {
                     if count != 0 {
@@ -44,13 +50,13 @@ struct MyAdvList2: View {
                         Text("Нажмите 'Добавить', чтобы добавить объявление")
                     }
                 }
-                    .padding()
-                    .foregroundColor(Color("graytext"))
-                    .font(.system(size: 15))
-                    .frame(maxWidth: .infinity, maxHeight: .infinity, alignment: .leading)
-                    .listRowInsets(EdgeInsets())
-                    .background(Color(UIColor.systemGroupedBackground).opacity(0.1))
-                    .background(Color(UIColor.systemGroupedBackground))
+                .padding()
+                .foregroundColor(Color("graytext"))
+                .font(.system(size: 15))
+                .frame(maxWidth: .infinity, maxHeight: .infinity, alignment: .leading)
+                .listRowInsets(EdgeInsets())
+                .background(Color(UIColor.systemGroupedBackground).opacity(0.1))
+                .background(Color(UIColor.systemGroupedBackground))
                 
                 ForEach(advManager.myAdvs, id: \.uid) { adv in
                     NavigationLink(destination: InnerAdvertisement(adv: adv)) {
@@ -72,13 +78,13 @@ struct MyAdvList2: View {
                                     title: Text("Вы уверены что хотите удалить Ваше объявление?"),
                                     primaryButton: .destructive(Text("Удалить"), action: {
                                         advManager.deleteAdv(uid: adv.uid) {}
-//                                        DB().deleteAdv(uid: adv.uid) {
-//                                            DB().getAdvs(category: "all") { (list) in
-////                                                globalAdv = list.sorted { $0.createdAt > $1.createdAt }
-////                                                self.list = globalAdv.filter { $0.uid.contains(myUID) }
-////                                                count = self.list.count
-//                                            }
-//                                        }
+                                        //                                        DB().deleteAdv(uid: adv.uid) {
+                                        //                                            DB().getAdvs(category: "all") { (list) in
+                                        ////                                                globalAdv = list.sorted { $0.createdAt > $1.createdAt }
+                                        ////                                                self.list = globalAdv.filter { $0.uid.contains(myUID) }
+                                        ////                                                count = self.list.count
+                                        //                                            }
+                                        //                                        }
                                     }),
                                     secondaryButton: .cancel(Text("Отмена"))
                                 )
@@ -86,26 +92,36 @@ struct MyAdvList2: View {
                     }
                 }
             }
-                .navigationTitle("Мои Объявления")
-                .onAppear {
-                    advManager.getMyAdvs() {
-                        count = advManager.myAdvs.count
-                        self.isLoading = false
-                    }
+            .navigationTitle("Мои Объявления")
+            .onAppear {
+                advManager.getMyAdvs() {
+                    count = advManager.myAdvs.count
+                    self.isLoading = false
                 }
+            }
             .disabled(isLoading)
             if isLoading {
                 ProgressView().progressViewStyle(CircularProgressViewStyle(tint: Color("textColor")))
                     .background(Color(UIColor.systemGroupedBackground).opacity(0.1))
             }
         }
-        .navigationBarItems(trailing:
-                                NavigationLink(destination: NewAdvView(uid: $myUID, name: $name, city: $city, price: $price, phone: $phone, description: $description, category: $category, updatedAt: $updatedAt, isActive: $isActive, subcategory: $subcategory, photos: $photos)) {
-                    Text("Добавить")
+        .toolbar {
+            ToolbarItemGroup(placement: .navigationBarTrailing) {
+                Menu {
+                    Button("Добавить Объявление") {
+                        openAddAdv.toggle()
+                    }
+                    Button("Добавить Вакансию") {
+                        openAddWork.toggle()
+                    }
+                } label: {
+                    HStack {
+                        Text("Добавить")
+                            .font(.system(size: 15))
+                    }
                 }
-            
-                
-        )
+            }
+        }
     }
     
 }
@@ -117,7 +133,7 @@ struct MyAdvView2: View {
     
     var body: some View {
         HStack(alignment: .top) {
-//            UrlImageView(urlString: post.uid  + "ADV" + "0", directory: "advImages")
+            //            UrlImageView(urlString: post.uid  + "ADV" + "0", directory: "advImages")
             Image(uiImage: image)
                 .resizable()
                 .scaledToFit()

@@ -148,8 +148,6 @@ class MessagesManager: ObservableObject {
 
 class ServiceManager: ObservableObject {
     @Published private(set) var services: [Service] = []
-    @Published var openServices: [Service] = []
-//    @Published var myService: Service
     @Published var city: String = "Все города"
     @Published var category: String = "all"
     let db = Firestore.firestore()
@@ -175,9 +173,7 @@ class ServiceManager: ObservableObject {
                 }
             }
             
-//            self.openServices = self.services.filter { $0.city == self.city && $0.category == self.category }
-            
-            self.services = self.services.shuffled()
+//            self.services = self.services.shuffled()
             
             switch self.category {
             case "all":
@@ -291,11 +287,12 @@ class ServiceManager: ObservableObject {
 
 class AdvManager: ObservableObject {
     @Published private(set) var advs: [Adv] = []
-    @Published var openAdv: [Adv] = []
+    @Published var workAdvs: [Adv] = []
     @Published private(set) var myAdvs: [Adv] = []
     
     @Published var city: String = "Все города"
     @Published var category: String = "all"
+    @Published var subcategory: String = "all"
     let db = Firestore.firestore()
 
     init() {
@@ -309,6 +306,17 @@ class AdvManager: ObservableObject {
                 print("Error fetching documents: \(String(describing: error))")
                 return
             }
+            
+            self.workAdvs = documents.compactMap { document -> Adv? in
+                do {
+                    return try document.data(as: Adv.self)
+                } catch {
+                    print("Error decoding document into Adv: \(error)")
+                    return nil
+                }
+            }
+            
+            self.workAdvs = self.workAdvs.filter { $0.isActive == "1" &&  $0.category == "work" }.sorted { $0.createdAt > $1.createdAt }
             
             self.advs = documents.compactMap { document -> Adv? in
                 do {
@@ -356,28 +364,61 @@ class AdvManager: ObservableObject {
             switch self.city {
             case "Все города":
                 self.advs = self.advs
+                self.workAdvs = self.workAdvs
             case "Ансан":
                 self.advs = self.advs.filter { $0.city == "Ансан" || $0.city == "admin"}
+                self.workAdvs = self.workAdvs.filter { $0.city == "Ансан" || $0.city == "admin"}
             case "Хвасонг":
                 self.advs = self.advs.filter { $0.city == "Хвасонг" || $0.city == "admin"}
+                self.workAdvs = self.workAdvs.filter { $0.city == "Хвасонг" || $0.city == "admin"}
             case "Сеул":
                 self.advs = self.advs.filter { $0.city == "Сеул" || $0.city == "admin"}
+                self.workAdvs = self.workAdvs.filter { $0.city == "Сеул" || $0.city == "admin"}
             case "Инчхон":
                 self.advs = self.advs.filter { $0.city == "Инчхон" || $0.city == "admin"}
+                self.workAdvs = self.workAdvs.filter { $0.city == "Инчхон" || $0.city == "admin"}
             case "Асан":
                 self.advs = self.advs.filter { $0.city == "Асан" || $0.city == "admin"}
+                self.workAdvs = self.workAdvs.filter { $0.city == "Асан" || $0.city == "admin"}
             case "Сувон":
                 self.advs = self.advs.filter { $0.city == "Сувон" || $0.city == "admin"}
+                self.workAdvs = self.workAdvs.filter { $0.city == "Сувон" || $0.city == "admin"}
             case "Чхонан":
                 self.advs = self.advs.filter { $0.city == "Чхонан" || $0.city == "admin"}
+                self.workAdvs = self.workAdvs.filter { $0.city == "Чхонан" || $0.city == "admin"}
             case "Чхонджу":
                 self.advs = self.advs.filter { $0.city == "Чхонджу" || $0.city == "admin"}
+                self.workAdvs = self.workAdvs.filter { $0.city == "Чхонджу" || $0.city == "admin"}
             case "Другой город":
                 self.advs = self.advs.filter { $0.city != "Чхонан" && $0.city != "Хвасонг" && $0.city != "Ансан" && $0.city != "Асан" && $0.city != "Сеул" && $0.city != "Инчхон" && $0.city != "Хвасонг" && $0.city != "Сувон" && $0.city != "Чхонджу" || $0.city == "admin"}
+                self.workAdvs = self.workAdvs.filter { $0.city != "Чхонан" && $0.city != "Хвасонг" && $0.city != "Ансан" && $0.city != "Асан" && $0.city != "Сеул" && $0.city != "Инчхон" && $0.city != "Хвасонг" && $0.city != "Сувон" && $0.city != "Чхонджу" || $0.city == "admin"}
             default:
                 self.advs = self.advs.filter { $0.city == "nil" || $0.city == "admin"}
+                self.workAdvs = self.workAdvs.filter { $0.city == "nil" || $0.city == "admin"}
             }
             
+            switch self.subcategory {
+            case "all":
+                self.workAdvs = self.workAdvs.filter { $0.subcategory == "factory" || $0.subcategory == "construction" || $0.subcategory == "motel" || $0.subcategory == "cafe" || $0.subcategory == "farm" || $0.subcategory == "delivery" || $0.subcategory == "office" || $0.subcategory == "otherwork" }
+            case "factory":
+                self.workAdvs = self.workAdvs.filter { $0.subcategory == "factory" }
+            case "construction":
+                self.workAdvs = self.workAdvs.filter { $0.subcategory == "construction" }
+            case "motel":
+                self.workAdvs = self.workAdvs.filter { $0.subcategory == "motel" }
+            case "cafe":
+                self.workAdvs = self.workAdvs.filter { $0.subcategory == "cafe" }
+            case "farm":
+                self.workAdvs = self.workAdvs.filter { $0.subcategory == "farm" }
+            case "delivery":
+                self.workAdvs = self.workAdvs.filter { $0.subcategory == "delivery" }
+            case "office":
+                self.workAdvs = self.workAdvs.filter { $0.subcategory == "office" }
+            case "otherwork":
+                self.workAdvs = self.workAdvs.filter { $0.subcategory == "otherwork" }
+            default:
+                self.workAdvs = self.workAdvs.filter { $0.subcategory == "nil" }
+            }
         }
     }
     
