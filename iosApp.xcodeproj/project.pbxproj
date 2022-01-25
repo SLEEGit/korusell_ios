@@ -12,6 +12,8 @@
 		2515C94B2782B10F007C376F /* AdvSubView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2515C94A2782B10F007C376F /* AdvSubView.swift */; };
 		2515C94D2782B151007C376F /* AdvDetailsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2515C94C2782B151007C376F /* AdvDetailsView.swift */; };
 		2515C95727841754007C376F /* MultipleImagePicker.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2515C95627841754007C376F /* MultipleImagePicker.swift */; };
+		2522D7CE279FC69E008301E8 /* NewWorkView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2522D7CD279FC69E008301E8 /* NewWorkView.swift */; };
+		2522D7D0279FD2EE008301E8 /* CheckBoxToggleStyle.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2522D7CF279FD2ED008301E8 /* CheckBoxToggleStyle.swift */; };
 		253305C32754A7050061DD28 /* JSONParser.swift in Sources */ = {isa = PBXBuildFile; fileRef = 253305C22754A7050061DD28 /* JSONParser.swift */; };
 		253305CD27560E450061DD28 /* MenuItems.swift in Sources */ = {isa = PBXBuildFile; fileRef = 253305CC27560E440061DD28 /* MenuItems.swift */; };
 		253305CF27571F690061DD28 /* ServiceView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 253305CE27571F690061DD28 /* ServiceView.swift */; };
@@ -71,6 +73,8 @@
 		2515C94A2782B10F007C376F /* AdvSubView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AdvSubView.swift; sourceTree = "<group>"; };
 		2515C94C2782B151007C376F /* AdvDetailsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AdvDetailsView.swift; sourceTree = "<group>"; };
 		2515C95627841754007C376F /* MultipleImagePicker.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MultipleImagePicker.swift; sourceTree = "<group>"; };
+		2522D7CD279FC69E008301E8 /* NewWorkView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NewWorkView.swift; sourceTree = "<group>"; };
+		2522D7CF279FD2ED008301E8 /* CheckBoxToggleStyle.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CheckBoxToggleStyle.swift; sourceTree = "<group>"; };
 		253305C22754A7050061DD28 /* JSONParser.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = JSONParser.swift; sourceTree = "<group>"; };
 		253305CC27560E440061DD28 /* MenuItems.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MenuItems.swift; sourceTree = "<group>"; };
 		253305CE27571F690061DD28 /* ServiceView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ServiceView.swift; sourceTree = "<group>"; };
@@ -256,6 +260,7 @@
 				253305CC27560E440061DD28 /* MenuItems.swift */,
 				253305C22754A7050061DD28 /* JSONParser.swift */,
 				25F9B33B2798F6300018662D /* SegmentedViewController.swift */,
+				2522D7CF279FD2ED008301E8 /* CheckBoxToggleStyle.swift */,
 			);
 			path = Utils;
 			sourceTree = "<group>";
@@ -269,6 +274,7 @@
 				2592E23227916AFC00508B01 /* MyAdvList2.swift */,
 				257CD81827928C9F0000EF95 /* InnerAdvertisement.swift */,
 				25F9B33D2799011F0018662D /* NewAdvView.swift */,
+				2522D7CD279FC69E008301E8 /* NewWorkView.swift */,
 				2542E3482774664800883E0D /* EditAdvView.swift */,
 				254084FD2781602D00D30CF5 /* AddLinksView.swift */,
 				25F9B34A279A4B150018662D /* Chatting */,
@@ -465,6 +471,7 @@
 			files = (
 				25ED2B632771CE1600575FEB /* ImageCache.swift in Sources */,
 				25441F8C2767260D00B6E240 /* MapView.swift in Sources */,
+				2522D7D0279FD2EE008301E8 /* CheckBoxToggleStyle.swift in Sources */,
 				259936142769E33900F468B6 /* RegistrationView.swift in Sources */,
 				25F9B345279A49B40018662D /* Message.swift in Sources */,
 				254084FE2781602D00D30CF5 /* AddLinksView.swift in Sources */,
@@ -481,6 +488,7 @@
 				25C6DB6B278C07BB0026ACE6 /* AdminPanelView.swift in Sources */,
 				256D58FF2761DA30002EDC6A /* ServiceMenuView.swift in Sources */,
 				257CD81D27965DAD0000EF95 /* ATTrackingHelper.swift in Sources */,
+				2522D7CE279FC69E008301E8 /* NewWorkView.swift in Sources */,
 				25E0BD23278E84080021A326 /* HomeView.swift in Sources */,
 				25973E02275B27CF00DC016B /* ServiceSubView.swift in Sources */,
 				25F9B343279A47580018662D /* Firestore.swift in Sources */,

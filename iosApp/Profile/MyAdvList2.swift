@@ -41,7 +41,7 @@ struct MyAdvList2: View {
     var body: some View {
         ZStack {
             NavigationLink(destination: NewAdvView(uid: $myUID, name: $name, city: $city, price: $price, phone: $phone, description: $description, category: $category, updatedAt: $updatedAt, isActive: $isActive, subcategory: $subcategory, photos: $photos), isActive: $openAddAdv) {}
-            NavigationLink(destination: NewAdvView(uid: $myUID, name: $name, city: $city, price: $price, phone: $phone, description: $description, category: $category, updatedAt: $updatedAt, isActive: $isActive, subcategory: $subcategory, photos: $photos), isActive: $openAddWork) {}
+            NavigationLink(destination: NewWorkView(uid: $myUID, name: $name, city: $city, price: $price, phone: $phone, description: $description, category: $category, updatedAt: $updatedAt, isActive: $isActive, subcategory: $subcategory, photos: $photos), isActive: $openAddWork) {}
             List {
                 Section {
                     if count != 0 {
