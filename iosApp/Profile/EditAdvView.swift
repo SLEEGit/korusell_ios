@@ -21,6 +21,8 @@ struct EditAdvView: View {
     @Binding var createdAt: String
     @Binding var isActive: String
     @Binding var subcategory: String
+    @Binding var visa: [String]
+    @Binding var gender: String
     
     @State var directory: String = "advImages"
     @State private var image = UIImage(named: "blank")!
@@ -193,7 +195,7 @@ struct EditAdvView: View {
                         self.images = String(photos.count)
                         postImages() {
                             deleteImages() {
-                                advManager.postAdv(adv: Adv(id: id.description, uid: uid, name: name, category: category, city: city, price: price, phone: phone, description: description, createdAt: createdAt, images: images, updatedAt: Util().dateByTimeZone(), isActive: "1", subcategory: subcategory)) {
+                                advManager.postAdv(adv: Adv(id: id.description, uid: uid, name: name, category: category, city: city, price: price, phone: phone, description: description, createdAt: createdAt, images: images, updatedAt: Util().dateByTimeZone(), isActive: "1", subcategory: subcategory, visa: visa, gender: gender)) {
 //                                    showingAlert = true
                                 }
                             }

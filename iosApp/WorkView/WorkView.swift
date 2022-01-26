@@ -20,36 +20,90 @@ struct WorkView: View {
 struct OneWorkView: View {
     let adv: Adv
     //    @State var width: CGFloat = 0
+    @State var visaString: String = ""
+    @State var icon: String = "🏭"
+//    @State var gender: String = ""
+    @State var shift: String = "🌞🌚"
     
     var body: some View {
-        HStack(alignment: .top) {
-            UrlImageView(urlString: adv.uid  + "ADV" + "0", directory: "advImages")
-                .scaledToFit()
-                .frame(width: 120, height: 100)
             VStack(alignment: .leading) {
-                Text(Util().formatDate(date: adv.createdAt))
-                    .padding(.leading, 4).padding(.trailing, 4).padding(.bottom, 3).padding(.top, 2)
-                    .font(.caption)
-                    .foregroundColor(Color.gray)
-                Text(adv.name)
-                    .lineLimit(2)
-                    .font(.headline)
-                    .padding(.leading, 4).padding(.trailing, 4).padding(.bottom, 2)
-                Text(adv.city)
-                    .foregroundColor(Color.gray)
-                    .lineLimit(5)
-                    .font(.caption)
-                    .padding(.leading, 4).padding(.trailing, 4).padding(.bottom, 2)
-                Text(adv.price)
+                    Text(adv.name)
+                        .lineLimit(2)
+                        .font(.headline)
+                        .padding(.leading, 4).padding(.trailing, 4).padding(.bottom, 2).padding(.top, 3)
+                Text("\u{20A9} \(adv.price)")
+                    .lineLimit(1)
                     .font(.title3)
-                Spacer()
-                
-            }.frame(height: 100, alignment: .leading)
-        }.frame(alignment: .top)
+                    .padding(.leading, 4).padding(.trailing, 4).padding(.bottom, 2)
+                HStack {
+                    Text("Город: ")
+                        .foregroundColor(Color.gray)
+                    Text(adv.city)
+                        .lineLimit(1)
+                        .font(.body)
+                }.padding(.leading, 4).padding(.trailing, 4).padding(.bottom, 2)
+                HStack {
+                    Text(Util().formatDate(date: adv.createdAt))
+                        .font(.caption)
+                        .foregroundColor(Color.gray)
+                    Spacer()
+                    VStack {
+                        Text("")
+                            .font(.caption)
+                        Text(icon)
+                    }
+                    if adv.gender != "" {
+                        VStack {
+                            Text("Пол")
+                                .font(.caption)
+                            Text(adv.gender)
+                        }
+                    }
+                    if shift != "" {
+                        VStack {
+                            Text("Смена")
+                                .font(.caption)
+                            Text(shift)
+                        }
+                    }
+                    if visaString != "" {
+                        VStack {
+                            Text("Виза")
+                                .font(.caption)
+                            Text(self.visaString)
+                                .font(.headline)
+                        }
+                    }
+                    
+                }.padding(.leading, 4).padding(.trailing, 4).padding(.bottom, 3)
+            }.frame(alignment: .leading)
             .onAppear {
+                if adv.subcategory == "factory" {
+                    self.icon = "🏭"
+                } else if adv.subcategory == "construction" {
+                    self.icon = "👷🏻‍♀️"
+                } else if adv.subcategory == "motel" {
+                    self.icon = "🏩"
+                } else if adv.subcategory == "cafe" {
+                    self.icon = "🍽"
+                } else if adv.subcategory == "farm" {
+                    self.icon = "🧑🏽‍🌾"
+                } else if adv.subcategory == "delivery" {
+                    self.icon = "📦"
+                } else if adv.subcategory == "office" {
+                    self.icon = "💼"
+                } else if adv.subcategory == "otherwork" {
+                    self.icon = "👨‍🚀"
+                }
+                
+                for i in adv.visa {
+                    self.visaString.append("\(i) ")
+                }
+                
             }
     }
 }
+
 
 struct WorkList: View {
     @State var categoryName: String = "🛠"
@@ -70,7 +124,7 @@ struct WorkList: View {
                 .toolbar {
                     ToolbarItemGroup(placement: .navigationBarLeading) {
                         Menu {
-                            Group {                   
+                            Group {
                                 Button("🛠 Вся Работа") {
                                     self.categoryName = "🛠"
                                     self.advManager.subcategory = "all"
@@ -198,4 +252,6 @@ struct WorkList: View {
         }
     }
 }
+
+
 
