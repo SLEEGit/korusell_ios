@@ -20,6 +20,8 @@ struct NewAdvView: View {
     @Binding var subcategory: String
     @Binding var visa: [String]
     @Binding var gender: String
+    @Binding var shift: String
+    @Binding var age: [String]
     
     @State var directory: String = "advImages"
     @State private var image = UIImage(named: "blank")!
@@ -187,7 +189,7 @@ struct NewAdvView: View {
                     Spacer()
                     Button("Создать") {
                         self.images = String(photos.count)
-                        AdvManager().postAdv(adv: Adv(id: uid + Util().dateForAdv(date: Util().dateByTimeZone()), uid: uid + Util().dateForAdv(date: Util().dateByTimeZone()), name: name, category: category, city: city, price: price, phone: phone, description: description, createdAt: Util().dateByTimeZone(), images: images, updatedAt: Util().dateByTimeZone(), isActive: "1", subcategory: subcategory, visa: visa, gender: gender)) {}
+                        AdvManager().postAdv(adv: Adv(id: uid + Util().dateForAdv(date: Util().dateByTimeZone()), uid: uid + Util().dateForAdv(date: Util().dateByTimeZone()), name: name, category: category, city: city, price: price, phone: phone, description: description, createdAt: Util().dateByTimeZone(), images: images, updatedAt: Util().dateByTimeZone(), isActive: "1", subcategory: subcategory, visa: visa, gender: gender, shift: shift, age: age)) {}
 //                        DB().createAdv(uid: uid, name: name, category: category, city: city, price: price, phone: phone, descrition: description, createdAt: Util().dateByTimeZone(), images: images, updatedAt: Util().dateByTimeZone(), isActive: "1", subcategory: subcategory) {
                             postImages() {
                                 deleteImages() {

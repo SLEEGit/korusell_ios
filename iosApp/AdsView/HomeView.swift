@@ -221,7 +221,7 @@ struct AdvList: View {
                 .onAppear {
                     self.city = globalCity
                     advManager.city = globalCity
-                    self.advManager.getAdvs()
+//                    self.advManager.getAdvs()
                         self.isLoading = false
                     
                 }

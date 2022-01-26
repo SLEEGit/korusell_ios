@@ -24,6 +24,8 @@ struct Adv: Codable, Identifiable {
     let subcategory: String
     let visa: [String]
     let gender: String
+    let shift: String
+    let age: [String]
     
     //    let image: [String]
     
@@ -43,9 +45,11 @@ struct Adv: Codable, Identifiable {
         self.subcategory = dictionary["subcategory"] as? String ?? ""
         self.visa = dictionary["visa"] as? [String] ?? []
         self.gender = dictionary["gender"] as? String ?? ""
+        self.shift = dictionary["shift"] as? String ?? ""
+        self.age = dictionary["age"] as? [String] ?? []
     }
     
-    init(id: String, uid: String, name: String, category: String, city: String, price: String, phone: String, description: String, createdAt: String, images: String, updatedAt: String, isActive: String, subcategory: String, visa: [String], gender: String) {
+    init(id: String, uid: String, name: String, category: String, city: String, price: String, phone: String, description: String, createdAt: String, images: String, updatedAt: String, isActive: String, subcategory: String, visa: [String], gender: String, shift: String, age: [String]) {
 //        self.id = id
         self.uid = uid
         self.name = name
@@ -61,6 +65,8 @@ struct Adv: Codable, Identifiable {
         self.subcategory = subcategory
         self.visa = visa
         self.gender = gender
+        self.shift = shift
+        self.age = age
     }
 }
 

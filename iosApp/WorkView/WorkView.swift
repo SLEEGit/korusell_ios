@@ -19,64 +19,68 @@ struct WorkView: View {
 
 struct OneWorkView: View {
     let adv: Adv
-    //    @State var width: CGFloat = 0
-    @State var visaString: String = ""
-    @State var icon: String = "🏭"
-//    @State var gender: String = ""
-    @State var shift: String = "🌞🌚"
+    @State var icon: String = ""
     
     var body: some View {
-            VStack(alignment: .leading) {
-                    Text(adv.name)
-                        .lineLimit(2)
-                        .font(.headline)
-                        .padding(.leading, 4).padding(.trailing, 4).padding(.bottom, 2).padding(.top, 3)
-                Text("\u{20A9} \(adv.price)")
+        VStack(alignment: .leading) {
+            HStack {
+                Text("Город:")
+                    .foregroundColor(Color.gray)
+                Text(adv.city)
                     .lineLimit(1)
-                    .font(.title3)
-                    .padding(.leading, 4).padding(.trailing, 4).padding(.bottom, 2)
-                HStack {
-                    Text("Город: ")
-                        .foregroundColor(Color.gray)
-                    Text(adv.city)
-                        .lineLimit(1)
-                        .font(.body)
-                }.padding(.leading, 4).padding(.trailing, 4).padding(.bottom, 2)
-                HStack {
-                    Text(Util().formatDate(date: adv.createdAt))
+                    .font(.body)
+                Spacer()
+                Text(Util().formatDate(date: adv.createdAt))
+                    .font(.caption)
+                    .foregroundColor(Color.gray)
+            }.padding(.leading, 4).padding(.trailing, 4).padding(.bottom, 2).padding(.top, 3)
+            Text(adv.name)
+                .lineLimit(2)
+                .font(.headline)
+                .padding(.leading, 4).padding(.trailing, 4).padding(.bottom, 2)
+            Text(adv.price)
+                .lineLimit(1)
+                .font(.title3)
+                .padding(.leading, 4).padding(.trailing, 4).padding(.bottom, 2)
+            HStack {
+                VStack {
+                    Text("")
                         .font(.caption)
-                        .foregroundColor(Color.gray)
-                    Spacer()
+                    Text(icon)
+                }
+                if adv.gender != "" {
                     VStack {
-                        Text("")
+                        Text("Пол")
                             .font(.caption)
-                        Text(icon)
+                        Text(adv.gender)
                     }
-                    if adv.gender != "" {
-                        VStack {
-                            Text("Пол")
-                                .font(.caption)
-                            Text(adv.gender)
-                        }
+                }
+                if adv.shift != "" {
+                    VStack {
+                        Text("Смена")
+                            .font(.caption)
+                        Text(adv.shift)
                     }
-                    if shift != "" {
-                        VStack {
-                            Text("Смена")
-                                .font(.caption)
-                            Text(shift)
-                        }
+                }
+                if !adv.age.isEmpty {
+                    VStack {
+                        Text("Возвраст")
+                            .font(.caption)
+                        Text(adv.age.joined(separator: "-"))
+                            .font(.headline)
                     }
-                    if visaString != "" {
-                        VStack {
-                            Text("Виза")
-                                .font(.caption)
-                            Text(self.visaString)
-                                .font(.headline)
-                        }
+                }
+                if !adv.visa.isEmpty {
+                    VStack {
+                        Text("Виза")
+                            .font(.caption)
+                        Text(adv.visa.joined(separator: ","))
+                            .font(.headline)
                     }
-                    
-                }.padding(.leading, 4).padding(.trailing, 4).padding(.bottom, 3)
-            }.frame(alignment: .leading)
+                }
+                
+            }.padding(.leading, 4).padding(.trailing, 4).padding(.bottom, 3)
+        }.frame(alignment: .leading)
             .onAppear {
                 if adv.subcategory == "factory" {
                     self.icon = "🏭"
@@ -95,11 +99,6 @@ struct OneWorkView: View {
                 } else if adv.subcategory == "otherwork" {
                     self.icon = "👨‍🚀"
                 }
-                
-                for i in adv.visa {
-                    self.visaString.append("\(i) ")
-                }
-                
             }
     }
 }
@@ -116,7 +115,7 @@ struct WorkList: View {
         ZStack {
             List {
                 ForEach(self.advManager.workAdvs, id: \.id) { adv in
-                    NavigationLink(destination: AdvDetailsView(adv: adv)) {
+                    NavigationLink(destination: WorkViewDetails(adv: adv)) {
                         OneWorkView(adv: adv)
                     }
                 }
@@ -242,7 +241,7 @@ struct WorkList: View {
                     self.city = globalCity
                     advManager.subcategory = subcategory
                     advManager.city = globalCity
-                    self.advManager.getAdvs()
+                    //                    self.advManager.getAdvs()
                     self.isLoading = false
                 }
             if isLoading {

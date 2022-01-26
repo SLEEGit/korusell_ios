@@ -35,6 +35,8 @@ struct MyAdvList2: View {
     @State var subcategory: String = "subcategory"
     @State var visa: [String] = []
     @State var gender: String = "gender"
+    @State var shift: String = "shift"
+    @State var age: [String] = []
     
     @State private var photos: [UIImage] = []
     
@@ -42,8 +44,8 @@ struct MyAdvList2: View {
     
     var body: some View {
         ZStack {
-            NavigationLink(destination: NewAdvView(uid: $myUID, name: $name, city: $city, price: $price, phone: $phone, description: $description, category: $category, updatedAt: $updatedAt, isActive: $isActive, subcategory: $subcategory, visa: $visa, gender: $gender, photos: $photos), isActive: $openAddAdv) {}
-            NavigationLink(destination: NewWorkView(uid: $myUID, name: $name, city: $city, price: $price, phone: $phone, description: $description, category: $category, updatedAt: $updatedAt, isActive: $isActive, subcategory: $subcategory, visa: $visa, gender: $gender, photos: $photos), isActive: $openAddWork) {}
+            NavigationLink(destination: NewAdvView(uid: $myUID, name: $name, city: $city, price: $price, phone: $phone, description: $description, category: $category, updatedAt: $updatedAt, isActive: $isActive, subcategory: $subcategory, visa: $visa, gender: $gender, shift: $shift, age: $age, photos: $photos), isActive: $openAddAdv) {}
+            NavigationLink(destination: NewWorkView(uid: $myUID, name: $name, city: $city, price: $price, phone: $phone, description: $description, category: $category, updatedAt: $updatedAt, isActive: $isActive, subcategory: $subcategory, visa: $visa, gender: $gender, shift: $shift, age: $age, photos: $photos), isActive: $openAddWork) {}
             List {
                 Section {
                     if count != 0 {

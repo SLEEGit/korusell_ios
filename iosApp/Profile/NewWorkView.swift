@@ -20,6 +20,8 @@ struct NewWorkView: View {
     @Binding var subcategory: String
     @Binding var visa: [String]
     @Binding var gender: String
+    @Binding var shift: String
+    @Binding var age: [String]
     
     @State var directory: String = "advImages"
     @State private var image = UIImage(named: "blank")!
@@ -42,7 +44,9 @@ struct NewWorkView: View {
     @State private var shift1 = false
     @State private var shift2 = false
     
-    @State private var shift: String = ""
+    @State private var stepperValue1: Int = 20
+    @State private var stepperValue2: Int = 50
+    
     
     @Environment(\.presentationMode) var presentationMode: Binding<PresentationMode>
     
@@ -154,6 +158,14 @@ struct NewWorkView: View {
                             .toggleStyle(CheckboxToggleStyle(style: .circle))
                     }
                 }
+                VStack(alignment: .leading) {
+                    Text("Возраст: ")
+                        .foregroundColor(.gray)
+                    HStack {
+                        Stepper("От: \(stepperValue1)", value: $stepperValue1, step: 5)
+                        Stepper("До: \(stepperValue2)", value: $stepperValue2, step: 5)
+                    }
+                }
                 
                 VStack(alignment: .leading) {
                     HStack {
@@ -183,7 +195,7 @@ struct NewWorkView: View {
                         }
                         if f1 && f4 && h2 && other {
                             visa.removeAll()
-                            visa.append("Все")
+                            visa.append("Любая")
                         }
                         if gender1 && !gender2 {
                             gender = "👱🏼‍♂️"
@@ -200,9 +212,11 @@ struct NewWorkView: View {
                         } else if shift1 && shift2 {
                             shift = "🌞🌚"
                         }
+                        age.append(String(stepperValue1))
+                        age.append(String(stepperValue2))
                         
                         DispatchQueue.main.asyncAfter(deadline: .now() + 0.1) {
-                        AdvManager().postAdv(adv: Adv(id: uid + Util().dateForAdv(date: Util().dateByTimeZone()), uid: uid + Util().dateForAdv(date: Util().dateByTimeZone()), name: name, category: "work", city: city, price: price, phone: phone, description: description, createdAt: Util().dateByTimeZone(), images: images, updatedAt: Util().dateByTimeZone(), isActive: "1", subcategory: subcategory, visa: visa, gender: gender)) {}
+                        AdvManager().postAdv(adv: Adv(id: uid + Util().dateForAdv(date: Util().dateByTimeZone()), uid: uid + Util().dateForAdv(date: Util().dateByTimeZone()), name: name, category: "work", city: city, price: price, phone: phone, description: description, createdAt: Util().dateByTimeZone(), images: images, updatedAt: Util().dateByTimeZone(), isActive: "1", subcategory: subcategory, visa: visa, gender: gender, shift: shift, age: age)) {}
                         showingAlert = true
                         }
                     }
@@ -224,5 +238,34 @@ struct NewWorkView: View {
 
 
 
+struct Pickers: View {
+    @State var selection1: Int = 0
+    @State var selection2: Int = 0
 
+    @State var integers: [Int] = [0, 1, 2, 3, 4, 5]
+
+    var body: some View {
+        GeometryReader { geometry in
+            HStack(spacing: 0) {
+                Picker(selection: self.$selection1, label: Text("Numbers")) {
+                    ForEach(0..<70) { integer in
+                        Text("\(integer)")
+                    }
+                }.pickerStyle(WheelPickerStyle())
+                .frame(maxWidth: geometry.size.width / 2, maxHeight: 100)
+                .clipped()
+                .border(Color.red)
+
+                Picker(selection: self.$selection2, label: Text("Numbers")) {
+                    ForEach(0..<70) { integer in
+                        Text("\(integer)")
+                    }
+                }.pickerStyle(WheelPickerStyle())
+                .frame(maxWidth: geometry.size.width / 2, maxHeight: 100)
+                .clipped()
+                .border(Color.blue)
+            }
+        }
+    }
+}
 

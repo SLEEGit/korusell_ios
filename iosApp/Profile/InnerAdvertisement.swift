@@ -47,6 +47,8 @@ struct ExpandedAdvDetails2: View {
     @State var subcategory: String = ""
     @State var visa: [String] = []
     @State var gender: String = ""
+    @State var shift: String = ""
+    @State var age: [String] = []
     
     @State var alertText: String = ""
     @State private var showingAlert2 = false
@@ -156,7 +158,7 @@ struct ExpandedAdvDetails2: View {
                         Spacer()
                     }
                 }
-                NavigationLink(destination: EditAdvView(id: $id, uid: $uid, name: $name, city: $city, price: $price, phone: $phone, description: $description, category: $category, updatedAt: $updatedAt, createdAt: $createdAt, isActive: $isActive, subcategory: $subcategory, visa: $visa, gender: $gender, photos: $photos)) {
+                NavigationLink(destination: EditAdvView(id: $id, uid: $uid, name: $name, city: $city, price: $price, phone: $phone, description: $description, category: $category, updatedAt: $updatedAt, createdAt: $createdAt, isActive: $isActive, subcategory: $subcategory, visa: $visa, gender: $gender, shift: $shift, age: $age, photos: $photos)) {
                     HStack {
                         Spacer()
                         HStack {
