@@ -1,13 +1,14 @@
 //
-//  NewWorkView.swift
+//  EditWorkView.swift
 //  iosApp
 //
-//  Created by Sergey Lee on 2022/01/25.
+//  Created by Sergey Lee on 2022/01/27.
 //
 
 import SwiftUI
 
-struct NewWorkView: View {
+struct EditWorkView: View {
+    @Binding var id: UUID
     @Binding var uid: String
     @Binding var name: String
     @Binding var city: String
@@ -16,6 +17,7 @@ struct NewWorkView: View {
     @Binding var description: String
     @Binding var category: String
     @Binding var updatedAt: String
+    @Binding var createdAt: String
     @Binding var isActive: String
     @Binding var subcategory: String
     @Binding var visa: [String]
@@ -120,7 +122,7 @@ struct NewWorkView: View {
                 HStack {
                     VStack(alignment: .leading) {
                         Text("Пол:")
-                            .padding(.bottom, 5)
+                            .padding(.bottom, 5) 
                             .foregroundColor(.gray)
                         HStack {
                             Toggle("👱🏼‍♂️", isOn: $gender1)
@@ -179,7 +181,7 @@ struct NewWorkView: View {
             Section {
                 HStack {
                     Spacer()
-                    Button("Создать") {
+                    Button("Обновить") {
                         self.images = String(photos.count)
                         if f1 {
                             visa.append("F1")
@@ -212,12 +214,15 @@ struct NewWorkView: View {
                         } else if shift1 && shift2 {
                             shift = "🌞🌚"
                         }
+                        age.removeAll()
                         age.append(String(stepperValue1))
                         age.append(String(stepperValue2))
                         
-                        DispatchQueue.main.asyncAfter(deadline: .now() + 0.1) {
-                        AdvManager().postAdv(adv: Adv(id: uid + Util().dateForAdv(date: Util().dateByTimeZone()), uid: uid + Util().dateForAdv(date: Util().dateByTimeZone()), name: name, category: "work", city: city, price: price, phone: phone, description: description, createdAt: Util().dateByTimeZone(), images: images, updatedAt: Util().dateByTimeZone(), isActive: "1", subcategory: subcategory, visa: visa, gender: gender, shift: shift, age: age)) {}
-                        showingAlert = true
+                        
+                        AdvManager().postAdv(adv: Adv(id: id.description, uid: uid, name: name, category: "work", city: city, price: price, phone: phone, description: description, createdAt: createdAt, images: images, updatedAt: Util().dateByTimeZone(), isActive: "1", subcategory: subcategory, visa: visa, gender: gender, shift: shift, age: age)) {
+//                            DispatchQueue.main.asyncAfter(deadline: .now() + 0.1) {
+//                                showingAlert = true
+//                            }
                         }
                     }
                     Spacer()
@@ -232,11 +237,41 @@ struct NewWorkView: View {
             }
         }
         .onAppear {
+            if visa.contains("F1") {
+                self.f1 = true
+            }
+            if visa.contains("F4") {
+                self.f4 = true
+            }
+            if visa.contains("H2") {
+                self.h2 = true
+            }
+            if visa.contains("Другая") {
+                self.other = true
+            }
+            if visa.contains("Любая") {
+                self.f1 = true
+                self.f4 = true
+                self.h2 = true
+                self.other = true
+            }
+            if self.gender.contains("👱🏼‍♂️") {
+                self.gender1 = true
+            }
+            if self.gender.contains("👩🏻") {
+                self.gender2 = true
+            }
+
+            if self.shift.contains("🌞") {
+                self.shift1 = true
+            }
+            if self.shift.contains("🌚") {
+                self.shift2 = true
+            }
+            self.stepperValue1 = Int(age[0]) ?? 20
+            self.stepperValue2 = Int(age[1]) ?? 50
         }
     }
 }
-
-
-
 
 

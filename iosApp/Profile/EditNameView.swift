@@ -59,7 +59,6 @@ struct EditNameView: View {
                                 title: Text("Ваш аккаунт будет удален! Вся информация будет утеряна!"),
                                 primaryButton: .destructive(Text("Удалить аккаунт"), action: {
                                     firestore.deleteAccount(uid: user.uid) {
-//                                    DB().deleteAccount(uid: user.uid) {
                                         Authentication().signOut() {
                                             logging.isSignedIn = false
                                         }
@@ -75,7 +74,7 @@ struct EditNameView: View {
             
         }
         .onAppear {
-            DB().getUser(uid: user.uid) { user in
+            firestore.getUser(uid: user.uid) { user in
                 self.name = user.name ?? ""
                 self.phone = user.phone ?? ""
             }
@@ -83,9 +82,3 @@ struct EditNameView: View {
     }
 
 }
-
-//struct EditNameView_Previews: PreviewProvider {
-//    static var previews: some View {
-//        EditNameView()
-//    }
-//}

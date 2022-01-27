@@ -2,12 +2,12 @@
 //  AddAdv.swift
 //  iosApp
 //
-//  Created by Sergey Lee on 2022/01/10.
+//  Created by Sergey Lee on 2022/01/27.
 //
 
 import SwiftUI
 
-struct AddAdvView: View {
+struct AddAdv: View {
     //    @State var service: Service!
     @State var uid: String = ""
     @State var name: String = ""
@@ -18,8 +18,11 @@ struct AddAdvView: View {
     @State var category: String = ""
     @State var updatedAt: String = ""
     @State var isActive: String = ""
-    @State var subcategory: String = "subcategory"
-    @State var createdAt: String = ""
+    @State var subcategory: String = ""
+    @State var visa: [String] = []
+    @State var gender: String = ""
+    @State var shift: String = ""
+    @State var age: [String] = []
     
     @State var directory: String = "advImages"
     @State private var image = UIImage(named: "blank")!
@@ -29,9 +32,10 @@ struct AddAdvView: View {
     @State private var showingHint = false
     @State private var showingHint2 = false
     @State private var businessWarning = false
-    @State private var photos: [UIImage] = []
+    @State var photos: [UIImage] = []
     @State var images: String = "0"
-
+    @State var checked: Bool = false
+    
     @Environment(\.presentationMode) var presentationMode: Binding<PresentationMode>
     
     
@@ -59,6 +63,14 @@ struct AddAdvView: View {
                 }.frame(height: 300)
                     .indexViewStyle(.page(backgroundDisplayMode: .always))
                     .tabViewStyle(.page)
+            } else {
+                Image("launchicon_mini")
+                    .resizable()
+                    .scaledToFill()
+//                    ProgressView().progressViewStyle(CircularProgressViewStyle(tint: Color("textColor")))
+//                        .background(Color(UIColor.systemGroupedBackground).opacity(0.1))
+//                    .frame(width: 350, height: 300)
+                    .clipped()
             }
                 HStack {
                     Spacer()
@@ -72,6 +84,7 @@ struct AddAdvView: View {
                 }
             
             }
+            Group {
             HStack {
                 
                 Text("UID")
@@ -81,46 +94,48 @@ struct AddAdvView: View {
             }
             HStack {
                 
-                Text("Название")
+                Text("Заголовок")
                     .foregroundColor(.gray)
                 TextField("Название", text: $name)
                     .disableAutocorrection(true)
             }
             Picker("Категории", selection: $category) {
                 Group {
-                    Text("Работа").tag("work")
-                    Text("Транспорт").tag("transport")
-                    Text("Недвижимость").tag("house")
-                    Text("Телефоны и Аксессуары").tag("phone")
-                    Text("Для дома, хобби").tag("hobby")
-                    Text("Автозапчасти и Аксессуары").tag("workshop")
-                    Text("Электроника").tag("electronic")
-                    Text("Детские товары").tag("children")
-                    Text("Одежда").tag("clothes")
-                    Text("Спорт, туризм и отдых").tag("sport")
+//                    Text("🛠 Работа").tag("work")
+                    Text("🚗 Транспорт").tag("transport")
+                    Text("🏢 Недвижимость").tag("house")
+                    Text("📱 Телефоны и Аксессуары").tag("phone")
+                    Text("🏠 Для дома, хобби").tag("hobby")
+                    Text("⚙️ Автозапчасти и Аксессуары").tag("car")
+                    Text("📺 Электроника").tag("electronic")
+                    Text("👶🏻 Детские товары").tag("children")
+                    Text("👕 Одежда").tag("clothes")
+                    Text("🏓 Спорт, туризм и отдых").tag("sport")
                 }
                 .foregroundColor(Color("textColor"))
                 Group {
-                    Text("Домашние животные").tag("pet")
-                    Text("Обмен, отдам бесплатно").tag("change")
+                    Text("🐶 Домашние животные").tag("pet")
+                    Text("🔄 Обмен, отдам бесплатно").tag("change")
+                    Text("🪆 Другое").tag("other")
                 }.foregroundColor(Color("textColor"))
             }.foregroundColor(.gray)
             
-            if self.category == "work" {
-                Picker("Виды работ", selection: $subcategory) {
-                    Group {
-                        Text("🏭 Завод").tag("factory")
-                        Text("👷🏻‍♀️ Стройка").tag("construction")
-                        Text("🏩 Мотель").tag("motel")
-                        Text("🍽 Общепит").tag("cafe")
-                        Text("🧑🏽‍🌾 Сельхоз работы").tag("farm")
-                        Text("📦 Почта/Доставка").tag("delivery")
-                        Text("💼 Работа в офисе").tag("office")
-                        Text("👨‍🚀 Другая работа").tag("otherwork")
-                    }.foregroundColor(Color("textColor"))
-                }
-                .foregroundColor(.gray)
-            }
+//            if self.category == "work" {
+//                Picker("Виды работ", selection: $subcategory) {
+//                    Group {
+//                        Text("🏭 Завод").tag("factory")
+//                        Text("👷🏻‍♀️ Стройка").tag("construction")
+//                        Text("🏩 Мотель").tag("motel")
+//                        Text("🍽 Общепит").tag("cafe")
+//                        Text("🧑🏽‍🌾 Сельхоз работы").tag("farm")
+//                        Text("📦 Почта/Доставка").tag("delivery")
+//                        Text("💼 Работа в офисе").tag("office")
+//                        Text("👨‍🚀 Другая работа").tag("otherwork")
+//                    }.foregroundColor(Color("textColor"))
+//                }
+//                .foregroundColor(.gray)
+//            }
+            
             
             HStack {
                 Picker("Город", selection: $city) {
@@ -128,8 +143,8 @@ struct AddAdvView: View {
                         Text("Ансан").tag("Ансан")
                         Text("Хвасонг").tag("Хвасонг")
                         Text("Сеул").tag("Сеул")
-                        Text("Инчхон").tag("Инчхон")
                         Text("Сувон").tag("Сувон")
+                        Text("Инчхон").tag("Инчхон")
                         Text("Асан").tag("Асан")
                         Text("Чхонан").tag("Чхонан")
                         Text("Чхонджу").tag("Чхонджу")
@@ -148,7 +163,7 @@ struct AddAdvView: View {
                         )
                     }
             }
-            Group {
+            
             HStack {
                 Text("Другой город")
                     .foregroundColor(.gray)
@@ -182,20 +197,22 @@ struct AddAdvView: View {
             Section {
                 HStack {
                     Spacer()
-                    Button("Обновить данные") {
+                    Button("Создать") {
                         self.images = String(photos.count)
-                        DB().createAdv(uid: uid, name: name, category: category, city: city, price: price, phone: phone, descrition: description, createdAt: Util().dateByTimeZone(), images: images, updatedAt: Util().dateByTimeZone(), isActive: "1", subcategory: subcategory) {
-                            var n = 0
-                            for photo1 in photos {
-                                DB().postImage(image: photo1, directory: directory, uid: uid + "ADV" + String(n), quality: 0.5)
-                                n += 1
+                        AdvManager().postAdv(adv: Adv(id: uid + Util().dateForAdv(date: Util().dateByTimeZone()), uid: uid + Util().dateForAdv(date: Util().dateByTimeZone()), name: name, category: category, city: city, price: price, phone: phone, description: description, createdAt: Util().dateByTimeZone(), images: images, updatedAt: Util().dateByTimeZone(), isActive: "1", subcategory: subcategory, visa: visa, gender: gender, shift: shift, age: age)) {}
+//                        DB().createAdv(uid: uid, name: name, category: category, city: city, price: price, phone: phone, descrition: description, createdAt: Util().dateByTimeZone(), images: images, updatedAt: Util().dateByTimeZone(), isActive: "1", subcategory: subcategory) {
+                            postImages() {
+                                deleteImages() {
+//                                    DispatchQueue.main.asyncAfter(deadline: .now() + 0.3) {
+//                                        DB().getAdvs(category: "all") { (list) in
+//                                            globalAdv = list
+//                                                .filter { $0.isActive == "1" }
+//                                                .sorted { $0.createdAt > $1.createdAt }
+//                                        }
+                                        showingAlert = true
+//                                    }
+//                                }
                             }
-                            for i in photos.count...4 {
-                                print(i)
-                                print("iii")
-                                DB().deleteImage(uid: uid + "ADV" + String(i), directory: directory)
-                            }
-                            showingAlert = true
                         }
                     }
                     Spacer()
@@ -209,70 +226,36 @@ struct AddAdvView: View {
                 }
                 
             }
-            
-                Section {
-                    HStack {
-                        Spacer()
-                        Button(action: {
-                            showingAlertDelete = true
-                        }) {
-                            Text("Удалить объявление")
-                                .foregroundColor(Color.red)
-                        }.disabled(
-                            self.name == "" &&
-                            self.category == "" &&
-                            self.city == "" &&
-                            self.price == "" &&
-                            self.phone == "" &&
-                            self.description == "" &&
-                            self.updatedAt == "" &&
-                            self.subcategory == ""
-                        ).alert(isPresented: $showingAlertDelete) {
-                            Alert(
-                                title: Text("Вы уверены что хотите удалить Ваше объявление?"),
-                                primaryButton: .destructive(Text("Удалить"), action: {
-                                    DB().deleteAdv(uid: uid) {
-                                        self.name = ""
-                                        self.category = ""
-                                        self.city = ""
-                                        self.price = ""
-                                        self.phone = ""
-                                        self.description = ""
-                                        self.createdAt = ""
-                                        presentationMode.wrappedValue.dismiss()
-                                    }
-                                    
-                                    
-                                }),
-                                secondaryButton: .cancel(Text("Отмена"))
-                            )
-                        }
-                        Spacer()
-                    
-                }
-                
-            }
-        }.alert(isPresented: $businessWarning) {
-            Alert(
-                title: Text("Создавая объявление, информация из Вашего профиля становится также доступной"),
-                dismissButton: .default(Text("Ок"))
-            )
         }
-        
-        .navigationTitle("Мои объявления")
         .onAppear {
-            
-            businessWarning = true
-            if Pref.userDefault.bool(forKey: "adv") {
-                businessWarning = false
-            }
-            Pref.userDefault.set(true, forKey: "adv")
-            Pref.userDefault.synchronize()
-            
-            DB().getMultiImages(uid: uid + "ADV", directory: directory) { images in
-                self.photos = images
-            }
+        }
+    }
+    
+    func postImages(completion: @escaping () -> Void) {
+        var n = 0
+        for photo1 in photos {
+            DB().postImage(image: photo1, directory: directory, uid: uid + "ADV" + String(n), quality: 0.5)
+            n += 1
+            print("adding photo")
+        }
+        DispatchQueue.main.asyncAfter(deadline: .now() + 0.2) {
+            completion()
+        }
+    }
+    
+    func deleteImages(completion: @escaping () -> Void) {
+        for i in photos.count...4 {
+            print(i)
+            print("deleting")
+            DB().deleteImage(uid: uid + "ADV" + String(i), directory: directory)
+        }
+        DispatchQueue.main.asyncAfter(deadline: .now() + 0.2) {
+            completion()
         }
     }
 }
+
+
+
+
 

@@ -1,5 +1,5 @@
 //
-//  MyAdvList2.swift
+//  MyAdvList.swift
 //  iosApp
 //
 //  Created by Sergey Lee on 2022/01/14.
@@ -8,9 +8,7 @@
 import SwiftUI
 import FirebaseAuth
 
-struct MyAdvList2: View {
-    @StateObject private var session = DB()
-    //    @State var list: [Adv] = []
+struct MyAdvList: View {
     @StateObject var advManager = AdvManager()
     @State var isLoading: Bool = true
     @State var showingAlertDelete: Bool = false
@@ -63,8 +61,8 @@ struct MyAdvList2: View {
                 .background(Color(UIColor.systemGroupedBackground))
                 
                 ForEach(advManager.myAdvs, id: \.uid) { adv in
-                    NavigationLink(destination: InnerAdvertisement(adv: adv)) {
-                        MyAdvView2(adv: adv)
+                    NavigationLink(destination: getNavigation(adv: adv)) {
+                        getDestination(adv: adv)
                             .opacity(Double(adv.isActive)!)
                             .contextMenu {
                                 Button(action: {
@@ -82,13 +80,6 @@ struct MyAdvList2: View {
                                     title: Text("Вы уверены что хотите удалить Ваше объявление?"),
                                     primaryButton: .destructive(Text("Удалить"), action: {
                                         advManager.deleteAdv(uid: adv.uid) {}
-                                        //                                        DB().deleteAdv(uid: adv.uid) {
-                                        //                                            DB().getAdvs(category: "all") { (list) in
-                                        ////                                                globalAdv = list.sorted { $0.createdAt > $1.createdAt }
-                                        ////                                                self.list = globalAdv.filter { $0.uid.contains(myUID) }
-                                        ////                                                count = self.list.count
-                                        //                                            }
-                                        //                                        }
                                     }),
                                     secondaryButton: .cancel(Text("Отмена"))
                                 )
@@ -130,7 +121,23 @@ struct MyAdvList2: View {
     
 }
 
-struct MyAdvView2: View {
+func getDestination(adv: Adv) -> AnyView {
+    if adv.category == "work" {
+        return AnyView(OneWorkView(adv: adv))
+    } else {
+        return AnyView(MyAdvView(adv: adv))
+    }
+}
+
+func getNavigation(adv: Adv) -> AnyView {
+    if adv.category == "work" {
+        return AnyView(InnerWork(adv:adv))
+    } else {
+        return AnyView(InnerAdvertisement(adv: adv))
+    }
+}
+
+struct MyAdvView: View {
     let adv: Adv
     @State var imagename: String = "launchicon_mini"
     @State var image: UIImage = UIImage(named: "launchicon_mini")!
@@ -166,29 +173,5 @@ struct MyAdvView2: View {
                 }
         }
     }
-    
-    //        var body: some View {
-    //            VStack(alignment: .leading, spacing: 8) {
-    //                UrlImageView(urlString: post.uid + "0", directory: "advImages")
-    //                    .frame(height: 250)
-    ////                    .scaledToFit()
-    //
-    ////                    .clipped()
-    //                Text(Util().formatDate(date: post.createdAt))
-    //                    .padding(.leading, 16).padding(.bottom, 5)
-    //                    .font(.caption)
-    //                    .foregroundColor(Color.gray)
-    //                HStack {
-    //                    Text(post.name).font(.headline)
-    //                }
-    //                .padding(EdgeInsets(top: 8, leading: 16, bottom: 0, trailing: 0))
-    //
-    //                Text(post.description)
-    //                    .lineLimit(3)
-    //                    .font(.system(size: 15))
-    //                    .padding(.leading, 16).padding(.trailing, 16).padding(.bottom, 16)
-    //            }
-    //            .listRowInsets(EdgeInsets())
-    //        }
 }
 

@@ -61,8 +61,6 @@ struct PostView: View {
 }
 
 struct AdvList: View {
-    @StateObject private var session = DB()
-    @State var list: [Adv] = []
     @State var categoryName: String = "🗂"
     @State var city: String = "all"
     @State var isLoading: Bool = true

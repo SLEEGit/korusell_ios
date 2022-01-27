@@ -8,10 +8,7 @@
 import SwiftUI 
 
 struct ServiceSubView: View {
-//    @StateObject var serviceManager = ServiceManager()
-    
-    @StateObject private var session = DB()
-//    @State var list: [Service] = serviceManager.services
+
     @StateObject var serviceManager = ServiceManager()
     @State var afterCatlList: [Service] = []
     @State private var image = UIImage(named: "blank")!
@@ -21,7 +18,6 @@ struct ServiceSubView: View {
     
     var body: some View {
         List {
-            // Добавить логику для других городов и переходить на объявления с @StateObject чтобы убрать все фетчи после изменений
             ForEach(serviceManager.services, id: \.name) { service in
                 NavigationLink(destination: ServiceView(service: service)) {
                     ExpandedService(service: service, image: image)
@@ -109,11 +105,37 @@ struct ServiceSubView: View {
     
 }
 
-//struct ServiceSubView_Previews: PreviewProvider {
-//    static var previews: some View {
-//        ServiceSubView(category: "food", menu: "service")
-//    }
-//}
-
+struct ExpandedService: View {
+    @State var service: Service
+    @State var image: UIImage
+    var body: some View {
+        HStack {
+            UrlImageView(urlString: service.uid + "0", directory: "images")
+                .scaledToFit()
+                .frame(width: 100, height: 100)
+            VStack(alignment: .leading) {
+                Text(service.name)
+                    .font(.system(size: 15))
+                    .bold()
+                    .minimumScaleFactor(0.1)
+                HStack {
+                    Text("Город:")
+                        .font(.system(size: 15))
+                        .foregroundColor(.gray)
+                    Text(service.city)
+                        .font(.system(size: 13))
+                        .foregroundColor(.gray)
+                }
+                
+                Text(service.description)
+                    .font(.caption)
+                    .foregroundColor(.gray)
+                    .padding(.top, 5)
+                    .lineLimit(3)
+            }
+            Spacer()
+        }
+    }
+}
 
 

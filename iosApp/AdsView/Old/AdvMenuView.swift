@@ -14,7 +14,6 @@ struct AdvMenuView: View {
     @ObservedObject var fetcher = DataFetcher()
     @State private var city = "Все города"
     @State var selectCategory: Bool = false
-    @StateObject private var session = DB()
     @State var isLoading: Bool = true
     @State var isShowInfo: Bool = false
     @Environment(\.colorScheme) var colorScheme
@@ -54,10 +53,10 @@ struct AdvMenuView: View {
                 .onAppear{
                     
                     city = globalCity
-                    session.getAdvs(category: "all") { (list) in
-                        globalAdv = list.sorted { $0.createdAt > $1.createdAt }
-                        self.isLoading = false
-                    }
+//                    session.getAdvs(category: "all") { (list) in
+//                        globalAdv = list.sorted { $0.createdAt > $1.createdAt }
+//                        self.isLoading = false
+//                    }
                     
                 }
 

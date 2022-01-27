@@ -14,8 +14,12 @@ struct AdminPanelView: View {
                 Text("Add business")
                     .font(.title)
             }
-            NavigationLink(destination: AddAdvView()) {
+            NavigationLink(destination: AddAdv()) {
                 Text("Add advertisement")
+                    .font(.title)
+            }
+            NavigationLink(destination: AddWork()) {
+                Text("Add Work")
                     .font(.title)
             }
             NavigationLink(destination: ChattingAdmin()) {

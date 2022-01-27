@@ -15,7 +15,7 @@ class FireStore: ObservableObject {
     let db = Firestore.firestore()
     
     func getUser(uid: String, completion: @escaping (User) -> ()) {
-        db.collection("users").document(Auth.auth().currentUser?.uid ?? "").getDocument { (document, error) in
+        db.collection("users").document(uid).getDocument { (document, error) in
             if let document = document, document.exists {
                 let values = document.data()!
                 let user = User(dictionary: values)
@@ -442,6 +442,7 @@ class AdvManager: ObservableObject {
             
         }
     }
+    
     
     func postAdv(adv: Adv, completion: @escaping () -> Void) {
         do {

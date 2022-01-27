@@ -92,7 +92,7 @@ struct NewAdvView: View {
             }
             Picker("Категории", selection: $category) {
                 Group {
-                    Text("🛠 Работа").tag("work")
+//                    Text("🛠 Работа").tag("work")
                     Text("🚗 Транспорт").tag("transport")
                     Text("🏢 Недвижимость").tag("house")
                     Text("📱 Телефоны и Аксессуары").tag("phone")
@@ -111,21 +111,21 @@ struct NewAdvView: View {
                 }.foregroundColor(Color("textColor"))
             }.foregroundColor(.gray)
             
-            if self.category == "work" {
-                Picker("Виды работ", selection: $subcategory) {
-                    Group {
-                        Text("🏭 Завод").tag("factory")
-                        Text("👷🏻‍♀️ Стройка").tag("construction")
-                        Text("🏩 Мотель").tag("motel")
-                        Text("🍽 Общепит").tag("cafe")
-                        Text("🧑🏽‍🌾 Сельхоз работы").tag("farm")
-                        Text("📦 Почта/Доставка").tag("delivery")
-                        Text("💼 Работа в офисе").tag("office")
-                        Text("👨‍🚀 Другая работа").tag("otherwork")
-                    }.foregroundColor(Color("textColor"))
-                }
-                .foregroundColor(.gray)
-            }
+//            if self.category == "work" {
+//                Picker("Виды работ", selection: $subcategory) {
+//                    Group {
+//                        Text("🏭 Завод").tag("factory")
+//                        Text("👷🏻‍♀️ Стройка").tag("construction")
+//                        Text("🏩 Мотель").tag("motel")
+//                        Text("🍽 Общепит").tag("cafe")
+//                        Text("🧑🏽‍🌾 Сельхоз работы").tag("farm")
+//                        Text("📦 Почта/Доставка").tag("delivery")
+//                        Text("💼 Работа в офисе").tag("office")
+//                        Text("👨‍🚀 Другая работа").tag("otherwork")
+//                    }.foregroundColor(Color("textColor"))
+//                }
+//                .foregroundColor(.gray)
+//            }
             
             
             HStack {
@@ -163,7 +163,7 @@ struct NewAdvView: View {
                 
             }
             HStack {
-                Text("Цена/Зарплата")
+                Text("Цена")
                     .foregroundColor(.gray)
                 TextField("", text: $price)
                     .disableAutocorrection(true)

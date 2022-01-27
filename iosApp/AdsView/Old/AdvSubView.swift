@@ -93,11 +93,46 @@ struct AdvSubView: View {
     
 }
 
-//struct ServiceSubView_Previews: PreviewProvider {
-//    static var previews: some View {
-//        ServiceSubView(category: "food", menu: "service")
-//    }
-//}
+struct ExpandedAdv: View {
+    @State var adv: Adv
+    @State var image: UIImage
+    
+    var body: some View {
+        HStack {
+            UrlImageView(urlString: adv.uid + "ADV" + "0", directory: "advImages")
+                .scaledToFit()
+                .frame(width: 100, height: 100)
+            VStack(alignment: .leading) {
+                Text(adv.name)
+                    .font(.system(size: 16))
+                    .minimumScaleFactor(0.1)
+                if adv.price != "" {
+                    Text("\u{20A9} \(adv.price)")
+                        .font(.system(size: 16))
+                        .bold()
+                        .minimumScaleFactor(0.1)
+                }
+                HStack {
+                    Text("Город:")
+                        .font(.system(size: 13))
+                        .foregroundColor(.gray)
+                    Text(adv.city)
+                        .font(.system(size: 13))
+                        .foregroundColor(.gray)
+                }
+                if adv.createdAt != "" {
+                    Text(Util().formatDate(date: adv.createdAt))
+                        .font(.caption)
+                        .foregroundColor(.gray)
+                        .padding(.top, 5)
+                        .lineLimit(3)
+                }
+            }
+            .frame(width: 180)
+            Spacer()
+        }
+    }
+}
 
 
 

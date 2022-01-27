@@ -17,7 +17,7 @@ struct OwnerView: View {
     @State var avatar: String = ""
 
     @State private var image = UIImage(named: "avatar")!
-    
+    @StateObject var firestore = FireStore()
     var ownerUid: String = ""
     
     var body: some View {
@@ -56,7 +56,6 @@ struct OwnerView: View {
             .frame(maxWidth: .infinity, maxHeight: .infinity, alignment: .center)
             .listRowInsets(EdgeInsets())
             .background(Color(UIColor.systemGroupedBackground))
-            //                NavigationLink(destination: EditNameView(name: $name, phone: $phone)) {
             
             HStack {
                 Text("Эл. почта")
@@ -83,11 +82,9 @@ struct OwnerView: View {
                     
                 }
             }
-
-            
         }
         .onAppear {
-            DB().getUser(uid: ownerUid) { user in
+            firestore.getUser(uid: ownerUid) { user in
                 name = user.name ?? ""
                 phone = user.phone ?? ""
                 email = user.email

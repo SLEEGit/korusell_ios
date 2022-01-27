@@ -18,6 +18,8 @@ struct WorkViewDetails: View {
     @State var category: String = ""
     @State var genderString: String = ""
     @State var shiftString: String = ""
+    @StateObject var serviceManager = ServiceManager()
+    @StateObject var firestore = FireStore()
     
     var body: some View {
         ScrollView {
@@ -34,6 +36,7 @@ struct WorkViewDetails: View {
                         .font(.title)
                         .bold()
                         .padding(.leading, 15).padding(.bottom, 5).padding(.trailing, 15)
+                        .lineLimit(3)
                     if adv.city != "admin" && adv.city != "" {
                         HStack {
                             Text("Город")
@@ -73,7 +76,9 @@ struct WorkViewDetails: View {
                             Text(genderString)
                                 .font(.body)
                             Text(shiftString)
-                            Text(adv.age.joined(separator: "-") + " лет")
+                            if !adv.age.isEmpty {
+                                Text(adv.age.joined(separator: "-") + " лет")
+                            }
                             Text(adv.visa.joined(separator: ","))
                         }
                     }
@@ -110,7 +115,6 @@ struct WorkViewDetails: View {
                         .padding()
                         .background(Color.accentColor)
                         .cornerRadius(15)
-                        //                        .position(x: UIScreen.main.bounds.width/2)
                         .padding(.vertical, 20)
                         Spacer()
                     }
@@ -143,7 +147,7 @@ struct WorkViewDetails: View {
                             .padding(.leading, 15)
                         }
                         
-                    }.padding(.bottom, 5)
+                    }.padding(.bottom, 50)
                 }
             }
             .navigationBarTitleDisplayMode(.inline)
@@ -189,14 +193,15 @@ struct WorkViewDetails: View {
                     self.shiftString = "🌚 Яган"
                 }
                 
-                DB().getMyBusiness(uid: String(adv.uid.prefix(28))) { service in
+                serviceManager.getMyService() { service in
                     self.service = service
                     DB().getImage(uid: String(adv.uid.prefix(28)) + "0", directory: "images") { image in
                         self.businessImage = image
                     }
                     
                 }
-                DB().getUser(uid: String(adv.uid.prefix(28))) { user in
+                
+                firestore.getUser(uid: String(adv.uid.prefix(28))) { user in
                     self.name = user.name ?? "Контактное лицо"
                     if user.name == "" {
                         self.name = "Контактное лицо"

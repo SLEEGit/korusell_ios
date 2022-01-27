@@ -189,25 +189,15 @@ struct AddBusinessView: View {
                                 self.latitude = lat
                                 self.longitude = long
                                 DispatchQueue.main.asyncAfter(deadline: .now() + 0.1) {
-                                    DB().updateBusiness(uid: uid, name: name, category: category, city: city, address: address, phone: phone, descrition: description, latitude: latitude, longitude: longitude, social: social, images: images) {
+                                    ServiceManager().postService(service: Service(uid: uid, name: name, category: category, city: city, address: address, phone: phone, description: description, latitude: latitude, longitude: longitude, social: social, images: images)) {
                                         postImages() {
                                             deleteImages() {
                                                 DispatchQueue.main.asyncAfter(deadline: .now() + 0.3) {
                                                     showingAlert = true
                                                 }
                                             }
-                                        }
-//                                        var n = 0
-//                                        for photo1 in photos {
-//                                            DB().postImage(image: photo1, directory: directory, uid: uid+String(n), quality: 0.1)
-//                                            n += 1
-//                                        }
-//                                        for i in photos.count...4 {
-//                                            print(i)
-//                                            print("iii")
-//                                            DB().deleteImage(uid: uid + String(i), directory: directory)
-//                                        }
-//                                        showingAlert = true
+                                    }
+                                    DB().updateBusiness(uid: uid, name: name, category: category, city: city, address: address, phone: phone, descrition: description, latitude: latitude, longitude: longitude, social: social, images: images) {}
                                     }
                                 }
                             }
@@ -246,6 +236,7 @@ struct AddBusinessView: View {
                                 title: Text("Вы уверены что хотите удалить Ваш бизнес?"),
                                 primaryButton: .destructive(Text("Удалить"), action: {
                                     DB().deleteBusiness(uid: uid)
+                                    ServiceManager().deleteService(uid: uid) {}
                                     for i in 0...4 {
                                         print(i)
                                         print("iii")

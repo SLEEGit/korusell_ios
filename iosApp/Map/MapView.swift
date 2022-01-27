@@ -12,8 +12,6 @@ import CoreLocationUI
 
 struct MapView: View {
     
-    @StateObject private var session = DB()
-    @State var list: [Service] = []
     @State var category: String = "all"
     @State var categoryName: String = "🗂"
     @State var isLoading: Bool = true

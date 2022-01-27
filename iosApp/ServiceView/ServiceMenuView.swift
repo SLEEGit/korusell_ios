@@ -18,7 +18,6 @@ struct ServiceMenuView: View {
     @ObservedObject var fetcher = DataFetcher()
     @State private var city = "Все города"
     @State var selectCategory: Bool = false
-    @StateObject private var session = DB()
     @State var isLoading: Bool = true
     @State var isShowInfo: Bool = false
     @State var email: String = ""
@@ -60,12 +59,7 @@ struct ServiceMenuView: View {
                     
                     email = Auth.auth().currentUser?.email ?? ""
                     city = globalCity
-//                    session.getServices(category: "all") { (list) in
-//                        globalServices = list
-//                        //                        globalServices = list.sorted { $0.name < $1.name }
                         self.isLoading = false
-//                    }
-                    
                 }
                 
                 .navigationBarItems(trailing:

@@ -1,27 +1,26 @@
 //
-//  NewWorkView.swift
+//  AddAdv.swift
 //  iosApp
 //
-//  Created by Sergey Lee on 2022/01/25.
+//  Created by Sergey Lee on 2022/01/10.
 //
-
 import SwiftUI
 
-struct NewWorkView: View {
-    @Binding var uid: String
-    @Binding var name: String
-    @Binding var city: String
-    @Binding var price: String
-    @Binding var phone: String
-    @Binding var description: String
-    @Binding var category: String
-    @Binding var updatedAt: String
-    @Binding var isActive: String
-    @Binding var subcategory: String
-    @Binding var visa: [String]
-    @Binding var gender: String
-    @Binding var shift: String
-    @Binding var age: [String]
+struct AddWork: View {
+    @State var uid: String = ""
+    @State var name: String = ""
+    @State var city: String = ""
+    @State var price: String = ""
+    @State var phone: String = ""
+    @State var description: String = ""
+    @State var category: String = ""
+    @State var updatedAt: String = ""
+    @State var isActive: String = ""
+    @State var subcategory: String = ""
+    @State var visa: [String] = []
+    @State var gender: String = ""
+    @State var shift: String = ""
+    @State var age: [String] = []
     
     @State var directory: String = "advImages"
     @State private var image = UIImage(named: "blank")!
@@ -31,7 +30,6 @@ struct NewWorkView: View {
     @State private var showingHint = false
     @State private var showingHint2 = false
     @State private var businessWarning = false
-    @Binding var photos: [UIImage]
     @State var images: String = "0"
     @State var checked: Bool = false
     
@@ -54,6 +52,13 @@ struct NewWorkView: View {
     var body: some View {
         Form {
             Group {
+                HStack {
+                    
+                    Text("UID")
+                        .foregroundColor(.gray)
+                    TextField("UID", text: $uid)
+                        .disableAutocorrection(true)
+                }
                 HStack {
                     Text("Заголовок")
                         .foregroundColor(.gray)
@@ -99,6 +104,8 @@ struct NewWorkView: View {
                             )
                         }
                 }
+            }
+            Group {
                 HStack {
                     Text("Другой город")
                         .foregroundColor(.gray)
@@ -180,7 +187,7 @@ struct NewWorkView: View {
                 HStack {
                     Spacer()
                     Button("Создать") {
-                        self.images = String(photos.count)
+
                         if f1 {
                             visa.append("F1")
                         }
@@ -215,8 +222,10 @@ struct NewWorkView: View {
                         age.append(String(stepperValue1))
                         age.append(String(stepperValue2))
                         
+                        let date = Util().dateByTimeZone()
+                        
                         DispatchQueue.main.asyncAfter(deadline: .now() + 0.1) {
-                        AdvManager().postAdv(adv: Adv(id: uid + Util().dateForAdv(date: Util().dateByTimeZone()), uid: uid + Util().dateForAdv(date: Util().dateByTimeZone()), name: name, category: "work", city: city, price: price, phone: phone, description: description, createdAt: Util().dateByTimeZone(), images: images, updatedAt: Util().dateByTimeZone(), isActive: "1", subcategory: subcategory, visa: visa, gender: gender, shift: shift, age: age)) {}
+                        AdvManager().postAdv(adv: Adv(id: uid + Util().dateForAdv(date: date), uid: uid + Util().dateForAdv(date: date), name: name, category: "work", city: city, price: price, phone: phone, description: description, createdAt: date, images: images, updatedAt: date, isActive: "1", subcategory: subcategory, visa: visa, gender: gender, shift: shift, age: age)) {}
                         showingAlert = true
                         }
                     }
@@ -235,8 +244,3 @@ struct NewWorkView: View {
         }
     }
 }
-
-
-
-
-

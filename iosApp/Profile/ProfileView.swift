@@ -116,7 +116,7 @@ struct ProfileView: View {
                         }
                         
                     }
-                    NavigationLink(destination: MyAdvList2(myUID: uid, count: $count)) {
+                    NavigationLink(destination: MyAdvList(myUID: uid, count: $count)) {
                         HStack {
                             Text("🏷")
                             Text("Мои Объявления")
@@ -190,31 +190,9 @@ struct ProfileView: View {
                 phone = user.phone ?? ""
                 email = user.email
             }
-//            DB().getUser(uid: user.uid) { user in
-//                name = user.name ?? ""
-//                phone = user.phone ?? ""
-//                email = user.email
-//            }
+
             firestore.updateLastLogin(user: user, last_login: Util().dateByTimeZone()) {}
-//            DB().getMyBusiness(uid: user.uid) { business in
-//                print("getting business in profile")
-//                print(business)
-//                self.business = business
-//                self.bname = business.name
-//                self.bphone = business.phone
-//                self.city = business.city
-//                self.address = business.address
-//                self.description = business.description
-//                self.latitude = business.latitude
-//                self.longitude = business.longitude
-//                self.category = business.category
-//                self.social = business.social
-//            }
-//            DB().getAdvs(category: "all") { (list) in
-//            self.list = list.filter { $0.uid.contains(user.uid) }
-//                            .sorted { $0.createdAt > $1.createdAt }
-                
-//            }
+
             advManager.getMyAdvs() {
                 self.count = advManager.myAdvs.count
             }
@@ -231,24 +209,10 @@ struct ProfileView: View {
                 self.category = business.category
                 self.social = business.social
             }
-//            DB().getMyAdv(uid: user.uid) { adv in
-//                print("getting adv in profile")
-//                print(adv)
-//                self.adv = adv
-//                self.aname = adv.name
-//                self.aphone = adv.phone
-//                self.acity = adv.city
-//                self.price = adv.price
-//                self.adescription = adv.description
-//                self.createdAt = adv.createdAt
-//                self.acategory = adv.category
-//            }
             
             DB().getImage(uid: uid, directory: "avatars") { image in
                 self.image = image
             }
-            print("qqq")
-            print(list.count)
         }
     }
     
