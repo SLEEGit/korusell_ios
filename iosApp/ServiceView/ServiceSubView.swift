@@ -18,7 +18,7 @@ struct ServiceSubView: View {
     
     var body: some View {
         List {
-            ForEach(serviceManager.services.shuffled(), id: \.name) { service in
+            ForEach(serviceManager.services, id: \.name) { service in
                 NavigationLink(destination: ServiceView(service: service)) {
                     ExpandedService(service: service, image: image)
                 }
@@ -29,7 +29,7 @@ struct ServiceSubView: View {
             self.city = globalCity
             serviceManager.category = category
             serviceManager.city = globalCity
-            serviceManager.getServices()
+//            serviceManager.getServices()
         }
         .navigationTitle(barTitle)
         .navigationBarTitleDisplayMode(.inline)

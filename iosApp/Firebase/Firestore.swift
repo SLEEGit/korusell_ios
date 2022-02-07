@@ -173,7 +173,7 @@ class ServiceManager: ObservableObject {
                 }
             }
             
-//            self.services = self.services.shuffled()
+            self.services = self.services.shuffled()
             
             switch self.category {
             case "all":
