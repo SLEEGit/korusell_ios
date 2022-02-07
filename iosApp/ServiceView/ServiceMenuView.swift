@@ -144,7 +144,7 @@ struct ServiceMenuView: View {
         if email == "guagetru.bla@inbox.ru" {
             return AnyView(AdminPanelView())
         } else {
-            return AnyView(Text("🥚 ver. 1.3"))
+            return AnyView(Text("🥚 ver. 1.4"))
         }
     }
 }

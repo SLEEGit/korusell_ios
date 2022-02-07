@@ -18,7 +18,7 @@ struct ServiceSubView: View {
     
     var body: some View {
         List {
-            ForEach(serviceManager.services, id: \.name) { service in
+            ForEach(serviceManager.services.shuffled(), id: \.name) { service in
                 NavigationLink(destination: ServiceView(service: service)) {
                     ExpandedService(service: service, image: image)
                 }
