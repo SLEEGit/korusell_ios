@@ -17,13 +17,18 @@ class ATTrackingHelper: ObservableObject {
         }
         
         ATTrackingManager.requestTrackingAuthorization { status in
-            DispatchQueue.main.async { [unowned self] in
-                self.status = status
-                if status == .authorized {
-                    self.currentUUID = ASIdentifierManager.shared().advertisingIdentifier
+            DispatchQueue.main.async { [weak self] in
+                if self != nil {
+                    self!.status = status
+                    if status == .authorized {
+                        self!.currentUUID = ASIdentifierManager.shared().advertisingIdentifier
+                    } else {
+                        return
+                    }
                 } else {
                     return
                 }
+
             }
         }
     }

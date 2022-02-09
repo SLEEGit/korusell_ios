@@ -38,7 +38,7 @@ struct ExpandedServiceDetails: View {
                     }
                 }
                 .padding()
-                .frame(height: 350)
+                .frame(height: 400)
                 .cornerRadius(15)
                 .indexViewStyle(.page(backgroundDisplayMode: .always))
                 .tabViewStyle(.page)
