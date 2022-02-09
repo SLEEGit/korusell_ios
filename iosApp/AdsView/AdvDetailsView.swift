@@ -174,7 +174,7 @@ struct ExpandedAdvDetails: View {
                 } else {
                     self.height = 400
                 }
-                serviceManager.getMyService() { service in
+                serviceManager.getMyService(uid: String(adv.uid.prefix(28))) { service in
                     self.service = service
                     DB().getImage(uid: String(adv.uid.prefix(28)) + "0", directory: "images") { image in
                         self.businessImage = image

@@ -197,7 +197,7 @@ struct ProfileView: View {
                 self.count = advManager.myAdvs.count
             }
             
-            serviceManager.getMyService { business in
+            serviceManager.getMyService(uid: self.uid) { business in
                 self.business = business
                 self.bname = business.name
                 self.bphone = business.phone

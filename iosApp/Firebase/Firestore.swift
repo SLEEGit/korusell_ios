@@ -246,8 +246,8 @@ class ServiceManager: ObservableObject {
 //        }
 //    }
     
-    func getMyService(completion: @escaping (Service) -> ()) {
-        db.collection("services").document(Auth.auth().currentUser?.uid ?? "").getDocument { (document, error) in
+    func getMyService(uid: String, completion: @escaping (Service) -> ()) {
+        db.collection("services").document(uid).getDocument { (document, error) in
             if let document = document, document.exists {
                 let values = document.data()!
                 let service = Service(dictionary: values)
