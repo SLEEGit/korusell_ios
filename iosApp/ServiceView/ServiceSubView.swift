@@ -120,7 +120,7 @@ struct ExpandedService: View {
                     .minimumScaleFactor(0.1)
                 HStack {
                     Text("Город:")
-                        .font(.system(size: 15))
+                        .font(.system(size: 13))
                         .foregroundColor(.gray)
                     Text(service.city)
                         .font(.system(size: 13))
