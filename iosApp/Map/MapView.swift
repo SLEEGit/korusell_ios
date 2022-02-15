@@ -24,30 +24,18 @@ struct MapView: View {
     
     var body: some View {
         NavigationView {
-            ZStack(alignment: .bottom) {
+//            ZStack(alignment: .bottom) {
                 Map(coordinateRegion: $mapRegion, interactionModes: .all, showsUserLocation: true, userTrackingMode: $trackingMode, annotationItems: serviceManager.services)
-            { service in
+                { service in
                     MapAnnotation(coordinate: CLLocationCoordinate2D(latitude: Double(service.latitude) ?? 0.0, longitude: Double(service.longitude) ?? 0.0)) {
                         NavigationLink {
                             DetailsView(service: service)
                         } label: {
-                            VStack {
-                                if service.latitude != "" {
-//                                    if service.category == "health" {
-//                                        Text("💅🏼")
-//                                    } else if service.category == "food" {
-//                                            Text("🍽")
-//                                            .border(Color.red)
-//                                    } else {
-                                        Image(systemName: "mappin.circle.fill")
-                                            .renderingMode(.original)
-                                            .resizable()
-                                            .frame(width: 25, height: 25)
-    //                                        .shadow(color: .gray, radius: 1, x: 1, y: 1)
-//                                    }
-                                    
-                                }
-
+                            if service.latitude != "" {
+                                Image(service.category)
+                                    .renderingMode(.original)
+                                    .resizable()
+                                    .frame(width: 50, height: 50)
                             }
                         }
                     }
@@ -56,7 +44,7 @@ struct MapView: View {
                     .navigationTitle("Карта")
                     .navigationBarTitleDisplayMode(.inline)
                     .onAppear {
-                            self.isLoading = false
+                        self.isLoading = false
                     }
                 
                     .toolbar {
@@ -66,6 +54,12 @@ struct MapView: View {
                                     Button("🗂 Все категории") {
                                         self.categoryName = "🗂"
                                         self.category = "all"
+                                        serviceManager.category = self.category
+                                        serviceManager.getServices()
+                                    }
+                                    Button("🏫 Посольства") {
+                                        self.categoryName = "🏫"
+                                        self.category = "embassy"
                                         serviceManager.category = self.category
                                         serviceManager.getServices()
                                     }
@@ -227,24 +221,24 @@ struct MapView: View {
                         }
                     }
                 Group {
-                HStack {
-                    Spacer()
-//                    if #available(iOS 15.0, *) {
-//                        LocationButton {
-//                            locationManager.requestLocation()
-//                            if let location = locationManager.lastLocation?.coordinate {
-//
-//                                mapRegion = MKCoordinateRegion(center: CLLocationCoordinate2D(latitude: location.latitude, longitude: location.longitude), span: MKCoordinateSpan(latitudeDelta: 0.05, longitudeDelta: 0.05))
-//                            }
-//                        }
-//                        .labelStyle(.iconOnly)
-//                        .symbolVariant(.fill)
-//                        .cornerRadius(30)
-//                        .foregroundColor(.white)
-//                        .frame(width: 60, height: 60)
-//                        .shadow(color: Color.gray, radius: 1, x: 1, y: 1)
-//                        .padding()
-//                    } else {
+                    HStack {
+                        Spacer()
+                        //                    if #available(iOS 15.0, *) {
+                        //                        LocationButton {
+                        //                            locationManager.requestLocation()
+                        //                            if let location = locationManager.lastLocation?.coordinate {
+                        //
+                        //                                mapRegion = MKCoordinateRegion(center: CLLocationCoordinate2D(latitude: location.latitude, longitude: location.longitude), span: MKCoordinateSpan(latitudeDelta: 0.05, longitudeDelta: 0.05))
+                        //                            }
+                        //                        }
+                        //                        .labelStyle(.iconOnly)
+                        //                        .symbolVariant(.fill)
+                        //                        .cornerRadius(30)
+                        //                        .foregroundColor(.white)
+                        //                        .frame(width: 60, height: 60)
+                        //                        .shadow(color: Color.gray, radius: 1, x: 1, y: 1)
+                        //                        .padding()
+                        //                    } else {
                         Button(action: {
                             locationManager.requestLocation()
                             if let location = locationManager.lastLocation?.coordinate {
@@ -258,16 +252,16 @@ struct MapView: View {
                                 .padding()
                                 .shadow(color: Color.gray, radius: 1, x: 1, y: 1)
                         }
-//                    }
-            
-                }
+                        //                    }
+                        
+                    }
                 }
             }
-            if isLoading {
-                ProgressView().progressViewStyle(CircularProgressViewStyle(tint: Color("textColor")))
-                    .background(Color(UIColor.systemGroupedBackground).opacity(0.1))
-            }
-        }
+//            if isLoading {
+//                ProgressView().progressViewStyle(CircularProgressViewStyle(tint: Color("textColor")))
+//                    .background(Color(UIColor.systemGroupedBackground).opacity(0.1))
+//            }
+//        }
     }
 }
 

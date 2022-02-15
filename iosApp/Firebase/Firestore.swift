@@ -177,7 +177,9 @@ class ServiceManager: ObservableObject {
             
             switch self.category {
             case "all":
-                self.services = self.services.filter { $0.category == "food" || $0.category == "shop" || $0.category == "connect" || $0.category == "study" || $0.category == "party" || $0.category == "docs" || $0.category == "cars" || $0.category == "health" || $0.category == "transport" || $0.category == "travel" || $0.category == "workshop" || $0.category == "other" || $0.category == "products" || $0.category == "admin"}
+                self.services = self.services.filter { $0.category == "food" || $0.category == "shop" || $0.category == "connect" || $0.category == "study" || $0.category == "party" || $0.category == "docs" || $0.category == "cars" || $0.category == "health" || $0.category == "transport" || $0.category == "travel" || $0.category == "workshop" || $0.category == "other" || $0.category == "products" || $0.category == "admin" || $0.category == "embassy"}
+            case "embassy":
+                self.services = self.services.filter { $0.category == "embassy" || $0.category == "admin"}
             case "food":
                 self.services = self.services.filter { $0.category == "food" || $0.category == "admin"}
             case "shop":
