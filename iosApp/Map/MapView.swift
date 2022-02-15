@@ -33,7 +33,7 @@ struct MapView: View {
                         } label: {
                             if service.latitude != "" {
                                 Image(service.category)
-                                    .renderingMode(.original)
+//                                    .renderingMode(.original)
                                     .resizable()
                                     .frame(width: 50, height: 50)
                             }
