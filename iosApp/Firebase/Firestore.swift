@@ -318,7 +318,7 @@ class AdvManager: ObservableObject {
                 }
             }
             
-            self.workAdvs = self.workAdvs.filter { $0.isActive == "1" &&  $0.category == "work" }.sorted { $0.createdAt > $1.createdAt }
+            self.workAdvs = self.workAdvs.filter { $0.isActive == "1" &&  $0.category == "work" }.sorted { $0.updatedAt > $1.updatedAt }
             
             self.advs = documents.compactMap { document -> Adv? in
                 do {

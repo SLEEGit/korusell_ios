@@ -50,6 +50,7 @@
 		259936102769BF4300F468B6 /* Authentication.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2599360F2769BF4300F468B6 /* Authentication.swift */; };
 		259936122769DD6900F468B6 /* Pref.swift in Sources */ = {isa = PBXBuildFile; fileRef = 259936112769DD6900F468B6 /* Pref.swift */; };
 		259936142769E33900F468B6 /* RegistrationView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 259936132769E33900F468B6 /* RegistrationView.swift */; };
+		25ABC74127BB981200752978 /* Sheet.swift in Sources */ = {isa = PBXBuildFile; fileRef = 25ABC74027BB981100752978 /* Sheet.swift */; };
 		25C6DB61278670780026ACE6 /* AppleAuth.swift in Sources */ = {isa = PBXBuildFile; fileRef = 25C6DB60278670780026ACE6 /* AppleAuth.swift */; };
 		25C6DB69278C03160026ACE6 /* AddBusiness.swift in Sources */ = {isa = PBXBuildFile; fileRef = 25C6DB68278C03160026ACE6 /* AddBusiness.swift */; };
 		25C6DB6B278C07BB0026ACE6 /* AdminPanelView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 25C6DB6A278C07BB0026ACE6 /* AdminPanelView.swift */; };
@@ -118,6 +119,7 @@
 		2599360F2769BF4300F468B6 /* Authentication.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Authentication.swift; sourceTree = "<group>"; };
 		259936112769DD6900F468B6 /* Pref.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Pref.swift; sourceTree = "<group>"; };
 		259936132769E33900F468B6 /* RegistrationView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RegistrationView.swift; sourceTree = "<group>"; };
+		25ABC74027BB981100752978 /* Sheet.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Sheet.swift; sourceTree = "<group>"; };
 		25C6DB60278670780026ACE6 /* AppleAuth.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppleAuth.swift; sourceTree = "<group>"; };
 		25C6DB68278C03160026ACE6 /* AddBusiness.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddBusiness.swift; sourceTree = "<group>"; };
 		25C6DB6A278C07BB0026ACE6 /* AdminPanelView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AdminPanelView.swift; sourceTree = "<group>"; };
@@ -176,6 +178,7 @@
 				25441F8B2767260D00B6E240 /* MapView.swift */,
 				25441F8D2768269C00B6E240 /* DetailsView.swift */,
 				25441F8F276844C700B6E240 /* LocationManager.swift */,
+				25ABC74027BB981100752978 /* Sheet.swift */,
 			);
 			path = Map;
 			sourceTree = "<group>";
@@ -535,6 +538,7 @@
 				25F9B33A2797FE5B0018662D /* FullScreenImages.swift in Sources */,
 				2542CAE3279A757A00982C48 /* ChattingAdmin.swift in Sources */,
 				25C6DB61278670780026ACE6 /* AppleAuth.swift in Sources */,
+				25ABC74127BB981200752978 /* Sheet.swift in Sources */,
 				25F9B33C2798F6300018662D /* SegmentedViewController.swift in Sources */,
 				2542E347277436B600883E0D /* OwnerView.swift in Sources */,
 				253305CD27560E450061DD28 /* MenuItems.swift in Sources */,
@@ -677,7 +681,7 @@
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_ENTITLEMENTS = iosApp/iosApp.entitlements;
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 33;
+				CURRENT_PROJECT_VERSION = 34;
 				DEVELOPMENT_ASSET_PATHS = "\"iosApp/Preview Content\"";
 				DEVELOPMENT_TEAM = 4GZ4AH8Z6M;
 				ENABLE_PREVIEWS = YES;
@@ -715,7 +719,7 @@
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_ENTITLEMENTS = iosApp/iosApp.entitlements;
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 33;
+				CURRENT_PROJECT_VERSION = 34;
 				DEVELOPMENT_ASSET_PATHS = "\"iosApp/Preview Content\"";
 				DEVELOPMENT_TEAM = 4GZ4AH8Z6M;
 				ENABLE_PREVIEWS = YES;

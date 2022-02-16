@@ -14,39 +14,49 @@ struct MapView: View {
     
     @State var category: String = "all"
     @State var categoryName: String = "🗂"
-    @State var isLoading: Bool = true
+//    @State var isLoading: Bool = true
     @State var trackingMode: MapUserTrackingMode = .follow
     
     @StateObject var locationManager = LocationManager()
     @StateObject var serviceManager = ServiceManager()
+    @State var isPresented = false
+    @State var openDetails = false
+    @State var currentService: Service = Service(dictionary: ["name":"BOOO"])
     
     @State private var mapRegion = MKCoordinateRegion(center: CLLocationCoordinate2D(latitude: 36.62257816899407, longitude: 127.91520089316795), span: MKCoordinateSpan(latitudeDelta: 3.5, longitudeDelta: 3.5))
     
     var body: some View {
         NavigationView {
-//            ZStack(alignment: .bottom) {
+            ZStack(alignment: .bottom) {
                 Map(coordinateRegion: $mapRegion, interactionModes: .all, showsUserLocation: true, userTrackingMode: $trackingMode, annotationItems: serviceManager.services)
                 { service in
                     MapAnnotation(coordinate: CLLocationCoordinate2D(latitude: Double(service.latitude) ?? 0.0, longitude: Double(service.longitude) ?? 0.0)) {
-                        NavigationLink {
-                            DetailsView(service: service)
-                        } label: {
+//                        NavigationLink {
+//                            DetailsView(service: service)
+//                        } label: {
                             if service.latitude != "" {
                                 Image(service.category)
-//                                    .renderingMode(.original)
+                                    .renderingMode(.original)
                                     .resizable()
                                     .frame(width: 50, height: 50)
+                                    .onTapGesture {
+                                        currentService = service
+                                        isPresented.toggle()
+                                    }
                             }
                         }
-                    }
+//                    }
                     
-                }.disabled(isLoading)
-                    .navigationTitle("Карта")
-                    .navigationBarTitleDisplayMode(.inline)
-                    .onAppear {
-                        self.isLoading = false
-                    }
-                
+                }
+//                .onTapGesture {
+//                    if self.isPresented == true {
+//                        isPresented.toggle()
+//                    }
+//                }
+//                .disabled(isLoading)
+                .navigationTitle("Карта")
+                .navigationBarTitleDisplayMode(.inline)
+//                .onAppear { self.isLoading = false }
                     .toolbar {
                         ToolbarItem(placement: .navigationBarLeading) {
                             Menu {
@@ -220,25 +230,10 @@ struct MapView: View {
                             }
                         }
                     }
+                NavigationLink(destination: DetailsView(service: currentService), isActive: $openDetails) { EmptyView() }
                 Group {
                     HStack {
                         Spacer()
-                        //                    if #available(iOS 15.0, *) {
-                        //                        LocationButton {
-                        //                            locationManager.requestLocation()
-                        //                            if let location = locationManager.lastLocation?.coordinate {
-                        //
-                        //                                mapRegion = MKCoordinateRegion(center: CLLocationCoordinate2D(latitude: location.latitude, longitude: location.longitude), span: MKCoordinateSpan(latitudeDelta: 0.05, longitudeDelta: 0.05))
-                        //                            }
-                        //                        }
-                        //                        .labelStyle(.iconOnly)
-                        //                        .symbolVariant(.fill)
-                        //                        .cornerRadius(30)
-                        //                        .foregroundColor(.white)
-                        //                        .frame(width: 60, height: 60)
-                        //                        .shadow(color: Color.gray, radius: 1, x: 1, y: 1)
-                        //                        .padding()
-                        //                    } else {
                         Button(action: {
                             locationManager.requestLocation()
                             if let location = locationManager.lastLocation?.coordinate {
@@ -257,16 +252,55 @@ struct MapView: View {
                     }
                 }
             }
-//            if isLoading {
+            
+            .popup(isPresented: $isPresented) {
+                Sheet {
+                        NamePopupView(isPresented: $isPresented, openDetails: $openDetails,service: currentService)
+                    
+                    
+                }
+            }
+//                    isLoading {
 //                ProgressView().progressViewStyle(CircularProgressViewStyle(tint: Color("textColor")))
 //                    .background(Color(UIColor.systemGroupedBackground).opacity(0.1))
 //            }
-//        }
+                
+        }
     }
 }
 
 struct MapView_Previews: PreviewProvider {
     static var previews: some View {
         MapView()
+    }
+}
+
+
+
+struct OverlayModifier<OverlayView: View>: ViewModifier {
+    
+    @Binding var isPresented: Bool
+    let overlayView: OverlayView
+    
+    init(isPresented: Binding<Bool>, @ViewBuilder overlayView: @escaping () -> OverlayView) {
+        self._isPresented = isPresented
+        self.overlayView = overlayView()
+    }
+    
+    func body(content: Content) -> some View {
+        content.overlay(isPresented ? overlayView : nil)
+    }
+}
+
+extension View {
+
+    func popup<OverlayView: View>(isPresented: Binding<Bool>,
+                                  blurRadius: CGFloat = 1,
+                                  blurAnimation: Animation? = .linear,
+                                  @ViewBuilder overlayView: @escaping () -> OverlayView) -> some View {
+        return blur(radius: isPresented.wrappedValue ? blurRadius : 0)
+            .animation(blurAnimation)
+//            .allowsHitTesting(!isPresented.wrappedValue)
+            .modifier(OverlayModifier(isPresented: isPresented, overlayView: overlayView))
     }
 }

@@ -30,7 +30,7 @@ struct OneWorkView: View {
                     .lineLimit(1)
                     .font(.body)
                 Spacer()
-                Text(Util().formatDate(date: adv.createdAt))
+                Text(Util().formatDate(date: adv.updatedAt))
                     .font(.caption)
                     .foregroundColor(Color.gray)
             }.padding(.leading, 4).padding(.trailing, 4).padding(.bottom, 2).padding(.top, 3)

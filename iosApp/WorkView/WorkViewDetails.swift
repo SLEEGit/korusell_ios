@@ -26,7 +26,7 @@ struct WorkViewDetails: View {
             VStack(alignment: .leading) {
                 Group {
                     if adv.createdAt != "" {
-                        Text("Добавлено: \(Util().formatDate(date: adv.createdAt))")
+                        Text("Добавлено: \(Util().formatDate(date: adv.updatedAt))")
                             .font(.caption)
                             .foregroundColor(.gray)
                             .padding(.bottom, 5)
