@@ -9,8 +9,6 @@ import Foundation
 import CoreLocation
 import Combine
 
-
-
 class LocationManager: NSObject, ObservableObject, CLLocationManagerDelegate {
     
     private let locationManager = CLLocationManager()
@@ -21,8 +19,8 @@ class LocationManager: NSObject, ObservableObject, CLLocationManagerDelegate {
         super.init()
         locationManager.delegate = self
         locationManager.desiredAccuracy = kCLLocationAccuracyBest
-        //        locationManager.requestWhenInUseAuthorization()
-        //        locationManager.startUpdatingLocation()
+                locationManager.requestWhenInUseAuthorization()
+                locationManager.startUpdatingLocation()
     }
     
     
