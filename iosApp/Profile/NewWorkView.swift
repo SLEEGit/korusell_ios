@@ -150,7 +150,7 @@ struct NewWorkView: View {
                     HStack {
                         Toggle("H2", isOn: $h2)
                             .toggleStyle(CheckboxToggleStyle(style: .circle))
-                        Toggle("H4", isOn: $f4)
+                        Toggle("F4", isOn: $f4)
                             .toggleStyle(CheckboxToggleStyle(style: .circle))
                         Toggle("F1", isOn: $f1)
                             .toggleStyle(CheckboxToggleStyle(style: .circle))

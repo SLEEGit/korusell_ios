@@ -439,7 +439,7 @@ class AdvManager: ObservableObject {
                     return nil
                 }
             }
-            self.myAdvs = self.advs.filter { $0.uid.contains(Auth.auth().currentUser?.uid ?? "") }
+            self.myAdvs = self.advs.filter { $0.uid.contains(Auth.auth().currentUser?.uid ?? "") }.sorted { $0.updatedAt > $1.updatedAt }
             completion()
             
         }

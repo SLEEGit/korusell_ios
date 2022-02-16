@@ -182,6 +182,7 @@ struct EditWorkView: View {
                 HStack {
                     Spacer()
                     Button("Обновить") {
+                        visa.removeAll()
                         self.images = String(photos.count)
                         if f1 {
                             visa.append("F1")
@@ -205,6 +206,8 @@ struct EditWorkView: View {
                             gender = "👩🏻"
                         } else if gender1 && gender2 {
                             gender = "👱🏼‍♂️👩🏻"
+                        } else {
+                            gender = ""
                         }
                         
                         if shift1 && !shift2 {
@@ -213,6 +216,8 @@ struct EditWorkView: View {
                             shift = "🌚"
                         } else if shift1 && shift2 {
                             shift = "🌞🌚"
+                        } else {
+                            shift = ""
                         }
                         age.removeAll()
                         age.append(String(stepperValue1))

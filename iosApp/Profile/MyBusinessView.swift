@@ -61,6 +61,9 @@ struct MyBusinessView: View {
                 }.frame(height: 300)
                     .indexViewStyle(.page(backgroundDisplayMode: .always))
                     .tabViewStyle(.page)
+            } else {
+                Image("launchicon_mini")
+                .frame(height: 300)
             }
                 HStack {
                     Spacer()
@@ -187,10 +190,11 @@ struct MyBusinessView: View {
                                 self.latitude = lat
                                 self.longitude = long
                                 DispatchQueue.main.asyncAfter(deadline: .now() + 0.1) {
-                                    serviceManager.postService(service: Service(uid: uid, name: name, category: category, city: city, address: address, phone: phone, description: description, latitude: latitude, longitude: longitude, social: social, images: images)) {
+                                    
                                         postImages() {
                                             deleteImages() {
                                                 DispatchQueue.main.asyncAfter(deadline: .now() + 0.3) {
+                                                    serviceManager.postService(service: Service(uid: uid, name: name, category: category, city: city, address: address, phone: phone, description: description, latitude: latitude, longitude: longitude, social: social, images: images)) {
                                                     showingAlert = true
                                                 }
                                             }

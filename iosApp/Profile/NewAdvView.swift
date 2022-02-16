@@ -189,10 +189,11 @@ struct NewAdvView: View {
                     Spacer()
                     Button("Создать") {
                         self.images = String(photos.count)
-                        AdvManager().postAdv(adv: Adv(id: uid + Util().dateForAdv(date: Util().dateByTimeZone()), uid: uid + Util().dateForAdv(date: Util().dateByTimeZone()), name: name, category: category, city: city, price: price, phone: phone, description: description, createdAt: Util().dateByTimeZone(), images: images, updatedAt: Util().dateByTimeZone(), isActive: "1", subcategory: subcategory, visa: visa, gender: gender, shift: shift, age: age)) {}
+                        
 //                        DB().createAdv(uid: uid, name: name, category: category, city: city, price: price, phone: phone, descrition: description, createdAt: Util().dateByTimeZone(), images: images, updatedAt: Util().dateByTimeZone(), isActive: "1", subcategory: subcategory) {
                             postImages() {
                                 deleteImages() {
+                                    AdvManager().postAdv(adv: Adv(id: uid + Util().dateForAdv(date: Util().dateByTimeZone()), uid: uid + Util().dateForAdv(date: Util().dateByTimeZone()), name: name, category: category, city: city, price: price, phone: phone, description: description, createdAt: Util().dateByTimeZone(), images: images, updatedAt: Util().dateByTimeZone(), isActive: "1", subcategory: subcategory, visa: visa, gender: gender, shift: shift, age: age)) {}
 //                                    DispatchQueue.main.asyncAfter(deadline: .now() + 0.3) {
 //                                        DB().getAdvs(category: "all") { (list) in
 //                                            globalAdv = list
@@ -224,7 +225,7 @@ struct NewAdvView: View {
     func postImages(completion: @escaping () -> Void) {
         var n = 0
         for photo1 in photos {
-            DB().postImage(image: photo1, directory: directory, uid: uid + "ADV" + String(n), quality: 0.5)
+            DB().postImage(image: photo1, directory: directory, uid: uid + Util().dateForAdv(date: Util().dateByTimeZone()) + "ADV" + String(n), quality: 0.5)
             n += 1
             print("adding photo")
         }

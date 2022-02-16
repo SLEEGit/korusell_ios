@@ -150,7 +150,7 @@ struct MyAdvView: View {
                 .scaledToFit()
                 .frame(width: 150, height: 150)
             VStack(alignment: .leading) {
-                Text(Util().formatDate(date: adv.createdAt))
+                Text(Util().formatDate(date: adv.updatedAt))
                     .padding(.leading, 4).padding(.trailing, 4).padding(.bottom, 3).padding(.top, 2)
                     .font(.caption)
                     .foregroundColor(Color.gray)
