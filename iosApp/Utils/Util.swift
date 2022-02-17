@@ -283,7 +283,7 @@ class Util {
         dateFormatterGet.dateFormat = "yyyy-MM-dd HH:mm:ss ZZZ"
         let dateFormatterPrint = DateFormatter()
 //        dateFormatterPrint.dateFormat = "dd MMMM yyyy г. в HH:mm"
-        dateFormatterPrint.dateFormat = "yy-MM-dd-HH-mm-ss"
+        dateFormatterPrint.dateFormat = "yy-MM-dd-HH-mm"
         dateFormatterPrint.locale = Locale(identifier: "ru_RU")
         let dated: Date? = dateFormatterGet.date(from: date)
         if date != "" {

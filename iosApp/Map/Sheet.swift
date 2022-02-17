@@ -82,7 +82,7 @@ struct NamePopupView: View {
                                 .frame(width: 32, height: 32)
                                 .background(Color("xmark").opacity(0.06))
                                 .cornerRadius(16)
-                                
+                            
                         })
                     }
                     if service.phone != "" {
@@ -106,7 +106,7 @@ struct NamePopupView: View {
                                 }
                         }
                     }
-                                            
+                    
                     
                     Text(service.description)
                         .font(.caption)
@@ -117,26 +117,21 @@ struct NamePopupView: View {
                         .onTapGesture {
                             openDetails = true
                         }
-                    HStack {
-                        Button(action: {
-                            Util().call(numberString: service.phone)
-                        }, label: {
-                            HStack {
-                                Image(systemName: "phone.fill")
-                                Text(service.phone.prefix(13))
-                                    .font(.system(size: 15))
-                                    .bold()
-                            }
-                            
-                        })
-                        Spacer()
-//                        Button(action: {
-//                            openDetails = true
-//                        }, label: {
-//                            Text("Подробнее")
-//                                .font(.system(size: 15))
-//                                .bold()
-//                        })
+                    if service.phone != "" {
+                        HStack {
+                            Button(action: {
+                                Util().call(numberString: service.phone)
+                            }, label: {
+                                HStack {
+                                    Image(systemName: "phone.fill")
+                                    Text(service.phone.prefix(13))
+                                        .font(.system(size: 15))
+                                        .bold()
+                                }
+                                
+                            })
+                            Spacer()
+                        }
                     }
                 }
                 .padding(.leading, 10)
