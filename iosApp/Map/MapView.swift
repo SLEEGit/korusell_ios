@@ -296,7 +296,7 @@ struct OverlayModifier<OverlayView: View>: ViewModifier {
 extension View {
     
     func popup<OverlayView: View>(isPresented: Binding<Bool>,
-                                  blurRadius: CGFloat = 1,
+                                  blurRadius: CGFloat = 0,
                                   blurAnimation: Animation? = .linear,
                                   @ViewBuilder overlayView: @escaping () -> OverlayView) -> some View {
         return blur(radius: isPresented.wrappedValue ? blurRadius : 0)
