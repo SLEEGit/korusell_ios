@@ -272,15 +272,8 @@ class Util {
 //        dateFormatterPrint.dateFormat = "dd MMMM yyyy г. в HH:mm"
         dateFormatterPrint.dateFormat = "dd-MM-yyyy HH:mm"
         dateFormatterPrint.locale = Locale(identifier: "ru_RU")
-        let dated: Date? = iosdateFormatterGet.date(from: date)
-        if dated != nil {
-            return dateFormatterPrint.string(from: dated! as Date)
-        } else {
-//            dateFormatterGet.dateFormat = "yyyy-MM-dd HH:mm:ss"
-//            dateFormatterPrint.dateFormat = "dd-MM-yyyy HH:mm"
-            let androiddated = androidFormatterGet.date(from: date)
-            return dateFormatterPrint.string(from: androiddated! as Date)
-        }
+        let dated: Date? = iosdateFormatterGet.date(from: date) ?? androidFormatterGet.date(from: date)
+        return dateFormatterPrint.string(from: dated! as Date)
     }
     
     func dateForAdv(date: String) -> String {
