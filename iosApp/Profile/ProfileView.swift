@@ -137,7 +137,7 @@ struct ProfileView: View {
                     }
                 }
                 Section {
-                    NavigationLink(destination: Chatting()) {
+                    NavigationLink(destination: Contacts()) {
                         HStack {
                             Text("✉️")
                             Text("Написать разработчикам")

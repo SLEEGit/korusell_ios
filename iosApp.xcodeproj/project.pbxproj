@@ -26,6 +26,7 @@
 		2542CAE3279A757A00982C48 /* ChattingAdmin.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2542CAE2279A757A00982C48 /* ChattingAdmin.swift */; };
 		2542E347277436B600883E0D /* OwnerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2542E346277436B500883E0D /* OwnerView.swift */; };
 		2542E3492774664800883E0D /* EditAdvView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2542E3482774664800883E0D /* EditAdvView.swift */; };
+		25431DD027DCBDB600446D57 /* Contacts.swift in Sources */ = {isa = PBXBuildFile; fileRef = 25431DCF27DCBDB600446D57 /* Contacts.swift */; };
 		25441F8C2767260D00B6E240 /* MapView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 25441F8B2767260D00B6E240 /* MapView.swift */; };
 		25441F8E2768269C00B6E240 /* DetailsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 25441F8D2768269C00B6E240 /* DetailsView.swift */; };
 		25441F90276844C700B6E240 /* LocationManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 25441F8F276844C700B6E240 /* LocationManager.swift */; };
@@ -92,6 +93,7 @@
 		2542CAE2279A757A00982C48 /* ChattingAdmin.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChattingAdmin.swift; sourceTree = "<group>"; };
 		2542E346277436B500883E0D /* OwnerView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OwnerView.swift; sourceTree = "<group>"; };
 		2542E3482774664800883E0D /* EditAdvView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditAdvView.swift; sourceTree = "<group>"; };
+		25431DCF27DCBDB600446D57 /* Contacts.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Contacts.swift; sourceTree = "<group>"; };
 		25441F8B2767260D00B6E240 /* MapView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MapView.swift; sourceTree = "<group>"; };
 		25441F8D2768269C00B6E240 /* DetailsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailsView.swift; sourceTree = "<group>"; };
 		25441F8F276844C700B6E240 /* LocationManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocationManager.swift; sourceTree = "<group>"; };
@@ -352,6 +354,7 @@
 				25F9B344279A49B40018662D /* Message.swift */,
 				25F9B346279A4ACB0018662D /* MessageField.swift */,
 				2542CAE0279A4B8300982C48 /* MessageBubble.swift */,
+				25431DCF27DCBDB600446D57 /* Contacts.swift */,
 			);
 			name = Chatting;
 			sourceTree = "<group>";
@@ -544,6 +547,7 @@
 				253305CD27560E450061DD28 /* MenuItems.swift in Sources */,
 				25441F8E2768269C00B6E240 /* DetailsView.swift in Sources */,
 				25C6DB6D278C090B0026ACE6 /* AddWork.swift in Sources */,
+				25431DD027DCBDB600446D57 /* Contacts.swift in Sources */,
 				2522D7DB27A286CC008301E8 /* AddAdv.swift in Sources */,
 				2599360A2769A0FA00F468B6 /* LoginView.swift in Sources */,
 				2515C95727841754007C376F /* MultipleImagePicker.swift in Sources */,
