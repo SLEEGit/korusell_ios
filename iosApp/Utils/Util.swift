@@ -264,17 +264,22 @@ class Util {
 //        }
 //
     func formatDate(date: String) -> String {
-        let dateFormatterGet = DateFormatter()
-        dateFormatterGet.dateFormat = "yyyy-MM-dd HH:mm:ss ZZZ"
+        let iosdateFormatterGet = DateFormatter()
+        let androidFormatterGet = DateFormatter()
+        iosdateFormatterGet.dateFormat = "yyyy-MM-dd HH:mm:ss ZZZ"
+        androidFormatterGet.dateFormat = "yyyy-MM-dd HH:mm:ss"
         let dateFormatterPrint = DateFormatter()
 //        dateFormatterPrint.dateFormat = "dd MMMM yyyy г. в HH:mm"
         dateFormatterPrint.dateFormat = "dd-MM-yyyy HH:mm"
         dateFormatterPrint.locale = Locale(identifier: "ru_RU")
-        let dated: Date? = dateFormatterGet.date(from: date)
-        if date != "" {
+        let dated: Date? = iosdateFormatterGet.date(from: date)
+        if dated != nil {
             return dateFormatterPrint.string(from: dated! as Date)
         } else {
-            return ""
+//            dateFormatterGet.dateFormat = "yyyy-MM-dd HH:mm:ss"
+//            dateFormatterPrint.dateFormat = "dd-MM-yyyy HH:mm"
+            let androiddated = androidFormatterGet.date(from: date)
+            return dateFormatterPrint.string(from: androiddated! as Date)
         }
     }
     
