@@ -234,8 +234,8 @@ struct LoginView : View {
                 Pref.userDefault.synchronize()
                 Pref.registerCompletion = "success"
                 let created_date = Util().dateByTimeZone()
-                firestore.createUserInDB(user: user!.user, email: Pref.userDefault.string(forKey: "email") ?? "", name: Pref.userDefault.string(forKey: "name") ?? "", created_date: created_date) {}
-                DB().createUserInDB(user: user!.user, email: Pref.userDefault.string(forKey: "email") ?? "", name: Pref.userDefault.string(forKey: "name") ?? "", created_date: created_date) {}
+                firestore.createUserInDB(user: user!.user, email: Pref.userDefault.string(forKey: "email") ?? "", name: Pref.userDefault.string(forKey: "name") ?? "", created_date: created_date, image_url: Pref.userDefault.string(forKey: "imageURL") ?? "") {}
+                DB().createUserInDB(user: user!.user, email: Pref.userDefault.string(forKey: "email") ?? "", name: Pref.userDefault.string(forKey: "name") ?? "", created_date: created_date, image_url: Pref.userDefault.string(forKey: "imageURL") ?? "") {}
                 DB().getImageByURL(from: URL(string: Pref.userDefault.string(forKey: "imageURL")!)!) { image in
                     DB().postImage(image: image, directory: "avatars", uid: user?.user.uid ?? "", quality: 1.0)
                 }
