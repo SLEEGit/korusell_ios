@@ -71,18 +71,18 @@ class FireStore: ObservableObject {
 class MessagesManager: ObservableObject {
     @Published private(set) var messages: [Message] = []
     @Published private(set) var lastMessageId: String = ""
-    
     // Create an instance of our Firestore database
     let db = Firestore.firestore()
+    var uid: String = ""
     
     // On initialize of the MessagesManager class, get the messages from Firestore
     init() {
-        getMessages()
+        getMessages(uid: uid)
     }
     
     // Read message from Firestore in real-time with the addSnapShotListener
-    func getMessages() {
-        db.collection("messages").document(Auth.auth().currentUser?.uid ?? "noUser").collection("test").addSnapshotListener { querySnapshot, error in
+    func getMessages(uid: String) {
+        db.collection("messages").document(uid).collection("test").addSnapshotListener { querySnapshot, error in
             
             // If we don't have documents, exit the function
             guard let documents = querySnapshot?.documents else {
@@ -123,7 +123,7 @@ class MessagesManager: ObservableObject {
             // Create a new document in Firestore with the newMessage variable above, and use setData(from:) to convert the Message into Firestore data
             // Note that setData(from:) is a function available only in FirebaseFirestoreSwift package - remember to import it at the top
             //            try db.collection("messages").document(Auth.auth().currentUser?.uid ?? "noUser").setData(from: newMessage)
-            try db.collection("messages").document(Auth.auth().currentUser?.uid ?? "noUser").collection("test").document("user_" + Util().dateForAdv(date: Util().dateByTimeZone())).setData(from: newMessage)
+            try db.collection("messages").document(uid ?? "noUser").collection("test").document("user_" + Util().dateForAdv(date: Util().dateByTimeZone())).setData(from: newMessage)
         } catch {
             // If we run into an error, print the error in the console
             print("Error adding message to Firestore: \(error)")

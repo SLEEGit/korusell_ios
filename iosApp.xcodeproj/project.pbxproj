@@ -174,6 +174,17 @@
 			path = Resources;
 			sourceTree = "<group>";
 		};
+		25431DD127DF1B8300446D57 /* Chatting */ = {
+			isa = PBXGroup;
+			children = (
+				25ED2B602771A08900575FEB /* Chatting.swift */,
+				25F9B344279A49B40018662D /* Message.swift */,
+				25F9B346279A4ACB0018662D /* MessageField.swift */,
+				2542CAE0279A4B8300982C48 /* MessageBubble.swift */,
+			);
+			path = Chatting;
+			sourceTree = "<group>";
+		};
 		25441F6A2767178600B6E240 /* Map */ = {
 			isa = PBXGroup;
 			children = (
@@ -251,6 +262,7 @@
 		25973DE42759969300DC016B /* AdsView */ = {
 			isa = PBXGroup;
 			children = (
+				25431DD127DF1B8300446D57 /* Chatting */,
 				25E0BD22278E84080021A326 /* HomeView.swift */,
 				2515C94C2782B151007C376F /* AdvDetailsView.swift */,
 				257CD81A27946A530000EF95 /* ExpandedServiceDetails2.swift */,
@@ -302,7 +314,7 @@
 				2522D7CD279FC69E008301E8 /* NewWorkView.swift */,
 				2522D7D627A22AD4008301E8 /* EditWorkView.swift */,
 				254084FD2781602D00D30CF5 /* AddLinksView.swift */,
-				25F9B34A279A4B150018662D /* Chatting */,
+				25431DCF27DCBDB600446D57 /* Contacts.swift */,
 			);
 			path = Profile;
 			sourceTree = "<group>";
@@ -345,18 +357,6 @@
 				2522D7D127A13A8F008301E8 /* WorkViewDetails.swift */,
 			);
 			path = WorkView;
-			sourceTree = "<group>";
-		};
-		25F9B34A279A4B150018662D /* Chatting */ = {
-			isa = PBXGroup;
-			children = (
-				25ED2B602771A08900575FEB /* Chatting.swift */,
-				25F9B344279A49B40018662D /* Message.swift */,
-				25F9B346279A4ACB0018662D /* MessageField.swift */,
-				2542CAE0279A4B8300982C48 /* MessageBubble.swift */,
-				25431DCF27DCBDB600446D57 /* Contacts.swift */,
-			);
-			name = Chatting;
 			sourceTree = "<group>";
 		};
 		45A62DF6782E9C65FD75BB4F /* Frameworks */ = {
@@ -685,7 +685,7 @@
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_ENTITLEMENTS = iosApp/iosApp.entitlements;
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 35;
+				CURRENT_PROJECT_VERSION = 36;
 				DEVELOPMENT_ASSET_PATHS = "\"iosApp/Preview Content\"";
 				DEVELOPMENT_TEAM = 4GZ4AH8Z6M;
 				ENABLE_PREVIEWS = YES;
@@ -706,7 +706,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				MARKETING_VERSION = 1.4.2;
+				MARKETING_VERSION = 1.4.3;
 				PRODUCT_BUNDLE_IDENTIFIER = com.korusell.korusell;
 				PRODUCT_NAME = korusell;
 				SWIFT_EMIT_LOC_STRINGS = YES;
@@ -723,7 +723,7 @@
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_ENTITLEMENTS = iosApp/iosApp.entitlements;
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 35;
+				CURRENT_PROJECT_VERSION = 36;
 				DEVELOPMENT_ASSET_PATHS = "\"iosApp/Preview Content\"";
 				DEVELOPMENT_TEAM = 4GZ4AH8Z6M;
 				ENABLE_PREVIEWS = YES;
@@ -744,7 +744,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				MARKETING_VERSION = 1.4.2;
+				MARKETING_VERSION = 1.4.3;
 				PRODUCT_BUNDLE_IDENTIFIER = com.korusell.korusell;
 				PRODUCT_NAME = korusell;
 				SWIFT_EMIT_LOC_STRINGS = YES;

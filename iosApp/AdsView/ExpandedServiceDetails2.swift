@@ -169,6 +169,7 @@ struct ExpandedServiceDetails2: View {
                         })
                     }
                     Spacer()
+                    
                 }.padding(.bottom, 30)
                 
             }

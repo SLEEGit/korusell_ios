@@ -166,6 +166,8 @@ struct ExpandedAdvDetails: View {
                         Spacer()
                 }
                 }
+                Divider()
+                Chatting()
             }
             .navigationBarTitleDisplayMode(.inline)
             .onAppear {
