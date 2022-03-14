@@ -156,16 +156,19 @@ struct EditWorkView: View {
                             .toggleStyle(CheckboxToggleStyle(style: .circle))
                     }.padding(.bottom, 10)
                     
-                    HStack {
-                        Toggle("H2", isOn: $h2)
-                            .toggleStyle(CheckboxToggleStyle(style: .circle))
-                        Toggle("F4", isOn: $f4)
-                            .toggleStyle(CheckboxToggleStyle(style: .circle))
-                        Toggle("F1", isOn: $f1)
-                            .toggleStyle(CheckboxToggleStyle(style: .circle))
-                        Toggle("Другие", isOn: $other)
-                            .toggleStyle(CheckboxToggleStyle(style: .circle))
-                    }.opacity(anyVisa ? 0 : 1)
+                    if !anyVisa {
+                        HStack {
+                            Toggle("H2", isOn: $h2)
+                                .toggleStyle(CheckboxToggleStyle(style: .circle))
+                            Toggle("F4", isOn: $f4)
+                                .toggleStyle(CheckboxToggleStyle(style: .circle))
+                            Toggle("F1", isOn: $f1)
+                                .toggleStyle(CheckboxToggleStyle(style: .circle))
+                            Toggle("Другие", isOn: $other)
+                                .toggleStyle(CheckboxToggleStyle(style: .circle))
+                        }
+                    }
+                    
                 }
                 VStack(alignment: .leading) {
                     HStack {
@@ -174,11 +177,12 @@ struct EditWorkView: View {
                         Toggle("Любой", isOn: $anyAge)
                             .toggleStyle(CheckboxToggleStyle(style: .circle))
                     }
-                    VStack {
-                        Stepper("От: \(stepperValue1)", value: $stepperValue1, in: 20...65, step: 5)
-                        Stepper("До: \(stepperValue2)", value: $stepperValue2, in: 25...70, step: 5)
+                    if !anyAge {
+                        VStack {
+                            Stepper("От: \(stepperValue1)", value: $stepperValue1, in: 20...65, step: 5)
+                            Stepper("До: \(stepperValue2)", value: $stepperValue2, in: 25...70, step: 5)
+                        }
                     }
-                    .opacity(anyAge ? 0 : 1)
                 }
                 
                 VStack(alignment: .leading) {
