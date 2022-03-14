@@ -35,16 +35,16 @@ class FireStore: ObservableObject {
     
     func updateLastLogin(user: FirebaseAuth.User, last_login: String, completion: @escaping () -> Void) {
         db.collection("users").document(user.uid).updateData(["last_login" : last_login])
-            DispatchQueue.main.async {
-                completion()
-            }
+        DispatchQueue.main.async {
+            completion()
+        }
     }
     
     func addNamePhone(user: FirebaseAuth.User, name: String, phone: String, completion: @escaping () -> Void) {
         db.collection("users").document(user.uid).updateData(["name" : name, "phone" : phone])
-            DispatchQueue.main.async {
-                completion()
-            }
+        DispatchQueue.main.async {
+            completion()
+        }
     }
     
     func deleteAccount(uid: String, completion: @escaping () -> Void) {
@@ -79,7 +79,7 @@ class MessagesManager: ObservableObject {
     init() {
         getMessages()
     }
-
+    
     // Read message from Firestore in real-time with the addSnapShotListener
     func getMessages() {
         db.collection("messages").document(Auth.auth().currentUser?.uid ?? "noUser").collection("test").addSnapshotListener { querySnapshot, error in
@@ -99,7 +99,7 @@ class MessagesManager: ObservableObject {
                 } catch {
                     // If we run into an error, print the error in the console
                     print("Error decoding document into Message: \(error)")
-
+                    
                     // Return nil if we run into an error - but the compactMap will not include it in the final array
                     return nil
                 }
@@ -122,7 +122,7 @@ class MessagesManager: ObservableObject {
             let newMessage = Message(id: Util().dateForAdv(date: Util().dateByTimeZone()), text: text, received: false, timestamp: Date())
             // Create a new document in Firestore with the newMessage variable above, and use setData(from:) to convert the Message into Firestore data
             // Note that setData(from:) is a function available only in FirebaseFirestoreSwift package - remember to import it at the top
-//            try db.collection("messages").document(Auth.auth().currentUser?.uid ?? "noUser").setData(from: newMessage)
+            //            try db.collection("messages").document(Auth.auth().currentUser?.uid ?? "noUser").setData(from: newMessage)
             try db.collection("messages").document(Auth.auth().currentUser?.uid ?? "noUser").collection("test").document("user_" + Util().dateForAdv(date: Util().dateByTimeZone())).setData(from: newMessage)
         } catch {
             // If we run into an error, print the error in the console
@@ -136,7 +136,7 @@ class MessagesManager: ObservableObject {
             let newMessage = Message(id: Util().dateForAdv(date: Util().dateByTimeZone()), text: text, received: true, timestamp: Date())
             // Create a new document in Firestore with the newMessage variable above, and use setData(from:) to convert the Message into Firestore data
             // Note that setData(from:) is a function available only in FirebaseFirestoreSwift package - remember to import it at the top
-//            try db.collection("messages").document(Auth.auth().currentUser?.uid ?? "noUser").setData(from: newMessage)
+            //            try db.collection("messages").document(Auth.auth().currentUser?.uid ?? "noUser").setData(from: newMessage)
             try db.collection("messages").document(userUID).collection("test").document("user_" + Util().dateForAdv(date: Util().dateByTimeZone())).setData(from: newMessage)
         } catch {
             // If we run into an error, print the error in the console
@@ -151,11 +151,11 @@ class ServiceManager: ObservableObject {
     @Published var city: String = "Все города"
     @Published var category: String = "all"
     let db = Firestore.firestore()
-
+    
     init() {
         getServices()
     }
-
+    
     func getServices() {
         db.collection("services").addSnapshotListener { querySnapshot, error in
             
@@ -238,15 +238,15 @@ class ServiceManager: ObservableObject {
     }
     
     
-//    func postService(text: String) {
-//        let uid = Auth.auth().currentUser!.uid
-//        do {
-//            let newService = Service(id: uid, uid: uid, name: "", category: "", city: "", address: "", phone: "", description: "", latitude: "", longitude: "", social: ["","","","",""], images: "")
-//            try db.collection("services").document(uid).setData(from: newService)
-//        } catch {
-//            print("Error adding message to Firestore: \(error)")
-//        }
-//    }
+    //    func postService(text: String) {
+    //        let uid = Auth.auth().currentUser!.uid
+    //        do {
+    //            let newService = Service(id: uid, uid: uid, name: "", category: "", city: "", address: "", phone: "", description: "", latitude: "", longitude: "", social: ["","","","",""], images: "")
+    //            try db.collection("services").document(uid).setData(from: newService)
+    //        } catch {
+    //            print("Error adding message to Firestore: \(error)")
+    //        }
+    //    }
     
     func getMyService(uid: String, completion: @escaping (Service) -> ()) {
         db.collection("services").document(uid).getDocument { (document, error) in
@@ -273,7 +273,7 @@ class ServiceManager: ObservableObject {
             }
         }
     }
-
+    
     func deleteService(uid: String, completion: @escaping () -> Void) {
         db.collection("services").document(uid).delete()
         for i in 0...4 {
@@ -296,7 +296,7 @@ class AdvManager: ObservableObject {
     @Published var category: String = "all"
     @Published var subcategory: String = "all"
     let db = Firestore.firestore()
-
+    
     init() {
         getAdvs()
     }
@@ -329,7 +329,7 @@ class AdvManager: ObservableObject {
                 }
             }
             
-//            self.advs.sort { $0.createdAt < $1.createdAt }
+            //            self.advs.sort { $0.createdAt < $1.createdAt }
             self.advs = self.advs.filter { $0.isActive == "1" }.sorted { $0.createdAt > $1.createdAt }
             
             switch self.category {

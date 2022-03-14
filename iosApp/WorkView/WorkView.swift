@@ -66,8 +66,13 @@ struct OneWorkView: View {
                     VStack {
                         Text("Возвраст")
                             .font(.caption)
-                        Text(adv.age.joined(separator: "-"))
-                            .font(.headline)
+                        if adv.age[0] == "20" && adv.age[1] == "70" {
+                            Text("Любой").font(.headline)
+                        } else {
+                            Text(adv.age.joined(separator: "-"))
+                                .font(.headline)
+                        }
+                        
                     }
                 }
                 if !adv.visa.isEmpty {

@@ -43,9 +43,11 @@ struct NewWorkView: View {
     @State private var gender2 = false
     @State private var shift1 = false
     @State private var shift2 = false
+    @State private var anyAge = true
+    @State private var anyVisa = false
     
     @State private var stepperValue1: Int = 20
-    @State private var stepperValue2: Int = 50
+    @State private var stepperValue2: Int = 70
     
     
     @Environment(\.presentationMode) var presentationMode: Binding<PresentationMode>
@@ -144,9 +146,14 @@ struct NewWorkView: View {
                 }
                 
                 VStack(alignment: .leading) {
-                    Text("Визы:")
-                        .foregroundColor(.gray)
-                        .padding(.bottom, 5)
+                    HStack {
+                        Text("Визы:")
+                            .foregroundColor(.gray)
+                            
+                        Toggle("Любая", isOn: $anyVisa)
+                            .toggleStyle(CheckboxToggleStyle(style: .circle))
+                    }.padding(.bottom, 10)
+                    
                     HStack {
                         Toggle("H2", isOn: $h2)
                             .toggleStyle(CheckboxToggleStyle(style: .circle))
@@ -156,15 +163,20 @@ struct NewWorkView: View {
                             .toggleStyle(CheckboxToggleStyle(style: .circle))
                         Toggle("Другие", isOn: $other)
                             .toggleStyle(CheckboxToggleStyle(style: .circle))
-                    }
+                    }.opacity(anyVisa ? 0 : 1)
                 }
                 VStack(alignment: .leading) {
-                    Text("Возраст: ")
-                        .foregroundColor(.gray)
                     HStack {
-                        Stepper("От: \(stepperValue1)", value: $stepperValue1, step: 5)
-                        Stepper("До: \(stepperValue2)", value: $stepperValue2, step: 5)
+                        Text("Возраст: ")
+                            .foregroundColor(.gray)
+                        Toggle("Любой", isOn: $anyAge)
+                            .toggleStyle(CheckboxToggleStyle(style: .circle))
                     }
+                    VStack {
+                        Stepper("От: \(stepperValue1)", value: $stepperValue1, in: 20...65, step: 5)
+                        Stepper("До: \(stepperValue2)", value: $stepperValue2, in: 25...70, step: 5)
+                    }
+                    .opacity(anyAge ? 0 : 1)
                 }
                 
                 VStack(alignment: .leading) {
@@ -193,7 +205,7 @@ struct NewWorkView: View {
                         if other {
                             visa.append("Другая")
                         }
-                        if f1 && f4 && h2 && other {
+                        if f1 && f4 && h2 && other || anyVisa {
                             visa.removeAll()
                             visa.append("Любая")
                         }
@@ -212,8 +224,14 @@ struct NewWorkView: View {
                         } else if shift1 && shift2 {
                             shift = "🌞🌚"
                         }
-                        age.append(String(stepperValue1))
-                        age.append(String(stepperValue2))
+                        if anyAge {
+                            age.append("20")
+                            age.append("70")
+                        } else {
+                            age.append(String(stepperValue1))
+                            age.append(String(stepperValue2))
+                        }
+                      
                         
                         DispatchQueue.main.asyncAfter(deadline: .now() + 0.1) {
                         AdvManager().postAdv(adv: Adv(id: uid + Util().dateForAdv(date: Util().dateByTimeZone()), uid: uid + Util().dateForAdv(date: Util().dateByTimeZone()), name: name, category: "work", city: city, price: price, phone: phone, description: description, createdAt: Util().dateByTimeZone(), images: images, updatedAt: Util().dateByTimeZone(), isActive: "1", subcategory: subcategory, visa: visa, gender: gender, shift: shift, age: age)) {}

@@ -22,7 +22,7 @@ struct InnerWork: View {
     @State var newArray: [Int] = []
     @State var count: String = ""
     @State var fromAdv: Bool = false
-
+    
     @State var id = UUID()
     @State var uid: String = ""
     @State var name: String = ""
@@ -47,7 +47,7 @@ struct InnerWork: View {
     @State var hideAdvText: String = "Скрыть объявление"
     
     @State private var photos: [UIImage] = []
-//    @State var servImage = UIImage(named: "blank")!
+    //    @State var servImage = UIImage(named: "blank")!
     @State var showingAlertDelete: Bool = false
     @Environment(\.presentationMode) var presentationMode: Binding<PresentationMode>
     
@@ -114,8 +114,13 @@ struct InnerWork: View {
                                 .font(.body)
                             Text(shiftString)
                             if !age.isEmpty {
-                                Text(age.joined(separator: "-") + " лет")
+                                if age[0] == "20" && age[1] == "70" {
+                                    Text("Любой")
+                                } else {
+                                    Text(age.joined(separator: "-") + " лет")
+                                }
                             }
+                            //
                             Text(visa.joined(separator: ","))
                         }
                     }
@@ -143,14 +148,14 @@ struct InnerWork: View {
                     HStack {
                         Spacer()
                         Button(action: {
-//                            Util().call(numberString: phone)
+                            //                            Util().call(numberString: phone)
                         }) {
                             Image(systemName: "phone.fill")
                             Text(phone)
                         }
-//                        .foregroundColor(.white)
+                        //                        .foregroundColor(.white)
                         .padding()
-//                        .background(Color.accentColor)
+                        //                        .background(Color.accentColor)
                         .cornerRadius(15)
                         .padding(.vertical, 15)
                         Spacer()
@@ -160,7 +165,7 @@ struct InnerWork: View {
                     HStack {
                         Spacer()
                         HStack {
-//                            Image(systemName: "pencil")
+                            //                            Image(systemName: "pencil")
                             Text("Редактировать")
                                 .bold()
                         }
@@ -175,72 +180,72 @@ struct InnerWork: View {
                 }
                 HStack {
                     Spacer()
-                            Button(action: {
-                                if self.isActive == "0.3" {
-                                    self.hideAdvText = "Восстановить объявление"
-                                    self.isActive = "1"
-                                    self.alertText = "Объявление восстановлено"
-                                } else {
-                                    self.hideAdvText = "Скрыть объявление"
-                                    self.isActive = "0.3"
-                                    self.alertText = "Объявление скрыто"
-                                }
-                                advManager.changeAdvStatus(uid: uid, isActive: self.isActive) {
-                                    self.showingAlert2 = true
-                                }
-//                                DB().changeAdvStatus(uid: uid, isActive: self.isActive) {
-//                                    self.showingAlert2 = true
-//                                }
-                            }) {
-                                HStack {
-//                                    Image(systemName: "trash")
-                                    Text(self.hideAdvText)
-                                        .bold()
-                                   
-                                }
-                            }.alert(isPresented: $showingAlert2) {
-                                Alert(
-                                    title: Text(alertText),
-                                    dismissButton: .destructive((Text("Ок")), action: {
-                                        presentationMode.wrappedValue.dismiss()
-                                    })
-                                )
+                    Button(action: {
+                        if self.isActive == "0.3" {
+                            self.hideAdvText = "Восстановить объявление"
+                            self.isActive = "1"
+                            self.alertText = "Объявление восстановлено"
+                        } else {
+                            self.hideAdvText = "Скрыть объявление"
+                            self.isActive = "0.3"
+                            self.alertText = "Объявление скрыто"
                         }
-                        .foregroundColor(Color.accentColor)
-                        .padding()
-                        .background(Color("graybg"))
-                        .cornerRadius(15)
-                        .padding(.vertical, 10)
+                        advManager.changeAdvStatus(uid: uid, isActive: self.isActive) {
+                            self.showingAlert2 = true
+                        }
+                        //                                DB().changeAdvStatus(uid: uid, isActive: self.isActive) {
+                        //                                    self.showingAlert2 = true
+                        //                                }
+                    }) {
+                        HStack {
+                            //                                    Image(systemName: "trash")
+                            Text(self.hideAdvText)
+                                .bold()
+                            
+                        }
+                    }.alert(isPresented: $showingAlert2) {
+                        Alert(
+                            title: Text(alertText),
+                            dismissButton: .destructive((Text("Ок")), action: {
+                                presentationMode.wrappedValue.dismiss()
+                            })
+                        )
+                    }
+                    .foregroundColor(Color.accentColor)
+                    .padding()
+                    .background(Color("graybg"))
+                    .cornerRadius(15)
+                    .padding(.vertical, 10)
                     Spacer()
                 }
                 
                 HStack {
                     Spacer()
-                            Button(action: {
-                                showingAlertDelete = true
-                            }) {
-                                HStack {
-//                                    Image(systemName: "trash")
-                                    Text("Удалить")
-                                        .bold()
-                                   
-                                }
-                            }.alert(isPresented: $showingAlertDelete) {
-                            Alert(
-                                title: Text("Вы уверены что хотите удалить Ваше объявление?"),
-                                primaryButton: .destructive(Text("Удалить"), action: {
-                                    advManager.deleteAdv(uid: adv.uid) {
-                                        presentationMode.wrappedValue.dismiss()
-                                    }
-                                }),
-                                secondaryButton: .cancel(Text("Отмена"))
-                            )
+                    Button(action: {
+                        showingAlertDelete = true
+                    }) {
+                        HStack {
+                            //                                    Image(systemName: "trash")
+                            Text("Удалить")
+                                .bold()
+                            
                         }
-                        .foregroundColor(Color.red)
-                        .padding()
-                        .background(Color("graybg"))
-                        .cornerRadius(15)
-                        .padding(.vertical, 10)
+                    }.alert(isPresented: $showingAlertDelete) {
+                        Alert(
+                            title: Text("Вы уверены что хотите удалить Ваше объявление?"),
+                            primaryButton: .destructive(Text("Удалить"), action: {
+                                advManager.deleteAdv(uid: adv.uid) {
+                                    presentationMode.wrappedValue.dismiss()
+                                }
+                            }),
+                            secondaryButton: .cancel(Text("Отмена"))
+                        )
+                    }
+                    .foregroundColor(Color.red)
+                    .padding()
+                    .background(Color("graybg"))
+                    .cornerRadius(15)
+                    .padding(.vertical, 10)
                     Spacer()
                 }
                 
@@ -306,7 +311,7 @@ struct InnerWork: View {
                     self.shiftString = "🌚 Яган"
                 }
                 
-
+                
                 
                 
                 if self.isActive == "0.3" {
