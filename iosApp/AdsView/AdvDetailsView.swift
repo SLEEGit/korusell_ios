@@ -167,7 +167,6 @@ struct ExpandedAdvDetails: View {
                 }
                 }
                 Divider()
-                Chatting()
             }
             .navigationBarTitleDisplayMode(.inline)
             .onAppear {
