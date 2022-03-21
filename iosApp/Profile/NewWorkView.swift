@@ -228,10 +228,13 @@ struct NewWorkView: View {
                         } else if shift1 && shift2 {
                             shift = "🌞🌚"
                         }
+                        
                         if anyAge {
+                            age.removeAll()
                             age.append("20")
                             age.append("70")
                         } else {
+                            age.removeAll()
                             age.append(String(stepperValue1))
                             age.append(String(stepperValue2))
                         }
