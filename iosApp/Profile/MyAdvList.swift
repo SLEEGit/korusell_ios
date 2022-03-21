@@ -22,7 +22,7 @@ struct MyAdvList: View {
     @State var uid: String = ""
     @State var name: String = ""
     @State var phone: String = ""
-    @State var city: String = ""
+    @State var city: String = "Ансан"
     @State var address: String = ""
     @State var description: String = ""
     @State var price: String = ""
@@ -30,11 +30,11 @@ struct MyAdvList: View {
     @State var category: String = ""
     @State var updatedAt: String = ""
     @State var isActive: String = ""
-    @State var subcategory: String = "subcategory"
-    @State var visa: [String] = []
-    @State var gender: String = "gender"
-    @State var shift: String = "shift"
-    @State var age: [String] = []
+    @State var subcategory: String = "factory"
+    @State var visa: [String] = [""]
+    @State var gender: String = ""
+    @State var shift: String = ""
+    @State var age: [String] = ["20", "70"]
     
     @State private var photos: [UIImage] = []
     
