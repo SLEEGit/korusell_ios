@@ -50,11 +50,16 @@ struct WorkViewDetails: View {
                     
                     
                     if adv.price != "" {
+                        HStack {
+                            Text("ЗП")
+                                .font(.body)
+                                .foregroundColor(.gray)
                         Text(adv.price)
                             .font(.system(size: 20))
                             .bold()
                             .minimumScaleFactor(0.1)
-                            .padding(.leading, 15)
+                            
+                        }.padding(.leading, 15)
                     }
                     Divider()
                     HStack(spacing: 10) {
@@ -77,7 +82,12 @@ struct WorkViewDetails: View {
                                 .font(.body)
                             Text(shiftString)
                             if !adv.age.isEmpty {
-                                Text(adv.age.joined(separator: "-") + " лет")
+                                if adv.age[0] == "20" && adv.age[1] == "70" {
+                                    Text("Любой")
+                                } else {
+                                    Text(adv.age.joined(separator: "-"))
+                                        .font(.headline)
+                                }
                             }
                             Text(adv.visa.joined(separator: ","))
                         }

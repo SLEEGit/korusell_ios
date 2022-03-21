@@ -38,10 +38,15 @@ struct OneWorkView: View {
                 .lineLimit(2)
                 .font(.headline)
                 .padding(.leading, 4).padding(.trailing, 4).padding(.bottom, 2)
-            Text(adv.price)
-                .lineLimit(1)
-                .font(.title3)
-                .padding(.leading, 4).padding(.trailing, 4).padding(.bottom, 2)
+            HStack {
+                Text("ЗП: ")
+                    .foregroundColor(Color.gray)
+                Text(adv.price)
+                    .lineLimit(1)
+                    .font(.title3)
+                    
+            }.padding(.leading, 4).padding(.trailing, 4).padding(.bottom, 2)
+            
             HStack {
                 VStack {
                     Text("")
