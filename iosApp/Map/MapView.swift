@@ -118,14 +118,27 @@ struct MapView: View {
                                     serviceManager.category = self.category
                                     serviceManager.getServices()
                                 }
-                                Button("💅🏼 Красота/Здоровье") {
+                                Button("💅🏼 Красота") {
                                     self.categoryName = "💅🏼"
+                                    self.category = "beauty"
+                                    serviceManager.category = self.category
+                                    serviceManager.getServices()
+                                }
+                                
+                            }
+                            Group {
+                                Button("❤️‍🩹 Здоровье") {
+                                    self.categoryName = "❤️‍🩹"
                                     self.category = "health"
                                     serviceManager.category = self.category
                                     serviceManager.getServices()
                                 }
-                            }
-                            Group {
+                                Button("💰 Страхование/Финансы") {
+                                    self.categoryName = "💰"
+                                    self.category = "insurance"
+                                    serviceManager.category = self.category
+                                    serviceManager.getServices()
+                                }
                                 Button("🚛 Трансфер/Переезд") {
                                     self.categoryName = "🚛"
                                     self.category = "transport"
@@ -213,18 +226,40 @@ struct MapView: View {
                                 serviceManager.city = globalCity
                                 serviceManager.getServices()
                             }
-                            Button("Чхонджу") {
-                                mapRegion = MKCoordinateRegion(center: CLLocationCoordinate2D(latitude: 36.63926314157214, longitude: 127.47918258581026), span: MKCoordinateSpan(latitudeDelta: 0.2, longitudeDelta: 0.2))
-                                globalCity = "Чхонджу"
-                                serviceManager.city = globalCity
-                                serviceManager.getServices()
+                            Group {
+                                Button("Чхонджу") {
+                                    mapRegion = MKCoordinateRegion(center: CLLocationCoordinate2D(latitude: 36.63926314157214, longitude: 127.47918258581026), span: MKCoordinateSpan(latitudeDelta: 0.2, longitudeDelta: 0.2))
+                                    globalCity = "Чхонджу"
+                                    serviceManager.city = globalCity
+                                    serviceManager.getServices()
+                                }
+                                Button("Пхёнтхэк") {
+                                    mapRegion = MKCoordinateRegion(center: CLLocationCoordinate2D(latitude: 37.0104484860411, longitude: 126.97948650235675), span: MKCoordinateSpan(latitudeDelta: 0.2, longitudeDelta: 0.2))
+                                    globalCity = "Пхёнтхэк"
+                                    serviceManager.city = globalCity
+                                    serviceManager.getServices()
+                                }
+                                Button("Сосан") {
+                                    mapRegion = MKCoordinateRegion(center: CLLocationCoordinate2D(latitude: 36.78116367382427, longitude: 126.45389687374652), span: MKCoordinateSpan(latitudeDelta: 0.2, longitudeDelta: 0.2))
+                                    globalCity = "Сосан"
+                                    serviceManager.city = globalCity
+                                    serviceManager.getServices()
+                                }
+                                Button("Дунпо") {
+                                    mapRegion = MKCoordinateRegion(center: CLLocationCoordinate2D(latitude: 36.927903013124414, longitude: 127.04292717110127), span: MKCoordinateSpan(latitudeDelta: 0.2, longitudeDelta: 0.2))
+                                    globalCity = "Дунпо"
+                                    serviceManager.city = globalCity
+                                    serviceManager.getServices()
+                                }
+                                Button("Другой город") {
+                                    mapRegion = MKCoordinateRegion(center: CLLocationCoordinate2D(latitude: 36.62257816899407, longitude: 127.91520089316795), span: MKCoordinateSpan(latitudeDelta: 3.5, longitudeDelta: 3.5))
+                                    globalCity = "Другой город"
+                                    serviceManager.city = globalCity
+                                    serviceManager.getServices()
+                                }
                             }
-                            Button("Другой город") {
-                                mapRegion = MKCoordinateRegion(center: CLLocationCoordinate2D(latitude: 36.62257816899407, longitude: 127.91520089316795), span: MKCoordinateSpan(latitudeDelta: 3.5, longitudeDelta: 3.5))
-                                globalCity = "Другой город"
-                                serviceManager.city = globalCity
-                                serviceManager.getServices()
-                            }
+                            
+                            
                         } label: {
                             Text(globalCity)
                                 .font(.system(size: 15))

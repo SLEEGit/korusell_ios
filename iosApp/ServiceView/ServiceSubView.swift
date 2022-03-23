@@ -89,12 +89,33 @@ struct ServiceSubView: View {
                 serviceManager.city = globalCity
                 serviceManager.getServices()
             }
-            Button("Другой город") {
-                globalCity = "Другой город"
-                self.city = globalCity
-                serviceManager.city = globalCity
-                serviceManager.getServices()
+            Group {
+                Button("Пхёнтхэк") {
+                    globalCity = "Пхёнтхэк"
+                    self.city = globalCity
+                    serviceManager.city = globalCity
+                    serviceManager.getServices()
                 }
+                Button("Сосан") {
+                    globalCity = "Сосан"
+                    self.city = globalCity
+                    serviceManager.city = globalCity
+                    serviceManager.getServices()
+                }
+                Button("Дунпо") {
+                    globalCity = "Дунпо"
+                    self.city = globalCity
+                    serviceManager.city = globalCity
+                    serviceManager.getServices()
+                }
+                Button("Другой город") {
+                    globalCity = "Другой город"
+                    self.city = globalCity
+                    serviceManager.city = globalCity
+                    serviceManager.getServices()
+                    }
+            }
+            
             } label: {
                 Text(self.city)
                 .font(.system(size: 15))

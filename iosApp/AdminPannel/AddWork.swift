@@ -91,6 +91,12 @@ struct AddWork: View {
                             Text("Чхонджу").tag("Чхонджу")
                         }
                         .foregroundColor(Color("textColor"))
+                        Group {
+                            Text("Пхёнтхэк").tag("Пхёнтхэк")
+                            Text("Сосан").tag("Сосан")
+                            Text("Дунпо").tag("Дунпо")
+                        }
+                        .foregroundColor(Color("textColor"))
                     }.foregroundColor(.gray)
                     Image(systemName: "info.circle.fill")
                         .renderingMode(.original)

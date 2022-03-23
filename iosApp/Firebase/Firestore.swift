@@ -177,7 +177,7 @@ class ServiceManager: ObservableObject {
             
             switch self.category {
             case "all":
-                self.services = self.services.filter { $0.category == "food" || $0.category == "shop" || $0.category == "connect" || $0.category == "study" || $0.category == "party" || $0.category == "docs" || $0.category == "cars" || $0.category == "health" || $0.category == "transport" || $0.category == "travel" || $0.category == "workshop" || $0.category == "other" || $0.category == "products" || $0.category == "admin" || $0.category == "embassy"}
+                self.services = self.services.filter { $0.category == "food" || $0.category == "shop" || $0.category == "connect" || $0.category == "study" || $0.category == "party" || $0.category == "docs" || $0.category == "cars" || $0.category == "health" || $0.category == "transport" || $0.category == "travel" || $0.category == "workshop" || $0.category == "other" || $0.category == "products" || $0.category == "admin" || $0.category == "embassy" || $0.category == "beauty" || $0.category == "insurance"}
             case "embassy":
                 self.services = self.services.filter { $0.category == "embassy" || $0.category == "admin"}
             case "food":
@@ -196,6 +196,10 @@ class ServiceManager: ObservableObject {
                 self.services = self.services.filter { $0.category == "cars" || $0.category == "admin"}
             case "health":
                 self.services = self.services.filter { $0.category == "health" || $0.category == "admin"}
+            case "beauty":
+                self.services = self.services.filter { $0.category == "beauty" || $0.category == "admin"}
+            case "insurance":
+                self.services = self.services.filter { $0.category == "insurance" || $0.category == "admin"}
             case "transport":
                 self.services = self.services.filter { $0.category == "transport" || $0.category == "admin"}
             case "travel":
@@ -229,8 +233,14 @@ class ServiceManager: ObservableObject {
                 self.services = self.services.filter  { $0.city == "Чхонан" || $0.city == "admin"}
             case "Чхонджу":
                 self.services = self.services.filter  { $0.city == "Чхонджу" || $0.city == "admin"}
+            case "Пхёнтхэк":
+                self.services = self.services.filter  { $0.city == "Пхёнтхэк" || $0.city == "admin"}
+            case "Сосан":
+                self.services = self.services.filter  { $0.city == "Сосан" || $0.city == "admin"}
+            case "Дунпо":
+                self.services = self.services.filter  { $0.city == "Дунпо" || $0.city == "admin"}
             case "Другой город":
-                self.services = self.services.filter  { $0.city != "Чхонан" && $0.city != "Хвасонг" && $0.city != "Ансан" && $0.city != "Асан" && $0.city != "Сеул" && $0.city != "Инчхон" && $0.city != "Хвасонг" && $0.city != "Сувон" && $0.city != "Чхонджу" || $0.city == "admin"}
+                self.services = self.services.filter  { $0.city != "Чхонан" && $0.city != "Хвасонг" && $0.city != "Ансан" && $0.city != "Асан" && $0.city != "Сеул" && $0.city != "Инчхон" && $0.city != "Хвасонг" && $0.city != "Сувон" && $0.city != "Чхонджу" && $0.city != "Пхёнтхэк" && $0.city != "Сосан" && $0.city != "Дунпо" || $0.city == "admin"}
             default:
                 self.services = self.services.filter  { $0.city == "nil" || $0.city == "admin"}
             }
@@ -391,9 +401,18 @@ class AdvManager: ObservableObject {
             case "Чхонджу":
                 self.advs = self.advs.filter { $0.city == "Чхонджу" || $0.city == "admin"}
                 self.workAdvs = self.workAdvs.filter { $0.city == "Чхонджу" || $0.city == "admin"}
+            case "Пхёнтхэк":
+                self.advs = self.advs.filter { $0.city == "Пхёнтхэк" || $0.city == "admin"}
+                self.workAdvs = self.workAdvs.filter { $0.city == "Пхёнтхэк" || $0.city == "admin"}
+            case "Сосан":
+                self.advs = self.advs.filter { $0.city == "Сосан" || $0.city == "admin"}
+                self.workAdvs = self.workAdvs.filter { $0.city == "Сосан" || $0.city == "admin"}
+            case "Дунпо":
+                self.advs = self.advs.filter { $0.city == "Дунпо" || $0.city == "admin"}
+                self.workAdvs = self.workAdvs.filter { $0.city == "Дунпо" || $0.city == "admin"}
             case "Другой город":
-                self.advs = self.advs.filter { $0.city != "Чхонан" && $0.city != "Хвасонг" && $0.city != "Ансан" && $0.city != "Асан" && $0.city != "Сеул" && $0.city != "Инчхон" && $0.city != "Хвасонг" && $0.city != "Сувон" && $0.city != "Чхонджу" || $0.city == "admin"}
-                self.workAdvs = self.workAdvs.filter { $0.city != "Чхонан" && $0.city != "Хвасонг" && $0.city != "Ансан" && $0.city != "Асан" && $0.city != "Сеул" && $0.city != "Инчхон" && $0.city != "Хвасонг" && $0.city != "Сувон" && $0.city != "Чхонджу" || $0.city == "admin"}
+                self.advs = self.advs.filter { $0.city != "Чхонан" && $0.city != "Хвасонг" && $0.city != "Ансан" && $0.city != "Асан" && $0.city != "Сеул" && $0.city != "Инчхон" && $0.city != "Хвасонг" && $0.city != "Сувон" && $0.city != "Чхонджу" && $0.city != "Пхёнтхэк" && $0.city != "Сосан" && $0.city != "Дунпо" || $0.city == "admin"}
+                self.workAdvs = self.workAdvs.filter { $0.city != "Чхонан" && $0.city != "Хвасонг" && $0.city != "Ансан" && $0.city != "Асан" && $0.city != "Сеул" && $0.city != "Инчхон" && $0.city != "Хвасонг" && $0.city != "Сувон" && $0.city != "Чхонджу" && $0.city != "Пхёнтхэк" && $0.city != "Сосан" && $0.city != "Дунпо" || $0.city == "admin"}
             default:
                 self.advs = self.advs.filter { $0.city == "nil" || $0.city == "admin"}
                 self.workAdvs = self.workAdvs.filter { $0.city == "nil" || $0.city == "admin"}

@@ -72,16 +72,34 @@ struct AdvSubView: View {
                     self.city = globalCity
                     self.list = Util().filterAdv(city: globalCity, category: category, unsortedList: globalAdv)
                 }
-            Button("Чхонджу") {
-                globalCity = "Чхонджу"
-                self.city = globalCity
-                self.list = Util().filterAdv(city: globalCity, category: category, unsortedList: globalAdv)
-            }
-                Button("Другой город") {
-                    globalCity = "Другой город"
+            Group {
+                Button("Чхонджу") {
+                    globalCity = "Чхонджу"
                     self.city = globalCity
                     self.list = Util().filterAdv(city: globalCity, category: category, unsortedList: globalAdv)
                 }
+                Button("Пхёнтхэк") {
+                    globalCity = "Пхёнтхэк"
+                    self.city = globalCity
+                    self.list = Util().filterAdv(city: globalCity, category: category, unsortedList: globalAdv)
+                }
+                Button("Сосан") {
+                    globalCity = "Сосан"
+                    self.city = globalCity
+                    self.list = Util().filterAdv(city: globalCity, category: category, unsortedList: globalAdv)
+                }
+                Button("Дунпо") {
+                    globalCity = "Дунпо"
+                    self.city = globalCity
+                    self.list = Util().filterAdv(city: globalCity, category: category, unsortedList: globalAdv)
+                }
+                    Button("Другой город") {
+                        globalCity = "Другой город"
+                        self.city = globalCity
+                        self.list = Util().filterAdv(city: globalCity, category: category, unsortedList: globalAdv)
+                    }
+            }
+            
             } label: {
                 Text(city)
                     .font(.system(size: 15))

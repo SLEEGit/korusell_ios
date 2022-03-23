@@ -49,183 +49,183 @@ class Util {
         UIApplication.shared.open(url)
     }
     
-    func filter(city: String, category: String, unsortedList: [Service]) -> [Service] {
-        
-        var afterCategory: [Service] = []
-        
-        switch category {
-        case "all":
-            afterCategory = unsortedList
-        case "food":
-            afterCategory = unsortedList.filter { $0.category == "food" }
-        case "shop":
-            afterCategory = unsortedList.filter { $0.category == "shop" }
-        case "connect":
-            afterCategory = unsortedList.filter { $0.category == "connect" }
-        case "docs":
-            afterCategory = unsortedList.filter { $0.category == "docs" }
-        case "transport":
-            afterCategory = unsortedList.filter { $0.category == "transport" }
-        case "travel":
-            afterCategory = unsortedList.filter { $0.category == "travel" }
-        case "party":
-            afterCategory = unsortedList.filter { $0.category == "party" }
-        case "health":
-            afterCategory = unsortedList.filter { $0.category == "health" }
-        case "workshop":
-            afterCategory = unsortedList.filter { $0.category == "workshop" }
-        case "products":
-            afterCategory = unsortedList.filter { $0.category == "products" }
-        case "study":
-            afterCategory = unsortedList.filter { $0.category == "study" }
-        case "tourism":
-            afterCategory = unsortedList.filter { $0.category == "tourism" }
-        case "cars":
-            afterCategory = unsortedList.filter { $0.category == "cars" }
-        case "other":
-            afterCategory = unsortedList.filter { $0.category == "other" }
-        default:
-            afterCategory = unsortedList.filter { $0.category == "no" }
-        }
-        
-        switch city {
-        case "Все города":
-            return afterCategory
-        case "Ансан":
-            return afterCategory.filter { $0.city == "Ансан"}
-        case "Хвасонг":
-            return afterCategory.filter { $0.city == "Хвасонг"}
-        case "Сеул":
-            return afterCategory.filter { $0.city == "Сеул"}
-        case "Инчхон":
-            return afterCategory.filter { $0.city == "Инчхон"}
-        case "Асан":
-            return afterCategory.filter { $0.city == "Асан"}
-        case "Сувон":
-            return afterCategory.filter { $0.city == "Сувон"}
-        case "Чхонан":
-            return afterCategory.filter { $0.city == "Чхонан"}
-        case "Чхонджу":
-            return afterCategory.filter { $0.city == "Чхонджу"}
-        case "Другой город":
-            return afterCategory.filter { $0.city != "Чхонан" && $0.city != "Хвасонг" && $0.city != "Ансан" && $0.city != "Асан" && $0.city != "Сеул" && $0.city != "Инчхон" && $0.city != "Хвасонг" && $0.city != "Сувон" && $0.city != "Чхонджу"}
-        default:
-            return afterCategory
-        }
-    }
-    
-    func filterAdv(city: String, category: String, unsortedList: [Adv]) -> [Adv] {
-        
-        var afterCategory: [Adv] = []
-        
-        switch category {
-        case "all":
-            afterCategory = unsortedList.filter { $0.category == "transport" || $0.category == "house" || $0.category == "phone" || $0.category == "hobby" || $0.category == "car" || $0.category == "electronic" || $0.category == "children" || $0.category == "clothes" || $0.category == "sport" || $0.category == "pet" || $0.category == "change" || $0.category == "other" || $0.category == "admin"}
-        case "transport":
-            afterCategory = unsortedList.filter { $0.category == "transport" || $0.category == "admin"}
-        case "house":
-            afterCategory = unsortedList.filter { $0.category == "house" || $0.category == "admin"}
-        case "phone":
-            afterCategory = unsortedList.filter { $0.category == "phone" || $0.category == "admin"}
-        case "hobby":
-            afterCategory = unsortedList.filter { $0.category == "hobby" || $0.category == "admin"}
-        case "car":
-            afterCategory = unsortedList.filter { $0.category == "car" || $0.category == "admin"}
-        case "electronic":
-            afterCategory = unsortedList.filter { $0.category == "electronic" || $0.category == "admin"}
-        case "children":
-            afterCategory = unsortedList.filter { $0.category == "children" || $0.category == "admin"}
-        case "clothes":
-            afterCategory = unsortedList.filter { $0.category == "clothes" || $0.category == "admin"}
-        case "sport":
-            afterCategory = unsortedList.filter { $0.category == "sport" || $0.category == "admin"}
-        case "pet":
-            afterCategory = unsortedList.filter { $0.category == "pet" || $0.category == "admin"}
-        case "change":
-            afterCategory = unsortedList.filter { $0.category == "change" || $0.category == "admin"}
-        case "other":
-            afterCategory = unsortedList.filter { $0.category == "other" || $0.category == "admin"}
-        default:
-            afterCategory = unsortedList.filter  { $0.category == "zavod" }
-        }
-        
-        switch city {
-        case "Все города":
-            return afterCategory
-        case "Ансан":
-            return afterCategory.filter { $0.city == "Ансан" || $0.city == "admin"}
-        case "Хвасонг":
-            return afterCategory.filter { $0.city == "Хвасонг" || $0.city == "admin"}
-        case "Сеул":
-            return afterCategory.filter { $0.city == "Сеул" || $0.city == "admin"}
-        case "Инчхон":
-            return afterCategory.filter { $0.city == "Инчхон" || $0.city == "admin"}
-        case "Асан":
-            return afterCategory.filter { $0.city == "Асан" || $0.city == "admin"}
-        case "Сувон":
-            return afterCategory.filter { $0.city == "Сувон" || $0.city == "admin"}
-        case "Чхонан":
-            return afterCategory.filter { $0.city == "Чхонан" || $0.city == "admin"}
-        case "Чхонджу":
-            return afterCategory.filter { $0.city == "Чхонджу" || $0.city == "admin"}
-        case "Другой город":
-            return afterCategory.filter { $0.city != "Чхонан" && $0.city != "Хвасонг" && $0.city != "Ансан" && $0.city != "Асан" && $0.city != "Сеул" && $0.city != "Инчхон" && $0.city != "Хвасонг" && $0.city != "Сувон" && $0.city != "Чхонджу" || $0.city == "admin"}
-        default:
-            return afterCategory
-        }
-    }
-    
-    func filterWork(city: String, category: String = "work", subcategory: String, unsortedList: [Adv]) -> [Adv] {
-        
-        var afterCategory: [Adv] = []
-        switch subcategory {
-        case "all":
-            afterCategory = unsortedList.filter { $0.subcategory == "factory" || $0.subcategory == "construction" || $0.subcategory == "motel" || $0.subcategory == "cafe" || $0.subcategory == "delivery" || $0.subcategory == "farm" || $0.subcategory == "office"}
-        case "factory":
-            afterCategory = unsortedList.filter { $0.subcategory == "factory"}
-        case "construction":
-            afterCategory = unsortedList.filter { $0.subcategory == "construction"}
-        case "motel":
-            afterCategory = unsortedList.filter { $0.subcategory == "motel"}
-        case "cafe":
-            afterCategory = unsortedList.filter { $0.subcategory == "cafe"}
-        case "delivery":
-            afterCategory = unsortedList.filter { $0.subcategory == "delivery"}
-        case "farm":
-            afterCategory = unsortedList.filter { $0.subcategory == "farm"}
-        case "office":
-            afterCategory = unsortedList.filter { $0.subcategory == "office"}
-        case "otherwork":
-            afterCategory = unsortedList.filter { $0.category == "otherwork"}
-        default:
-            afterCategory = unsortedList.filter  { $0.category == "none" }
-        }
-        
-        switch city {
-        case "Все города":
-            return afterCategory
-        case "Ансан":
-            return afterCategory.filter { $0.city == "Ансан" || $0.city == "admin"}
-        case "Хвасонг":
-            return afterCategory.filter { $0.city == "Хвасонг" || $0.city == "admin"}
-        case "Сеул":
-            return afterCategory.filter { $0.city == "Сеул" || $0.city == "admin"}
-        case "Инчхон":
-            return afterCategory.filter { $0.city == "Инчхон" || $0.city == "admin"}
-        case "Асан":
-            return afterCategory.filter { $0.city == "Асан" || $0.city == "admin"}
-        case "Сувон":
-            return afterCategory.filter { $0.city == "Сувон" || $0.city == "admin"}
-        case "Чхонан":
-            return afterCategory.filter { $0.city == "Чхонан" || $0.city == "admin"}
-        case "Чхонджу":
-            return afterCategory.filter { $0.city == "Чхонджу" || $0.city == "admin"}
-        case "Другой город":
-            return afterCategory.filter { $0.city != "Чхонан" && $0.city != "Хвасонг" && $0.city != "Ансан" && $0.city != "Асан" && $0.city != "Сеул" && $0.city != "Инчхон" && $0.city != "Хвасонг" && $0.city != "Сувон" && $0.city != "Чхонджу" || $0.city == "admin"}
-        default:
-            return afterCategory
-        }
-    }
+//    func filter(city: String, category: String, unsortedList: [Service]) -> [Service] {
+//
+//        var afterCategory: [Service] = []
+//
+//        switch category {
+//        case "all":
+//            afterCategory = unsortedList
+//        case "food":
+//            afterCategory = unsortedList.filter { $0.category == "food" }
+//        case "shop":
+//            afterCategory = unsortedList.filter { $0.category == "shop" }
+//        case "connect":
+//            afterCategory = unsortedList.filter { $0.category == "connect" }
+//        case "docs":
+//            afterCategory = unsortedList.filter { $0.category == "docs" }
+//        case "transport":
+//            afterCategory = unsortedList.filter { $0.category == "transport" }
+//        case "travel":
+//            afterCategory = unsortedList.filter { $0.category == "travel" }
+//        case "party":
+//            afterCategory = unsortedList.filter { $0.category == "party" }
+//        case "health":
+//            afterCategory = unsortedList.filter { $0.category == "health" }
+//        case "workshop":
+//            afterCategory = unsortedList.filter { $0.category == "workshop" }
+//        case "products":
+//            afterCategory = unsortedList.filter { $0.category == "products" }
+//        case "study":
+//            afterCategory = unsortedList.filter { $0.category == "study" }
+//        case "tourism":
+//            afterCategory = unsortedList.filter { $0.category == "tourism" }
+//        case "cars":
+//            afterCategory = unsortedList.filter { $0.category == "cars" }
+//        case "other":
+//            afterCategory = unsortedList.filter { $0.category == "other" }
+//        default:
+//            afterCategory = unsortedList.filter { $0.category == "no" }
+//        }
+//
+//        switch city {
+//        case "Все города":
+//            return afterCategory
+//        case "Ансан":
+//            return afterCategory.filter { $0.city == "Ансан"}
+//        case "Хвасонг":
+//            return afterCategory.filter { $0.city == "Хвасонг"}
+//        case "Сеул":
+//            return afterCategory.filter { $0.city == "Сеул"}
+//        case "Инчхон":
+//            return afterCategory.filter { $0.city == "Инчхон"}
+//        case "Асан":
+//            return afterCategory.filter { $0.city == "Асан"}
+//        case "Сувон":
+//            return afterCategory.filter { $0.city == "Сувон"}
+//        case "Чхонан":
+//            return afterCategory.filter { $0.city == "Чхонан"}
+//        case "Чхонджу":
+//            return afterCategory.filter { $0.city == "Чхонджу"}
+//        case "Другой город":
+//            return afterCategory.filter { $0.city != "Чхонан" && $0.city != "Хвасонг" && $0.city != "Ансан" && $0.city != "Асан" && $0.city != "Сеул" && $0.city != "Инчхон" && $0.city != "Хвасонг" && $0.city != "Сувон" && $0.city != "Чхонджу"}
+//        default:
+//            return afterCategory
+//        }
+//    }
+//
+//    func filterAdv(city: String, category: String, unsortedList: [Adv]) -> [Adv] {
+//
+//        var afterCategory: [Adv] = []
+//
+//        switch category {
+//        case "all":
+//            afterCategory = unsortedList.filter { $0.category == "transport" || $0.category == "house" || $0.category == "phone" || $0.category == "hobby" || $0.category == "car" || $0.category == "electronic" || $0.category == "children" || $0.category == "clothes" || $0.category == "sport" || $0.category == "pet" || $0.category == "change" || $0.category == "other" || $0.category == "admin"}
+//        case "transport":
+//            afterCategory = unsortedList.filter { $0.category == "transport" || $0.category == "admin"}
+//        case "house":
+//            afterCategory = unsortedList.filter { $0.category == "house" || $0.category == "admin"}
+//        case "phone":
+//            afterCategory = unsortedList.filter { $0.category == "phone" || $0.category == "admin"}
+//        case "hobby":
+//            afterCategory = unsortedList.filter { $0.category == "hobby" || $0.category == "admin"}
+//        case "car":
+//            afterCategory = unsortedList.filter { $0.category == "car" || $0.category == "admin"}
+//        case "electronic":
+//            afterCategory = unsortedList.filter { $0.category == "electronic" || $0.category == "admin"}
+//        case "children":
+//            afterCategory = unsortedList.filter { $0.category == "children" || $0.category == "admin"}
+//        case "clothes":
+//            afterCategory = unsortedList.filter { $0.category == "clothes" || $0.category == "admin"}
+//        case "sport":
+//            afterCategory = unsortedList.filter { $0.category == "sport" || $0.category == "admin"}
+//        case "pet":
+//            afterCategory = unsortedList.filter { $0.category == "pet" || $0.category == "admin"}
+//        case "change":
+//            afterCategory = unsortedList.filter { $0.category == "change" || $0.category == "admin"}
+//        case "other":
+//            afterCategory = unsortedList.filter { $0.category == "other" || $0.category == "admin"}
+//        default:
+//            afterCategory = unsortedList.filter  { $0.category == "zavod" }
+//        }
+//
+//        switch city {
+//        case "Все города":
+//            return afterCategory
+//        case "Ансан":
+//            return afterCategory.filter { $0.city == "Ансан" || $0.city == "admin"}
+//        case "Хвасонг":
+//            return afterCategory.filter { $0.city == "Хвасонг" || $0.city == "admin"}
+//        case "Сеул":
+//            return afterCategory.filter { $0.city == "Сеул" || $0.city == "admin"}
+//        case "Инчхон":
+//            return afterCategory.filter { $0.city == "Инчхон" || $0.city == "admin"}
+//        case "Асан":
+//            return afterCategory.filter { $0.city == "Асан" || $0.city == "admin"}
+//        case "Сувон":
+//            return afterCategory.filter { $0.city == "Сувон" || $0.city == "admin"}
+//        case "Чхонан":
+//            return afterCategory.filter { $0.city == "Чхонан" || $0.city == "admin"}
+//        case "Чхонджу":
+//            return afterCategory.filter { $0.city == "Чхонджу" || $0.city == "admin"}
+//        case "Другой город":
+//            return afterCategory.filter { $0.city != "Чхонан" && $0.city != "Хвасонг" && $0.city != "Ансан" && $0.city != "Асан" && $0.city != "Сеул" && $0.city != "Инчхон" && $0.city != "Хвасонг" && $0.city != "Сувон" && $0.city != "Чхонджу" || $0.city == "admin"}
+//        default:
+//            return afterCategory
+//        }
+//    }
+//
+//    func filterWork(city: String, category: String = "work", subcategory: String, unsortedList: [Adv]) -> [Adv] {
+//
+//        var afterCategory: [Adv] = []
+//        switch subcategory {
+//        case "all":
+//            afterCategory = unsortedList.filter { $0.subcategory == "factory" || $0.subcategory == "construction" || $0.subcategory == "motel" || $0.subcategory == "cafe" || $0.subcategory == "delivery" || $0.subcategory == "farm" || $0.subcategory == "office"}
+//        case "factory":
+//            afterCategory = unsortedList.filter { $0.subcategory == "factory"}
+//        case "construction":
+//            afterCategory = unsortedList.filter { $0.subcategory == "construction"}
+//        case "motel":
+//            afterCategory = unsortedList.filter { $0.subcategory == "motel"}
+//        case "cafe":
+//            afterCategory = unsortedList.filter { $0.subcategory == "cafe"}
+//        case "delivery":
+//            afterCategory = unsortedList.filter { $0.subcategory == "delivery"}
+//        case "farm":
+//            afterCategory = unsortedList.filter { $0.subcategory == "farm"}
+//        case "office":
+//            afterCategory = unsortedList.filter { $0.subcategory == "office"}
+//        case "otherwork":
+//            afterCategory = unsortedList.filter { $0.category == "otherwork"}
+//        default:
+//            afterCategory = unsortedList.filter  { $0.category == "none" }
+//        }
+//
+//        switch city {
+//        case "Все города":
+//            return afterCategory
+//        case "Ансан":
+//            return afterCategory.filter { $0.city == "Ансан" || $0.city == "admin"}
+//        case "Хвасонг":
+//            return afterCategory.filter { $0.city == "Хвасонг" || $0.city == "admin"}
+//        case "Сеул":
+//            return afterCategory.filter { $0.city == "Сеул" || $0.city == "admin"}
+//        case "Инчхон":
+//            return afterCategory.filter { $0.city == "Инчхон" || $0.city == "admin"}
+//        case "Асан":
+//            return afterCategory.filter { $0.city == "Асан" || $0.city == "admin"}
+//        case "Сувон":
+//            return afterCategory.filter { $0.city == "Сувон" || $0.city == "admin"}
+//        case "Чхонан":
+//            return afterCategory.filter { $0.city == "Чхонан" || $0.city == "admin"}
+//        case "Чхонджу":
+//            return afterCategory.filter { $0.city == "Чхонджу" || $0.city == "admin"}
+//        case "Другой город":
+//            return afterCategory.filter { $0.city != "Чхонан" && $0.city != "Хвасонг" && $0.city != "Ансан" && $0.city != "Асан" && $0.city != "Сеул" && $0.city != "Инчхон" && $0.city != "Хвасонг" && $0.city != "Сувон" && $0.city != "Чхонджу" || $0.city == "admin"}
+//        default:
+//            return afterCategory
+//        }
+//    }
     
 //        func parseCategory(category: String) -> [String] {
 //            var list: [String] = []

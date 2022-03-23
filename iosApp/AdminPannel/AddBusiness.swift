@@ -94,10 +94,12 @@ struct AddBusinessView: View {
                     Text("Мероприятия/Фото/Видео").tag("party")
                     Text("Документы/Переводы").tag("docs")
                     Text("Авто Купля/Продажа").tag("cars")
-                    Text("Красота/Здоровье").tag("health")
+                    Text("Здоровье").tag("health")
                 }
                 .foregroundColor(Color("textColor"))
                 Group {
+                    Text("Красота").tag("beauty")
+                    Text("Страхование/Финансы").tag("insurance")
                     Text("Трансфер/Переезд").tag("transport")
                     Text("Туризм/Почта").tag("travel")
                     Text("СТО/Тюнинг").tag("workshop")
@@ -116,6 +118,12 @@ struct AddBusinessView: View {
                         Text("Асан").tag("Асан")
                         Text("Чхонан").tag("Чхонан")
                         Text("Чхонджу").tag("Чхонджу")
+                    }
+                    .foregroundColor(Color("textColor"))
+                    Group {
+                        Text("Пхёнтхэк").tag("Пхёнтхэк")
+                        Text("Сосан").tag("Сосан")
+                        Text("Дунпо").tag("Дунпо")
                     }
                     .foregroundColor(Color("textColor"))
                 }.foregroundColor(.gray)

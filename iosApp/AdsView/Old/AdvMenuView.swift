@@ -117,12 +117,33 @@ struct AdvMenuView: View {
                     } label: {
                         Text("Чхонджу")
                     }
+                    Group {
                         Button {
-                            globalCity = "Другой город"
+                            globalCity = "Пхёнтхэк"
                             city = globalCity
                         } label: {
-                            Text("Другой город")
+                            Text("Пхёнтхэк")
                         }
+                        Button {
+                            globalCity = "Сосан"
+                            city = globalCity
+                        } label: {
+                            Text("Сосан")
+                        }
+                        Button {
+                            globalCity = "Дунпо"
+                            city = globalCity
+                        } label: {
+                            Text("Дунпо")
+                        }
+                            Button {
+                                globalCity = "Другой город"
+                                city = globalCity
+                            } label: {
+                                Text("Другой город")
+                            }
+                    }
+                    
                     } label: {
                         //                Image(systemName: "eye.circle")
                         Text(city)

@@ -203,11 +203,29 @@ struct AdvList: View {
                                 self.advManager.city = globalCity
                                 self.advManager.getAdvs()
                             }
-                            Button("Другой город") {
-                                globalCity = "Другой город"
-                                self.advManager.city = globalCity
-                                self.advManager.getAdvs()
+                            Group {
+                                Button("Пхёнтхэк") {
+                                    globalCity = "Пхёнтхэк"
+                                    self.advManager.city = globalCity
+                                    self.advManager.getAdvs()
+                                }
+                                Button("Сосан") {
+                                    globalCity = "Сосан"
+                                    self.advManager.city = globalCity
+                                    self.advManager.getAdvs()
+                                }
+                                Button("Дунпо") {
+                                    globalCity = "Дунпо"
+                                    self.advManager.city = globalCity
+                                    self.advManager.getAdvs()
+                                }
+                                Button("Другой город") {
+                                    globalCity = "Другой город"
+                                    self.advManager.city = globalCity
+                                    self.advManager.getAdvs()
+                                }
                             }
+                            
                         } label: {
                             HStack {
                                 Text(globalCity)
