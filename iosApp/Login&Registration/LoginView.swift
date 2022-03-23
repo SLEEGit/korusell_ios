@@ -189,8 +189,9 @@ struct LoginView : View {
     
     func fbLogin(){
         let cont = UIHostingController(rootView: self) // convert to UIController from SwiftUI
-        // 'FBSDKLoginManager' has been renamed to 'LoginManager'
+        
         let fbLoginManager: LoginManager = LoginManager()
+        fbLoginManager.logOut()
         fbLoginManager.logIn(permissions: ["email"], from: cont) { (result, err) in
             if err != nil{
                 print("Process error")
@@ -213,7 +214,7 @@ struct LoginView : View {
                     let data:[String:AnyObject] = result as! [String : AnyObject]
                     let data2:[String:AnyObject] = data["picture"]! as! [String : AnyObject]
                     let data3:[String:AnyObject] = data2["data"] as! [String : AnyObject]
-                    Pref.userDefault.setValue(data["email"]!, forKey: "email")
+                    Pref.userDefault.setValue(data["email"] ?? "", forKey: "email")
                     Pref.userDefault.setValue(data["name"]!, forKey: "name")
                     Pref.userDefault.setValue(data3["url"]!, forKey: "imageURL")
                     print(Pref.userDefault.string(forKey: "imageURL") ?? "")
